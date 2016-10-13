@@ -44,16 +44,12 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable\\abc_dialog_material_background.xml"
     },
     {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\turnbull.jpg",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\drawable\\turnbull.jpg"
+        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\neil_harbisson.jpg",
+        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\drawable\\neil_harbisson.jpg"
     },
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
-    },
-    {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\neil_harbisson.jpg",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\drawable\\neil_harbisson.jpg"
     },
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
@@ -130,10 +126,6 @@
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\design_snackbar_background.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\drawable\\design_snackbar_background.xml"
-    },
-    {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\side_nav_bar.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
     },
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",

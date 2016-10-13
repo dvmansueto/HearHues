@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">Hear Hues</string>
+    <string name="intro_message">
+        <![CDATA[
 
-    <!-- HearHueActivity -->
-    <string name="title_activity_hear_hue">Hear Hue</string>
+
+            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
+            you can display camera preview and take pictures.
+
+
+        ]]>
+    </string>
+
+    <!-- HearHueFragment -->
+    <string name="title_fragment_hear_hue">Hear Hue</string>
     <string name="hearHue_title">Hear Hue</string>
     <string name="hearHue_desc_short">Hear the sound of colour</string>
     <string name="heading_tone">Tone: </string>
@@ -10,18 +20,20 @@
     <string name="btn_capturePhoto">Capture Photograph</string>
     <string name="ic_tone">Tone</string>
     <string name="ic_hue">Hue</string>
+    <string name="request_permission">This feature requires camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
-    <!-- SeeSoundActivity -->
-    <string name="title_activity_see_sound">See Sound</string>
+    <!-- SeeSoundFragment -->
+    <string name="title_fragment_see_sound">See Sound</string>
 
-    <!-- SandboxActivity -->
-    <string name="title_activity_sandbox">Tinker</string>
+    <!-- TinkerFragment -->
+    <string name="title_fragment_tinker">Tinker</string>
 
-    <!-- SettingsActivity -->
-    <string name="title_activity_settings">Settings</string>
+    <!-- SettingsFragment -->
+    <string name="title_fragment_settings">Settings</string>
 
-    <!-- AboutActivity -->
-    <string name="title_activity_about">About</string>
+    <!-- AboutFragment -->
+    <string name="title_fragment_about">About</string>
 
     <!-- AppBar -->
     <string name="action_mute">Toggle Mute</string>
@@ -31,4 +43,10 @@
     <string name="navigation_drawer_secondary_features">Ancillary Features</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

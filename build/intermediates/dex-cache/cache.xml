@@ -39,6 +39,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v13\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e3c7e8ff9f476d0d93ee7b046fbe8037a2b822c0">
+        <dex dex="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v13-24.2.1_a8bb1a5079f58a060a82f52880e8982ea6dc366a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -106,7 +115,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="ef1eb1d3013c0e6e51a42805078616dfc3cb64fa">
+        sha1="1dfdadd5645b0a1796635cc49cdb2ba0caa4423f">
         <dex dex="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_a09edfbcb0af0ccac3e7358a55932bbf328d17c4\classes.dex" />
     </item>
     <item
@@ -115,7 +124,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="64dae9d686c14e37818e01724d1ed30af33db7ac">
+        sha1="289cc1b9afb0dcf9e215575fb7e077748ae31aa6">
         <dex dex="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_fa4a2a1e580ee4a502c255c66ff095f7e8bd6321\classes.dex" />
     </item>
     <item
@@ -180,6 +189,15 @@
         revision="24.0.2"
         sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
         <dex dex="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_fc9ef3094c37cd7f64ef29c83a2b4b89da862778\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v13\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c07fb99b729345908dda75fadbbf882e300631ff">
+        <dex dex="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_0c02913295862511d02c76b02ac0b00e9aa037ce\classes.dex" />
     </item>
 
 </items>
