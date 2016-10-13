@@ -12,10 +12,6 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_search_view.xml"
     },
     {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_main.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\content_main.xml"
-    },
-    {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
@@ -24,12 +20,12 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
     },
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
@@ -38,10 +34,6 @@
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_hear_hue.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\fragment_hear_hue.xml"
-    },
-    {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\app_bar_hear_hue.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\app_bar_hear_hue.xml"
     },
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
@@ -116,10 +108,6 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_subheader.xml"
     },
     {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_sandbox.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\activity_sandbox.xml"
-    },
-    {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_mode_bar.xml"
     },
@@ -140,10 +128,6 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_sandbox.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\content_sandbox.xml"
-    },
-    {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_big_media.xml"
     },
@@ -154,10 +138,6 @@
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_media_action.xml"
-    },
-    {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_hear_hue.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\activity_hear_hue.xml"
     },
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
@@ -206,10 +186,6 @@
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
-        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\app_bar_main.xml",
-        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\app_bar_main.xml"
     },
     {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
