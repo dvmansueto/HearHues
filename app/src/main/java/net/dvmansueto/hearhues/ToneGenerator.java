@@ -36,20 +36,20 @@ public class ToneGenerator {
         mMuted = DEFAULT_MUTED;
     }
 
-    public ToneGenerator( float tone) {
+    public ToneGenerator( double tone) {
         mTone = tone;
         mAmplitude = DEFAULT_AMPLITUDE;
         mMuted = DEFAULT_MUTED;
     }
 
-    public ToneGenerator( float tone, boolean muted) {
+    public ToneGenerator( double tone, boolean muted) {
         mTone = tone;
         mAmplitude = DEFAULT_AMPLITUDE;
         mMuted = muted;
     }
 
 
-    public void setTone( float tone) {
+    public void setTone( double tone) {
         mTone = tone;
         startTone();
     }

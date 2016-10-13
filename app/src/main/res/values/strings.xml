@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Hear Hues</string>
-    <string name="action_settings">Settings</string>
 
-    <!-- HearHueActivity-->
+    <!-- HearHueActivity -->
+    <string name="title_activity_hear_hue">Hear Hue</string>
     <string name="hearHue_title">Hear Hue</string>
     <string name="hearHue_desc_short">Hear the sound of colour</string>
     <string name="heading_tone">Tone: </string>
@@ -10,4 +10,24 @@
     <string name="btn_capturePhoto">Capture Photograph</string>
     <string name="ic_tone">Tone</string>
     <string name="ic_hue">Hue</string>
+
+    <!-- SeeSoundActivity -->
+    <string name="title_activity_see_sound">See Sound</string>
+
+    <!-- SandboxActivity -->
+    <string name="title_activity_sandbox">Tinker</string>
+
+    <!-- SettingsActivity -->
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- AboutActivity -->
+    <string name="title_activity_about">About</string>
+
+    <!-- AppBar -->
+
+    <!-- NavDrawer -->
+    <string name="navigation_drawer_primary_features">Primary Features</string>
+    <string name="navigation_drawer_secondary_features">Ancillary Features</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

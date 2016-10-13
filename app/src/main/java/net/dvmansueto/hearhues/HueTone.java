@@ -21,7 +21,7 @@ final class HueTone {
     private static final double FREQUENCY_DENOMINATOR = HALF_STEPS_PER_RANGE * Math.log( TWELFTH_ROOT_OF_2);
 
     private int mRgb;   // mRgb is AARRGGBB
-    private float[] mHsl;   // mHsl is [0] Hue [0...360), [1] Saturation [0...1], [2] Lightness [0...1]
+    private float[] mHsl = new float[3];   // mHsl is [0] Hue [0...360), [1] Saturation [0...1], [2] Lightness [0...1]
     private double mHue;     // mHue is HSL Hue [0...1)
     private double mTone;    // mTone is frequency corresponding to hue
 

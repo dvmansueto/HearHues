@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera2" />
 
     <application
@@ -12,11 +13,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HearHueActivity">
+        <activity
+            android:name=".HearHueActivity"
+            android:icon="@drawable/ic_camera"
+            android:label="@string/title_activity_hear_hue"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SandboxActivity"
+            android:icon="@drawable/ic_tone"
+            android:label="@string/title_activity_sandbox"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".navdrawTempActivity"
+            android:label="@string/title_activity_navdraw_temp"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
+
 </manifest>

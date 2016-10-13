@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- navigation drawer -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/navigation_drawer_primary_features">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_hearHue"
+                android:icon="@drawable/ic_hue"
+                android:title="@string/title_activity_hear_hue" />
+            <item
+                android:id="@+id/nav_seeSound"
+                android:icon="@drawable/ic_tone"
+                android:title="@string/title_activity_see_sound" />
+            <item
+                android:id="@+id/nav_sandbox"
+                android:icon="@drawable/ic_sandbox"
+                android:title="@string/title_activity_sandbox" />
+        </menu>
+    </item>
+
+    <item android:title="@string/navigation_drawer_secondary_features">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_about"
+                android:title="@string/title_activity_about" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/title_activity_settings" />
+        </menu>
+    </item>
+
+</menu>
