@@ -12,7 +12,7 @@
     <!-- Tones header -->
     <ImageView
         android:id="@+id/HH_iv_tone"
-        android:src="@drawable/ic_tone"
+        android:src="@drawable/ic_tone_48"
         android:contentDescription="@string/ic_tone"
         android:padding="8dp"
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
     <!-- Hues overlay -->
     <ImageView
         android:id="@+id/HH_iv_hue"
-        android:src="@drawable/ic_hue"
+        android:src="@drawable/ic_hue_48"
         android:tint="@color/colorAccent"
         android:contentDescription="@string/ic_hue"
         android:padding="8dp"
@@ -62,7 +62,7 @@
     <!-- Camera control overlay -->
     <ImageButton
         android:id="@+id/HH_btn_capturePhoto"
-        android:background="@drawable/ic_camera"
+        android:background="@drawable/ic_shutter_48"
         android:backgroundTint="@android:color/white"
         android:contentDescription="@string/btn_capturePhoto"
         android:layout_width="wrap_content"

@@ -5,29 +5,29 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.1"
-    timestamp="77293299886754"
+    timestamp="85182412152669"
     token="-449604552763967447"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="460" />
+        duration="608" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="107" />
+        duration="203" />
     <task
         name="verifier"
-        duration="19" />
+        duration="49" />
 
     <artifact
         location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\outputs\apk\app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="77293299886754"
+        timestamp="85182412152669"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\outputs\apk\app-debug.apk"

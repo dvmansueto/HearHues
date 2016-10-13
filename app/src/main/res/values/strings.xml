@@ -24,6 +24,7 @@
     <string name="title_activity_about">About</string>
 
     <!-- AppBar -->
+    <string name="action_mute">Toggle Mute</string>
 
     <!-- NavDrawer -->
     <string name="navigation_drawer_primary_features">Primary Features</string>

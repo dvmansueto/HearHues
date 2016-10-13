@@ -28,11 +28,8 @@
             android:name=".SandboxActivity"
             android:icon="@drawable/ic_tone"
             android:label="@string/title_activity_sandbox"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".navdrawTempActivity"
-            android:label="@string/title_activity_navdraw_temp"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

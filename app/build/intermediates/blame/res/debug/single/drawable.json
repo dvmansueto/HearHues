@@ -52,6 +52,10 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
     },
     {
+        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\neil_harbisson.jpg",
+        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\drawable\\neil_harbisson.jpg"
+    },
+    {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_switch_thumb_material.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable\\abc_switch_thumb_material.xml"
     },
