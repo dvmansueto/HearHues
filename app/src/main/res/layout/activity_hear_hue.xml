@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--http://inducesmile.com/android/android-camera2-api-example-tutorial/-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_hear_hue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.dvmansueto.hearhues.HearHueActivity"
+    >
+
+    <!-- Tones header -->
+    <ImageView
+        android:id="@+id/HH_iv_tone"
+        android:src="@drawable/ic_tone"
+        android:contentDescription="@string/ic_tone"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="6dp"/>
+    <TextView
+        android:id="@+id/HH_tv_tone"
+        android:text="414.7 Hz"
+        android:textSize="@dimen/heading_textSize"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:layout_toEndOf="@+id/HH_iv_tone"
+        android:gravity="center_vertical" />
+
+    <!-- Camera texture -->
+    <TextureView
+        android:id="@+id/HH_cameraPreviewTexture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HH_iv_tone"
+        android:layout_alignParentStart="true" />
+
+    <!-- Hues overlay -->
+    <ImageView
+        android:id="@+id/HH_iv_hue"
+        android:src="@drawable/ic_hue"
+        android:tint="@color/colorAccent"
+        android:contentDescription="@string/ic_hue"
+        android:padding="8dp"
+        android:layout_alignTop="@id/HH_cameraPreviewTexture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp" />
+    <TextView
+        android:id="@+id/HH_tv_hue"
+        android:text="#E8CDAB"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/heading_textSize"
+        android:layout_alignTop="@id/HH_cameraPreviewTexture"
+        android:layout_toEndOf="@id/HH_iv_hue"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:gravity="center_vertical"/>
+
+    <!-- Camera control overlay -->
+    <ImageButton
+        android:id="@+id/HH_btn_capturePhoto"
+        android:background="@drawable/ic_camera"
+        android:backgroundTint="@android:color/white"
+        android:contentDescription="@string/btn_capturePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/HH_cameraPreviewTexture"
+        android:layout_marginBottom="12dp"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
