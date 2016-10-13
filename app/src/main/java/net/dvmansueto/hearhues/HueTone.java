@@ -14,19 +14,21 @@ import static java.lang.Integer.parseInt;
 /**
  * Provides HueTone objects with both colour and sound attributes.
  */
-public final class HueTone {
-    private int mRed;   // mRed is RGB Red [0...255]
-    private int mGreen; // mGreen is RGB Green [0...255]
-    private int mBlue;  // mBlue is RGB Blue [0...255]
+final class HueTone {
+    private static final double BASE_FREQUENCY = 110; // A2 = 110 Hz
+    private static final int HALF_STEPS_PER_RANGE = 48; // A2 -> A6 (1760 Hz)
+    private static final double TWELFTH_ROOT_OF_2 = Math.pow( 2, 1 / 12);
+    private static final double FREQUENCY_DENOMINATOR = HALF_STEPS_PER_RANGE * Math.log( TWELFTH_ROOT_OF_2);
+
     private int mRgb;   // mRgb is AARRGGBB
     private float[] mHsl;   // mHsl is [0] Hue [0...360), [1] Saturation [0...1], [2] Lightness [0...1]
-    private float mHue;     // mHue is HSL Hue [0...1)
-    private float mTone;    // mTone is frequency corresponding to hue
+    private double mHue;     // mHue is HSL Hue [0...1)
+    private double mTone;    // mTone is frequency corresponding to hue
 
     //// Constructors
 
     // Default constructor
-    public HueTone() {
+    HueTone() {
         updateHueTone( 0);
     }
 
@@ -60,15 +62,6 @@ public final class HueTone {
         updateHueTone( ColorUtils.HSLToColor( hsl));
     }
 
-    // Converts from tone to colour and back again...
-    /**
-     * Creates a HueTone from a tone float.
-     * @param tone frequency (Hertz) of the tone.
-     */
-    public HueTone( @NonNull float tone) {
-        updateHueTone( toneToColorInt( tone));
-    }
-
     /**
      * Creates a HueTone from an \"#RRGGBB\" string.
      * @param colorString \"#RRGGBB\" string to import
@@ -88,20 +81,32 @@ public final class HueTone {
         updateHueTone( color);
     }
 
-
     // Primary Constructor / Constructor Helper
     /**
      * Primary constructor, resets all values after any change to HueTone.
      * @param color the ColorInt to import
      */
     private void updateHueTone( @ColorInt int color) {
-        mRed = Color.red( color);
-        mGreen = Color.green( color);
-        mBlue = Color.blue( color);
         mRgb = color;
         ColorUtils.colorToHSL( mRgb, mHsl);
         mHue = mHsl[0] / 360;
         mTone = hueToTone( mHue);
+    }
+
+    // Overload for tone due to calculation expense of hueToTone()
+    public HueTone( double tone) {
+        updateHueTone( tone);
+    }
+
+    /**
+     * Creates a HueTone from a tone double.
+     * @param tone frequency (Hertz) of the tone.
+     */
+    private void updateHueTone( double tone) {
+        mTone = tone;
+        mHue = toneToHue( tone);
+        mHsl = new float[] { (float) ( mHue * 360), 1, (float) 0.5 };
+        mRgb = ColorUtils.HSLToColor( mHsl);
     }
 
 
@@ -109,69 +114,68 @@ public final class HueTone {
 
     /**
      *
-     * @param swatch
+     * @param swatch the swatch to import.
      */
-    public void setHue( @NonNull Palette.Swatch swatch) {
+    void setHue(@NonNull Palette.Swatch swatch) {
         updateHueTone( swatch.getRgb());
     }
 
-    public void setTone( @NonNull float tone) {
+    public void setTone( double tone) {
         updateHueTone( toneToColorInt( tone));
     }
 
     //// Accessors
     @ColorInt
-    public int getRgb() {
+    int getRgb() {
         return mRgb;
     }
 
-    public float[] getHsl() {
+    float[] getHsl() {
         return mHsl;
     }
 
-    public float getHue() {
+    double getHue() {
         return mHue;
     }
 
-    public float getTone() {
+    double getTone() {
         return mTone;
     }
 
-    public String getColorString() {
+    String getColorString() {
         return "#" + Integer.toHexString( mRgb).substring( 0, 6).toUpperCase();
     }
 
     @Override
     public String toString() {
         return new StringBuilder(getClass().getSimpleName())
-                .append(" [Hue: ").append(Float.toString(getHue())).append(']')
-                .append(" [Tone: ").append(Float.toString(getTone())).append(']')
+                .append(" [Hue: ").append(Double.toString(getHue())).append(']')
+                .append(" [Tone: ").append(Double.toString(getTone())).append(']')
                 .append(" [RGB: #").append(Integer.toHexString(getRgb())).append(']')
                 .append(" [HSL: ").append(Arrays.toString(getHsl())).append(']')
                 .toString();
     }
 
 
-    //// Helpors
+    //// Helpers
 
     /**
      * Converts a tone to a hue.
      * @param tone frequency (Hertz) to convert
      * @return the corresponding hue [0...1)
      */
-    private float toneToHue(float tone) {
-        float hue = 0;
-        return hue;
+    private double toneToHue( double tone) {
+        return Math.log( tone / BASE_FREQUENCY) / FREQUENCY_DENOMINATOR;
     }
 
     /**
      * Converts a hue to a tone.
+     *
      * @param hue the hue [0...1) to convert
      * @return the corresponding frequency (Hertz)
      */
-    private float hueToTone(float hue) {
-        float tone = 0;
-        return tone;
+    private double hueToTone( double hue) {
+        return BASE_FREQUENCY * Math.pow( TWELFTH_ROOT_OF_2, HALF_STEPS_PER_RANGE * hue);
     }
 
     /**
@@ -180,9 +184,11 @@ public final class HueTone {
      * @return ColorInt
      */
     @ColorInt
-    private int toneToColorInt( float tone) {
-        float hue = toneToHue( tone);
-        float[] hsl = new float[] { hue * 360, 1, ( float) 0.5 };
+    private int toneToColorInt( double tone) {
+        double hue = toneToHue( tone);
+        float[] hsl = new float[] { (float) ( hue * 360), 1, (float) 0.5 };
         return ColorUtils.HSLToColor( hsl);
     }
+
+
 }

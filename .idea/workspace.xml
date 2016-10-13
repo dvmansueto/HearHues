@@ -7,9 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49c3ac5-b34b-494b-ac36-e38df15117ba" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
     </list>
     <ignored path="Hear Hues.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HearHueActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HearHueActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
+            <state relative-caret-position="-140">
+              <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4433#4952#0" expanded="true" />
@@ -73,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ToneGenerator.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ToneGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2440">
@@ -96,32 +95,32 @@
       <file leaf-file-name="HueTone.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="847">
-              <caret line="172" column="23" selection-start-line="172" selection-start-column="23" selection-end-line="172" selection-end-column="23" />
+            <state relative-caret-position="547">
+              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#972#973#0" expanded="true" />
-                <element signature="e#1005#1006#0" expanded="true" />
-                <element signature="e#1671#1672#0" expanded="true" />
-                <element signature="e#1718#1719#0" expanded="true" />
-                <element signature="e#1896#1897#0" expanded="true" />
-                <element signature="e#1955#1956#0" expanded="true" />
-                <element signature="e#2163#2164#0" expanded="true" />
-                <element signature="e#2216#2217#0" expanded="true" />
-                <element signature="e#2774#2775#0" expanded="true" />
-                <element signature="e#2811#2812#0" expanded="true" />
-                <element signature="e#3417#3418#0" expanded="true" />
-                <element signature="e#3464#3465#0" expanded="true" />
-                <element signature="e#3513#3514#0" expanded="true" />
-                <element signature="e#3566#3567#0" expanded="true" />
-                <element signature="e#3626#3627#0" expanded="true" />
-                <element signature="e#3653#3654#0" expanded="true" />
-                <element signature="e#3684#3685#0" expanded="true" />
-                <element signature="e#3711#3712#0" expanded="true" />
-                <element signature="e#3740#3741#0" expanded="true" />
-                <element signature="e#3767#3768#0" expanded="true" />
-                <element signature="e#3797#3798#0" expanded="true" />
-                <element signature="e#3825#3826#0" expanded="true" />
+                <element signature="e#1126#1127#0" expanded="true" />
+                <element signature="e#1159#1160#0" expanded="true" />
+                <element signature="e#1825#1826#0" expanded="true" />
+                <element signature="e#1872#1873#0" expanded="true" />
+                <element signature="e#2050#2051#0" expanded="true" />
+                <element signature="e#2109#2110#0" expanded="true" />
+                <element signature="e#2667#2668#0" expanded="true" />
+                <element signature="e#2704#2705#0" expanded="true" />
+                <element signature="e#3181#3182#0" expanded="true" />
+                <element signature="e#3217#3218#0" expanded="true" />
+                <element signature="e#3689#3690#0" expanded="true" />
+                <element signature="e#3736#3737#0" expanded="true" />
+                <element signature="e#3777#3778#0" expanded="true" />
+                <element signature="e#3830#3831#0" expanded="true" />
+                <element signature="e#3883#3884#0" expanded="true" />
+                <element signature="e#3910#3911#0" expanded="true" />
+                <element signature="e#3934#3935#0" expanded="true" />
+                <element signature="e#3961#3962#0" expanded="true" />
+                <element signature="e#3984#3985#0" expanded="true" />
+                <element signature="e#4011#4012#0" expanded="true" />
+                <element signature="e#4035#4036#0" expanded="true" />
+                <element signature="e#4063#4064#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -201,6 +200,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="David Mansueto &lt;David Mansueto&gt;" />
         <option value="Dave" />
         <option value="dvmansueto" />
       </list>
@@ -1920,16 +1920,17 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_hear_hue.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHue.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTones.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1294" />
-    <option name="height" value="1447" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="2576" />
+    <option name="height" value="1456" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -2311,10 +2312,18 @@
       <option name="presentableId" value="Default" />
       <updated>1475991207667</updated>
     </task>
+    <task id="LOCAL-00001" summary="Provided ToneGenerator">
+      <created>1476342258583</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1476342258583</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1294" height="1447" extended-state="0" />
+    <frame x="-8" y="-8" width="2576" height="1456" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2444,28 +2453,28 @@
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-            <element signature="e#1005#1006#0" expanded="true" />
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#1718#1719#0" expanded="true" />
-            <element signature="e#1896#1897#0" expanded="true" />
-            <element signature="e#1955#1956#0" expanded="true" />
-            <element signature="e#2163#2164#0" expanded="true" />
-            <element signature="e#2216#2217#0" expanded="true" />
-            <element signature="e#2774#2775#0" expanded="true" />
-            <element signature="e#2811#2812#0" expanded="true" />
-            <element signature="e#3417#3418#0" expanded="true" />
-            <element signature="e#3464#3465#0" expanded="true" />
-            <element signature="e#3513#3514#0" expanded="true" />
-            <element signature="e#3566#3567#0" expanded="true" />
-            <element signature="e#3626#3627#0" expanded="true" />
-            <element signature="e#3653#3654#0" expanded="true" />
-            <element signature="e#3684#3685#0" expanded="true" />
-            <element signature="e#3711#3712#0" expanded="true" />
-            <element signature="e#3740#3741#0" expanded="true" />
-            <element signature="e#3767#3768#0" expanded="true" />
-            <element signature="e#3797#3798#0" expanded="true" />
-            <element signature="e#3825#3826#0" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
+            <element signature="e#1159#1160#0" expanded="true" />
+            <element signature="e#1825#1826#0" expanded="true" />
+            <element signature="e#1872#1873#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
+            <element signature="e#2109#2110#0" expanded="true" />
+            <element signature="e#2667#2668#0" expanded="true" />
+            <element signature="e#2704#2705#0" expanded="true" />
+            <element signature="e#3181#3182#0" expanded="true" />
+            <element signature="e#3217#3218#0" expanded="true" />
+            <element signature="e#3689#3690#0" expanded="true" />
+            <element signature="e#3736#3737#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
+            <element signature="e#3830#3831#0" expanded="true" />
+            <element signature="e#3883#3884#0" expanded="true" />
+            <element signature="e#3910#3911#0" expanded="true" />
+            <element signature="e#3934#3935#0" expanded="true" />
+            <element signature="e#3961#3962#0" expanded="true" />
+            <element signature="e#3984#3985#0" expanded="true" />
+            <element signature="e#4011#4012#0" expanded="true" />
+            <element signature="e#4035#4036#0" expanded="true" />
+            <element signature="e#4063#4064#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2802,34 +2811,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="847">
-          <caret line="172" column="23" selection-start-line="172" selection-start-column="23" selection-end-line="172" selection-end-column="23" />
+        <state relative-caret-position="-140">
+          <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-            <element signature="e#1005#1006#0" expanded="true" />
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#1718#1719#0" expanded="true" />
-            <element signature="e#1896#1897#0" expanded="true" />
-            <element signature="e#1955#1956#0" expanded="true" />
-            <element signature="e#2163#2164#0" expanded="true" />
-            <element signature="e#2216#2217#0" expanded="true" />
-            <element signature="e#2774#2775#0" expanded="true" />
-            <element signature="e#2811#2812#0" expanded="true" />
-            <element signature="e#3417#3418#0" expanded="true" />
-            <element signature="e#3464#3465#0" expanded="true" />
-            <element signature="e#3513#3514#0" expanded="true" />
-            <element signature="e#3566#3567#0" expanded="true" />
-            <element signature="e#3626#3627#0" expanded="true" />
-            <element signature="e#3653#3654#0" expanded="true" />
-            <element signature="e#3684#3685#0" expanded="true" />
-            <element signature="e#3711#3712#0" expanded="true" />
-            <element signature="e#3740#3741#0" expanded="true" />
-            <element signature="e#3767#3768#0" expanded="true" />
-            <element signature="e#3797#3798#0" expanded="true" />
-            <element signature="e#3825#3826#0" expanded="true" />
+            <element signature="e#4433#4952#0" expanded="true" />
+            <element signature="e#4951#4952#0" expanded="true" />
+            <element signature="e#6231#6496#0" expanded="true" />
+            <element signature="e#6336#6470#0" expanded="true" />
+            <element signature="e#6469#6470#0" expanded="true" />
+            <element signature="e#6495#6496#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
+            <element signature="e#1159#1160#0" expanded="true" />
+            <element signature="e#1825#1826#0" expanded="true" />
+            <element signature="e#1872#1873#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
+            <element signature="e#2109#2110#0" expanded="true" />
+            <element signature="e#2667#2668#0" expanded="true" />
+            <element signature="e#2704#2705#0" expanded="true" />
+            <element signature="e#3181#3182#0" expanded="true" />
+            <element signature="e#3217#3218#0" expanded="true" />
+            <element signature="e#3689#3690#0" expanded="true" />
+            <element signature="e#3736#3737#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
+            <element signature="e#3830#3831#0" expanded="true" />
+            <element signature="e#3883#3884#0" expanded="true" />
+            <element signature="e#3910#3911#0" expanded="true" />
+            <element signature="e#3934#3935#0" expanded="true" />
+            <element signature="e#3961#3962#0" expanded="true" />
+            <element signature="e#3984#3985#0" expanded="true" />
+            <element signature="e#4011#4012#0" expanded="true" />
+            <element signature="e#4035#4036#0" expanded="true" />
+            <element signature="e#4063#4064#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2848,22 +2873,6 @@
             <element signature="e#1931#1932#0" expanded="true" />
             <element signature="e#1964#1965#0" expanded="true" />
             <element signature="e#1993#1994#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4433#4952#0" expanded="true" />
-            <element signature="e#4951#4952#0" expanded="true" />
-            <element signature="e#6231#6496#0" expanded="true" />
-            <element signature="e#6336#6470#0" expanded="true" />
-            <element signature="e#6469#6470#0" expanded="true" />
-            <element signature="e#6495#6496#0" expanded="true" />
           </folding>
         </state>
       </provider>
