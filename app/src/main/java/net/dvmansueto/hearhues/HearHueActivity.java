@@ -19,6 +19,9 @@ import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
@@ -98,7 +101,13 @@ public class HearHueActivity extends AppCompatActivity {
     private int mHeight = 640;
     private Palette.PaletteAsyncListener paletteListener;
     private HueTone mHueTone = new HueTone();
+    private ToneGenerator toneGenerator = new ToneGenerator();
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +138,9 @@ public class HearHueActivity extends AppCompatActivity {
                 // Update views
                 setImageViewSwatch( mHueImageView, mHueTone);
                 setTextViewSwatch( mHueTextView, mHueTone);
+
+                // Update sounds
+                toneGenerator.setTone( mHueTone.getTone());
             }
         };
 
@@ -155,9 +167,24 @@ public class HearHueActivity extends AppCompatActivity {
             }
         });
 
+        // Use a new tread as this can take a while
+        final Thread thread = new Thread(new Runnable() {
+            public void run() {
+                genTone();
+                handler.post(new Runnable() {
+
+                    public void run() {
+                        playSound();
+                    }
+                });
+            }
+        });
+        thread.start();
+
     }
 
-    //////// Palette methods
+
+    //// Palette methods
     public void setImageViewSwatch( ImageView iv, HueTone hueTone) {
         if( hueTone != null) {
             iv.setColorFilter( hueTone.getRgb());
