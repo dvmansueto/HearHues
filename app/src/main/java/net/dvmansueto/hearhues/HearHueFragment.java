@@ -1,6 +1,7 @@
 package net.dvmansueto.hearhues;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -56,11 +59,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Provides the HearHue interaction mode.
+ * Primarily, allows user to find colours using their camera which is then converted to a
+ * corresponding tone.
+ * As a secondary feature, the ability to capture photographs is provided as it would be annoying to
+ * be using a camera without this feature.
  * @author David Mansueto
  * @version $Id$
  * @since 0.1
@@ -68,6 +76,12 @@ import java.util.concurrent.TimeUnit;
 public class HearHueFragment extends Fragment
         implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
 
+    /**
+     * The parent activity.
+     */
+    private AppCompatActivity mActivity;
+
+    // extending Google's Camera2Basic sample code
 
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -86,7 +100,7 @@ public class HearHueFragment extends Fragment
     /**
      * Tag for the {@link Log}.
      */
-    private static final String TAG = "Camera2BasicFragment";
+    private static final String TAG = "HearHueFragment";
 
     /**
      * Camera state: Showing camera preview.
@@ -132,7 +146,7 @@ public class HearHueFragment extends Fragment
 
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-            openCamera(width, height);
+            openCamera( mCameraId, width, height);
         }
 
         @Override
@@ -155,6 +169,18 @@ public class HearHueFragment extends Fragment
      * ID of the current {@link CameraDevice}.
      */
     private String mCameraId;
+
+    //NEW:
+    /**
+     * ID of the front facing {@link CameraDevice}
+     */
+    private String mFrontCameraId;
+
+    //NEW:
+    /**
+     * ID of the back facing {@link CameraDevice}
+     */
+    private String mBackCameraId;
 
     /**
      * An {@link AutoFitTextureView} for camera preview.
@@ -230,6 +256,26 @@ public class HearHueFragment extends Fragment
     private File mFile;
 
     /**
+     * This is the output file directory.
+     */
+    private File mFileDirectory;
+
+    /**
+     * This is the output file prefix.
+     */
+    String mFilePrefix;
+
+    /**
+     * This is the output file serial number.
+     */
+    int mFileNumber;
+
+    /**
+     * This is the output file type.
+     */
+    private String mFileType;
+
+    /**
      * This a callback object for the {@link ImageReader}. "onImageAvailable" will be called when a
      * still image is ready to be saved.
      */
@@ -290,7 +336,7 @@ public class HearHueFragment extends Fragment
                 case STATE_WAITING_LOCK: {
                     Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);
                     if (afState == null) {
-                        captureStillPicture();
+                        captureStillPhoto();
                     } else if (CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState ||
                             CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
                         // CONTROL_AE_STATE can be null on some devices
@@ -298,7 +344,7 @@ public class HearHueFragment extends Fragment
                         if (aeState == null ||
                                 aeState == CaptureResult.CONTROL_AE_STATE_CONVERGED) {
                             mState = STATE_PICTURE_TAKEN;
-                            captureStillPicture();
+                            captureStillPhoto();
                         } else {
                             runPrecaptureSequence();
                         }
@@ -320,7 +366,7 @@ public class HearHueFragment extends Fragment
                     Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
                     if (aeState == null || aeState != CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
                         mState = STATE_PICTURE_TAKEN;
-                        captureStillPicture();
+                        captureStillPhoto();
                     }
                     break;
                 }
@@ -377,7 +423,8 @@ public class HearHueFragment extends Fragment
      * @return The optimal {@code Size}, or an arbitrary one if none were big enough
      */
     private static Size chooseOptimalSize(Size[] choices, int textureViewWidth,
-                                          int textureViewHeight, int maxWidth, int maxHeight, Size aspectRatio) {
+                                          int textureViewHeight, int maxWidth, int maxHeight,
+                                          Size aspectRatio) {
 
         // Collect the supported resolutions that are at least as big as the preview Surface
         List<Size> bigEnough = new ArrayList<>();
@@ -412,46 +459,80 @@ public class HearHueFragment extends Fragment
 
     //// Palette fields
 
+    /**
+     * The hue icon.
+     */
     private ImageView mHueImageView;
     private TextView mHueTextView;
+    private TextView mToneTextView;
+
     // Override default number bitmap area ( = 160 * 160)
     private static final int RESIZE_BITMAP_AREA = 32 * 32;
     // Override default number of swatches ( = 16)
     private static final int CALCULATE_NUMBER_COLORS = 4;
-    private ImageReader mPreviewImageReader;
-    private int mWidth = 480;
-    private int mHeight = 640;
-    private Palette.PaletteAsyncListener paletteListener;
+
     private HueTone mHueTone = new HueTone();
     private ToneGenerator toneGenerator = new ToneGenerator();
+    private boolean mPlaying;
 
-    //// Palette methods
-    public void setImageViewSwatch( ImageView iv, HueTone hueTone) {
-        if( hueTone != null) {
-            iv.setColorFilter( hueTone.getRgb());
+
+
+    public void updateHueTone( Palette.Swatch swatch) {
+        mHueTone.setHue( swatch);
+
+        // update hue icon colour
+        mHueImageView.setColorFilter( mHueTone.getRgb());
+        // update hue text display
+        mHueTextView.setText( mHueTone.getHueString());
+
+        // update tone text display
+        mToneTextView.setText( mHueTone.getToneString());
+
+        // update the frequency of the tone generator
+//        toneGenerator.setTone( mHueTone.getTone());
+
+        // let rip!
+//        startPlaying();
+    }
+
+    private void playPause() {
+        ImageView imageView = (ImageView) mActivity.findViewById( R.id.HH_btn_playPause);
+        if ( !mPlaying) {
+            startPlaying();
+            imageView.setImageResource( R.drawable.ic_play_circle_outline_48);
+        } else {
+            stopPlaying();
+            imageView.setImageResource( R.drawable.ic_pause_circle_outline_48);
         }
     }
 
-    /**
-     * Sets text to #RGB
-     * @param tv the TextView to update
-     * @param hueTone the HueTone to source #RGB from
-     */
-    public void setTextViewSwatch( TextView tv, HueTone hueTone) {
-        tv.setText( hueTone.getColorString());
+    //TODO: implement startPlaying()
+    private void startPlaying() {
+        toneGenerator.startTone();
+        mPlaying = true;
     }
-//
-//    /**
-//     * Associates views with their XML counterparts.
-//     */
-//    private void initViews() {
-//        mHueImageView = (ImageView) findViewById(R.id.HH_iv_hue);
-//        mHueTextView = (TextView) findViewById(R.id.HH_tv_hue);
-//    }
-//
-//
 
+    //TODO: implement stopPlaying()
+    private void stopPlaying() {
+        toneGenerator.stopTone();
+        mPlaying = false;
+    }
 
+    /**
+     * Begins the Palette operation on the photograph. Called when a JPEG image has just been saved
+     * in {@link #mFile}.
+     */
+    private void processHueTone() {
+        Bitmap bitmap = BitmapFactory.decodeFile(mFile.toString());
+        // asynchronous palette processing
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            public void onGenerated(Palette palette) {
+//                mPalette = palette; // may be redundant
+//                Palette.Swatch swatch = palette.getDominantSwatch();
+                updateHueTone(palette.getDominantSwatch());
+            }
+        });
+    }
 
 
 
@@ -465,35 +546,38 @@ public class HearHueFragment extends Fragment
         // require empty constructor
     }
 
-    @Override
-    public View onCreateView( LayoutInflater inflater,
-                              ViewGroup container,
-                              Bundle savedInstanceState) {
-
-        return inflater.inflate( R.layout.fragment_hear_hue, container, false);
-    }
-
     public static HearHueFragment newInstance() {
         return new HearHueFragment();
     }
 
     @Override
+    public View onCreateView( LayoutInflater inflater,
+                              ViewGroup container,
+                              Bundle savedInstanceState) {
+        return inflater.inflate( R.layout.fragment_hear_hue, container, false);
+    }
+
+    @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
+        mHueImageView = (ImageView) view.findViewById( R.id.HH_iv_hue);
+        mHueTextView = (TextView) view.findViewById( R.id.HH_tv_hue);
+        mToneTextView = (TextView) view.findViewById( R.id.HH_tv_tone);
         view.findViewById(R.id.HH_btn_capturePhoto).setOnClickListener(this);
-        mTextureView = (AutoFitTextureView) view.findViewById(R.id.HH_cameraPreviewTexture);
+        mTextureView = (AutoFitTextureView) view.findViewById(R.id.HH_aftv_cameraPreview);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+        initFile();
+        initCamera();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle(R.string.title_fragment_hear_hue);
+        mActivity = (AppCompatActivity) getActivity();
+        mActivity.getSupportActionBar().setTitle(R.string.title_fragment_hear_hue);
         startBackgroundThread();
 
         // When the screen is turned off and turned back on, the SurfaceTexture is already
@@ -501,29 +585,10 @@ public class HearHueFragment extends Fragment
         // a camera and start preview from here (otherwise, we wait until the surface is ready in
         // the SurfaceTextureListener).
         if (mTextureView.isAvailable()) {
-            openCamera(mTextureView.getWidth(), mTextureView.getHeight());
+            openCamera( mCameraId, mTextureView.getWidth(), mTextureView.getHeight());
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
-
-        // listen for completed processing of camera preview to palette
-        Palette.PaletteAsyncListener paletteListener = new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated( Palette palette ) {
-
-            // Find dominant (largest number of pixels) colour
-            mHueTone.setHue( palette.getDominantSwatch());
-
-            // Update views
-            setImageViewSwatch( mHueImageView, mHueTone);
-            setTextViewSwatch( mHueTextView, mHueTone);
-
-            // Update sounds
-            toneGenerator.setTone( mHueTone.getTone());
-            }
-        };
-
-
     }
 
 
@@ -557,108 +622,41 @@ public class HearHueFragment extends Fragment
     }
 
     /**
-     * Sets up member variables related to camera.
-     *
-     * @param width  The width of available size for camera preview
-     * @param height The height of available size for camera preview
+     * Initialises the camera.
      */
-    private void setUpCameraOutputs(int width, int height) {
+    private void initCamera() {
+        findCameraIds();
+    }
+
+    /**
+     * Finds the front and back facing cameras IDs:
+     *  • {@link HearHueFragment#mBackCameraId}
+     *  • {@link HearHueFragment#mFrontCameraId}
+     *  • {@link HearHueFragment#mCameraId} (defaults to back camera, else front)
+     */
+    private void findCameraIds() {
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
-            for (String cameraId : manager.getCameraIdList()) {
-                CameraCharacteristics characteristics
-                        = manager.getCameraCharacteristics(cameraId);
+            // look for front and back cameras
+            for( String cameraId : manager.getCameraIdList()) {
+                CameraCharacteristics characteristics = manager.getCameraCharacteristics( cameraId);
 
-                // We don't use a front facing camera in this sample.
-                Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
+                Integer facing = characteristics.get( CameraCharacteristics.LENS_FACING);
+                if ( facing == null ) {
                     continue;
                 }
-
-                StreamConfigurationMap map = characteristics.get(
-                        CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-                if (map == null) {
-                    continue;
+                if ( facing == CameraCharacteristics.LENS_FACING_BACK) {
+                    mBackCameraId = cameraId;
+                } else if ( facing == CameraCharacteristics.LENS_FACING_FRONT) {
+                    mFrontCameraId = cameraId;
                 }
-
-                // For still image captures, we use the largest available size.
-                Size largest = Collections.max(
-                        Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
-                        new CompareSizesByArea());
-                mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
-                        ImageFormat.JPEG, /*maxImages*/2);
-                mImageReader.setOnImageAvailableListener(
-                        mOnImageAvailableListener, mBackgroundHandler);
-
-                // Find out if we need to swap dimension to get the preview size relative to sensor
-                // coordinate.
-                int displayRotation = activity.getWindowManager().getDefaultDisplay().getRotation();
-                //noinspection ConstantConditions
-                mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
-                boolean swappedDimensions = false;
-                switch (displayRotation) {
-                    case Surface.ROTATION_0:
-                    case Surface.ROTATION_180:
-                        if (mSensorOrientation == 90 || mSensorOrientation == 270) {
-                            swappedDimensions = true;
-                        }
-                        break;
-                    case Surface.ROTATION_90:
-                    case Surface.ROTATION_270:
-                        if (mSensorOrientation == 0 || mSensorOrientation == 180) {
-                            swappedDimensions = true;
-                        }
-                        break;
-                    default:
-                        Log.e(TAG, "Display rotation is invalid: " + displayRotation);
-                }
-
-                Point displaySize = new Point();
-                activity.getWindowManager().getDefaultDisplay().getSize(displaySize);
-                int rotatedPreviewWidth = width;
-                int rotatedPreviewHeight = height;
-                int maxPreviewWidth = displaySize.x;
-                int maxPreviewHeight = displaySize.y;
-
-                if (swappedDimensions) {
-                    rotatedPreviewWidth = height;
-                    rotatedPreviewHeight = width;
-                    maxPreviewWidth = displaySize.y;
-                    maxPreviewHeight = displaySize.x;
-                }
-
-                if (maxPreviewWidth > MAX_PREVIEW_WIDTH) {
-                    maxPreviewWidth = MAX_PREVIEW_WIDTH;
-                }
-
-                if (maxPreviewHeight > MAX_PREVIEW_HEIGHT) {
-                    maxPreviewHeight = MAX_PREVIEW_HEIGHT;
-                }
-
-                // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
-                // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
-                // garbage capture data.
-                mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
-                        rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
-                        maxPreviewHeight, largest);
-
-                // We fit the aspect ratio of TextureView to the size of preview we picked.
-                int orientation = getResources().getConfiguration().orientation;
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getWidth(), mPreviewSize.getHeight());
-                } else {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getHeight(), mPreviewSize.getWidth());
-                }
-
-                // Check if the flash is supported.
-                Boolean available = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-                mFlashSupported = available == null ? false : available;
-
-                mCameraId = cameraId;
-                return;
+            }
+            // set mCameraId to back camera by default
+            if ( mBackCameraId != null) {
+                mCameraId = mBackCameraId;
+            } else if ( mFrontCameraId != null) {
+                mCameraId = mFrontCameraId;
             }
         } catch (CameraAccessException e) {
             e.printStackTrace();
@@ -671,29 +669,186 @@ public class HearHueFragment extends Fragment
     }
 
     /**
-     * Opens the camera specified by {@link HearHueFragment#mCameraId}.
+     * Toggles between front and back cameras, changes the button icon.
      */
-    private void openCamera(int width, int height) {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+    private void toggleCamera() {
+        closeCamera();
+        ImageView imageView = (ImageView) getActivity().findViewById( R.id.HH_btn_toggleCamera);
+        if (Objects.equals( mCameraId, mBackCameraId)) {
+            mCameraId = mFrontCameraId;
+            imageView.setImageResource( R.drawable.ic_camera_front_48);
+        } else {
+            mCameraId = mBackCameraId;
+            imageView.setImageResource( R.drawable.ic_camera_back_48);
+        }
+        setUpCameraOutputs( mTextureView.getWidth(), mTextureView.getHeight());
+    }
+
+    /**
+     * Sets up member variables related to camera.
+     *
+     * @param width  The width of available size for camera preview
+     * @param height The height of available size for camera preview
+     */
+    private void setUpCameraOutputs( int width, int height) {
+        Activity activity = getActivity();
+        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        try {
+            CameraCharacteristics characteristics = manager.getCameraCharacteristics( mCameraId);
+
+            StreamConfigurationMap map = characteristics.get(
+                    CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+                // from when this was looping through cameraId's
+//                if (map == null) {
+//                    continue;
+//                }
+
+            // For still image captures, we use the largest available size.
+            Size largest = Collections.max(
+                    Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
+                    new CompareSizesByArea());
+            mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
+                    ImageFormat.JPEG, /*maxImages*/2);
+            mImageReader.setOnImageAvailableListener(
+                    mOnImageAvailableListener, mBackgroundHandler);
+
+            // Find out if we need to swap dimension to get the preview size relative to sensor
+            // coordinate.
+            int displayRotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+            //noinspection ConstantConditions
+            mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
+            boolean swappedDimensions = false;
+            switch (displayRotation) {
+                case Surface.ROTATION_0:
+                case Surface.ROTATION_180:
+                    if (mSensorOrientation == 90 || mSensorOrientation == 270) {
+                        swappedDimensions = true;
+                    }
+                    break;
+                case Surface.ROTATION_90:
+                case Surface.ROTATION_270:
+                    if (mSensorOrientation == 0 || mSensorOrientation == 180) {
+                        swappedDimensions = true;
+                    }
+                    break;
+                default:
+                    Log.e(TAG, "Display rotation is invalid: " + displayRotation);
+            }
+
+            Point displaySize = new Point();
+            activity.getWindowManager().getDefaultDisplay().getSize(displaySize);
+            int rotatedPreviewWidth = width;
+            int rotatedPreviewHeight = height;
+            int maxPreviewWidth = displaySize.x;
+            int maxPreviewHeight = displaySize.y;
+
+            if (swappedDimensions) {
+                rotatedPreviewWidth = height;
+                rotatedPreviewHeight = width;
+                maxPreviewWidth = displaySize.y;
+                maxPreviewHeight = displaySize.x;
+            }
+
+            if (maxPreviewWidth > MAX_PREVIEW_WIDTH) {
+                maxPreviewWidth = MAX_PREVIEW_WIDTH;
+            }
+
+            if (maxPreviewHeight > MAX_PREVIEW_HEIGHT) {
+                maxPreviewHeight = MAX_PREVIEW_HEIGHT;
+            }
+
+            // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
+            // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
+            // garbage capture data.
+            mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
+                    rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
+                    maxPreviewHeight, largest);
+
+            // We fit the aspect ratio of TextureView to the size of preview we picked.
+            int orientation = getResources().getConfiguration().orientation;
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                mTextureView.setAspectRatio(
+                        mPreviewSize.getWidth(), mPreviewSize.getHeight());
+            } else {
+                mTextureView.setAspectRatio(
+                        mPreviewSize.getHeight(), mPreviewSize.getWidth());
+            }
+
+            // Check if the flash is supported.
+            Boolean available = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+            mFlashSupported = available == null ? false : available;
+
+//            mCameraId = cameraId;
+            return;
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            // Currently an NPE is thrown when the Camera2API is used but not supported on the
+            // device this code runs.
+            ErrorDialog.newInstance(getString(R.string.camera_error))
+                    .show(getChildFragmentManager(), FRAGMENT_DIALOG);
+        }
+    }
+
+    /**
+     * Opens the camera specified.
+     */
+    private void openCamera( @NonNull String cameraId, int width, int height) {
+
+        if ( ContextCompat.checkSelfPermission( getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             requestCameraPermission();
             return;
         }
-        setUpCameraOutputs(width, height);
-        configureTransform(width, height);
+
+        // if changing from front to back camera or visa versa, close old camera first
+        if ( !Objects.equals( mCameraId, cameraId)) {
+            closeCamera();
+            mCameraId = cameraId;
+        }
+
+        setUpCameraOutputs( width, height);
+        configureTransform( width, height);
+
         Activity activity = getActivity();
-        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        CameraManager manager = (CameraManager) activity.getSystemService( Context.CAMERA_SERVICE);
         try {
-            if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
+            if ( !mCameraOpenCloseLock.tryAcquire( 2500, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException("Time out waiting to lock camera opening.");
             }
-            manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
-        } catch (CameraAccessException e) {
+            manager.openCamera( mCameraId, mStateCallback, mBackgroundHandler);
+        } catch ( CameraAccessException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
+        } catch  (InterruptedException e) {
+            throw new RuntimeException( "Interrupted while trying to lock camera opening.", e);
         }
     }
+
+    //TODO: delete.
+//    /**
+//     * Opens the camera specified by {@link HearHueFragment#mCameraId}.
+//     */
+//    private void openCamera(int width, int height) {
+//        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            requestCameraPermission();
+//            return;
+//        }
+//        setUpCameraOutputs(width, height);
+//        configureTransform(width, height);
+//        Activity activity = getActivity();
+//        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+//        try {
+//            if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
+//                throw new RuntimeException("Time out waiting to lock camera opening.");
+//            }
+//            manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
+//        } catch (CameraAccessException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
+//        }
+//    }
 
     /**
      * Closes the current {@link CameraDevice}.
@@ -839,7 +994,7 @@ public class HearHueFragment extends Fragment
     /**
      * Initiate a still image capture.
      */
-    private void takePicture() {
+    private void capturePhoto() {
         lockFocus();
     }
 
@@ -879,10 +1034,10 @@ public class HearHueFragment extends Fragment
     }
 
     /**
-     * Capture a still picture. This method should be called when we get a response in
+     * Capture a still photograph. This method should be called when we get a response in
      * {@link #mCaptureCallback} from both {@link #lockFocus()}.
      */
-    private void captureStillPicture() {
+    private void captureStillPhoto() {
         try {
             final Activity activity = getActivity();
             if (null == activity || null == mCameraDevice) {
@@ -911,7 +1066,16 @@ public class HearHueFragment extends Fragment
                                                @NonNull TotalCaptureResult result) {
                     showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
+                    processHueTone();
+                    incrementFile();
+                    //TODO: implement settings, 'save to file' option.
+//                    if ( mSaving) {
+//                        incrementFile();
+//                    } else {
+//                        mFile.delete();
+//                    }
                     unlockFocus();
+
                 }
             };
 
@@ -958,20 +1122,18 @@ public class HearHueFragment extends Fragment
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.HH_btn_capturePhoto: {
-                takePicture();
+    public void onClick( View view) {
+        switch( view.getId()) {
+            case R.id.HH_btn_playPause: {
+                playPause();
                 break;
             }
-            case R.id.info: {
-                Activity activity = getActivity();
-                if (null != activity) {
-                    new AlertDialog.Builder(activity)
-                            .setMessage(R.string.intro_message)
-                            .setPositiveButton(android.R.string.ok, null)
-                            .show();
-                }
+            case R.id.HH_btn_capturePhoto: {
+                capturePhoto();
+                break;
+            }
+            case R.id.HH_btn_toggleCamera: {
+                toggleCamera();
                 break;
             }
         }
@@ -982,6 +1144,51 @@ public class HearHueFragment extends Fragment
             requestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
                     CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
         }
+    }
+
+    /**
+     * Initialises the output file {@link HearHueFragment#mFile} in accordance with Design rule for
+     * Camera File system (DCF) v2.0 (2010).
+     * Makes the {@link HearHueFragment#mFileDirectory}
+     * Defines the {@link HearHueFragment#mFilePrefix}
+     * Finds the latest {@link HearHueFragment#mFileNumber}
+     */
+    @SuppressLint("DefaultLocale") // since is only zero pad format
+    private void initFile() {
+        // the file directory, following
+        mFileDirectory = new File( getActivity().getExternalFilesDir( null) + "/DCIM/100HHUE/");
+        mFileDirectory.mkdirs();
+        mFilePrefix = "DSC_";
+        mFileNumber = 1;
+        mFileType = ".jpg";
+        File[] files = mFileDirectory.listFiles();
+        // find latest serial number if there already files here
+        if ( files.length > 0) {
+            for (File file : files) {
+                String name = file.getName();
+                // ensure appropriate file to compare
+                if (name.substring(0, 3).equalsIgnoreCase(mFilePrefix) &&
+                        name.substring(8, 11).equalsIgnoreCase(mFileType)) {
+                    // find largest
+                    int number = Integer.parseInt(name.substring(4, 7));
+                    if (number > mFileNumber) {
+                        mFileNumber = number;
+                    }
+                }
+            }
+            mFileNumber++; // increment to unused serial number
+        }
+        mFile = new File( mFileDirectory,
+                mFilePrefix + String.format( "%04d", mFileNumber) + mFileType);
+    }
+
+    /**
+     * Increments {@link HearHueFragment#mFileNumber} and updates {@link HearHueFragment#mFile}.
+     */
+    @SuppressLint("DefaultLocale") // since is only zero pad format
+    private void incrementFile() {
+        mFile = new File( mFileDirectory,
+                mFilePrefix + String.format( "%04d", ++mFileNumber) + mFileType);
     }
 
     /**

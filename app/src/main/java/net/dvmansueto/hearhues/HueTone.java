@@ -142,8 +142,12 @@ final class HueTone {
         return mTone;
     }
 
-    String getColorString() {
+    String getHueString() {
         return "#" + Integer.toHexString( mRgb).substring( 0, 6).toUpperCase();
+    }
+
+    String getToneString() {
+        return String.format( "%4.2f", mTone) + " Hz";
     }
 
     @Override

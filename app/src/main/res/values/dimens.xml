@@ -11,4 +11,28 @@
 
     <dimen name="subheading_vertical_padding">16dp</dimen>
     <dimen name="subheading_textSize">14sp</dimen>
+
+    <!-- Elevations -->
+    <!-- https://material.google.com/material-design/elevation-shadows.html#elevation-shadows-elevation-android -->
+    <dimen name="dialog_elevation">24dp</dimen>
+    <dimen name="picker_elevation">24dp</dimen>
+    <dimen name="nav_drawer_elevation">16dp</dimen>
+    <dimen name="right_drawer_elevation">16dp</dimen>
+    <dimen name="modal_bottom_sheet_elevation">16dp</dimen>
+    <dimen name="floating_action_button_pressed_elevation">12dp</dimen>
+    <dimen name="sub_menu_base_elevation">9dp</dimen>
+    <dimen name="bottom_nav_bar_elevation">8dp</dimen>
+    <dimen name="menu_elevation">8dp</dimen>
+    <dimen name="card_picked_up_elevation">8dp</dimen>
+    <dimen name="raised_button_pressed_elevation">8dp</dimen>
+    <dimen name="floating_action_button_resting_elevation">6dp</dimen>
+    <dimen name="snackbar_elevation">6dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="refresh_indicatior_elevation">3dp</dimen>
+    <dimen name="quick_entry_bar_scrolled_state_elevation">3dp</dimen>
+    <dimen name="card_resting_elevation">2dp</dimen>
+    <dimen name="raised_button_resting_elevation">2dp</dimen>
+    <dimen name="quick_entry_bar_resting_elevation">2dp</dimen>
+    <dimen name="switch_elevation">1dp</dimen>
+
 </resources>

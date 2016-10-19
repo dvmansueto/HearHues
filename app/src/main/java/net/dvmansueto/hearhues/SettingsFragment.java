@@ -19,19 +19,17 @@ public class SettingsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView( LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate( R.layout.fragment_settings, container, false);
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle(R.string.title_fragment_settings);
+        activity.getSupportActionBar().setTitle( R.string.title_fragment_settings);
     }
 }

@@ -13,13 +13,17 @@
 
     <!-- HearHueFragment -->
     <string name="title_fragment_hear_hue">Hear Hue</string>
-    <string name="hearHue_title">Hear Hue</string>
-    <string name="hearHue_desc_short">Hear the sound of colour</string>
-    <string name="heading_tone">Tone: </string>
-    <string name="heading_hue">Hue: </string>
-    <string name="btn_capturePhoto">Capture Photograph</string>
-    <string name="ic_tone">Tone</string>
-    <string name="ic_hue">Hue</string>
+    <string name="HH_title">Hear Hue</string>
+    <string name="HH_description">Hear the sound of colour</string>
+    <string name="HH_toneHeading">Tone: </string>
+    <string name="HH_tone">440 Hz</string>
+    <string name="HH_hueTitle">Hue: </string>
+    <string name="HH_hue">#E8CDAB</string>
+    <string name="HH_btn_capturePhoto">Capture Photograph</string>
+    <string name="HH_btn_toggleCamera">Toggle Camera</string>
+    <string name="HH_btn_playPause">Play/Pause</string>
+    <string name="HH_ic_tone">Tone</string>
+    <string name="HH_ic_hue">Hue</string>
     <string name="request_permission">This feature requires camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
@@ -43,7 +47,7 @@
     <string name="navigation_drawer_secondary_features">Ancillary Features</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Hear Hues</string>
 
     <string name="action_settings">Settings</string>
 

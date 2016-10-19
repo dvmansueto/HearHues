@@ -25,6 +25,7 @@ public class ToneGenerator {
     private double mTone; // Hertz
     private double mAmplitude; // [0...1]
     private boolean mMuted;
+    private boolean mPlaying;
     private double[] mSamples;
     private int mSampleIdx;
     private byte[] mSoundBytes;
@@ -74,8 +75,12 @@ public class ToneGenerator {
 
     public void startTone() {
 
-        // lead out of the last tone gracefully
-        leadOut();
+        if ( mPlaying) {
+            // lead out of the last tone gracefully
+            leadOut();
+        }
+
+        mPlaying = true;
 
         for ( int i = 0; i < SAMPLE_RATE; ++i) {
             mSamples[ i] = Math.sin( ( 2 * Math.PI - 0.001) * i / ( SAMPLE_RATE / mTone));
@@ -86,6 +91,9 @@ public class ToneGenerator {
 
         // play back tone for MAXIMUM_SECONDS
         loopTone();
+
+        // lead out and stop playing.
+        leadOut();
     }
 
     private void leadIn() {
@@ -130,6 +138,15 @@ public class ToneGenerator {
             // 16-bit WAV PCM is little endian, so reverse byte order
             mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
             mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
+        }
+
+        // stopped playing.
+        mPlaying = false;
+    }
+
+    public void stopTone() {
+        if ( mPlaying) {
+            leadOut();
         }
     }
 

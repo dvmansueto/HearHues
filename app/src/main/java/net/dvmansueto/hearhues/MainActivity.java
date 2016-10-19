@@ -29,7 +29,7 @@ public class MainActivity
 
         if (null == savedInstanceState) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, HearHueFragment.newInstance())
+                    .replace(R.id.container_content, HearHueFragment.newInstance())
                     .commit();
         }
 
@@ -68,18 +68,15 @@ public class MainActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_mute) {
-            return true;
-        }
-
+//        switch (item.getItemId()) {
+//            case R.id.action_mute: {
+//
+//                return true;
+//            }
+//        }
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected( @NonNull MenuItem item) {
         Fragment fragment = null;
@@ -99,7 +96,7 @@ public class MainActivity
 
         if( fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.container_content, fragment).commit();
         }
         DrawerLayout drawer = ( DrawerLayout) findViewById( R.id.drawer_layout);
         drawer.closeDrawer( GravityCompat.START);
