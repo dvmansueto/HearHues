@@ -3,6 +3,7 @@ package net.dvmansueto.hearhues;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.util.Log;
 
 /**
  * Created by Dave on 13/10/16.
@@ -14,95 +15,114 @@ import android.media.AudioTrack;
  */
 
 public class ToneGenerator {
+
+    private static final String TAG = "ToneGenerator";
+
     private static final int SAMPLE_RATE = 9600;
-    private static final double LEAD_IN_MILLISECONDS = 0.35;
-    private static final double LEAD_OUT_MILLISECONDS = 0.15;
-    private static final int MAXIMUM_LOOP_SECONDS = 3;
+    //TODO: preference candidate
+    private static final double PLAYBACK_SECONDS = 1.6;
+    private static final int PLAYBACK_SAMPLES = (int) ( SAMPLE_RATE * PLAYBACK_SECONDS);
+    private static final double LEAD_IN_SECONDS = 0.35;
+    private static final int LEAD_IN_SAMPLES = (int) ( SAMPLE_RATE * LEAD_IN_SECONDS);
+    private static final double LEAD_OUT_SECONDS = 0.15;
+    private static final int LEAD_OUT_SAMPLES = (int) ( SAMPLE_RATE * LEAD_OUT_SECONDS);
     private static final int MAGIC_INT = 32767; // 2^15 for 16-bit WAV
     private static final double DEFAULT_FREQUENCY = 440;
     private static final double DEFAULT_AMPLITUDE = 0.85;
-    private static final boolean DEFAULT_MUTED = true;
     private double mTone; // Hertz
+    //TODO: preference candidate
     private double mAmplitude; // [0...1]
-    private boolean mMuted;
+    private double[] mSamples = new double[ PLAYBACK_SAMPLES];
+    private byte[] mSoundBytes = new byte[ 2 * PLAYBACK_SAMPLES];
+    private AudioTrack mAudioTrack;
     private boolean mPlaying;
-    private double[] mSamples;
-    private int mSampleIdx;
-    private byte[] mSoundBytes;
+    private ToneGeneratorListener mListener;
 
+    /**
+     *
+     */
+    interface ToneGeneratorListener {
+        void startedPlaying();
+        void stoppedPlaying();
+    }
 
-    public ToneGenerator() {
+    // Assign the listener implementing events interface that will receive the events
+    public void setToneGeneratorListener( ToneGeneratorListener listener) {
+        mListener = listener;
+    }
+
+    ToneGenerator() {
         mTone = DEFAULT_FREQUENCY;
         mAmplitude = DEFAULT_AMPLITUDE;
-        mMuted = DEFAULT_MUTED;
+        mListener = null;
     }
 
-    public ToneGenerator( double tone) {
+    void setTone( double tone) {
         mTone = tone;
-        mAmplitude = DEFAULT_AMPLITUDE;
-        mMuted = DEFAULT_MUTED;
     }
 
-    public ToneGenerator( double tone, boolean muted) {
-        mTone = tone;
-        mAmplitude = DEFAULT_AMPLITUDE;
-        mMuted = muted;
-    }
-
-
-    public void setTone( double tone) {
-        mTone = tone;
-        startTone();
-    }
-
-
-    public void setAmplitude( double amplitude) {
+    void setAmplitude( double amplitude) {
         mAmplitude = amplitude;
     }
 
-    public void setMuted( boolean muted) {
-        mMuted = muted;
-    }
-
-
-    public double getAmplitude() {
+    double getAmplitude() {
         return mAmplitude;
     }
 
-    public boolean getMuted() {
-        return mMuted;
+    void stopTone() {
+        if ( mPlaying) {
+            mAudioTrack.stop();
+            mListener.stoppedPlaying();
+            mPlaying = false;
+//            leadOut();
+        }
     }
 
-    public void startTone() {
+    void startTone() {
 
         if ( mPlaying) {
-            // lead out of the last tone gracefully
-            leadOut();
+            stopTone();
         }
 
-        mPlaying = true;
-
-        for ( int i = 0; i < SAMPLE_RATE; ++i) {
+        for ( int i = 0; i < mSamples.length; ++i) {
             mSamples[ i] = Math.sin( ( 2 * Math.PI - 0.001) * i / ( SAMPLE_RATE / mTone));
         }
 
-        // lead in to new tone
-        leadIn();
+        int idx = 0;
 
-        // play back tone for MAXIMUM_SECONDS
-        loopTone();
+//        // lead in gently to avoid audio artifacts (cracks)
+//        for ( int i = 0; i < LEAD_IN_SAMPLES; i++) {
+//            final short val = (short) ( ( mSamples[ i] * MAGIC_INT) * i / LEAD_IN_SAMPLES);
+//            // 16-bit WAV PCM is little endian, so reverse byte order
+//            mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
+//            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
+//        }
 
-        // lead out and stop playing.
-        leadOut();
+        // generate main playback segment
+//        for (int i = LEAD_IN_SAMPLES; i < PLAYBACK_SAMPLES - LEAD_OUT_SAMPLES; i++) {
+        for (int i = LEAD_IN_SAMPLES; i < PLAYBACK_SAMPLES; i++) {
+            final short val = (short) ( mSamples[i] * MAGIC_INT);
+            mSoundBytes[ idx++] = (byte) ( val & 0x00FF);
+            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 );
+        }
+
+//        // lead out gently
+//        for ( int i = PLAYBACK_SAMPLES - LEAD_OUT_SAMPLES; i < PLAYBACK_SAMPLES; i++) {
+//            final short val = (short) ( (mSamples[i] * MAGIC_INT) * ( LEAD_OUT_SAMPLES - i) / LEAD_OUT_SAMPLES);
+//            mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
+//            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
+//        }
+
+        generateTone();
     }
 
     private void leadIn() {
-        int samples = (int) ( SAMPLE_RATE * LEAD_IN_MILLISECONDS);
+        int samples = (int) ( SAMPLE_RATE * LEAD_IN_SECONDS);
         mSoundBytes = new byte[ 2 * samples];
         int idx = 0;
 
         for ( int i = 0; i < samples; i++) {
-            final short val = (short) ( ( mSamples[i] * MAGIC_INT) * i / samples);
+            final short val = (short) ( ( mSamples[ i] * MAGIC_INT) * i / samples);
             // 16-bit WAV PCM is little endian, so reverse byte order
             mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
             mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
@@ -112,23 +132,21 @@ public class ToneGenerator {
     }
 
     private void loopTone() {
+        int samples = SAMPLE_RATE;
         mSoundBytes = new byte[ 2 * SAMPLE_RATE];
         int idx = 0;
 
-        for ( int i = 0; i < SAMPLE_RATE; i++) {
+        // sample 1 seconds worth of tone
+        for ( int i = 0; i < samples; i++) {
             final short val = (short) ( mSamples[i] * MAGIC_INT);
             mSoundBytes[ idx++] = (byte) ( val & 0x00FF);
             mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 );
         }
-
-        for ( int i = 0; i < MAXIMUM_LOOP_SECONDS; i++) {
-            generateTone();
-        }
+        generateTone();
     }
 
-
     private void leadOut() {
-        int samples = (int) ( SAMPLE_RATE * LEAD_OUT_MILLISECONDS);
+        int samples = (int) ( SAMPLE_RATE * LEAD_OUT_SECONDS);
         mSoundBytes = new byte[ 2 * samples];
         int idx = 0;
 
@@ -139,15 +157,7 @@ public class ToneGenerator {
             mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
             mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
         }
-
-        // stopped playing.
-        mPlaying = false;
-    }
-
-    public void stopTone() {
-        if ( mPlaying) {
-            leadOut();
-        }
+        generateTone();
     }
 
     /**
@@ -155,14 +165,33 @@ public class ToneGenerator {
      * Source: http://stackoverflow.com/a/3731075
      */
     private void generateTone() {
-        final AudioTrack audioTrack = new AudioTrack(
+        // create anew each time to set buffer size
+        // since setter & getter methods require API v24 & v23 respectively.
+        mAudioTrack = new AudioTrack(
                 AudioManager.STREAM_MUSIC,
                 SAMPLE_RATE,
                 AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT,
                 mSoundBytes.length,
                 AudioTrack.MODE_STATIC);
-        audioTrack.write(mSoundBytes, 0, mSoundBytes.length);
-        audioTrack.play();
+        mAudioTrack.write(mSoundBytes, 0, mSoundBytes.length);
+        mAudioTrack.setNotificationMarkerPosition(mSoundBytes.length / 2);
+        mAudioTrack.setPlaybackPositionUpdateListener(new AudioTrack.OnPlaybackPositionUpdateListener() {
+            @Override
+            public void onPeriodicNotification(AudioTrack track) {
+            }
+
+            @Override
+            public void onMarkerReached(AudioTrack track) {
+                Log.d(TAG, "End of audioTrack");
+                mPlaying = false;
+                if (mListener != null)
+                    mListener.stoppedPlaying();
+            }
+        });
+        mAudioTrack.play();
+        mListener.startedPlaying();
+        mPlaying = true;
     }
+
 }

@@ -6,18 +6,35 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.graphics.Palette;
+import android.util.Log;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 
 /**
  * Provides HueTone objects with both colour and sound attributes.
+ * Hues:
+ *    0* = red
+ *   60* = yellow
+ *  120* = green
+ *  180* = blue
+ *  240* = indigo
+ *  300* = pink
+ *  360* = red
  */
 final class HueTone {
-    private static final double BASE_FREQUENCY = 110; // A2 = 110 Hz
+
+
+    /**
+     * Tag for the {@link Log}.
+     */
+    private static final String TAG = "HearHue";
+
+    private static final double BASE_FREQUENCY = 440; // A2 = 110 Hz
     private static final int HALF_STEPS_PER_RANGE = 48; // A2 -> A6 (1760 Hz)
-    private static final double TWELFTH_ROOT_OF_2 = Math.pow( 2, 1 / 12);
+    private static final double TWELFTH_ROOT_OF_2 = Math.pow( 2, (double) 1 / (double) 12);
     private static final double FREQUENCY_DENOMINATOR = HALF_STEPS_PER_RANGE * Math.log( TWELFTH_ROOT_OF_2);
 
     private int mRgb;   // mRgb is AARRGGBB
@@ -29,7 +46,7 @@ final class HueTone {
 
     // Default constructor
     HueTone() {
-        updateHueTone( 0);
+        updateHueTone( BASE_FREQUENCY);
     }
 
     // Secondary constructors
@@ -87,10 +104,13 @@ final class HueTone {
      * @param color the ColorInt to import
      */
     private void updateHueTone( @ColorInt int color) {
+        Log.d( TAG, "Color: " + Integer.toHexString( color));
         mRgb = color;
         ColorUtils.colorToHSL( mRgb, mHsl);
         mHue = mHsl[0] / 360;
+        Log.d( TAG, "Hue:" + Double.toString( mHue));
         mTone = hueToTone( mHue);
+        Log.d( TAG, "Tone:" + Double.toString( mTone));
     }
 
     // Overload for tone due to calculation expense of hueToTone()
@@ -146,8 +166,13 @@ final class HueTone {
         return "#" + Integer.toHexString( mRgb).substring( 0, 6).toUpperCase();
     }
 
+    /**
+     * Fetches the frequency as a formatted string.
+     * @return the tone as a "xxxx.xx Hz" string.
+     */
     String getToneString() {
-        return String.format( "%4.2f", mTone) + " Hz";
+        // Locale.getDefault() for appropriate '.' or ',' decimal point
+        return String.format(Locale.getDefault(), "%4.2f", mTone) + " Hz";
     }
 
     @Override
@@ -179,6 +204,11 @@ final class HueTone {
      * @return the corresponding frequency (Hertz)
      */
     private double hueToTone( double hue) {
+        Log.d( TAG, "BF: " + Double.toString( BASE_FREQUENCY));
+        Log.d( TAG, "TR: " + Double.toString( TWELFTH_ROOT_OF_2));
+        Log.d( TAG, "HS: " + Double.toString( HALF_STEPS_PER_RANGE));
+        Log.d( TAG, "Hue: " + Double.toString( hue));
+        Log.d( TAG, "Tone: " + BASE_FREQUENCY * Math.pow( TWELFTH_ROOT_OF_2, HALF_STEPS_PER_RANGE * hue));
         return BASE_FREQUENCY * Math.pow( TWELFTH_ROOT_OF_2, HALF_STEPS_PER_RANGE * hue);
     }
 

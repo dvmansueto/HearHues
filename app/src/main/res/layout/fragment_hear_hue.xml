@@ -9,7 +9,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="net.dvmansueto.hearhues.HearHueFragment">
 
-    <!-- Tones header -->
+    <!-- TONES PANEL -->
+    <!-- Tones icon: static -->
     <ImageView
         android:id="@+id/HH_iv_tone"
         android:src="@drawable/ic_tone_48"
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"/>
+    <!-- Tones string: programatically changes after capture -->
     <TextView
         android:id="@+id/HH_tv_tone"
         android:text="@string/HH_tone"
@@ -31,8 +33,9 @@
         android:layout_alignTop="@id/HH_iv_tone"
         android:layout_alignBottom="@id/HH_iv_tone"
         android:gravity="center_vertical" />
+    <!-- Plays or pauses tone generation -->
     <ImageView
-        android:id="@+id/HH_btn_playPause"
+        android:id="@+id/HH_btn_playStop"
         android:src="@drawable/ic_play_circle_outline_48"
         android:contentDescription="@string/HH_btn_playPause"
         android:padding="8dp"
@@ -41,14 +44,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
-    <!-- Camera underlay -->
+    <!-- CAMERA PREVIEW PANEL -->
+    <!-- Camera underlay, so edges fill with black regardless of AFTV width -->
     <View
         android:id="@+id/HH_v_cameraUnderlay"
         android:foreground="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/HH_iv_tone" />
-    <!-- Camera texture -->
+    <!-- Camera texture: the camera preview -->
     <net.dvmansueto.hearhues.AutoFitTextureView
         android:id="@+id/HH_aftv_cameraPreview"
         android:layout_width="wrap_content"
@@ -56,16 +60,27 @@
         android:layout_alignTop="@id/HH_v_cameraUnderlay"
         android:layout_centerHorizontal="true" />
 
-    <!-- Hues overlay -->
+    <!-- HUES PANEL -->
+    <!-- 20% opaque black underlay to contrast white controls above -->
+    <View
+        android:id="@+id/HH_v_huePanelUnderlay"
+        android:background="#44000000"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@id/HH_v_cameraUnderlay"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight" />
+    <!-- Hue icon: programatically changes colour -->
     <ImageView
         android:id="@+id/HH_iv_hue"
         android:src="@drawable/ic_hue_48"
         android:tint="@color/colorAccent"
         android:contentDescription="@string/HH_ic_hue"
         android:padding="8dp"
-        android:layout_alignTop="@id/HH_v_cameraUnderlay"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@id/HH_v_huePanelUnderlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <!-- Hue string: programatically changes content -->
     <TextView
         android:id="@+id/HH_tv_hue"
         android:text="@string/HH_hue"
@@ -74,10 +89,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_toEndOf="@+id/HH_iv_tone"
+        android:layout_toEndOf="@+id/HH_iv_hue"
         android:layout_alignTop="@id/HH_iv_hue"
         android:layout_alignBottom="@+id/HH_iv_hue"
         android:gravity="center_vertical" />
+    <!-- Shutter button: captures photo to update hue -->
     <ImageView
         android:id="@+id/HH_btn_capturePhoto"
         android:src="@drawable/ic_shutter_48"
@@ -89,7 +105,8 @@
         android:layout_alignTop="@id/HH_v_cameraUnderlay"
         android:layout_alignParentEnd="true" />
 
-    <!-- Camera control overlay -->
+    <!-- CAMERA PANEL -->
+    <!-- Toggles between front and back cameras -->
     <ImageView
         android:id="@+id/HH_btn_toggleCamera"
         android:src="@drawable/ic_camera_back"

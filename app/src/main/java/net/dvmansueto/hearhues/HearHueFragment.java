@@ -146,7 +146,7 @@ public class HearHueFragment extends Fragment
 
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-            openCamera( mCameraId, width, height);
+            openCamera( width, height);
         }
 
         @Override
@@ -213,6 +213,7 @@ public class HearHueFragment extends Fragment
             mCameraOpenCloseLock.release();
             mCameraDevice = cameraDevice;
             createCameraPreviewSession();
+            Log.d( TAG, "Camera preview now for ID " + mCameraId);
         }
 
         @Override
@@ -460,62 +461,79 @@ public class HearHueFragment extends Fragment
     //// Palette fields
 
     /**
-     * The hue icon.
+     * Override {@link Palette#DEFAULT_RESIZE_BITMAP_AREA} (default: 160 * 160), reduce to speed-up
+     * conversion time.
+     * Doesn't seem to have much affect on time, so increase to get more colours!
      */
-    private ImageView mHueImageView;
-    private TextView mHueTextView;
-    private TextView mToneTextView;
+    private static final int RESIZE_BITMAP_AREA = 256 * 256;
 
-    // Override default number bitmap area ( = 160 * 160)
-    private static final int RESIZE_BITMAP_AREA = 32 * 32;
-    // Override default number of swatches ( = 16)
-    private static final int CALCULATE_NUMBER_COLORS = 4;
+    /**
+     * Override {@link Palette#DEFAULT_CALCULATE_NUMBER_COLORS} (default: 16, recommended:
+     * ~10 for landscape, ~24 for faces), reduce to speed-up conversion time.
+     * Doesn't seem to have much affect on time, so increase to get more colours!
+     */
+    private static final int CALCULATE_NUMBER_COLORS = 24;
 
+    /**
+     * A {@link HueTone} object.
+     */
     private HueTone mHueTone = new HueTone();
-    private ToneGenerator toneGenerator = new ToneGenerator();
+
+    /**
+     * A {@link ToneGenerator} object.
+     */
+    private ToneGenerator mToneGenerator;
+
+    /**
+     * Whether the tone is currently playing or not.
+     */
     private boolean mPlaying;
 
 
-
+    /**
+     * Updates the {@link #mHueTone}, then updates the UI and tone generation accordingly.
+     * @param swatch the new hue to use.
+     */
     public void updateHueTone( Palette.Swatch swatch) {
-        mHueTone.setHue( swatch);
 
-        // update hue icon colour
-        mHueImageView.setColorFilter( mHueTone.getRgb());
-        // update hue text display
-        mHueTextView.setText( mHueTone.getHueString());
-
-        // update tone text display
-        mToneTextView.setText( mHueTone.getToneString());
+        // update HueTone
+        mHueTone.setHue(swatch);
+        updateUi();
 
         // update the frequency of the tone generator
-//        toneGenerator.setTone( mHueTone.getTone());
+        mToneGenerator.setTone( mHueTone.getTone());
 
         // let rip!
-//        startPlaying();
+        mToneGenerator.startTone();
     }
 
-    private void playPause() {
-        ImageView imageView = (ImageView) mActivity.findViewById( R.id.HH_btn_playPause);
+    /**
+     * Updates dynamic UI elements:
+     *  • Tone frequency string
+     *  • Hue icon colour
+     *  • Hue colour string
+     */
+    private void updateUi() {
+
+        // update UI
+        Activity activity = getActivity();
+        // update hue icon colour
+        ImageView imageView = (ImageView) activity.findViewById( R.id.HH_iv_hue);
+        imageView.setColorFilter( mHueTone.getRgb());
+        // update hue text display
+        TextView textView = (TextView) activity.findViewById( R.id.HH_tv_hue);
+        textView.setText( mHueTone.getHueString());
+        // update tone text display
+        textView = (TextView) activity.findViewById( R.id.HH_tv_tone);
+        textView.setText( mHueTone.getToneString());
+    }
+
+    private void playStop() {
         if ( !mPlaying) {
-            startPlaying();
-            imageView.setImageResource( R.drawable.ic_play_circle_outline_48);
+            mToneGenerator.startTone();
         } else {
-            stopPlaying();
-            imageView.setImageResource( R.drawable.ic_pause_circle_outline_48);
+            mToneGenerator.stopTone();
         }
-    }
-
-    //TODO: implement startPlaying()
-    private void startPlaying() {
-        toneGenerator.startTone();
-        mPlaying = true;
-    }
-
-    //TODO: implement stopPlaying()
-    private void stopPlaying() {
-        toneGenerator.stopTone();
-        mPlaying = false;
     }
 
     /**
@@ -523,13 +541,18 @@ public class HearHueFragment extends Fragment
      * in {@link #mFile}.
      */
     private void processHueTone() {
-        Bitmap bitmap = BitmapFactory.decodeFile(mFile.toString());
+        Bitmap bitmap = BitmapFactory.decodeFile( mFile.toString());
         // asynchronous palette processing
-        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+        Palette.from( bitmap).
+                maximumColorCount( CALCULATE_NUMBER_COLORS).resizeBitmapArea( RESIZE_BITMAP_AREA).
+                generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
 //                mPalette = palette; // may be redundant
 //                Palette.Swatch swatch = palette.getDominantSwatch();
-                updateHueTone(palette.getDominantSwatch());
+//                updateHueTone(palette.getDominantSwatch());
+                // seems sometimes there isn't a vibrant swatch, so backup with dominant swatch
+                updateHueTone( palette.getVibrantSwatch() != null ?
+                        palette.getVibrantSwatch() : palette.getDominantSwatch());
             }
         });
     }
@@ -559,10 +582,9 @@ public class HearHueFragment extends Fragment
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        mHueImageView = (ImageView) view.findViewById( R.id.HH_iv_hue);
-        mHueTextView = (TextView) view.findViewById( R.id.HH_tv_hue);
-        mToneTextView = (TextView) view.findViewById( R.id.HH_tv_tone);
-        view.findViewById(R.id.HH_btn_capturePhoto).setOnClickListener(this);
+        view.findViewById( R.id.HH_btn_playStop).setOnClickListener( this);
+        view.findViewById( R.id.HH_btn_toggleCamera).setOnClickListener( this);
+        view.findViewById( R.id.HH_btn_capturePhoto).setOnClickListener( this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.HH_aftv_cameraPreview);
     }
 
@@ -571,6 +593,25 @@ public class HearHueFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         initFile();
         initCamera();
+        updateUi();
+        mToneGenerator = new ToneGenerator();
+
+        mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
+            @Override
+            public void startedPlaying() {
+                mPlaying = true;
+                Activity activity = getActivity();
+                ImageView imageView = (ImageView) activity.findViewById( R.id.HH_btn_playStop);
+                imageView.setImageResource( R.drawable.ic_pause_circle_outline_48);
+            }
+            @Override
+            public void stoppedPlaying() {
+                mPlaying = false;
+                Activity activity = getActivity();
+                ImageView imageView = (ImageView) activity.findViewById( R.id.HH_btn_playStop);
+                imageView.setImageResource( R.drawable.ic_play_circle_outline_48);
+            }
+        });
     }
 
     @Override
@@ -585,7 +626,7 @@ public class HearHueFragment extends Fragment
         // a camera and start preview from here (otherwise, we wait until the surface is ready in
         // the SurfaceTextureListener).
         if (mTextureView.isAvailable()) {
-            openCamera( mCameraId, mTextureView.getWidth(), mTextureView.getHeight());
+            openCamera( mTextureView.getWidth(), mTextureView.getHeight());
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
@@ -648,9 +689,17 @@ public class HearHueFragment extends Fragment
                 }
                 if ( facing == CameraCharacteristics.LENS_FACING_BACK) {
                     mBackCameraId = cameraId;
+                    Log.d( TAG, "Found a back camera");
                 } else if ( facing == CameraCharacteristics.LENS_FACING_FRONT) {
                     mFrontCameraId = cameraId;
+                    Log.d( TAG, "Found a front camera");
+                } else {
+                    Log.d( TAG, "Found a mystery camera");
                 }
+            }
+            // hide the camera toggle button if there's only one camera
+            if ( mBackCameraId == null || mFrontCameraId == null) {
+                activity.findViewById( R.id.HH_btn_toggleCamera).setVisibility( View.INVISIBLE);
             }
             // set mCameraId to back camera by default
             if ( mBackCameraId != null) {
@@ -668,6 +717,7 @@ public class HearHueFragment extends Fragment
         }
     }
 
+    //TODO: explore generic 'switch camera' icon, avoid 'current state'/'next state' confusion.
     /**
      * Toggles between front and back cameras, changes the button icon.
      */
@@ -677,15 +727,18 @@ public class HearHueFragment extends Fragment
         if (Objects.equals( mCameraId, mBackCameraId)) {
             mCameraId = mFrontCameraId;
             imageView.setImageResource( R.drawable.ic_camera_front_48);
+            Log.d(TAG, "Toggling from back to front camera");
         } else {
             mCameraId = mBackCameraId;
             imageView.setImageResource( R.drawable.ic_camera_back_48);
+            Log.d(TAG, "Toggling from front to back camera");
         }
         setUpCameraOutputs( mTextureView.getWidth(), mTextureView.getHeight());
+        openCamera( mTextureView.getWidth(), mTextureView.getHeight());
     }
 
     /**
-     * Sets up member variables related to camera.
+     * Sets up member variables related to camera, using current {@link #mCameraId}.
      *
      * @param width  The width of available size for camera preview
      * @param height The height of available size for camera preview
@@ -791,20 +844,14 @@ public class HearHueFragment extends Fragment
     }
 
     /**
-     * Opens the camera specified.
+     * Opens the {@link #mCameraId} camera.
      */
-    private void openCamera( @NonNull String cameraId, int width, int height) {
+    private void openCamera( int width, int height) {
 
         if ( ContextCompat.checkSelfPermission( getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             requestCameraPermission();
             return;
-        }
-
-        // if changing from front to back camera or visa versa, close old camera first
-        if ( !Objects.equals( mCameraId, cameraId)) {
-            closeCamera();
-            mCameraId = cameraId;
         }
 
         setUpCameraOutputs( width, height);
@@ -823,32 +870,6 @@ public class HearHueFragment extends Fragment
             throw new RuntimeException( "Interrupted while trying to lock camera opening.", e);
         }
     }
-
-    //TODO: delete.
-//    /**
-//     * Opens the camera specified by {@link HearHueFragment#mCameraId}.
-//     */
-//    private void openCamera(int width, int height) {
-//        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            requestCameraPermission();
-//            return;
-//        }
-//        setUpCameraOutputs(width, height);
-//        configureTransform(width, height);
-//        Activity activity = getActivity();
-//        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
-//        try {
-//            if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
-//                throw new RuntimeException("Time out waiting to lock camera opening.");
-//            }
-//            manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
-//        } catch (CameraAccessException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
-//        }
-//    }
 
     /**
      * Closes the current {@link CameraDevice}.
@@ -1123,9 +1144,10 @@ public class HearHueFragment extends Fragment
 
     @Override
     public void onClick( View view) {
+        Log.d(TAG, "onClick: " + view.getId());
         switch( view.getId()) {
-            case R.id.HH_btn_playPause: {
-                playPause();
+            case R.id.HH_btn_playStop: {
+                playStop();
                 break;
             }
             case R.id.HH_btn_capturePhoto: {
@@ -1148,12 +1170,12 @@ public class HearHueFragment extends Fragment
 
     /**
      * Initialises the output file {@link HearHueFragment#mFile} in accordance with Design rule for
-     * Camera File system (DCF) v2.0 (2010).
+     * Camera File system (DCF) v2.0 (2010), file names: DSC_XXXX.jpg.
      * Makes the {@link HearHueFragment#mFileDirectory}
      * Defines the {@link HearHueFragment#mFilePrefix}
      * Finds the latest {@link HearHueFragment#mFileNumber}
      */
-    @SuppressLint("DefaultLocale") // since is only zero pad format
+    @SuppressLint("DefaultLocale") // since is only zero pad format for plain integers
     private void initFile() {
         // the file directory, following
         mFileDirectory = new File( getActivity().getExternalFilesDir( null) + "/DCIM/100HHUE/");
@@ -1162,24 +1184,30 @@ public class HearHueFragment extends Fragment
         mFileNumber = 1;
         mFileType = ".jpg";
         File[] files = mFileDirectory.listFiles();
+        Log.d( TAG, "Files: " + files.toString());
         // find latest serial number if there already files here
         if ( files.length > 0) {
+            Log.d( TAG, "Found " + Integer.toString( files.length) + " files");
             for (File file : files) {
                 String name = file.getName();
+                Log.d( TAG, "Looking at file " + name + " with prefix " + name.substring(0, 4) +
+                        " and type " + name.substring(8, 12));
                 // ensure appropriate file to compare
-                if (name.substring(0, 3).equalsIgnoreCase(mFilePrefix) &&
-                        name.substring(8, 11).equalsIgnoreCase(mFileType)) {
+                if ( name.substring(0, 4).equalsIgnoreCase(mFilePrefix) &&
+                        name.substring(8, 12).equalsIgnoreCase(mFileType)) {
                     // find largest
-                    int number = Integer.parseInt(name.substring(4, 7));
+                    int number = Integer.parseInt(name.substring(4, 8));
+                    Log.d( TAG, "Has number: " + Integer.toString( number));
                     if (number > mFileNumber) {
                         mFileNumber = number;
                     }
                 }
             }
+            Log.d( TAG, "Chose " + Integer.toString( mFileNumber));
             mFileNumber++; // increment to unused serial number
         }
         mFile = new File( mFileDirectory,
-                mFilePrefix + String.format( "%04d", mFileNumber) + mFileType);
+                mFilePrefix + String.format("%04d", mFileNumber) + mFileType);
     }
 
     /**
