@@ -5,33 +5,53 @@
     density="xxhdpi"
     format="8"
     plugin-version="2.2.1"
-    timestamp="675329934023441"
+    timestamp="682304806481121"
     token="-449604552763967447"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="121" />
+        duration="401" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="45" />
     <task
         name="instant-run-transform"
-        duration="24" />
+        duration="40" />
     <task
         name="verifier"
         duration="5" />
 
     <artifact
-        location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
+        location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
 
     <build
-        timestamp="675329934023441"
+        timestamp="681312759316589"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="681917916967001"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\builds\debug\681917916967001\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="682304806481121"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
+            type="RESOURCES" />
+        <artifact
+            location="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

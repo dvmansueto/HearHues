@@ -50,15 +50,45 @@
     <string name="title_activity_main">Hear Hues</string>
 
     <!-- Preferences -->
-    <string name="prefs_swatch_title">Target Colour</string>
-    <string name="prefs_swatch_summary">Method to choose a colour from the photograph</string>
-    <string name="prefs_swatch_default">Vibrant</string>
-    <string-array name="prefs_swatch_entries">
+    <string name="prefs_palette_swatch_key">swatch</string>
+    <string name="prefs_palette_swatch_title">Colour Extraction</string>
+    <string name="prefs_palette_swatch_summary">Method for extracting a colour from the photograph</string>
+    <string name="prefs_palette_swatch_default">Vibrant</string>
+    <string-array name="prefs_palette_swatch_entries">
         <item>Dominant</item>
         <item>Vibrant</item>
         <item>Vibrant Light</item>
         <item>Vibrant Dark</item>
     </string-array>
+    <string name="prefs_palette_area_key">resolution</string>
+    <string name="prefs_palette_area_title">Colour Resolution</string>
+    <string name="prefs_palette_area_summary">Number of candidate cells (affects processing time)</string>\
+    <string name="prefs_palette_area_default">Medium</string>
+    <string-array name="prefs_palette_area_entries">
+        <item>Very Low</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very High</item>
+    </string-array>
+
+    <string name="prefs_palette_number_key">precision</string>
+    <string name="prefs_palette_number_title">Colour Precision</string>
+    <string name="prefs_palette_number_summary">Number of candidate colours (affects processing time)</string>\
+    <string name="prefs_palette_number_default">Medium</string>
+    <string-array name="prefs_palette_number_entries">
+        <item>Very Low</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very High</item>
+    </string-array>
+
+    <string name="prefs_save_files_key">saving</string>
+    <string name="prefs_save_files_title">Save Photographs</string>
+    <string name="prefs_save_files_summary">Captured stills will be saved to disk</string>
+    <string name="prefs_save_files_default">true</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

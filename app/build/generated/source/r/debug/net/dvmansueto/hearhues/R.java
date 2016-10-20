@@ -28,7 +28,9 @@ public final class R {
         public static final int design_snackbar_out=0x7f050010;
     }
     public static final class array {
-        public static final int prefs_swatch_entries=0x7f0c0000;
+        public static final int prefs_palette_area_entries=0x7f0c0000;
+        public static final int prefs_palette_number_entries=0x7f0c0001;
+        public static final int prefs_palette_swatch_entries=0x7f0c0002;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -2926,18 +2928,31 @@ containing a value of this type.
         public static final int navigation_drawer_open=0x7f070035;
         public static final int navigation_drawer_primary_features=0x7f070036;
         public static final int navigation_drawer_secondary_features=0x7f070037;
-        public static final int prefs_swatch_default=0x7f070038;
-        public static final int prefs_swatch_summary=0x7f070039;
-        public static final int prefs_swatch_title=0x7f07003a;
-        public static final int request_permission=0x7f07003b;
+        public static final int prefs_palette_area_default=0x7f070038;
+        public static final int prefs_palette_area_key=0x7f070039;
+        public static final int prefs_palette_area_summary=0x7f07003a;
+        public static final int prefs_palette_area_title=0x7f07003b;
+        public static final int prefs_palette_number_default=0x7f07003c;
+        public static final int prefs_palette_number_key=0x7f07003d;
+        public static final int prefs_palette_number_summary=0x7f07003e;
+        public static final int prefs_palette_number_title=0x7f07003f;
+        public static final int prefs_palette_swatch_default=0x7f070040;
+        public static final int prefs_palette_swatch_key=0x7f070041;
+        public static final int prefs_palette_swatch_summary=0x7f070042;
+        public static final int prefs_palette_swatch_title=0x7f070043;
+        public static final int prefs_save_files_default=0x7f070044;
+        public static final int prefs_save_files_key=0x7f070045;
+        public static final int prefs_save_files_summary=0x7f070046;
+        public static final int prefs_save_files_title=0x7f070047;
+        public static final int request_permission=0x7f070048;
         public static final int search_menu_title=0x7f070013;
         public static final int status_bar_notification_info_overflow=0x7f070014;
-        public static final int title_activity_main=0x7f07003c;
-        public static final int title_fragment_about=0x7f07003d;
-        public static final int title_fragment_hear_hue=0x7f07003e;
-        public static final int title_fragment_see_sound=0x7f07003f;
-        public static final int title_fragment_settings=0x7f070040;
-        public static final int title_fragment_tinker=0x7f070041;
+        public static final int title_activity_main=0x7f070049;
+        public static final int title_fragment_about=0x7f07004a;
+        public static final int title_fragment_hear_hue=0x7f07004b;
+        public static final int title_fragment_see_sound=0x7f07004c;
+        public static final int title_fragment_settings=0x7f07004d;
+        public static final int title_fragment_tinker=0x7f07004e;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09008d;

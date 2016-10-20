@@ -9,6 +9,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -63,6 +64,8 @@ import java.util.Objects;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Boolean.parseBoolean;
+
 /**
  * Provides the HearHue interaction mode.
  * Primarily, allows user to find colours using their camera which is then converted to a
@@ -75,11 +78,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class HearHueFragment extends Fragment
         implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
-
-    /**
-     * The parent activity.
-     */
-    private AppCompatActivity mActivity;
 
     // extending Google's Camera2Basic sample code
 
@@ -460,19 +458,25 @@ public class HearHueFragment extends Fragment
 
     //// Palette fields
 
-    /**
-     * Override {@link Palette#DEFAULT_RESIZE_BITMAP_AREA} (default: 160 * 160), reduce to speed-up
-     * conversion time.
-     * Doesn't seem to have much affect on time, so increase to get more colours!
-     */
-    private static final int RESIZE_BITMAP_AREA = 256 * 256;
+//    /**
+//     * Override {@link Palette#DEFAULT_RESIZE_BITMAP_AREA} (default: 160 * 160), reduce to speed-up
+//     * conversion time.
+//     * Doesn't seem to have much affect on time, so increase to get more colours!
+//     */
+//
+//    private static final int RESIZE_BITMAP_AREA = 256 * 256;
 
-    /**
-     * Override {@link Palette#DEFAULT_CALCULATE_NUMBER_COLORS} (default: 16, recommended:
-     * ~10 for landscape, ~24 for faces), reduce to speed-up conversion time.
-     * Doesn't seem to have much affect on time, so increase to get more colours!
-     */
-    private static final int CALCULATE_NUMBER_COLORS = 24;
+    private SharedPreferences mSharedPreferences;
+    private int mResizeBitmapArea;
+    private int mCalculateNumberColors;
+    private boolean mSavingPhotos;
+
+//    /**
+//     * Override {@link Palette#DEFAULT_CALCULATE_NUMBER_COLORS} (default: 16, recommended:
+//     * ~10 for landscape, ~24 for faces), reduce to speed-up conversion time.
+//     * Doesn't seem to have much affect on time, so increase to get more colours!
+//     */
+//    private static final int CALCULATE_NUMBER_COLORS = 24;
 
     /**
      * A {@link HueTone} object.
@@ -544,17 +548,53 @@ public class HearHueFragment extends Fragment
         Bitmap bitmap = BitmapFactory.decodeFile( mFile.toString());
         // asynchronous palette processing
         Palette.from( bitmap).
-                maximumColorCount( CALCULATE_NUMBER_COLORS).resizeBitmapArea( RESIZE_BITMAP_AREA).
+                maximumColorCount( mCalculateNumberColors).resizeBitmapArea( mResizeBitmapArea).
                 generate(new Palette.PaletteAsyncListener() {
-            public void onGenerated(Palette palette) {
-//                mPalette = palette; // may be redundant
-//                Palette.Swatch swatch = palette.getDominantSwatch();
-//                updateHueTone(palette.getDominantSwatch());
-                // seems sometimes there isn't a vibrant swatch, so backup with dominant swatch
-                updateHueTone( palette.getVibrantSwatch() != null ?
-                        palette.getVibrantSwatch() : palette.getDominantSwatch());
-            }
-        });
+                    public void onGenerated(Palette palette) {
+//                StringBuilder stringBuilder = new StringBuilder();
+//                if ( palette.getVibrantSwatch() != null) stringBuilder.append( "Vibrant , ");
+//                if ( palette.getLightVibrantSwatch() != null) stringBuilder.append( "Light Vibrant, ");
+//                if ( palette.getDarkVibrantSwatch() != null) stringBuilder.append( "Dark Vibrant, ");
+//                if ( palette.getDominantSwatch() != null) stringBuilder.append( "Dominant");
+//                Log.d( TAG, stringBuilder.toString());
+                        // prefer user preference
+                        switch (mSharedPreferences.getString(getString(R.string.prefs_palette_swatch_key),
+                                getString(R.string.prefs_palette_swatch_default))) {
+                            case "Dominant":
+                                Log.d(TAG, "Dominant");
+                                updateHueTone(palette.getDominantSwatch());
+                                return;
+                            case "Vibrant":
+                                Log.d(TAG, "Vibrant");
+                                if (palette.getVibrantSwatch() != null) {
+                                    updateHueTone(palette.getVibrantSwatch());
+                                }
+                                break;
+                            case "Light Vibrant":
+                                Log.d(TAG, "Light Vibrant");
+                                if (palette.getLightVibrantSwatch() != null) {
+                                    updateHueTone(palette.getLightVibrantSwatch());
+                                }
+                                break;
+                            case "Dark Vibrant":
+                                Log.d(TAG, "Dark Vibrant");
+                                if (palette.getDarkVibrantSwatch() != null) {
+                                    updateHueTone(palette.getDarkVibrantSwatch());
+                                }
+                                break;
+                        }
+                        // else try for light and settle for dominant
+                        if (palette.getVibrantSwatch() != null) {
+                            updateHueTone(palette.getVibrantSwatch());
+                        } else if (palette.getLightVibrantSwatch() != null) {
+                            updateHueTone(palette.getLightVibrantSwatch());
+                        } else if (palette.getDarkVibrantSwatch() != null) {
+                            updateHueTone(palette.getDarkVibrantSwatch());
+                        } else {
+                            updateHueTone(palette.getDominantSwatch());
+                        }
+                    }
+                });
     }
 
 
@@ -617,8 +657,10 @@ public class HearHueFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        mActivity = (AppCompatActivity) getActivity();
-        mActivity.getSupportActionBar().setTitle(R.string.title_fragment_hear_hue);
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        //noinspection ConstantConditions
+        activity.getSupportActionBar().setTitle( R.string.title_fragment_hear_hue);
         startBackgroundThread();
 
         // When the screen is turned off and turned back on, the SurfaceTexture is already
@@ -630,6 +672,47 @@ public class HearHueFragment extends Fragment
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
+
+        mSharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        switch( mSharedPreferences.getString( getString( R.string.prefs_palette_area_key),
+                getString( R.string.prefs_palette_area_default))) {
+            case "Very Low":
+                mResizeBitmapArea = 20 * 20;
+                break;
+            case "Low":
+                mResizeBitmapArea = 80 * 80;
+                break;
+            case "Medium":
+                mResizeBitmapArea = 160 * 160;
+                break;
+            case "High":
+                mResizeBitmapArea = 320 * 320;
+                break;
+            case "Very High":
+                mResizeBitmapArea = 640 * 640;
+                break;
+        }
+        switch( mSharedPreferences.getString( getString( R.string.prefs_palette_number_key),
+                getString( R.string.prefs_palette_number_default))) {
+            case "Very Low":
+                mCalculateNumberColors = 4;
+                break;
+            case "Low":
+                mCalculateNumberColors = 8;
+                break;
+            case "Medium":
+                mCalculateNumberColors = 16;
+                break;
+            case "High":
+                mCalculateNumberColors = 24;
+                break;
+            case "Very High":
+                mCalculateNumberColors = 48;
+                break;
+        }
+        mSavingPhotos = mSharedPreferences.getBoolean( getString( R.string.prefs_save_files_key),
+                parseBoolean(getString( R.string.prefs_save_files_default)));
     }
 
 
@@ -743,7 +826,8 @@ public class HearHueFragment extends Fragment
      * @param width  The width of available size for camera preview
      * @param height The height of available size for camera preview
      */
-    private void setUpCameraOutputs( int width, int height) {
+    @SuppressWarnings("SuspiciousNameCombination") // rotated height and width
+    private void setUpCameraOutputs(int width, int height) {
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -757,6 +841,7 @@ public class HearHueFragment extends Fragment
 //                }
 
             // For still image captures, we use the largest available size.
+            assert map != null;
             Size largest = Collections.max(
                     Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
                     new CompareSizesByArea());
@@ -830,9 +915,6 @@ public class HearHueFragment extends Fragment
             // Check if the flash is supported.
             Boolean available = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
             mFlashSupported = available == null ? false : available;
-
-//            mCameraId = cameraId;
-            return;
         } catch (CameraAccessException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
@@ -1087,14 +1169,16 @@ public class HearHueFragment extends Fragment
                                                @NonNull TotalCaptureResult result) {
                     showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
+
                     processHueTone();
-                    incrementFile();
-                    //TODO: implement settings, 'save to file' option.
-//                    if ( mSaving) {
-//                        incrementFile();
-//                    } else {
-//                        mFile.delete();
-//                    }
+
+                    if (mSavingPhotos) {
+                        incrementFile();
+                    } else {
+                        //noinspection ResultOfMethodCallIgnored
+                        mFile.delete();
+                    }
+
                     unlockFocus();
 
                 }
@@ -1179,31 +1263,27 @@ public class HearHueFragment extends Fragment
     private void initFile() {
         // the file directory, following
         mFileDirectory = new File( getActivity().getExternalFilesDir( null) + "/DCIM/100HHUE/");
+        //TODO: probably should check mkdir is actually successful.
+        //noinspection ResultOfMethodCallIgnored
         mFileDirectory.mkdirs();
         mFilePrefix = "DSC_";
         mFileNumber = 1;
         mFileType = ".jpg";
         File[] files = mFileDirectory.listFiles();
-        Log.d( TAG, "Files: " + files.toString());
         // find latest serial number if there already files here
         if ( files.length > 0) {
-            Log.d( TAG, "Found " + Integer.toString( files.length) + " files");
             for (File file : files) {
                 String name = file.getName();
-                Log.d( TAG, "Looking at file " + name + " with prefix " + name.substring(0, 4) +
-                        " and type " + name.substring(8, 12));
                 // ensure appropriate file to compare
                 if ( name.substring(0, 4).equalsIgnoreCase(mFilePrefix) &&
                         name.substring(8, 12).equalsIgnoreCase(mFileType)) {
                     // find largest
                     int number = Integer.parseInt(name.substring(4, 8));
-                    Log.d( TAG, "Has number: " + Integer.toString( number));
                     if (number > mFileNumber) {
                         mFileNumber = number;
                     }
                 }
             }
-            Log.d( TAG, "Chose " + Integer.toString( mFileNumber));
             mFileNumber++; // increment to unused serial number
         }
         mFile = new File( mFileDirectory,
@@ -1233,7 +1313,7 @@ public class HearHueFragment extends Fragment
          */
         private final File mFile;
 
-        public ImageSaver(Image image, File file) {
+        ImageSaver(Image image, File file) {
             mImage = image;
             mFile = file;
         }

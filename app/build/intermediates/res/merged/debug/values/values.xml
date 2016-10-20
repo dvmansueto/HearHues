@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="prefs_swatch_entries">
+    <string-array name="prefs_palette_area_entries">
+        <item>Very Low</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very High</item>
+    </string-array>
+    <string-array name="prefs_palette_number_entries">
+        <item>Very Low</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very High</item>
+    </string-array>
+    <string-array name="prefs_palette_swatch_entries">
         <item>Dominant</item>
         <item>Vibrant</item>
         <item>Vibrant Light</item>
@@ -620,9 +634,22 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_primary_features">Primary Features</string>
     <string name="navigation_drawer_secondary_features">Ancillary Features</string>
-    <string name="prefs_swatch_default">Vibrant</string>
-    <string name="prefs_swatch_summary">Method to choose a colour from the photograph</string>
-    <string name="prefs_swatch_title">Target Colour</string>
+    <string name="prefs_palette_area_default">Medium</string>
+    <string name="prefs_palette_area_key">precision</string>
+    <string name="prefs_palette_area_summary">Affects processing time</string>
+    <string name="prefs_palette_area_title">Colour Precision</string>
+    <string name="prefs_palette_number_default">Medium</string>
+    <string name="prefs_palette_number_key">resolution</string>
+    <string name="prefs_palette_number_summary">Number of candidate colours (affects processing time)</string>
+    <string name="prefs_palette_number_title">Colour Resolution</string>
+    <string name="prefs_palette_swatch_default">Vibrant</string>
+    <string name="prefs_palette_swatch_key">swatch</string>
+    <string name="prefs_palette_swatch_summary">Method for extracting a colour from the photograph</string>
+    <string name="prefs_palette_swatch_title">Colour Extraction</string>
+    <string name="prefs_save_files_default">true</string>
+    <string name="prefs_save_files_key">saving</string>
+    <string name="prefs_save_files_summary">Captured stills will be saved to disk</string>
+    <string name="prefs_save_files_title">Save Photographs</string>
     <string name="request_permission">This feature requires camera permission.</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>

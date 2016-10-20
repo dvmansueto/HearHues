@@ -3,12 +3,31 @@
     <PreferenceCategory
         android:title="@string/title_fragment_hear_hue">
     <ListPreference
-        android:key="swatch"
-        android:title="@string/prefs_swatch_title"
-        android:summary="@string/prefs_swatch_summary"
-        android:defaultValue="@string/prefs_swatch_default"
-        android:entries="@array/prefs_swatch_entries"
-        android:entryValues="@array/prefs_swatch_entries" />
+        android:key="@string/prefs_palette_swatch_key"
+        android:title="@string/prefs_palette_swatch_title"
+        android:summary="@string/prefs_palette_swatch_summary"
+        android:defaultValue="@string/prefs_palette_swatch_default"
+        android:entries="@array/prefs_palette_swatch_entries"
+        android:entryValues="@array/prefs_palette_swatch_entries" />
+    <ListPreference
+        android:key="palette_area"
+        android:title="@string/prefs_palette_area_title"
+        android:summary="@string/prefs_palette_area_summary"
+        android:defaultValue="@string/prefs_palette_area_default"
+        android:entries="@array/prefs_palette_area_entries"
+        android:entryValues="@array/prefs_palette_area_entries" />
+    <ListPreference
+        android:key="palette_number"
+        android:title="@string/prefs_palette_number_title"
+        android:summary="@string/prefs_palette_number_summary"
+        android:defaultValue="@string/prefs_palette_number_default"
+        android:entries="@array/prefs_palette_number_entries"
+        android:entryValues="@array/prefs_palette_number_entries" />
+    <CheckBoxPreference
+        android:key="@string/prefs_save_files_key"
+        android:title="@string/prefs_save_files_title"
+        android:summary="@string/prefs_save_files_summary"
+        android:defaultValue="@string/prefs_save_files_default" />
 
     </PreferenceCategory>
 </PreferenceScreen>
