@@ -1,35 +1,43 @@
 package net.dvmansueto.hearhues;
 
-
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SettingsFragment extends Fragment {
 
-
-    public SettingsFragment() {
-        // Required empty public constructor
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater)
+    {
+        super.onCreateOptionsMenu(menu, menuInflater);
+        menu.clear();
+        menuInflater.inflate(R.menu.menu_blank_toolbar, menu);
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate( R.layout.fragment_settings, container, false);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle( R.string.title_fragment_settings);
+        activity.getFragmentManager().beginTransaction()
+                .replace( R.id.container_content, new PrefsFragment())
+                .commit();
+        activity.getSupportActionBar().setTitle(R.string.title_fragment_settings);
+    }
+
+    @SuppressLint("ValidFragment")
+    private class PrefsFragment extends PreferenceFragment {
+        public PrefsFragment() {}
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            addPreferencesFromResource( R.xml.preferences);
+        }
     }
 }

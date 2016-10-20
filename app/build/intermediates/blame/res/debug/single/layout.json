@@ -188,6 +188,10 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
+        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_settings.xml",
+        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\activity_settings.xml"
+    },
+    {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_media.xml"
     },

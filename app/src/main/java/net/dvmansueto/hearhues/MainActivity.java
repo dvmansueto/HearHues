@@ -59,11 +59,21 @@ public class MainActivity
         }
     }
 
+    private Menu mMenu;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        mMenu = menu;
         return true;
+    }
+
+    private void setMenuItemsVisible(boolean visible) {
+        if ( visible ^ mMenu.hasVisibleItems()) {
+            for (int i = 0; i < mMenu.size(); i++) {
+                mMenu.getItem(i).setVisible(visible);
+            }
+        }
     }
 
     @Override
@@ -84,14 +94,19 @@ public class MainActivity
 
         if( id == R.id.nav_hearHue) {
             fragment = new HearHueFragment();
+            setMenuItemsVisible( true);
         } else if( id == R.id.nav_seeSound) {
             fragment = new SeeSoundFragment();
+            setMenuItemsVisible( true);
         } else if( id == R.id.nav_tinker) {
             fragment = new TinkerFragment();
+            setMenuItemsVisible( true);
         } else if( id == R.id.nav_settings) {
             fragment = new SettingsFragment();
+            setMenuItemsVisible( false);
         } else if( id == R.id.nav_about) {
             fragment = new AboutFragment();
+            setMenuItemsVisible( false);
         }
 
         if( fragment != null) {
@@ -102,5 +117,4 @@ public class MainActivity
         drawer.closeDrawer( GravityCompat.START);
         return true;
     }
-
 }

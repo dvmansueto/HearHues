@@ -49,7 +49,16 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_main">Hear Hues</string>
 
-    <string name="action_settings">Settings</string>
+    <!-- Preferences -->
+    <string name="prefs_swatch_title">Target Colour</string>
+    <string name="prefs_swatch_summary">Method to choose a colour from the photograph</string>
+    <string name="prefs_swatch_default">Vibrant</string>
+    <string-array name="prefs_swatch_entries">
+        <item>Dominant</item>
+        <item>Vibrant</item>
+        <item>Vibrant Light</item>
+        <item>Vibrant Dark</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
