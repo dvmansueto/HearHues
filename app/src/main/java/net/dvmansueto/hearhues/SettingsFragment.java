@@ -12,21 +12,13 @@ import android.view.MenuItem;
 public class SettingsFragment extends Fragment {
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater)
-    {
-        super.onCreateOptionsMenu(menu, menuInflater);
-        menu.clear();
-        menuInflater.inflate(R.menu.menu_blank_toolbar, menu);
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getFragmentManager().beginTransaction()
                 .replace( R.id.container_content, new PrefsFragment())
                 .commit();
-        activity.getSupportActionBar().setTitle(R.string.title_fragment_settings);
+        activity.getSupportActionBar().setTitle( R.string.title_fragment_settings);
     }
 
     @SuppressLint("ValidFragment")

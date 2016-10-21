@@ -17,4 +17,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- https://material.google.com/style/typography.html -->
+    <style name="Headline" parent="@android:style/TextAppearance">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="Body1" parent="@android:style/TextAppearance">
+        <item name="android:textSize">13sp</item>
+    </style>
+
 </resources>

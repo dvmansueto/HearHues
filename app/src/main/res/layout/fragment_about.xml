@@ -1,13 +1,36 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.dvmansueto.hearhues.AboutFragment">
+    android:padding="16dp"
+    tools:context="net.dvmansueto.hearhues.AboutFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
+    <View
+        android:layout_height="16dp"
+        android:layout_width="match_parent"/>
     <TextView
+        android:id="@+id/about_project_heading"
+        android:text="@string/about_project_heading"
+        android:textAppearance="@style/Headline"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="19dp" />
+    <TextView
+        android:id="@+id/about_project_body"
+        android:text="@string/about_project_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+    <ImageView
+        android:id="@+id/about_neil_harbisson"
+        android:src="@drawable/neil_harbisson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</FrameLayout>
+</LinearLayout>

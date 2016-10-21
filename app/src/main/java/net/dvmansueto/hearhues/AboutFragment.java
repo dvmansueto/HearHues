@@ -4,9 +4,11 @@ package net.dvmansueto.hearhues;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -32,5 +34,9 @@ public class AboutFragment extends Fragment {
         super.onResume();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle(R.string.title_fragment_about);
+
+        // activate autoLink
+        TextView textView = (TextView) activity.findViewById( R.id.about_project_body);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
