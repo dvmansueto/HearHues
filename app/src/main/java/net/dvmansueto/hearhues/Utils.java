@@ -2,6 +2,8 @@ package net.dvmansueto.hearhues;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 /**
  * Created by Dave on 21/10/16.
@@ -10,7 +12,9 @@ import android.content.SharedPreferences;
 
 public class Utils {
 
-    private static final String PREFERENCE_NAME = "net.dvmansueto.hearhues";
+    private static final String TAG = "Utils";
+
+    private static final String PREFERENCE_NAME = "net.dvmansueto.hearhues_preferences";
 
     public static void setStringPreference(Context context, String value, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);

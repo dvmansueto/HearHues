@@ -34,10 +34,6 @@ final class HueTone {
 
     // all for updating incorrectly selected preferences
     private final Context mContext;
-    private final String[] mBaseFrequencyValues;
-    private final String[] mBaseFrequencyEntries;
-    private final String[] mPeakFrequencyValues;
-    private final String[] mPeakFrequencyEntries;
 
 //    private static final double BASE_FREQUENCY = 440; // A2 = 110 Hz
 //    private static final int HALF_STEPS_PER_RANGE = 48; // A2 -> A6 (1760 Hz)
@@ -58,14 +54,6 @@ final class HueTone {
     // Default constructor
     HueTone( Context context) {
         mContext = context;
-        mBaseFrequencyValues = context.getResources().getStringArray(
-                R.array.prefs_generator_base_frequency_values);
-        mBaseFrequencyEntries = context.getResources().getStringArray(
-                R.array.prefs_generator_base_frequency_entries);
-        mPeakFrequencyValues = context.getResources().getStringArray(
-                R.array.prefs_generator_peak_frequency_values);
-        mPeakFrequencyEntries = context.getResources().getStringArray(
-                R.array.prefs_generator_peak_frequency_entries);
         updateHueTone( mBaseFrequency);
     }
 
@@ -170,27 +158,44 @@ final class HueTone {
             peakFrequency *= 2; // jump an octave
             // update shared preference
             Utils.setStringPreference( mContext,
-                    mPeakFrequencyEntries[ Arrays.asList(mPeakFrequencyValues).indexOf( peakFrequency)],
+                    String.format( Locale.UK, "%d", (int) peakFrequency),
                     mContext.getResources().getString( R.string.prefs_generator_peak_frequency_key));
         }
 
         if ( baseFrequency > peakFrequency) {
             mBaseFrequency = peakFrequency;
             peakFrequency = baseFrequency;
+            baseFrequency = mBaseFrequency;
 
             // update shared preferences
             Utils.setStringPreference( mContext,
-                    mBaseFrequencyEntries[ Arrays.asList(mBaseFrequencyValues).indexOf( baseFrequency)],
+                    String.format( Locale.UK, "%d", (int) baseFrequency),
                     mContext.getResources().getString( R.string.prefs_generator_base_frequency_key));
             Utils.setStringPreference( mContext,
-                    mPeakFrequencyEntries[ Arrays.asList(mPeakFrequencyValues).indexOf( peakFrequency)],
+                    String.format( Locale.UK, "%d", (int) peakFrequency),
                     mContext.getResources().getString( R.string.prefs_generator_peak_frequency_key));
         }
 
-        mBaseFrequency = baseFrequency;
-        mHalfStepsPerRange = ( peakFrequency / mBaseFrequency) * HALF_STEPS_PER_OCTAVE;
+        // find how many octaves between limits
+        // nasty bit of maths, but only runs when prefs change.
+        int baseOctave = 0;
+        int peakOctave = 0;
+        int powerOfTwo;
+        double baseNote = 27.5; // could get using context...
+        double note;
+        for ( int i = 0; i <= 8; i++) {
+            powerOfTwo = (int) Math.pow( 2, i);
+            note = baseNote * powerOfTwo;
+            if ( baseFrequency == note) baseOctave = i;
+            if ( peakFrequency == note) peakOctave = i;
+        }
 
-        Log.d( TAG, "Base frequency: " + Double.toString( mBaseFrequency));
+
+
+        mBaseFrequency = baseFrequency;
+        mHalfStepsPerRange = ( peakOctave - baseOctave) * HALF_STEPS_PER_OCTAVE;
+
+        Log.d( TAG, "Base frequency: " + Double.toString( baseFrequency));
         Log.d( TAG, "Peak frequency: " + Double.toString( peakFrequency));
     }
 
@@ -222,7 +227,7 @@ final class HueTone {
      */
     String getToneString() {
         // Locale.getDefault() for appropriate '.' or ',' decimal point
-        return String.format(Locale.getDefault(), "%4.2f", mTone) + " Hz";
+        return String.format(Locale.getDefault(), "%7.2f", mTone) + " Hz";
     }
 
     @Override
@@ -255,7 +260,14 @@ final class HueTone {
      * @return the corresponding frequency (Hertz)
      */
     private double hueToTone( double hue) {
-        return mBaseFrequency * Math.pow( TWELFTH_ROOT_OF_2, mHalfStepsPerRange * hue);
+        double tone = mBaseFrequency * Math.pow( TWELFTH_ROOT_OF_2, mHalfStepsPerRange * hue);
+        Log.d( TAG, "TRO2: " + Double.toString( TWELFTH_ROOT_OF_2));
+        Log.d( TAG, "HSPR: " + Double.toString( mHalfStepsPerRange));
+        Log.d( TAG, "H*H: " + Double.toString( mHalfStepsPerRange * hue));
+        Log.d( TAG, "BF: " + Double.toString( mBaseFrequency));
+        Log.d( TAG, "Hue: " + Double.toString( hue));
+        Log.d( TAG, "Tone: " + Double.toString( tone));
+        return tone;
     }
 
     /**
