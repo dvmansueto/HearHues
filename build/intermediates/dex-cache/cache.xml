@@ -43,7 +43,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="3ac5d45722c0c3c63109467c7d5dc4d966e535df">
+        sha1="a3cc76e37f20c4d41ebbe88f1064da4285bf08e2">
         <dex dex="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_a09edfbcb0af0ccac3e7358a55932bbf328d17c4\classes.dex" />
     </item>
     <item
@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="a019ab2feedf8a75c4b9dcb7fce57de7b48a59af">
+        sha1="7b39e037cf2606c4dc891cddf15955ea3767b4c8">
         <dex dex="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_fa4a2a1e580ee4a502c255c66ff095f7e8bd6321\classes.dex" />
     </item>
     <item

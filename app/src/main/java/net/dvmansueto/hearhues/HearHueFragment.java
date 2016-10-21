@@ -34,6 +34,7 @@ import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
@@ -481,7 +482,7 @@ public class HearHueFragment extends Fragment
     /**
      * A {@link HueTone} object.
      */
-    private HueTone mHueTone = new HueTone();
+    private HueTone mHueTone;
 
     /**
      * A {@link ToneGenerator} object.
@@ -631,9 +632,7 @@ public class HearHueFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initFile();
-        initCamera();
-        updateUi();
+        mHueTone = new HueTone ( getActivity());
         mToneGenerator = new ToneGenerator();
 
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
@@ -652,6 +651,11 @@ public class HearHueFragment extends Fragment
                 imageView.setImageResource( R.drawable.ic_play_circle_outline_48);
             }
         });
+
+        initFile();
+        initCamera();
+        updateUi();
+
     }
 
     @Override
@@ -667,15 +671,15 @@ public class HearHueFragment extends Fragment
         // available, and "onSurfaceTextureAvailable" will not be called. In that case, we can open
         // a camera and start preview from here (otherwise, we wait until the surface is ready in
         // the SurfaceTextureListener).
-        if (mTextureView.isAvailable()) {
+        if ( mTextureView.isAvailable()) {
             openCamera( mTextureView.getWidth(), mTextureView.getHeight());
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
-
-        mSharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-
-        switch( mSharedPreferences.getString( getString( R.string.prefs_palette_area_key),
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences( getActivity());
+//        mSharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        switch( mSharedPreferences.getString(
+                getString( R.string.prefs_palette_area_key),
                 getString( R.string.prefs_palette_area_default))) {
             case "Very Low":
                 mResizeBitmapArea = 20 * 20;
@@ -693,7 +697,9 @@ public class HearHueFragment extends Fragment
                 mResizeBitmapArea = 640 * 640;
                 break;
         }
-        switch( mSharedPreferences.getString( getString( R.string.prefs_palette_number_key),
+
+        switch( mSharedPreferences.getString(
+                getString( R.string.prefs_palette_number_key),
                 getString( R.string.prefs_palette_number_default))) {
             case "Very Low":
                 mCalculateNumberColors = 4;
@@ -711,8 +717,26 @@ public class HearHueFragment extends Fragment
                 mCalculateNumberColors = 48;
                 break;
         }
-        mSavingPhotos = mSharedPreferences.getBoolean( getString( R.string.prefs_save_files_key),
+
+        mSavingPhotos = mSharedPreferences.getBoolean(
+                getString( R.string.prefs_save_files_key),
                 parseBoolean(getString( R.string.prefs_save_files_default)));
+
+        mToneGenerator.setPlaybackSeconds( Double.parseDouble( mSharedPreferences.getString(
+                getString( R.string.prefs_playback_seconds_key),
+                getString( R.string.prefs_playback_seconds_default))));
+
+        mHueTone.setFrequencies(
+                Double.parseDouble( mSharedPreferences.getString(
+                        getString( R.string.prefs_generator_base_frequency_key),
+                        getString( R.string.prefs_generator_base_frequency_default)
+                )),
+                Double.parseDouble( mSharedPreferences.getString(
+                        getString( R.string.prefs_generator_peak_frequency_key),
+                        getString( R.string.prefs_generator_peak_frequency_default)
+                )));
+
+
     }
 
 

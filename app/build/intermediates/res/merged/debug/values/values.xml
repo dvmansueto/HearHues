@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="prefs_generator_base_frequency_entries">
+        <item>A₀</item>
+        <item>A₁</item>
+        <item>A₂</item>
+        <item>A₃</item>
+        <item>A₄</item>
+        <item>A₅</item>
+        <item>A₆</item>
+        <item>A₇</item>
+    </string-array>
+    <string-array name="prefs_generator_base_frequency_values">
+        <item>27.5</item>
+        <item>55</item>
+        <item>110</item>
+        <item>220</item>
+        <item>440</item>
+        <item>880</item>
+        <item>1760</item>
+        <item>3520</item>
+    </string-array>
+    <string-array name="prefs_generator_peak_frequency_entries">
+        <item>A₁</item>
+        <item>A₂</item>
+        <item>A₃</item>
+        <item>A₄</item>
+        <item>A₅</item>
+        <item>A₆</item>
+        <item>A₇</item>
+        <item>A₈</item>
+    </string-array>
+    <string-array name="prefs_generator_peak_frequency_values">
+        <item>55</item>
+        <item>110</item>
+        <item>220</item>
+        <item>440</item>
+        <item>880</item>
+        <item>1760</item>
+        <item>3520</item>
+        <item>7040</item>
+    </string-array>
     <string-array name="prefs_palette_area_entries">
         <item>Very Low</item>
         <item>Low</item>
@@ -19,6 +59,16 @@
         <item>Vibrant</item>
         <item>Vibrant Light</item>
         <item>Vibrant Dark</item>
+    </string-array>
+    <string-array name="prefs_playback_seconds_entries">
+        <item>Short</item>
+        <item>Medium</item>
+        <item>Long</item>
+    </string-array>
+    <string-array name="prefs_playback_seconds_values">
+        <item>0.8</item>
+        <item>1.6</item>
+        <item>2.4</item>
     </string-array>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -634,20 +684,39 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_primary_features">Primary Features</string>
     <string name="navigation_drawer_secondary_features">Ancillary Features</string>
+    <string name="prefs__default"/>
+    <string name="prefs__key"/>
+    <string name="prefs__summary"/>
+    <string name="prefs__title"/>
+    <string name="prefs_detector_category">Tone Detector</string>
+    <string name="prefs_generator_base_frequency_default">440</string>
+    <string name="prefs_generator_base_frequency_key">generator_base_frequency</string>
+    <string name="prefs_generator_base_frequency_summary">Lowest note to be generated (must be lower than peak note)</string>
+    <string name="prefs_generator_base_frequency_title">Base Tone</string>
+    <string name="prefs_generator_category">Tone Generator</string>
+    <string name="prefs_generator_peak_frequency_default">7040</string>
+    <string name="prefs_generator_peak_frequency_key">generator_peak_frequency</string>
+    <string name="prefs_generator_peak_frequency_summary">Highest note to be generated (must be higher than base note)</string>
+    <string name="prefs_generator_peak_frequency_title">Peak Tone</string>
     <string name="prefs_palette_area_default">Medium</string>
-    <string name="prefs_palette_area_key">precision</string>
-    <string name="prefs_palette_area_summary">Affects processing time</string>
-    <string name="prefs_palette_area_title">Colour Precision</string>
+    <string name="prefs_palette_area_key">palette_area</string>
+    <string name="prefs_palette_area_summary">Number of candidate cells (affects processing time)</string>
+    <string name="prefs_palette_area_title">Colour Resolution</string>
+    <string name="prefs_palette_category">Hear Hue</string>
     <string name="prefs_palette_number_default">Medium</string>
-    <string name="prefs_palette_number_key">resolution</string>
+    <string name="prefs_palette_number_key">palette_number</string>
     <string name="prefs_palette_number_summary">Number of candidate colours (affects processing time)</string>
-    <string name="prefs_palette_number_title">Colour Resolution</string>
+    <string name="prefs_palette_number_title">Colour Precision</string>
     <string name="prefs_palette_swatch_default">Vibrant</string>
-    <string name="prefs_palette_swatch_key">swatch</string>
+    <string name="prefs_palette_swatch_key">palette_swatch</string>
     <string name="prefs_palette_swatch_summary">Method for extracting a colour from the photograph</string>
     <string name="prefs_palette_swatch_title">Colour Extraction</string>
+    <string name="prefs_playback_seconds_default">1.6</string>
+    <string name="prefs_playback_seconds_key">playback_seconds</string>
+    <string name="prefs_playback_seconds_summary">How long to play a tone for</string>
+    <string name="prefs_playback_seconds_title">Playback Duration</string>
     <string name="prefs_save_files_default">true</string>
-    <string name="prefs_save_files_key">saving</string>
+    <string name="prefs_save_files_key">save_files</string>
     <string name="prefs_save_files_summary">Captured stills will be saved to disk</string>
     <string name="prefs_save_files_title">Save Photographs</string>
     <string name="request_permission">This feature requires camera permission.</string>

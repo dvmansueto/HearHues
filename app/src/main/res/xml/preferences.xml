@@ -1,50 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="@string/title_fragment_hear_hue">
-    <ListPreference
-        android:key="@string/prefs_palette_swatch_key"
-        android:title="@string/prefs_palette_swatch_title"
-        android:summary="@string/prefs_palette_swatch_summary"
-        android:defaultValue="@string/prefs_palette_swatch_default"
-        android:entries="@array/prefs_palette_swatch_entries"
-        android:entryValues="@array/prefs_palette_swatch_entries" />
-    <ListPreference
-        android:key="palette_area"
-        android:title="@string/prefs_palette_area_title"
-        android:summary="@string/prefs_palette_area_summary"
-        android:defaultValue="@string/prefs_palette_area_default"
-        android:entries="@array/prefs_palette_area_entries"
-        android:entryValues="@array/prefs_palette_area_entries" />
-    <ListPreference
-        android:key="palette_number"
-        android:title="@string/prefs_palette_number_title"
-        android:summary="@string/prefs_palette_number_summary"
-        android:defaultValue="@string/prefs_palette_number_default"
-        android:entries="@array/prefs_palette_number_entries"
-        android:entryValues="@array/prefs_palette_number_entries" />
-    <CheckBoxPreference
-        android:key="@string/prefs_save_files_key"
-        android:title="@string/prefs_save_files_title"
-        android:summary="@string/prefs_save_files_summary"
-        android:defaultValue="@string/prefs_save_files_default" />
 
+    <PreferenceCategory
+        android:title="@string/prefs_palette_category">
+        <ListPreference
+            android:key="@string/prefs_palette_swatch_key"
+            android:title="@string/prefs_palette_swatch_title"
+            android:summary="@string/prefs_palette_swatch_summary"
+            android:defaultValue="@string/prefs_palette_swatch_default"
+            android:entries="@array/prefs_palette_swatch_entries"
+            android:entryValues="@array/prefs_palette_swatch_entries" />
+        <ListPreference
+            android:key="@string/prefs_palette_area_key"
+            android:title="@string/prefs_palette_area_title"
+            android:summary="@string/prefs_palette_area_summary"
+            android:defaultValue="@string/prefs_palette_area_default"
+            android:entries="@array/prefs_palette_area_entries"
+            android:entryValues="@array/prefs_palette_area_entries" />
+        <ListPreference
+            android:key="@string/prefs_palette_number_key"
+            android:title="@string/prefs_palette_number_title"
+            android:summary="@string/prefs_palette_number_summary"
+            android:defaultValue="@string/prefs_palette_number_default"
+            android:entries="@array/prefs_palette_number_entries"
+            android:entryValues="@array/prefs_palette_number_entries" />
+        <CheckBoxPreference
+            android:key="@string/prefs_save_files_key"
+            android:title="@string/prefs_save_files_title"
+            android:summary="@string/prefs_save_files_summary"
+            android:defaultValue="@string/prefs_save_files_default" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/prefs_generator_category">
+        <ListPreference
+            android:key="@string/prefs_playback_seconds_key"
+            android:title="@string/prefs_playback_seconds_title"
+            android:summary="@string/prefs_playback_seconds_summary"
+            android:defaultValue="@string/prefs_playback_seconds_default"
+            android:entries="@array/prefs_playback_seconds_entries"
+            android:entryValues="@array/prefs_playback_seconds_values" />
+        <ListPreference
+            android:key="@string/prefs_generator_base_frequency_key"
+            android:title="@string/prefs_generator_base_frequency_title"
+            android:summary="@string/prefs_generator_base_frequency_summary"
+            android:defaultValue="@string/prefs_generator_base_frequency_default"
+            android:entries="@array/prefs_generator_base_frequency_entries"
+            android:entryValues="@array/prefs_generator_base_frequency_values" />
+        <ListPreference
+            android:key="@string/prefs_generator_peak_frequency_key"
+            android:title="@string/prefs_generator_peak_frequency_title"
+            android:summary="@string/prefs_generator_peak_frequency_summary"
+            android:defaultValue="@string/prefs_generator_peak_frequency_default"
+            android:entries="@array/prefs_generator_peak_frequency_entries"
+            android:entryValues="@array/prefs_generator_peak_frequency_values" />
     </PreferenceCategory>
 </PreferenceScreen>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">-->
-<!--<EditTextPreference android:title="Your Name"-->
-    <!--android:key="username"-->
-    <!--android:summary="Please provide your username"></EditTextPreference>-->
-<!--<CheckBoxPreference android:title="Application Updates"-->
-    <!--android:defaultValue="false"-->
-    <!--android:summary="This option if selected will allow the application to check for latest versions."-->
-    <!--android:key="applicationUpdates" />-->
-<!--<ListPreference     android:title="Download Details"-->
-    <!--android:summary="Select the kind of data that you would like to download"-->
-    <!--android:key="downloadType"-->
-    <!--android:defaultValue="1"-->
-    <!--android:entries="@array/listArray"-->
-    <!--android:entryValues="@array/listValues" />-->
-<!--</PreferenceScreen>-->

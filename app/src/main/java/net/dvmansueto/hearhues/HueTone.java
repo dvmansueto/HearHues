@@ -1,8 +1,8 @@
 package net.dvmansueto.hearhues;
 
-import android.graphics.Color;
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.graphics.Palette;
@@ -30,12 +30,23 @@ final class HueTone {
     /**
      * Tag for the {@link Log}.
      */
-    private static final String TAG = "HearHue";
+    private static final String TAG = "HueTone";
 
-    private static final double BASE_FREQUENCY = 440; // A2 = 110 Hz
-    private static final int HALF_STEPS_PER_RANGE = 48; // A2 -> A6 (1760 Hz)
+    // all for updating incorrectly selected preferences
+    private final Context mContext;
+    private final String[] mBaseFrequencyValues;
+    private final String[] mBaseFrequencyEntries;
+    private final String[] mPeakFrequencyValues;
+    private final String[] mPeakFrequencyEntries;
+
+//    private static final double BASE_FREQUENCY = 440; // A2 = 110 Hz
+//    private static final int HALF_STEPS_PER_RANGE = 48; // A2 -> A6 (1760 Hz)
+//    private static final double FREQUENCY_DENOMINATOR = HALF_STEPS_PER_RANGE * Math.log( TWELFTH_ROOT_OF_2);
+    private static final int HALF_STEPS_PER_OCTAVE = 12;
     private static final double TWELFTH_ROOT_OF_2 = Math.pow( 2, (double) 1 / (double) 12);
-    private static final double FREQUENCY_DENOMINATOR = HALF_STEPS_PER_RANGE * Math.log( TWELFTH_ROOT_OF_2);
+
+    private double mBaseFrequency = 440;
+    private double mHalfStepsPerRange = 48;
 
     private int mRgb;   // mRgb is AARRGGBB
     private float[] mHsl = new float[3];   // mHsl is [0] Hue [0...360), [1] Saturation [0...1], [2] Lightness [0...1]
@@ -45,58 +56,67 @@ final class HueTone {
     //// Constructors
 
     // Default constructor
-    HueTone() {
-        updateHueTone( BASE_FREQUENCY);
+    HueTone( Context context) {
+        mContext = context;
+        mBaseFrequencyValues = context.getResources().getStringArray(
+                R.array.prefs_generator_base_frequency_values);
+        mBaseFrequencyEntries = context.getResources().getStringArray(
+                R.array.prefs_generator_base_frequency_entries);
+        mPeakFrequencyValues = context.getResources().getStringArray(
+                R.array.prefs_generator_peak_frequency_values);
+        mPeakFrequencyEntries = context.getResources().getStringArray(
+                R.array.prefs_generator_peak_frequency_entries);
+        updateHueTone( mBaseFrequency);
     }
 
-    // Secondary constructors
-
-    /**
-     * Creates a HueTone from RGB component integers.
-     * @param r the red component of RGB, [0...255]
-     * @param g the green component of RGB, [0...255]
-     * @param b the blue component of RGB, [0...255]
-     */
-    public HueTone( @IntRange( from = 0x0, to = 0xFF) int r,
-                    @IntRange( from = 0x0, to = 0xFF) int g,
-                    @IntRange( from = 0x0, to = 0xFF) int b) {
-        updateHueTone( Color.rgb( r, g, b));
-    }
-
-    /**
-     * Creates a HueTone from a Palette swatch.
-     * @param swatch the palette swatch to import
-     */
-    public HueTone( @NonNull Palette.Swatch swatch) {
-        updateHueTone( swatch.getRgb());
-    }
-
-    /**
-     * Creates a HueTone from a HSL.
-     * @param hsl 3-element array containing the HSL component floats to import
-     */
-    public HueTone( @NonNull float[] hsl) {
-        updateHueTone( ColorUtils.HSLToColor( hsl));
-    }
-
-    /**
-     * Creates a HueTone from an \"#RRGGBB\" string.
-     * @param colorString \"#RRGGBB\" string to import
-     */
-    public HueTone( @NonNull String colorString) {
-        int r = parseInt( colorString.substring( 1,2));
-        int g = parseInt( colorString.substring( 3,2));
-        int b = parseInt( colorString.substring( 5,2));
-        updateHueTone( Color.rgb( r, g, b));
-    }
-
-    /**
-     * Creates a HueTone from an @ColorInt int (#AARRGGBB).
-     * @param color the ColorInt to import
-     */
-    public HueTone( @ColorInt int color) {
-        updateHueTone( color);
-    }
+//    // Secondary constructors
+//
+//    /**
+//     * Creates a HueTone from RGB component integers.
+//     * @param r the red component of RGB, [0...255]
+//     * @param g the green component of RGB, [0...255]
+//     * @param b the blue component of RGB, [0...255]
+//     */
+//    public HueTone( @IntRange( from = 0x0, to = 0xFF) int r,
+//                    @IntRange( from = 0x0, to = 0xFF) int g,
+//                    @IntRange( from = 0x0, to = 0xFF) int b) {
+//        updateHueTone( Color.rgb( r, g, b));
+//    }
+//
+//    /**
+//     * Creates a HueTone from a Palette swatch.
+//     * @param swatch the palette swatch to import
+//     */
+//    public HueTone( @NonNull Palette.Swatch swatch) {
+//        updateHueTone( swatch.getRgb());
+//    }
+//
+//    /**
+//     * Creates a HueTone from a HSL.
+//     * @param hsl 3-element array containing the HSL component floats to import
+//     */
+//    public HueTone( @NonNull float[] hsl) {
+//        updateHueTone( ColorUtils.HSLToColor( hsl));
+//    }
+//
+//    /**
+//     * Creates a HueTone from an \"#RRGGBB\" string.
+//     * @param colorString \"#RRGGBB\" string to import
+//     */
+//    public HueTone( @NonNull String colorString) {
+//        int r = parseInt( colorString.substring( 1,2));
+//        int g = parseInt( colorString.substring( 3,2));
+//        int b = parseInt( colorString.substring( 5,2));
+//        updateHueTone( Color.rgb( r, g, b));
+//    }
+//
+//    /**
+//     * Creates a HueTone from an @ColorInt int (#AARRGGBB).
+//     * @param color the ColorInt to import
+//     */
+//    public HueTone( @ColorInt int color) {
+//        updateHueTone( color);
+//    }
 
     // Primary Constructor / Constructor Helper
     /**
@@ -113,10 +133,10 @@ final class HueTone {
         Log.d( TAG, "Tone:" + Double.toString( mTone));
     }
 
-    // Overload for tone due to calculation expense of hueToTone()
-    public HueTone( double tone) {
-        updateHueTone( tone);
-    }
+//    // Overload for tone due to calculation expense of hueToTone()
+//    public HueTone( double tone) {
+//        updateHueTone( tone);
+//    }
 
     /**
      * Creates a HueTone from a tone double.
@@ -142,6 +162,36 @@ final class HueTone {
 
     public void setTone( double tone) {
         updateHueTone( toneToColorInt( tone));
+    }
+
+    public void setFrequencies( double baseFrequency, double peakFrequency) {
+
+        if ( baseFrequency == peakFrequency) {
+            peakFrequency *= 2; // jump an octave
+            // update shared preference
+            Utils.setStringPreference( mContext,
+                    mPeakFrequencyEntries[ Arrays.asList(mPeakFrequencyValues).indexOf( peakFrequency)],
+                    mContext.getResources().getString( R.string.prefs_generator_peak_frequency_key));
+        }
+
+        if ( baseFrequency > peakFrequency) {
+            mBaseFrequency = peakFrequency;
+            peakFrequency = baseFrequency;
+
+            // update shared preferences
+            Utils.setStringPreference( mContext,
+                    mBaseFrequencyEntries[ Arrays.asList(mBaseFrequencyValues).indexOf( baseFrequency)],
+                    mContext.getResources().getString( R.string.prefs_generator_base_frequency_key));
+            Utils.setStringPreference( mContext,
+                    mPeakFrequencyEntries[ Arrays.asList(mPeakFrequencyValues).indexOf( peakFrequency)],
+                    mContext.getResources().getString( R.string.prefs_generator_peak_frequency_key));
+        }
+
+        mBaseFrequency = baseFrequency;
+        mHalfStepsPerRange = ( peakFrequency / mBaseFrequency) * HALF_STEPS_PER_OCTAVE;
+
+        Log.d( TAG, "Base frequency: " + Double.toString( mBaseFrequency));
+        Log.d( TAG, "Peak frequency: " + Double.toString( peakFrequency));
     }
 
     //// Accessors
@@ -194,7 +244,8 @@ final class HueTone {
      * @return the corresponding hue [0...1)
      */
     private double toneToHue( double tone) {
-        return Math.log( tone / BASE_FREQUENCY) / FREQUENCY_DENOMINATOR;
+        return Math.log( tone / mBaseFrequency) /
+                ( mHalfStepsPerRange * Math.log( TWELFTH_ROOT_OF_2));
     }
 
     /**
@@ -204,12 +255,7 @@ final class HueTone {
      * @return the corresponding frequency (Hertz)
      */
     private double hueToTone( double hue) {
-        Log.d( TAG, "BF: " + Double.toString( BASE_FREQUENCY));
-        Log.d( TAG, "TR: " + Double.toString( TWELFTH_ROOT_OF_2));
-        Log.d( TAG, "HS: " + Double.toString( HALF_STEPS_PER_RANGE));
-        Log.d( TAG, "Hue: " + Double.toString( hue));
-        Log.d( TAG, "Tone: " + BASE_FREQUENCY * Math.pow( TWELFTH_ROOT_OF_2, HALF_STEPS_PER_RANGE * hue));
-        return BASE_FREQUENCY * Math.pow( TWELFTH_ROOT_OF_2, HALF_STEPS_PER_RANGE * hue);
+        return mBaseFrequency * Math.pow( TWELFTH_ROOT_OF_2, mHalfStepsPerRange * hue);
     }
 
     /**

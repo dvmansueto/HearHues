@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fad9373a-5da7-45d2-94e3-f7712aa72a07" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/NumberPickerPreference.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Utils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -28,6 +28,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/net/dvmansueto/hearhues/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/net/dvmansueto/hearhues/R$string.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/net/dvmansueto/hearhues/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/net/dvmansueto/hearhues/R$style.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/net/dvmansueto/hearhues/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/net/dvmansueto/hearhues/R$styleable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/net/dvmansueto/hearhues/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/net/dvmansueto/hearhues/R$attr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/net/dvmansueto/hearhues/R$bool.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/net/dvmansueto/hearhues/R$bool.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/net/dvmansueto/hearhues/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental-verifier/debug/net/dvmansueto/hearhues/R$color.class" />
@@ -45,7 +47,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/instant-run-support/debug/instant-run.zip" afterPath="$PROJECT_DIR$/app/build/intermediates/instant-run-support/debug/instant-run.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_6/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/dvmansueto/hearhues/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/dvmansueto/hearhues/R$attr.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/dvmansueto/hearhues/R$bool.class" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/instantRun/debug/folders/1/5/main/net/dvmansueto/hearhues/R$bool.class" />
@@ -75,6 +76,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/net/dvmansueto/hearhues/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/net/dvmansueto/hearhues/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" />
@@ -84,8 +89,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/restart-dex/debug/build-info.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/restart-dex/debug/build-info.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" afterPath="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="HearHues.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -123,64 +131,78 @@
       <file leaf-file-name="HearHueFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8536">
-              <caret line="659" column="8" selection-start-line="659" selection-start-column="8" selection-end-line="659" selection-end-column="8" />
+            <state relative-caret-position="389">
+              <caret line="673" column="13" selection-start-line="673" selection-start-column="13" selection-end-line="673" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#18461#21271#0" expanded="true" />
-                <element signature="e#19199#19243#0" expanded="true" />
-                <element signature="e#19277#19325#0" expanded="true" />
-                <element signature="e#21270#21271#0" expanded="true" />
-                <element signature="e#23427#23459#0" expanded="true" />
-                <element signature="e#24176#24219#0" expanded="true" />
-                <element signature="e#24237#24284#0" expanded="true" />
-                <element signature="e#24826#24871#0" expanded="true" />
-                <element signature="e#24889#24938#0" expanded="true" />
-                <element signature="e#25481#25522#0" expanded="true" />
-                <element signature="e#25553#25598#0" expanded="true" />
-                <element signature="e#26849#26850#0" expanded="true" />
-                <element signature="e#26880#26881#0" expanded="true" />
-                <element signature="e#30274#30320#0" expanded="true" />
-                <element signature="e#44911#45680#0" expanded="true" />
-                <element signature="e#45679#45680#0" expanded="true" />
+                <element signature="e#18490#21300#0" expanded="true" />
+                <element signature="e#19228#19272#0" expanded="true" />
+                <element signature="e#19306#19354#0" expanded="true" />
+                <element signature="e#21299#21300#0" expanded="true" />
+                <element signature="e#23499#23531#0" expanded="true" />
+                <element signature="e#24357#24400#0" expanded="true" />
+                <element signature="e#24418#24465#0" expanded="true" />
+                <element signature="e#25024#25069#0" expanded="true" />
+                <element signature="e#25087#25136#0" expanded="true" />
+                <element signature="e#25696#25737#0" expanded="true" />
+                <element signature="e#25768#25813#0" expanded="true" />
+                <element signature="e#25927#25974#0" expanded="true" />
+                <element signature="e#25992#26043#0" expanded="true" />
+                <element signature="e#26172#26227#0" expanded="true" />
+                <element signature="e#26253#26312#0" expanded="true" />
+                <element signature="e#26423#26478#0" expanded="true" />
+                <element signature="e#26504#26563#0" expanded="true" />
+                <element signature="e#27834#27835#0" expanded="true" />
+                <element signature="e#27865#27866#0" expanded="true" />
+                <element signature="e#31259#31305#0" expanded="true" />
+                <element signature="e#45896#46665#0" expanded="true" />
+                <element signature="e#46664#46665#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TinkerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
+      <file leaf-file-name="SeeSoundFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SeeSoundFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="36" column="80" selection-start-line="35" selection-start-column="8" selection-end-line="36" selection-end-column="80" />
+            <state relative-caret-position="640">
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="669">
+              <caret line="162" column="19" selection-start-line="162" selection-start-column="19" selection-end-line="162" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HueTone.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="469">
+              <caret line="187" column="9" selection-start-line="187" selection-start-column="9" selection-end-line="187" selection-end-column="9" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#915#945#0" expanded="true" />
+                <element signature="e#5839#5918#0" expanded="true" />
+                <element signature="e#6281#6360#0" expanded="true" />
+                <element signature="e#6537#6616#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java">
+      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="70" column="55" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
+            <state relative-caret-position="460">
+              <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SettingsFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="18" column="62" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1011#1043#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,24 +211,22 @@
       <file leaf-file-name="preferences.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/preferences.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+            <state relative-caret-position="1100">
+              <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
               <folding>
-                <element signature="e#163#196#0" expanded="true" />
-                <element signature="e#238#272#0" expanded="true" />
-                <element signature="e#295#331#0" expanded="true" />
-                <element signature="e#356#394#0" expanded="true" />
-                <element signature="e#424#462#0" expanded="true" />
-                <element signature="e#671#705#0" expanded="true" />
-                <element signature="e#730#766#0" expanded="true" />
-                <element signature="e#796#832#0" expanded="true" />
-                <element signature="e#1039#1075#0" expanded="true" />
-                <element signature="e#1100#1138#0" expanded="true" />
-                <element signature="e#1168#1206#0" expanded="true" />
-                <element signature="e#1382#1412#0" expanded="true" />
-                <element signature="e#1435#1467#0" expanded="true" />
-                <element signature="e#1492#1526#0" expanded="true" />
-                <element signature="e#1556#1590#0" expanded="true" />
+                <element signature="e#1082#1116#0" expanded="true" />
+                <element signature="e#1891#1927#0" expanded="true" />
+                <element signature="e#1954#1992#0" expanded="true" />
+                <element signature="e#2021#2061#0" expanded="true" />
+                <element signature="e#2095#2135#0" expanded="true" />
+                <element signature="e#2326#2370#0" expanded="true" />
+                <element signature="e#2397#2443#0" expanded="true" />
+                <element signature="e#2472#2520#0" expanded="true" />
+                <element signature="e#2554#2602#0" expanded="true" />
+                <element signature="e#2809#2853#0" expanded="true" />
+                <element signature="e#2880#2926#0" expanded="true" />
+                <element signature="e#2955#3003#0" expanded="true" />
+                <element signature="e#3037#3085#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -215,22 +235,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <file leaf-file-name="ToneGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="949">
-              <caret line="88" column="83" selection-start-line="88" selection-start-column="83" selection-end-line="88" selection-end-column="83" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Palette.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Android/SDK/extras/android/m2repository/com/android/support/palette-v7/24.2.1/palette-v7-24.2.1-sources.jar!/android/support/v7/graphics/Palette.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="360">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="26" selection-end-column="90" />
+              <folding>
+                <element signature="e#2137#2138#0" expanded="true" />
+                <element signature="e#2169#2170#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1961,15 +1974,17 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_hear_hue.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_blank_toolbar.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SettingsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/NumberPicker.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Utilities.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Utils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" />
       </list>
     </option>
@@ -2159,6 +2174,7 @@
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="device.picker.selection" value="3c81bed7" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Dropbox/Uni/2016S2/COMP7717/HearHues/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -2495,7 +2511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1476951829815</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="#12. Tweaking Palette settings in HearHueFragment">
+      <created>1476959596759</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1476959596759</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2511,7 +2534,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993832" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3993832" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922128" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2585,7 +2608,8 @@
     <MESSAGE value="Convert Hear Hue from Activity to Fragment." />
     <MESSAGE value="#10. Hear Hue activity working." />
     <MESSAGE value="#11. Got SettingsFragment working" />
-    <option name="LAST_COMMIT_MESSAGE" value="#11. Got SettingsFragment working" />
+    <MESSAGE value="#12. Tweaking Palette settings in HearHueFragment" />
+    <option name="LAST_COMMIT_MESSAGE" value="#12. Tweaking Palette settings in HearHueFragment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2598,22 +2622,28 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#18461#21271#0" expanded="true" />
-            <element signature="e#19199#19243#0" expanded="true" />
-            <element signature="e#19277#19325#0" expanded="true" />
-            <element signature="e#21270#21271#0" expanded="true" />
-            <element signature="e#23427#23459#0" expanded="true" />
-            <element signature="e#24176#24219#0" expanded="true" />
-            <element signature="e#24237#24284#0" expanded="true" />
-            <element signature="e#24826#24871#0" expanded="true" />
-            <element signature="e#24889#24938#0" expanded="true" />
-            <element signature="e#25481#25522#0" expanded="true" />
-            <element signature="e#25553#25598#0" expanded="true" />
-            <element signature="e#26849#26850#0" expanded="true" />
-            <element signature="e#26880#26881#0" expanded="true" />
-            <element signature="e#30274#30320#0" expanded="true" />
-            <element signature="e#44911#45680#0" expanded="true" />
-            <element signature="e#45679#45680#0" expanded="true" />
+            <element signature="e#18490#21300#0" expanded="true" />
+            <element signature="e#19228#19272#0" expanded="true" />
+            <element signature="e#19306#19354#0" expanded="true" />
+            <element signature="e#21299#21300#0" expanded="true" />
+            <element signature="e#23499#23531#0" expanded="true" />
+            <element signature="e#24357#24400#0" expanded="true" />
+            <element signature="e#24418#24465#0" expanded="true" />
+            <element signature="e#25024#25069#0" expanded="true" />
+            <element signature="e#25087#25136#0" expanded="true" />
+            <element signature="e#25696#25737#0" expanded="true" />
+            <element signature="e#25768#25813#0" expanded="true" />
+            <element signature="e#25927#25974#0" expanded="true" />
+            <element signature="e#25992#26043#0" expanded="true" />
+            <element signature="e#26172#26227#0" expanded="true" />
+            <element signature="e#26253#26312#0" expanded="true" />
+            <element signature="e#26423#26478#0" expanded="true" />
+            <element signature="e#26504#26563#0" expanded="true" />
+            <element signature="e#27834#27835#0" expanded="true" />
+            <element signature="e#27865#27866#0" expanded="true" />
+            <element signature="e#31259#31305#0" expanded="true" />
+            <element signature="e#45896#46665#0" expanded="true" />
+            <element signature="e#46664#46665#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2722,27 +2752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="22" column="54" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
-          <folding>
-            <element signature="e#1937#1938#0" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-            <element signature="e#2165#2166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2785,17 +2794,6 @@
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="36" column="80" selection-start-line="35" selection-start-column="8" selection-end-line="36" selection-end-column="80" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#915#945#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://C:/Android/SDK/sources/android-24/android/app/Activity.java">
@@ -2849,35 +2847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Android/SDK/sources/android-24/android/content/SharedPreferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6151">
-          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SettingsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="18" column="62" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1011#1043#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="70" column="55" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Android/SDK/extras/android/m2repository/com/android/support/palette-v7/24.2.1/palette-v7-24.2.1-sources.jar!/android/support/v7/graphics/Target.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="542">
@@ -2902,26 +2871,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SettingsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="62" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1011#1043#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="70" column="55" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="36" column="80" selection-start-line="35" selection-start-column="8" selection-end-line="36" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#915#945#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SeeSoundFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="669">
+          <caret line="162" column="19" selection-start-line="162" selection-start-column="19" selection-end-line="162" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Android/SDK/sources/android-24/android/content/SharedPreferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="44" column="45" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/preferences.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        <state relative-caret-position="1100">
+          <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
           <folding>
-            <element signature="e#163#196#0" expanded="true" />
-            <element signature="e#238#272#0" expanded="true" />
-            <element signature="e#295#331#0" expanded="true" />
-            <element signature="e#356#394#0" expanded="true" />
-            <element signature="e#424#462#0" expanded="true" />
-            <element signature="e#671#705#0" expanded="true" />
-            <element signature="e#730#766#0" expanded="true" />
-            <element signature="e#796#832#0" expanded="true" />
-            <element signature="e#1039#1075#0" expanded="true" />
-            <element signature="e#1100#1138#0" expanded="true" />
-            <element signature="e#1168#1206#0" expanded="true" />
-            <element signature="e#1382#1412#0" expanded="true" />
-            <element signature="e#1435#1467#0" expanded="true" />
-            <element signature="e#1492#1526#0" expanded="true" />
-            <element signature="e#1556#1590#0" expanded="true" />
+            <element signature="e#1082#1116#0" expanded="true" />
+            <element signature="e#1891#1927#0" expanded="true" />
+            <element signature="e#1954#1992#0" expanded="true" />
+            <element signature="e#2021#2061#0" expanded="true" />
+            <element signature="e#2095#2135#0" expanded="true" />
+            <element signature="e#2326#2370#0" expanded="true" />
+            <element signature="e#2397#2443#0" expanded="true" />
+            <element signature="e#2472#2520#0" expanded="true" />
+            <element signature="e#2554#2602#0" expanded="true" />
+            <element signature="e#2809#2853#0" expanded="true" />
+            <element signature="e#2880#2926#0" expanded="true" />
+            <element signature="e#2955#3003#0" expanded="true" />
+            <element signature="e#3037#3085#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2929,36 +2962,57 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="949">
-          <caret line="88" column="83" selection-start-line="88" selection-start-column="83" selection-end-line="88" selection-end-column="83" />
-          <folding />
+        <state relative-caret-position="360">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="26" selection-end-column="90" />
+          <folding>
+            <element signature="e#2137#2138#0" expanded="true" />
+            <element signature="e#2169#2170#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="187" column="9" selection-start-line="187" selection-start-column="9" selection-end-line="187" selection-end-column="9" />
+          <folding>
+            <element signature="e#5839#5918#0" expanded="true" />
+            <element signature="e#6281#6360#0" expanded="true" />
+            <element signature="e#6537#6616#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8536">
-          <caret line="659" column="8" selection-start-line="659" selection-start-column="8" selection-end-line="659" selection-end-column="8" />
+        <state relative-caret-position="389">
+          <caret line="673" column="13" selection-start-line="673" selection-start-column="13" selection-end-line="673" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#18461#21271#0" expanded="true" />
-            <element signature="e#19199#19243#0" expanded="true" />
-            <element signature="e#19277#19325#0" expanded="true" />
-            <element signature="e#21270#21271#0" expanded="true" />
-            <element signature="e#23427#23459#0" expanded="true" />
-            <element signature="e#24176#24219#0" expanded="true" />
-            <element signature="e#24237#24284#0" expanded="true" />
-            <element signature="e#24826#24871#0" expanded="true" />
-            <element signature="e#24889#24938#0" expanded="true" />
-            <element signature="e#25481#25522#0" expanded="true" />
-            <element signature="e#25553#25598#0" expanded="true" />
-            <element signature="e#26849#26850#0" expanded="true" />
-            <element signature="e#26880#26881#0" expanded="true" />
-            <element signature="e#30274#30320#0" expanded="true" />
-            <element signature="e#44911#45680#0" expanded="true" />
-            <element signature="e#45679#45680#0" expanded="true" />
+            <element signature="e#18490#21300#0" expanded="true" />
+            <element signature="e#19228#19272#0" expanded="true" />
+            <element signature="e#19306#19354#0" expanded="true" />
+            <element signature="e#21299#21300#0" expanded="true" />
+            <element signature="e#23499#23531#0" expanded="true" />
+            <element signature="e#24357#24400#0" expanded="true" />
+            <element signature="e#24418#24465#0" expanded="true" />
+            <element signature="e#25024#25069#0" expanded="true" />
+            <element signature="e#25087#25136#0" expanded="true" />
+            <element signature="e#25696#25737#0" expanded="true" />
+            <element signature="e#25768#25813#0" expanded="true" />
+            <element signature="e#25927#25974#0" expanded="true" />
+            <element signature="e#25992#26043#0" expanded="true" />
+            <element signature="e#26172#26227#0" expanded="true" />
+            <element signature="e#26253#26312#0" expanded="true" />
+            <element signature="e#26423#26478#0" expanded="true" />
+            <element signature="e#26504#26563#0" expanded="true" />
+            <element signature="e#27834#27835#0" expanded="true" />
+            <element signature="e#27865#27866#0" expanded="true" />
+            <element signature="e#31259#31305#0" expanded="true" />
+            <element signature="e#45896#46665#0" expanded="true" />
+            <element signature="e#46664#46665#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -19,21 +19,22 @@ public class ToneGenerator {
     private static final String TAG = "ToneGenerator";
 
     private static final int SAMPLE_RATE = 9600;
-    //TODO: preference candidate
-    private static final double PLAYBACK_SECONDS = 1.6;
-    private static final int PLAYBACK_SAMPLES = (int) ( SAMPLE_RATE * PLAYBACK_SECONDS);
-    private static final double LEAD_IN_SECONDS = 0.35;
-    private static final int LEAD_IN_SAMPLES = (int) ( SAMPLE_RATE * LEAD_IN_SECONDS);
-    private static final double LEAD_OUT_SECONDS = 0.15;
-    private static final int LEAD_OUT_SAMPLES = (int) ( SAMPLE_RATE * LEAD_OUT_SECONDS);
+//    private static final double PLAYBACK_SECONDS = 1.6;
+//    private static final int PLAYBACK_SAMPLES = (int) ( SAMPLE_RATE * PLAYBACK_SECONDS);
+//    private static final double LEAD_IN_SECONDS = 0.35;
+//    private static final int LEAD_IN_SAMPLES = (int) ( SAMPLE_RATE * LEAD_IN_SECONDS);
+//    private static final double LEAD_OUT_SECONDS = 0.15;
+//    private static final int LEAD_OUT_SAMPLES = (int) ( SAMPLE_RATE * LEAD_OUT_SECONDS);
     private static final int MAGIC_INT = 32767; // 2^15 for 16-bit WAV
-    private static final double DEFAULT_FREQUENCY = 440;
-    private static final double DEFAULT_AMPLITUDE = 0.85;
-    private double mTone; // Hertz
-    //TODO: preference candidate
-    private double mAmplitude; // [0...1]
-    private double[] mSamples = new double[ PLAYBACK_SAMPLES];
-    private byte[] mSoundBytes = new byte[ 2 * PLAYBACK_SAMPLES];
+//    private static final double DEFAULT_FREQUENCY = 440;
+//    private static final double DEFAULT_AMPLITUDE = 0.75;
+    private double mTone = 440; // Hertz
+    private double mAmplitude = 0.85; // [0...1]
+    private double mPlaybackSeconds = 1.6;
+    private int mPlaybackSamples = (int) ( SAMPLE_RATE * mPlaybackSeconds);
+    private int mLeadInSamples = (int) ( 0.2 * mPlaybackSamples);
+    private double[] mSamples = new double[ mPlaybackSamples];
+    private byte[] mSoundBytes = new byte[ 2 * mPlaybackSamples];
     private AudioTrack mAudioTrack;
     private boolean mPlaying;
     private ToneGeneratorListener mListener;
@@ -47,18 +48,22 @@ public class ToneGenerator {
     }
 
     // Assign the listener implementing events interface that will receive the events
-    public void setToneGeneratorListener( ToneGeneratorListener listener) {
+    void setToneGeneratorListener( ToneGeneratorListener listener) {
         mListener = listener;
     }
 
     ToneGenerator() {
-        mTone = DEFAULT_FREQUENCY;
-        mAmplitude = DEFAULT_AMPLITUDE;
         mListener = null;
     }
 
     void setTone( double tone) {
         mTone = tone;
+    }
+
+    void setPlaybackSeconds( double seconds) {
+        mPlaybackSeconds = seconds;
+        mPlaybackSamples = (int) ( seconds * SAMPLE_RATE);
+        mLeadInSamples = (int) ( 0.2 * mPlaybackSamples);
     }
 
     void setAmplitude( double amplitude) {
@@ -100,7 +105,7 @@ public class ToneGenerator {
 
         // generate main playback segment
 //        for (int i = LEAD_IN_SAMPLES; i < PLAYBACK_SAMPLES - LEAD_OUT_SAMPLES; i++) {
-        for (int i = LEAD_IN_SAMPLES; i < PLAYBACK_SAMPLES; i++) {
+        for (int i = mLeadInSamples; i < mPlaybackSamples; i++) {
             final short val = (short) ( mSamples[i] * MAGIC_INT);
             mSoundBytes[ idx++] = (byte) ( val & 0x00FF);
             mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 );
@@ -115,50 +120,50 @@ public class ToneGenerator {
 
         generateTone();
     }
-
-    private void leadIn() {
-        int samples = (int) ( SAMPLE_RATE * LEAD_IN_SECONDS);
-        mSoundBytes = new byte[ 2 * samples];
-        int idx = 0;
-
-        for ( int i = 0; i < samples; i++) {
-            final short val = (short) ( ( mSamples[ i] * MAGIC_INT) * i / samples);
-            // 16-bit WAV PCM is little endian, so reverse byte order
-            mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
-            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
-        }
-
-        generateTone();
-    }
-
-    private void loopTone() {
-        int samples = SAMPLE_RATE;
-        mSoundBytes = new byte[ 2 * SAMPLE_RATE];
-        int idx = 0;
-
-        // sample 1 seconds worth of tone
-        for ( int i = 0; i < samples; i++) {
-            final short val = (short) ( mSamples[i] * MAGIC_INT);
-            mSoundBytes[ idx++] = (byte) ( val & 0x00FF);
-            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 );
-        }
-        generateTone();
-    }
-
-    private void leadOut() {
-        int samples = (int) ( SAMPLE_RATE * LEAD_OUT_SECONDS);
-        mSoundBytes = new byte[ 2 * samples];
-        int idx = 0;
-
-        for ( int i = 0; i < samples; i++) {
-            // scale to minimum amplitude
-            final short val = (short) ( (mSamples[i] * MAGIC_INT) * ( samples - i) / samples);
-            // 16-bit WAV PCM is little endian, so reverse byte order
-            mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
-            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
-        }
-        generateTone();
-    }
+//
+//    private void leadIn() {
+//        int samples = (int) ( SAMPLE_RATE * LEAD_IN_SECONDS);
+//        mSoundBytes = new byte[ 2 * samples];
+//        int idx = 0;
+//
+//        for ( int i = 0; i < samples; i++) {
+//            final short val = (short) ( ( mSamples[ i] * MAGIC_INT) * i / samples);
+//            // 16-bit WAV PCM is little endian, so reverse byte order
+//            mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
+//            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
+//        }
+//
+//        generateTone();
+//    }
+//
+//    private void loopTone() {
+//        int samples = SAMPLE_RATE;
+//        mSoundBytes = new byte[ 2 * SAMPLE_RATE];
+//        int idx = 0;
+//
+//        // sample 1 seconds worth of tone
+//        for ( int i = 0; i < samples; i++) {
+//            final short val = (short) ( mSamples[i] * MAGIC_INT);
+//            mSoundBytes[ idx++] = (byte) ( val & 0x00FF);
+//            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 );
+//        }
+//        generateTone();
+//    }
+//
+//    private void leadOut() {
+//        int samples = (int) ( SAMPLE_RATE * LEAD_OUT_SECONDS);
+//        mSoundBytes = new byte[ 2 * samples];
+//        int idx = 0;
+//
+//        for ( int i = 0; i < samples; i++) {
+//            // scale to minimum amplitude
+//            final short val = (short) ( (mSamples[i] * MAGIC_INT) * ( samples - i) / samples);
+//            // 16-bit WAV PCM is little endian, so reverse byte order
+//            mSoundBytes[ idx++] = (byte) ( val & 0x00FF); // bit-mask to get low byte first
+//            mSoundBytes[ idx++] = (byte) ( ( val & 0xFF00) >>> 8 ); // bit-mask and shift for high byte
+//        }
+//        generateTone();
+//    }
 
     /**
      * Generates audio.
