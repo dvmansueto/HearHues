@@ -90,7 +90,7 @@ final class HueTone {
 
     // Constructor Helper
     /**
-     * Primary constructor, resets all values after any change to HueTone.
+     * (Constructor helper), resets all values after any change to HueTone.
      * @param color the ColorInt to import
      */
     private void updateHueTone( @ColorInt int color) {
@@ -108,11 +108,6 @@ final class HueTone {
 //        Log.d( TAG, "t2h( h2t( t2h)): " + Double.toString( toneToHue( hueToTone( toneToHue( mTone)))));
 //        Log.d( TAG, "h2t( t2h( h2t)): " + Double.toString( hueToTone( toneToHue( hueToTone( mHue)))));
     }
-
-//    // Overload for tone due to calculation expense of hueToTone()
-//    public HueTone( double tone) {
-//        updateHueTone( tone);
-//    }
 
     /**
      * Creates a HueTone from a tone double.
@@ -236,7 +231,7 @@ final class HueTone {
     String toNoteString() {
         double minDistance = 100000; // larger than highest note
         int noteIdx = 0;
-        for ( int i = 0; i < NOTE_FREQS.length; i++ ) {
+        for ( int i = 0; i <= NOTE_FREQS.length; i++ ) {
             double distance = Math.abs( NOTE_FREQS[ i] - mTone);
             if ( distance < minDistance) {
                 minDistance = distance;
@@ -246,10 +241,16 @@ final class HueTone {
             }
         }
 
+        Log.e( TAG, "minDistance: " + Double.toString( minDistance));
+        Log.e( TAG, "noteIdx: " + Integer.toString( noteIdx));
+        Log.e( TAG, "mTone: " + Double.toString( mTone));
         // if note is a long way from a note, suggest it is 'between' notes
+        if ( noteIdx == 0 || noteIdx == NOTE_FREQS.length) return NOTE_NAMES[ noteIdx];
         if ( minDistance > NOTE_THRESHOLD * ( NOTE_FREQS[ noteIdx] - NOTE_FREQS[ noteIdx - 1])) {
+            Log.e( TAG, "bit flat");
             return NOTE_NAMES[ noteIdx - 1] + " to " + NOTE_NAMES[ noteIdx];
         } else if ( minDistance > NOTE_THRESHOLD * ( NOTE_FREQS[ noteIdx + 1] - NOTE_FREQS[ noteIdx])) {
+            Log.e( TAG, "bit sharp");
             return NOTE_NAMES[ noteIdx] + " to " + NOTE_NAMES[ noteIdx + 1];
         }
         return NOTE_NAMES[ noteIdx];
