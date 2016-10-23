@@ -527,10 +527,10 @@ public class HearHueFragment extends Fragment
         imageView.setColorFilter( mHueTone.getRgb());
         // update hue text display
         TextView textView = (TextView) activity.findViewById( R.id.HH_tv_hue);
-        textView.setText( mHueTone.getHueString());
+        textView.setText( mHueTone.toRgbString() + " (" + mHueTone.toHueString() + ")");
         // update tone text display
         textView = (TextView) activity.findViewById( R.id.HH_tv_tone);
-        textView.setText( mHueTone.getToneString());
+        textView.setText( mHueTone.toToneString() + " (" + mHueTone.toNoteString() + ")");
     }
 
     private void playStop() {
@@ -658,12 +658,13 @@ public class HearHueFragment extends Fragment
 
     }
 
+    //TODO: consider replacing fetching prefs with a listener, or something!
     @Override
     public void onResume() {
         super.onResume();
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        //noinspection ConstantConditions
+//        noinspection ConstantConditions
         activity.getSupportActionBar().setTitle( R.string.title_fragment_hear_hue);
         startBackgroundThread();
 
@@ -676,6 +677,8 @@ public class HearHueFragment extends Fragment
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
+
+        // update SharedPreferences every time fragment resumes
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences( getActivity());
 //        mSharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         switch( mSharedPreferences.getString(

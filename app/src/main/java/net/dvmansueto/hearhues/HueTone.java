@@ -11,6 +11,7 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.Locale;
 
+import static android.graphics.Color.parseColor;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -35,90 +36,77 @@ final class HueTone {
     // all for updating incorrectly selected preferences
     private final Context mContext;
 
-//    private static final double BASE_FREQUENCY = 440; // A2 = 110 Hz
-//    private static final int HALF_STEPS_PER_RANGE = 48; // A2 -> A6 (1760 Hz)
-//    private static final double FREQUENCY_DENOMINATOR = HALF_STEPS_PER_RANGE * Math.log( TWELFTH_ROOT_OF_2);
     private static final int HALF_STEPS_PER_OCTAVE = 12;
     private static final double TWELFTH_ROOT_OF_2 = Math.pow( 2, (double) 1 / (double) 12);
 
-    private double mBaseFrequency = 440;
-    private double mHalfStepsPerRange = 48;
+    private double mBaseFrequency;
+    private double mHalfStepsPerRange;
 
-    private int mRgb;   // mRgb is AARRGGBB
+    private int mRgb;   // mRgb is 0hAARRGGBB
     private float[] mHsl = new float[3];   // mHsl is [0] Hue [0...360), [1] Saturation [0...1], [2] Lightness [0...1]
     private double mHue;     // mHue is HSL Hue [0...1)
     private double mTone;    // mTone is frequency corresponding to hue
 
+//    private static final String[] NOTE_NAMES = {
+//            "C₀", "C♯₀/D♭₀", "D₀", "D♯₀/E♭₀", "E₀", "F₀", "F♯₀/G♭₀", "G₀", "G♯₀/A♭₀", "A₀", "A♯₀/B♭₀", "B₀",
+//            "C₁", "C♯₁/D♭₁", "D₁", "D♯₁/E♭₁", "E₁", "F₁", "F♯₁/G♭₁", "G₁", "G♯₁/A♭₁", "A₁", "A♯₁/B♭₁", "B₁",
+//            "C₂", "C♯₂/D♭₂", "D₂", "D♯₂/E♭₂", "E₂", "F₂", "F♯₂/G♭₂", "G₂", "G♯₂/A♭₂", "A₂", "A♯₂/B♭₂", "B₂",
+//            "C₃", "C♯₃/D♭₃", "D₃", "D♯₃/E♭₃", "E₃", "F₃", "F♯₃/G♭₃", "G₃", "G♯₃/A♭₃", "A₃", "A♯₃/B♭₃", "B₃",
+//            "C₄", "C♯₄/D♭₄", "D₄", "D♯₄/E♭₄", "E₄", "F₄", "F♯₄/G♭₄", "G₄", "G♯₄/A♭₄", "A₄", "A♯₄/B♭₄", "B₄",
+//            "C₅", "C♯₅/D♭₅", "D₅", "D♯₅/E♭₅", "E₅", "F₅", "F♯₅/G♭₅", "G₅", "G♯₅/A♭₅", "A₅", "A♯₅/B♭₅", "B₅",
+//            "C₆", "C♯₆/D♭₆", "D₆", "D♯₆/E♭₆", "E₆", "F₆", "F♯₆/G♭₆", "G₆", "G♯₆/A♭₆", "A₆", "A♯₆/B♭₆", "B₆",
+//            "C₇", "C♯₇/D♭₇", "D₇", "D♯₇/E♭₇", "E₇", "F₇", "F♯₇/G♭₇", "G₇", "G♯₇/A♭₇", "A₇", "A♯₇/B♭₇", "B₇",
+//            "C₈", "C♯₈/D♭₈", "D₈", "D♯₈/E♭₈", "E₈", "F₈", "F♯₈/G♭₈", "G₈", "G♯₈/A♭₈", "A₈", "A♯₈/B♭₈", "B₈"};
+    private static final String[] NOTE_NAMES = {
+        "C₀", "C#₀/Db₀", "D₀", "D#₀/Eb₀", "E₀", "F₀", "F#₀/Gb₀", "G₀", "G#₀/Ab₀", "A₀", "A#₀/Bb₀", "B₀",
+        "C₁", "C#₁/Db₁", "D₁", "D#₁/Eb₁", "E₁", "F₁", "F#₁/Gb₁", "G₁", "G#₁/Ab₁", "A₁", "A#₁/Bb₁", "B₁",
+        "C₂", "C#₂/Db₂", "D₂", "D#₂/Eb₂", "E₂", "F₂", "F#₂/Gb₂", "G₂", "G#₂/Ab₂", "A₂", "A#₂/Bb₂", "B₂",
+        "C₃", "C#₃/Db₃", "D₃", "D#₃/Eb₃", "E₃", "F₃", "F#₃/Gb₃", "G₃", "G#₃/Ab₃", "A₃", "A#₃/Bb₃", "B₃",
+        "C₄", "C#₄/Db₄", "D₄", "D#₄/Eb₄", "E₄", "F₄", "F#₄/Gb₄", "G₄", "G#₄/Ab₄", "A₄", "A#₄/Bb₄", "B₄",
+        "C₅", "C#₅/Db₅", "D₅", "D#₅/Eb₅", "E₅", "F₅", "F#₅/Gb₅", "G₅", "G#₅/Ab₅", "A₅", "A#₅/Bb₅", "B₅",
+        "C₆", "C#₆/Db₆", "D₆", "D#₆/Eb₆", "E₆", "F₆", "F#₆/Gb₆", "G₆", "G#₆/Ab₆", "A₆", "A#₆/Bb₆", "B₆",
+        "C₇", "C#₇/Db₇", "D₇", "D#₇/Eb₇", "E₇", "F₇", "F#₇/Gb₇", "G₇", "G#₇/Ab₇", "A₇", "A#₇/Bb₇", "B₇",
+        "C₈", "C#₈/Db₈", "D₈", "D#₈/Eb₈", "E₈", "F₈", "F#₈/Gb₈", "G₈", "G#₈/Ab₈", "A₈", "A#₈/Bb₈", "B₈"};
+    private static final double[] NOTE_FREQS = {
+            16.35, 17.32, 18.35, 19.45, 20.6, 21.83, 23.12, 24.5, 25.96, 27.5, 29.14, 30.87,
+            32.7, 34.65, 36.71, 38.89, 41.2, 43.65, 46.25, 49, 51.91, 55, 58.27, 61.74,
+            65.41, 69.3, 73.42, 77.78, 82.41, 87.31, 92.5, 98, 103.83, 110, 116.54, 123.47,
+            130.81, 138.59, 146.83, 155.56, 164.81, 174.61, 185, 196, 207.65, 220, 233.08, 246.94,
+            261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392, 415.3, 440, 466.16, 493.88,
+            523.25, 554.37, 587.33, 622.25, 659.25, 698.46, 739.99, 783.99, 830.61, 880, 932.33, 987.77,
+            1046.5, 1108.73, 1174.66, 1244.51, 1318.51, 1396.91, 1479.98, 1567.98, 1661.22, 1760, 1864.66, 1975.53,
+            2093, 2217.46, 2349.32, 2489.02, 2637.02, 2793.83, 2959.96, 3135.96, 3322.44, 3520, 3729.31, 3951.07,
+            4186.01, 4434.92, 4698.63, 4978.03, 5274.04, 5587.65, 5919.91, 6271.93, 6644.88, 7040, 7458.62, 7902.13};
+    private static final double NOTE_THRESHOLD = 0.3; // distance from a named note before suggesting it isn't really that note anymore.
+
     //// Constructors
 
-    // Default constructor
+    // Constructor
     HueTone( Context context) {
         mContext = context;
-        updateHueTone( mBaseFrequency);
+        updateHueTone( parseColor( "#00FFFF")); // seed with mid-range cyan
     }
 
-//    // Secondary constructors
-//
-//    /**
-//     * Creates a HueTone from RGB component integers.
-//     * @param r the red component of RGB, [0...255]
-//     * @param g the green component of RGB, [0...255]
-//     * @param b the blue component of RGB, [0...255]
-//     */
-//    public HueTone( @IntRange( from = 0x0, to = 0xFF) int r,
-//                    @IntRange( from = 0x0, to = 0xFF) int g,
-//                    @IntRange( from = 0x0, to = 0xFF) int b) {
-//        updateHueTone( Color.rgb( r, g, b));
-//    }
-//
-//    /**
-//     * Creates a HueTone from a Palette swatch.
-//     * @param swatch the palette swatch to import
-//     */
-//    public HueTone( @NonNull Palette.Swatch swatch) {
-//        updateHueTone( swatch.getRgb());
-//    }
-//
-//    /**
-//     * Creates a HueTone from a HSL.
-//     * @param hsl 3-element array containing the HSL component floats to import
-//     */
-//    public HueTone( @NonNull float[] hsl) {
-//        updateHueTone( ColorUtils.HSLToColor( hsl));
-//    }
-//
-//    /**
-//     * Creates a HueTone from an \"#RRGGBB\" string.
-//     * @param colorString \"#RRGGBB\" string to import
-//     */
-//    public HueTone( @NonNull String colorString) {
-//        int r = parseInt( colorString.substring( 1,2));
-//        int g = parseInt( colorString.substring( 3,2));
-//        int b = parseInt( colorString.substring( 5,2));
-//        updateHueTone( Color.rgb( r, g, b));
-//    }
-//
-//    /**
-//     * Creates a HueTone from an @ColorInt int (#AARRGGBB).
-//     * @param color the ColorInt to import
-//     */
-//    public HueTone( @ColorInt int color) {
-//        updateHueTone( color);
-//    }
 
-    // Primary Constructor / Constructor Helper
+    // Constructor Helper
     /**
      * Primary constructor, resets all values after any change to HueTone.
      * @param color the ColorInt to import
      */
     private void updateHueTone( @ColorInt int color) {
-        Log.d( TAG, "Color: " + Integer.toHexString( color));
         mRgb = color;
         ColorUtils.colorToHSL( mRgb, mHsl);
         mHue = mHsl[0] / 360;
-        Log.d( TAG, "Hue:" + Double.toString( mHue));
         mTone = hueToTone( mHue);
-        Log.d( TAG, "Tone:" + Double.toString( mTone));
+//        Log.d( TAG, "color: " + Integer.toHexString( color));
+//        Log.d( TAG, "mRgb: " + Integer.toHexString( color));
+//        Log.d( TAG, "toHueString: " + toHueString());
+//        Log.d( TAG, "mHue:" + Double.toString( mHue));
+//        Log.d( TAG, "mTone:" + Double.toString( mTone));
+//        Log.d( TAG, "toneToColorInt: " + Integer.toHexString( toneToColorInt( mTone)));
+//        Log.d( TAG, "toneToHue: " + Double.toString( toneToHue( mTone)));
+//        Log.d( TAG, "t2h( h2t( t2h)): " + Double.toString( toneToHue( hueToTone( toneToHue( mTone)))));
+//        Log.d( TAG, "h2t( t2h( h2t)): " + Double.toString( hueToTone( toneToHue( hueToTone( mHue)))));
     }
 
 //    // Overload for tone due to calculation expense of hueToTone()
@@ -133,7 +121,7 @@ final class HueTone {
     private void updateHueTone( double tone) {
         mTone = tone;
         mHue = toneToHue( tone);
-        mHsl = new float[] { (float) ( mHue * 360), 1, (float) 0.5 };
+        mHsl = new float[] { (float) ( mHue * 360), 1, (float) 0.5 }; // H [0...1], S=1, L=0.5
         mRgb = ColorUtils.HSLToColor( mHsl);
     }
 
@@ -148,11 +136,11 @@ final class HueTone {
         updateHueTone( swatch.getRgb());
     }
 
-    public void setTone( double tone) {
+    void setTone( double tone) {
         updateHueTone( toneToColorInt( tone));
     }
 
-    public void setFrequencies( double baseFrequency, double peakFrequency) {
+    void setFrequencies( double baseFrequency, double peakFrequency) {
 
         if ( baseFrequency == peakFrequency) {
             peakFrequency *= 2; // jump an octave
@@ -178,6 +166,7 @@ final class HueTone {
 
         // find how many octaves between limits
         // nasty bit of maths, but only runs when prefs change.
+        // (probably should look at a listener instead...)
         int baseOctave = 0;
         int peakOctave = 0;
         int powerOfTwo;
@@ -189,8 +178,6 @@ final class HueTone {
             if ( baseFrequency == note) baseOctave = i;
             if ( peakFrequency == note) peakOctave = i;
         }
-
-
 
         mBaseFrequency = baseFrequency;
         mHalfStepsPerRange = ( peakOctave - baseOctave) * HALF_STEPS_PER_OCTAVE;
@@ -217,27 +204,64 @@ final class HueTone {
         return mTone;
     }
 
-    String getHueString() {
-        return "#" + Integer.toHexString( mRgb).substring( 0, 6).toUpperCase();
+    /**
+     * Fetches the hue in RGB format.
+     * @return the hue as a "#RRGGBB" format string.
+     */
+    String toRgbString() {
+        return "#" + Integer.toHexString( mRgb).substring( 2, 8).toUpperCase();
     }
 
     /**
-     * Fetches the frequency as a formatted string.
-     * @return the tone as a "xxxx.xx Hz" string.
+     * Fetches the hue in hue format.
+     * @return the hue as a "xxx.x°" format string, hue [0...360).
      */
-    String getToneString() {
+    String toHueString() {
+        return String.format( Locale.getDefault(), "%4.1f", mHue * 360) + "°";
+    }
+
+    /**
+     * Fetches the tone in frequency format.
+     * @return the tone as a "xxxxxx.xx Hz" format string.
+     */
+    String toToneString() {
         // Locale.getDefault() for appropriate '.' or ',' decimal point
         return String.format(Locale.getDefault(), "%7.2f", mTone) + " Hz";
     }
 
+    /**
+     * Fetches the nearest half-note.
+     * @return the nearest half-note as a formatted string.
+     */
+    String toNoteString() {
+        double minDistance = 100000; // larger than highest note
+        int noteIdx = 0;
+        for ( int i = 0; i < NOTE_FREQS.length; i++ ) {
+            double distance = Math.abs( NOTE_FREQS[ i] - mTone);
+            if ( distance < minDistance) {
+                minDistance = distance;
+                noteIdx = i;
+            } else {
+                break; // ordered list; increasing distance => overshoot
+            }
+        }
+
+        // if note is a long way from a note, suggest it is 'between' notes
+        if ( minDistance > NOTE_THRESHOLD * ( NOTE_FREQS[ noteIdx] - NOTE_FREQS[ noteIdx - 1])) {
+            return NOTE_NAMES[ noteIdx - 1] + " to " + NOTE_NAMES[ noteIdx];
+        } else if ( minDistance > NOTE_THRESHOLD * ( NOTE_FREQS[ noteIdx + 1] - NOTE_FREQS[ noteIdx])) {
+            return NOTE_NAMES[ noteIdx] + " to " + NOTE_NAMES[ noteIdx + 1];
+        }
+        return NOTE_NAMES[ noteIdx];
+    }
+
     @Override
     public String toString() {
-        return new StringBuilder(getClass().getSimpleName())
-                .append(" [Hue: ").append(Double.toString(getHue())).append(']')
-                .append(" [Tone: ").append(Double.toString(getTone())).append(']')
-                .append(" [RGB: #").append(Integer.toHexString(getRgb())).append(']')
-                .append(" [HSL: ").append(Arrays.toString(getHsl())).append(']')
-                .toString();
+        return getClass().getSimpleName() +
+                " [Hue: " + Double.toString( getHue()) + ']' +
+                " [Tone: " + Double.toString( getTone()) + ']' +
+                " [RGB: #" + Integer.toHexString( getRgb()) + ']' +
+                " [HSL: " + Arrays.toString( getHsl()) + ']';
     }
 
 
@@ -260,14 +284,13 @@ final class HueTone {
      * @return the corresponding frequency (Hertz)
      */
     private double hueToTone( double hue) {
-        double tone = mBaseFrequency * Math.pow( TWELFTH_ROOT_OF_2, mHalfStepsPerRange * hue);
-        Log.d( TAG, "TRO2: " + Double.toString( TWELFTH_ROOT_OF_2));
-        Log.d( TAG, "HSPR: " + Double.toString( mHalfStepsPerRange));
-        Log.d( TAG, "H*H: " + Double.toString( mHalfStepsPerRange * hue));
-        Log.d( TAG, "BF: " + Double.toString( mBaseFrequency));
-        Log.d( TAG, "Hue: " + Double.toString( hue));
-        Log.d( TAG, "Tone: " + Double.toString( tone));
-        return tone;
+//        Log.d( TAG, "TRO2: " + Double.toString( TWELFTH_ROOT_OF_2));
+//        Log.d( TAG, "HSPR: " + Double.toString( mHalfStepsPerRange));
+//        Log.d( TAG, "H*H: " + Double.toString( mHalfStepsPerRange * hue));
+//        Log.d( TAG, "BF: " + Double.toString( mBaseFrequency));
+//        Log.d( TAG, "Hue: " + Double.toString( hue));
+//        Log.d( TAG, "Tone: " + Double.toString( tone));
+        return mBaseFrequency * Math.pow( TWELFTH_ROOT_OF_2, mHalfStepsPerRange * hue);
     }
 
     /**
@@ -278,9 +301,8 @@ final class HueTone {
     @ColorInt
     private int toneToColorInt( double tone) {
         double hue = toneToHue( tone);
-        float[] hsl = new float[] { (float) ( hue * 360), 1, (float) 0.5 };
+        float[] hsl = new float[] { (float) ( hue * 360f), 1f, 0.5f };
         return ColorUtils.HSLToColor( hsl);
     }
-
 
 }

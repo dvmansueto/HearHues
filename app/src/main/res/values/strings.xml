@@ -40,7 +40,7 @@
     <string name="title_fragment_about">About</string>
     <string name="about_project_heading">Hear Hues</string>
     <string name="about_project_body">
-Hear Hues was developed for a "Sensor Implementation" project in a
+Hear Hues was developed for a \"Sensor Implementation\" project in a
 <a href="http://www.flinders.edu.au">university</a> mobile application development topic.
 \n The idea for the app comes from <a href="https://en.wikipedia.org/wiki/Neil_Harbisson">Neil Harbisson</a>,
 the worlds first government-recognized cyborg.
@@ -51,6 +51,7 @@ into his skull, allowing him to \'hear\' colour.
 luminance) and maps it to a range of tones. As no literature appears to have been published on the
 implant, the mapping used by Harbisson is unknown, leaving us free to play with it in the settings.
     </string>
+    <string name="about_iv_neil_harbisson">Image of Neil Harbisson</string>
 
     <!-- AppBar -->
     <string name="action_mute">Toggle Mute</string>
@@ -177,15 +178,4 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
 
     <string name="prefs_detector_category">Tone Detector</string>
 
-
-
-    <string name="prefs__key"></string>
-    <string name="prefs__title"></string>
-    <string name="prefs__summary"></string>
-    <string name="prefs__default"></string>
-
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

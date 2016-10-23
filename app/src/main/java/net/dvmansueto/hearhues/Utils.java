@@ -2,43 +2,39 @@ package net.dvmansueto.hearhues;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
 /**
- * Created by Dave on 21/10/16.
+ * Utility methods.
+ * @author Dave
  * Based on http://stackoverflow.com/a/28427963
  */
-
-public class Utils {
-
-    private static final String TAG = "Utils";
+class Utils {
 
     private static final String PREFERENCE_NAME = "net.dvmansueto.hearhues_preferences";
 
-    public static void setStringPreference(Context context, String value, String key) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+    /**
+     * Sets the specified key to the specified value in the default Shared Preferences file.
+     * @param context application context.
+     * @param key the name of the shared preference to change.
+     * @param value the new value to apply.
+     */
+    static void setStringPreference( Context context, String key, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences( PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString( key, value);
-        editor.commit();
+        editor.apply();
     }
 
-
-    public static void setStringPreference(Context context, String value, String key, String prefName) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.commit();
-    }
-
-    public static String getStringPreference(Context context, String defaultValue, String key) {
+    /**
+     * Fetches the specified string from the default Shared Preferences file.
+     * @param context application context.
+     * @param key the name of the shared preference to fetch the value of.
+     * @param defaultValue the value to return if this shared preference does not exist.
+     * @return the value of the shared preference if it exists, else the default value.
+     */
+    static String getStringPreference( Context context, String key, String defaultValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences( PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString( key, defaultValue);
     }
 
-    public static String getStringPreference(Context context, String defaultValue, String key, String prefName) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
-        String temp = sharedPreferences.getString(key, defaultValue);
-        return temp;
-    }
 }

@@ -5,9 +5,6 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 public class SettingsFragment extends Fragment {
 
@@ -18,6 +15,7 @@ public class SettingsFragment extends Fragment {
         activity.getFragmentManager().beginTransaction()
                 .replace( R.id.container_content, new PrefsFragment())
                 .commit();
+        //noinspection ConstantConditions
         activity.getSupportActionBar().setTitle( R.string.title_fragment_settings);
     }
 
