@@ -27,8 +27,8 @@
     <string name="request_permission">This feature requires camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
-    <!-- SeeSoundFragment -->
-    <string name="title_fragment_see_sound">See Sound</string>
+    <!-- TreadTunesFragment -->
+    <string name="title_fragment_tread_tunes">Tread Tunes</string>
 
     <!-- TinkerFragment -->
     <string name="title_fragment_tinker">Tinker</string>
@@ -105,7 +105,7 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
     <string name="prefs_save_files_key">save_files</string>
     <string name="prefs_save_files_title">Save Photographs</string>
     <string name="prefs_save_files_summary">Captured stills will be saved to disk</string>
-    <string name="prefs_save_files_default">true</string>
+    <string name="prefs_save_files_default">false</string>
 
     <string name="prefs_generator_category">Tone Generator</string>
 
@@ -177,5 +177,19 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
     </string-array>
 
     <string name="prefs_detector_category">Tone Detector</string>
+
+    <!-- DIALOGS -->
+    <string name="alert_positive">Okay</string>
+    <string name="alert_negative">Cancel</string>
+
+    <string name="alert_enable_gps_title">Location is disabled</string>
+    <string name="alert_enable_gps_message">Please go to settings and enable location in order to
+        use this feature.</string>
+    <string name="alert_enable_gps_positive">Go to settings</string>
+    <string name="alert_enable_gps_negative">Cancel</string>
+
+    <string name="alert_location_refused_title">This feature requires location</string>
+    <string name="alert_location_refused_message">Sorry, this feature requires location access.</string>
+    <string name="alert_location_refused_neutral">Cancel</string>
 
 </resources>

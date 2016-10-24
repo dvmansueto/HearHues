@@ -13,7 +13,7 @@ public class SettingsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getFragmentManager().beginTransaction()
-                .replace( R.id.container_content, new PrefsFragment())
+                .replace( R.id.fragment_container, new PrefsFragment())
                 .commit();
         //noinspection ConstantConditions
         activity.getSupportActionBar().setTitle( R.string.title_fragment_settings);

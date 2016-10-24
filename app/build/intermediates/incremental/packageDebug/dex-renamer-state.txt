@@ -1,7 +1,0 @@
-#Sun Oct 23 11:51:15 ACDT 2016
-base.0=C\:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_a09edfbcb0af0ccac3e7358a55932bbf328d17c4
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=C\:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_fa4a2a1e580ee4a502c255c66ff095f7e8bd6321\\classes.dex
-base.1=C\:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_fa4a2a1e580ee4a502c255c66ff095f7e8bd6321
-file.0=C\:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_a09edfbcb0af0ccac3e7358a55932bbf328d17c4\\classes.dex

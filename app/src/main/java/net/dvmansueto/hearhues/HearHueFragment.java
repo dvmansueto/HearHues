@@ -632,9 +632,10 @@ public class HearHueFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mHueTone = new HueTone ( getActivity());
-        mToneGenerator = new ToneGenerator();
 
+        mHueTone = new HueTone ( getActivity());
+
+        mToneGenerator = new ToneGenerator();
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
             @Override
             public void startedPlaying() {

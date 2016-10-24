@@ -1,7 +1,12 @@
 package net.dvmansueto.hearhues;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+
+import java.util.ArrayList;
 
 /**
  * Utility methods.
@@ -37,4 +42,22 @@ class Utils {
         return sharedPreferences.getString( key, defaultValue);
     }
 
+
+    static void checkPermissions( Context context, String[] permissions, int callbackCode) {
+
+        // check which permissions need to be requested
+        ArrayList<String> permissionsToRequest = new ArrayList<>();
+        for ( String permission : permissions) {
+            if ( ActivityCompat.checkSelfPermission( context, permission) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add( permission);
+            }
+        }
+
+        if ( !permissionsToRequest.isEmpty()) {
+            ActivityCompat.requestPermissions( (Activity) context,
+                    permissionsToRequest.toArray( new String[ permissionsToRequest.size()]),
+                    callbackCode);
+        }
+    }
 }

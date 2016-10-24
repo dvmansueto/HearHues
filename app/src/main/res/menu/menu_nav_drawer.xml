@@ -7,9 +7,9 @@
         android:icon="@drawable/ic_hue"
         android:title="@string/title_fragment_hear_hue" />
     <item
-        android:id="@+id/nav_seeSound"
+        android:id="@+id/nav_treadTunes"
         android:icon="@drawable/ic_tone"
-        android:title="@string/title_fragment_see_sound" />
+        android:title="@string/title_fragment_tread_tunes" />
     <item
         android:id="@+id/nav_tinker"
         android:icon="@drawable/ic_tinker"

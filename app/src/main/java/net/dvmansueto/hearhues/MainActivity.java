@@ -29,7 +29,7 @@ public class MainActivity
 
         if (null == savedInstanceState) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container_content, HearHueFragment.newInstance())
+                    .replace(R.id.fragment_container, TreadTunesFragment.newInstance())
                     .commit();
         }
 
@@ -38,10 +38,10 @@ public class MainActivity
         setSupportActionBar(toolbar);
 
         // setup the navigation drawer
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById( R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener( toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -51,9 +51,9 @@ public class MainActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById( R.id.drawer_layout);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -95,8 +95,8 @@ public class MainActivity
         if( id == R.id.nav_hearHue) {
             fragment = new HearHueFragment();
             setMenuItemsVisible( true);
-        } else if( id == R.id.nav_seeSound) {
-            fragment = new SeeSoundFragment();
+        } else if( id == R.id.nav_treadTunes) {
+            fragment = new TreadTunesFragment();
             setMenuItemsVisible( true);
         } else if( id == R.id.nav_tinker) {
             fragment = new TinkerFragment();
@@ -111,10 +111,20 @@ public class MainActivity
 
         if( fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.container_content, fragment).commit();
+            fragmentManager.beginTransaction().replace( R.id.fragment_container, fragment).commit();
         }
-        DrawerLayout drawer = ( DrawerLayout) findViewById( R.id.drawer_layout);
-        drawer.closeDrawer( GravityCompat.START);
+        closeNavigationDrawer();
         return true;
+    }
+
+    void closeNavigationDrawer() {
+        DrawerLayout drawerLayout = ( DrawerLayout) findViewById( R.id.drawer_layout);
+        drawerLayout.closeDrawer( GravityCompat.START);
+    }
+
+    void openNavigationDrawer() {
+        DrawerLayout drawerLayout = ( DrawerLayout) findViewById( R.id.drawer_layout);
+        drawerLayout.openDrawer( GravityCompat.START);
+
     }
 }
