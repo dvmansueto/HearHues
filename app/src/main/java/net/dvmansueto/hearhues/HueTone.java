@@ -47,6 +47,8 @@ final class HueTone {
     private double mHue;     // mHue is HSL Hue [0...1)
     private double mTone;    // mTone is frequency corresponding to hue
 
+// this version used unicode characters which didn't match other text on the actual device,
+// so using 'hash' and 'b' version below.
 //    private static final String[] NOTE_NAMES = {
 //            "C₀", "C♯₀/D♭₀", "D₀", "D♯₀/E♭₀", "E₀", "F₀", "F♯₀/G♭₀", "G₀", "G♯₀/A♭₀", "A₀", "A♯₀/B♭₀", "B₀",
 //            "C₁", "C♯₁/D♭₁", "D₁", "D♯₁/E♭₁", "E₁", "F₁", "F♯₁/G♭₁", "G₁", "G♯₁/A♭₁", "A₁", "A♯₁/B♭₁", "B₁",
@@ -57,6 +59,7 @@ final class HueTone {
 //            "C₆", "C♯₆/D♭₆", "D₆", "D♯₆/E♭₆", "E₆", "F₆", "F♯₆/G♭₆", "G₆", "G♯₆/A♭₆", "A₆", "A♯₆/B♭₆", "B₆",
 //            "C₇", "C♯₇/D♭₇", "D₇", "D♯₇/E♭₇", "E₇", "F₇", "F♯₇/G♭₇", "G₇", "G♯₇/A♭₇", "A₇", "A♯₇/B♭₇", "B₇",
 //            "C₈", "C♯₈/D♭₈", "D₈", "D♯₈/E♭₈", "E₈", "F₈", "F♯₈/G♭₈", "G₈", "G♯₈/A♭₈", "A₈", "A♯₈/B♭₈", "B₈"};
+
     private static final String[] NOTE_NAMES = {
         "C₀", "C#₀/Db₀", "D₀", "D#₀/Eb₀", "E₀", "F₀", "F#₀/Gb₀", "G₀", "G#₀/Ab₀", "A₀", "A#₀/Bb₀", "B₀",
         "C₁", "C#₁/Db₁", "D₁", "D#₁/Eb₁", "E₁", "F₁", "F#₁/Gb₁", "G₁", "G#₁/Ab₁", "A₁", "A#₁/Bb₁", "B₁",
