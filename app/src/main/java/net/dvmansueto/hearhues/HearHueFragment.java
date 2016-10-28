@@ -467,6 +467,7 @@ public class HearHueFragment extends Fragment
 //
 //    private static final int RESIZE_BITMAP_AREA = 256 * 256;
 
+    private ScalarTone mScalarTone;
     private SharedPreferences mSharedPreferences;
     private int mResizeBitmapArea;
     private int mCalculateNumberColors;
@@ -633,7 +634,9 @@ public class HearHueFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mHueTone = new HueTone ( getActivity());
+        mScalarTone = new ScalarTone( getActivity());
+
+        mHueTone = new HueTone ( mScalarTone);
 
         mToneGenerator = new ToneGenerator();
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
@@ -730,7 +733,7 @@ public class HearHueFragment extends Fragment
                 getString( R.string.prefs_playback_seconds_key),
                 getString( R.string.prefs_playback_seconds_default))));
 
-        mHueTone.setFrequencies(
+        mScalarTone.setFrequencyRange(
                 Double.parseDouble( mSharedPreferences.getString(
                         getString( R.string.prefs_generator_base_frequency_key),
                         getString( R.string.prefs_generator_base_frequency_default)

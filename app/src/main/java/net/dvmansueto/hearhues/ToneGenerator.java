@@ -74,6 +74,10 @@ public class ToneGenerator {
         return mAmplitude;
     }
 
+    void setFrequency( double frequency) {
+
+    }
+
     void stopTone() {
         if ( mPlaying) {
             mAudioTrack.stop();

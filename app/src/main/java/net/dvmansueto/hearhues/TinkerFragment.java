@@ -1,6 +1,7 @@
 package net.dvmansueto.hearhues;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 /**
@@ -16,6 +18,10 @@ import android.view.ViewGroup;
 public class TinkerFragment extends Fragment {
 
     private static final String TAG = "TinkerFragment";
+
+    private HueView mHueView;
+    private LocView mLocView;
+    private ToneGenerator mToneGenerator;
 
     public TinkerFragment() {
         // Required empty public constructor
@@ -26,17 +32,41 @@ public class TinkerFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        LocView locView = (LocView) getActivity().findViewById( R.id.tinker_loc_view);
-        locView.setLocViewListener(new LocView.LocViewListener() {
+        mHueView = (HueView) getActivity().findViewById( R.id.tinker_hue_view);
+
+        mToneGenerator = new ToneGenerator();
+        mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
+            @Override
+            public void startedPlaying() {
+//                mPlaying = true;
+//                Activity activity = getActivity();
+//                ImageView imageView = (ImageView) activity.findViewById( R.id.HH_btn_playStop);
+//                imageView.setImageResource( R.drawable.ic_pause_circle_outline_48);
+            }
+            @Override
+            public void stoppedPlaying() {
+//                mPlaying = false;
+//                Activity activity = getActivity();
+//                ImageView imageView = (ImageView) activity.findViewById( R.id.HH_btn_playStop);
+//                imageView.setImageResource( R.drawable.ic_play_circle_outline_48);
+            }
+        });
+
+        mLocView = (LocView) getActivity().findViewById( R.id.tinker_loc_view);
+        mLocView.setLocViewListener(new LocView.LocViewListener() {
             @Override
             public void newFrequency(double frequency) {
                 Log.d( TAG, "f: " + Double.toString( frequency));
+                mToneGenerator.setFrequency( frequency);
             }
             @Override
             public void newAmplitude(double amplitude) {
                 Log.d( TAG, "a: " + Double.toString( amplitude));
+                mToneGenerator.setAmplitude( amplitude);
             }
         });
+
+
     }
 
     @Override

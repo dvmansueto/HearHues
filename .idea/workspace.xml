@@ -8,41 +8,17 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" line="32" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="fad9373a-5da7-45d2-94e3-f7712aa72a07" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueView.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TouchHuesFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TouchTonesFragment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_touch_hues.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_touch_tones.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/mockable-android-24.jar" afterPath="$PROJECT_DIR$/build/generated/mockable-android-24.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ScalarTone.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/design/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/design/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/net/dvmansueto/hearhues/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/net/dvmansueto/hearhues/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/locView.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/locView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tinker.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tinker.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_nav_drawer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_nav_drawer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
     </list>
     <ignored path="HearHues.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,11 +53,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HearHueFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HearHueFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="630" column="0" selection-start-line="630" selection-start-column="0" selection-end-line="633" selection-end-column="52" />
+            <state relative-caret-position="120">
+              <caret line="724" column="22" selection-start-line="724" selection-start-column="22" selection-end-line="724" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -100,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TinkerFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TinkerFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+            <state relative-caret-position="-78">
+              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -112,26 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HueView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueView.java">
+      <file leaf-file-name="ToneGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_tinker.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tinker.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="860">
+              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -140,7 +101,7 @@
       <file leaf-file-name="LocView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
+            <state relative-caret-position="27">
               <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -149,12 +110,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LocTone.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java">
+      <file leaf-file-name="HueTone.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-              <folding />
+            <state relative-caret-position="300">
+              <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+              <folding>
+                <element signature="e#9860#9861#0" expanded="true" />
+                <element signature="e#9915#9916#0" expanded="true" />
+                <marker date="1477631231722" expanded="false" signature="7017:7096" ph="&quot;generator_peak_frequency&quot;" />
+                <marker date="1477631231722" expanded="false" signature="7494:7573" ph="&quot;generator_base_frequency&quot;" />
+                <marker date="1477631231722" expanded="false" signature="7725:7804" ph="&quot;generator_peak_frequency&quot;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScalarTone.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ScalarTone.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2542">
+              <caret line="145" column="4" selection-start-line="145" selection-start-column="4" selection-end-line="145" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2739#2740#0" expanded="true" />
+                <element signature="e#2773#2774#0" expanded="true" />
+                <element signature="e#3131#3210#0" expanded="true" />
+                <element signature="e#3586#3665#0" expanded="true" />
+                <element signature="e#3811#3890#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1888,7 +1872,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/NumberPicker.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/preferences.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Utilities.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/AboutFragment.java" />
@@ -1901,13 +1884,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tread_tunes.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_nav_drawer.xml" />
         <option value="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/fragment_settings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/gpsLocs.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TreadTunesFragment.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TouchHuesFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/locView.java" />
@@ -1918,6 +1899,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tinker.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/Frequency.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ScalarTone.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" />
       </list>
     </option>
   </component>
@@ -2475,7 +2461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477623002752</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="#22. LocView mostly complete, uses a listener interface to push amplitude and frequency to TinkerFragment.">
+      <created>1477629391368</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1477629391368</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2575,20 +2568,14 @@
     <MESSAGE value="#19. Preliminary LocTone implementation." />
     <MESSAGE value="#20. Converted TinkerFragment to a tab host fragment with 'Touch Hues' and 'Touch Tones' tabbed fragments." />
     <MESSAGE value="#21. LocTone now drawing DPI scaled axes" />
-    <option name="LAST_COMMIT_MESSAGE" value="#21. LocTone now drawing DPI scaled axes" />
+    <MESSAGE value="#22. LocView mostly complete, uses a listener interface to push amplitude and frequency to TinkerFragment." />
+    <option name="LAST_COMMIT_MESSAGE" value="#22. LocView mostly complete, uses a listener interface to push amplitude and frequency to TinkerFragment." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Android/SDK/extras/android/m2repository/com/android/support/palette-v7/24.2.1/palette-v7-24.2.1-sources.jar!/android/support/v7/graphics/Palette.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -2752,14 +2739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/header_nav_drawer.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -2823,14 +2802,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="11624" column="19" selection-start-line="11624" selection-start-column="19" selection-end-line="11624" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="78" column="84" selection-start-line="78" selection-start-column="84" selection-end-line="78" selection-end-column="84" />
           <folding />
         </state>
       </provider>
@@ -2933,14 +2904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Android/SDK/sources/android-24/android/view/MotionEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -2952,25 +2915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_hear_hue.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="34" column="44" selection-start-line="23" selection-start-column="4" selection-end-line="34" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="630" column="0" selection-start-line="630" selection-start-column="0" selection-end-line="633" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Android/SDK/sources/android-24/android/app/Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -2978,16 +2922,6 @@
           <folding>
             <element signature="e#63737#63738#0" expanded="true" />
             <element signature="e#63765#63766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3013,13 +2947,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state relative-caret-position="-660">
+          <caret line="0" column="32" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_hear_hue.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="34" column="44" selection-start-line="23" selection-start-column="4" selection-end-line="34" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-78">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="860">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ScalarTone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2542">
+          <caret line="145" column="4" selection-start-line="145" selection-start-column="4" selection-end-line="145" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2739#2740#0" expanded="true" />
+            <element signature="e#2773#2774#0" expanded="true" />
+            <element signature="e#3131#3210#0" expanded="true" />
+            <element signature="e#3586#3665#0" expanded="true" />
+            <element signature="e#3811#3890#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+          <folding>
+            <element signature="e#9860#9861#0" expanded="true" />
+            <element signature="e#9915#9916#0" expanded="true" />
+            <marker date="1477631231722" expanded="false" signature="7017:7096" ph="&quot;generator_peak_frequency&quot;" />
+            <marker date="1477631231722" expanded="false" signature="7494:7573" ph="&quot;generator_base_frequency&quot;" />
+            <marker date="1477631231722" expanded="false" signature="7725:7804" ph="&quot;generator_peak_frequency&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="724" column="22" selection-start-line="724" selection-start-column="22" selection-end-line="724" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
