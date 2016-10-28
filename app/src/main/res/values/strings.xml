@@ -31,18 +31,9 @@
     <string name="title_fragment_tread_tunes">Tread Tunes</string>
 
     <!-- TinkerFragment -->
-    <string name="title_fragment_tinker">Tinker</string>
-
-    <!-- TouchHuesFragment -->
-    <string name="fragment_touch_hues_title">Touch Hues</string>
-    <string name="fragment_touch_hues_tab_tag">touchHues</string>
-
-    <!-- TouchTonesFragment -->
-    <string name="fragment_touch_tones_title">Touch Tones</string>
-    <string name="fragment_touch_tones_tab_tag">touchTones</string>
-
-
-
+    <string name="fragment_tinker_title">Tinker</string>
+    <string name="tinker_hue_view_title">Touch Hues</string>
+    <string name="tinker_loc_view_title">Touch Tones</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>

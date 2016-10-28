@@ -1,5 +1,47 @@
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/tinker_fragment"
+    tools:context="net.dvmansueto.hearhues.TinkerFragment">
+
+    <TextView
+        android:id="@+id/tinker_hue_view_title"
+        android:text="@string/tinker_hue_view_title"
+        android:textSize="@dimen/heading_textSize"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight" />
+
+    <net.dvmansueto.hearhues.HueView
+        android:id="@+id/tinker_hue_view"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tinker_loc_view_title"
+        android:text="@string/tinker_hue_view_title"
+        android:textSize="@dimen/heading_textSize"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight" />
+
+    <net.dvmansueto.hearhues.LocView
+        android:id="@+id/tinker_loc_view"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
+
+<!--<android.support.v13.app.FragmentTabHost-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@android:id/tabhost"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
     <!--tools:context="net.dvmansueto.hearhues.TinkerFragment">-->
@@ -9,31 +51,16 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent" />-->
 
-<!--</FrameLayout>-->
+<!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
 
-<android.support.v13.app.FragmentTabHost
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@android:id/tabhost"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="net.dvmansueto.hearhues.TinkerFragment">
+    <!--&lt;!&ndash;<FrameLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/realtabcontent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="0dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_weight="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
 
-    <FrameLayout
-        android:id="@+id/tinker_tabbed_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-<!--<LinearLayout-->
-    <!--android:orientation="vertical"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<FrameLayout-->
-        <!--android:id="@+id/realtabcontent"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"/>-->
-<!--</LinearLayout>-->
-
-</android.support.v13.app.FragmentTabHost>
+<!--</android.support.v13.app.FragmentTabHost>-->
