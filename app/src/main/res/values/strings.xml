@@ -33,6 +33,17 @@
     <!-- TinkerFragment -->
     <string name="title_fragment_tinker">Tinker</string>
 
+    <!-- TouchHuesFragment -->
+    <string name="fragment_touch_hues_title">Touch Hues</string>
+    <string name="fragment_touch_hues_tab_tag">touchHues</string>
+
+    <!-- TouchTonesFragment -->
+    <string name="fragment_touch_tones_title">Touch Tones</string>
+    <string name="fragment_touch_tones_tab_tag">touchTones</string>
+
+
+
+
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
 

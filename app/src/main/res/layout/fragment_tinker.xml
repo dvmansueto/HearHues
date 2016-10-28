@@ -1,8 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="net.dvmansueto.hearhues.TinkerFragment">-->
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/tinker_tabbed_fragment_container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
+<!--</FrameLayout>-->
+
+<android.support.v13.app.FragmentTabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@android:id/tabhost"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="net.dvmansueto.hearhues.TinkerFragment">
 
+    <FrameLayout
+        android:id="@+id/tinker_tabbed_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-</FrameLayout>
+<!--<LinearLayout-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/realtabcontent"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"/>-->
+<!--</LinearLayout>-->
+
+</android.support.v13.app.FragmentTabHost>
