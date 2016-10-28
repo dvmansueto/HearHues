@@ -616,29 +616,17 @@ public class HearHueFragment extends Fragment
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater,
-                              ViewGroup container,
-                              Bundle savedInstanceState) {
-        return inflater.inflate( R.layout.fragment_hear_hue, container, false);
-    }
-
-    @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
-        view.findViewById( R.id.HH_btn_playStop).setOnClickListener( this);
-        view.findViewById( R.id.HH_btn_toggleCamera).setOnClickListener( this);
-        view.findViewById( R.id.HH_btn_capturePhoto).setOnClickListener( this);
-        mTextureView = (AutoFitTextureView) view.findViewById(R.id.HH_aftv_cameraPreview);
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mScalarTone = new ScalarTone( getActivity());
+        Log.d( TAG, " onActivityCreated.");
+
+        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
+        mScalarTone = applicationSingleton.getScalarTone();
+        mToneGenerator = applicationSingleton.getToneGenerator();
 
         mHueTone = new HueTone ( mScalarTone);
 
-        mToneGenerator = new ToneGenerator();
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
             @Override
             public void startedPlaying() {
@@ -661,6 +649,22 @@ public class HearHueFragment extends Fragment
         updateUi();
 
     }
+
+    @Override
+    public View onCreateView( LayoutInflater inflater,
+                              ViewGroup container,
+                              Bundle savedInstanceState) {
+        return inflater.inflate( R.layout.fragment_hear_hue, container, false);
+    }
+
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        view.findViewById( R.id.HH_btn_playStop).setOnClickListener( this);
+        view.findViewById( R.id.HH_btn_toggleCamera).setOnClickListener( this);
+        view.findViewById( R.id.HH_btn_capturePhoto).setOnClickListener( this);
+        mTextureView = (AutoFitTextureView) view.findViewById(R.id.HH_aftv_cameraPreview);
+    }
+
 
     //TODO: consider replacing fetching prefs with a listener, or something!
     @Override
@@ -729,21 +733,6 @@ public class HearHueFragment extends Fragment
                 getString( R.string.prefs_save_files_key),
                 parseBoolean(getString( R.string.prefs_save_files_default)));
 
-        mToneGenerator.setPlaybackSeconds( Double.parseDouble( mSharedPreferences.getString(
-                getString( R.string.prefs_playback_seconds_key),
-                getString( R.string.prefs_playback_seconds_default))));
-
-        mScalarTone.setFrequencyRange(
-                Double.parseDouble( mSharedPreferences.getString(
-                        getString( R.string.prefs_generator_base_frequency_key),
-                        getString( R.string.prefs_generator_base_frequency_default)
-                )),
-                Double.parseDouble( mSharedPreferences.getString(
-                        getString( R.string.prefs_generator_peak_frequency_key),
-                        getString( R.string.prefs_generator_peak_frequency_default)
-                )));
-
-
     }
 
 
@@ -752,6 +741,14 @@ public class HearHueFragment extends Fragment
         closeCamera();
         stopBackgroundThread();
         super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
+        applicationSingleton.setScalarTone( mScalarTone);
+        applicationSingleton.setToneGenerator( mToneGenerator);
+        super.onStop();
     }
 
     private void requestCameraPermission() {

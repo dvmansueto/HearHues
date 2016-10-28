@@ -19,6 +19,7 @@ public class TinkerFragment extends Fragment {
 
     private static final String TAG = "TinkerFragment";
 
+    private ScalarTone mScalarTone;
     private HueView mHueView;
     private LocView mLocView;
     private ToneGenerator mToneGenerator;
@@ -32,9 +33,15 @@ public class TinkerFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        Log.d( TAG, " onActivityCreated.");
+
         mHueView = (HueView) getActivity().findViewById( R.id.tinker_hue_view);
 
-        mToneGenerator = new ToneGenerator();
+        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
+        mScalarTone = applicationSingleton.getScalarTone();
+        mToneGenerator = applicationSingleton.getToneGenerator();
+        mToneGenerator.playContinuously( false);
+        mToneGenerator.setPlaybackSeconds( 200/1000);
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
             @Override
             public void startedPlaying() {
@@ -57,12 +64,14 @@ public class TinkerFragment extends Fragment {
             @Override
             public void newFrequency(double frequency) {
                 Log.d( TAG, "f: " + Double.toString( frequency));
-                mToneGenerator.setFrequency( frequency);
+                mToneGenerator.setFrequency( mScalarTone.scalarToTone( frequency));
+                mToneGenerator.startTone();
             }
             @Override
             public void newAmplitude(double amplitude) {
                 Log.d( TAG, "a: " + Double.toString( amplitude));
                 mToneGenerator.setAmplitude( amplitude);
+                mToneGenerator.startTone();
             }
         });
 
@@ -84,8 +93,15 @@ public class TinkerFragment extends Fragment {
         super.onResume();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle(R.string.fragment_tinker_title);
+    }
 
 
+    @Override
+    public void onStop() {
+        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
+        applicationSingleton.setScalarTone( mScalarTone);
+        applicationSingleton.setToneGenerator( mToneGenerator);
+        super.onStop();
     }
 
 }

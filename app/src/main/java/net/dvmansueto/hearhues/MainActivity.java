@@ -3,7 +3,9 @@ package net.dvmansueto.hearhues;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,15 +16,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import static java.lang.Boolean.parseBoolean;
+
 
 public class MainActivity
         extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected ScalarTone mScalarTone; // the _ONLY_ ScalarTone for the entire app.
+    protected ToneGenerator mToneGenerator;  // the _ONLY_ ToneGenerator for the entire app.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mScalarTone = new ScalarTone( this);
+        mToneGenerator = new ToneGenerator();
+        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getApplicationContext();
+        applicationSingleton.setScalarTone( mScalarTone);
+        applicationSingleton.setToneGenerator( mToneGenerator);
 
         // provide content view
         setContentView(R.layout.activity_main);
@@ -46,6 +58,33 @@ public class MainActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+    public void updatedSharedPrefs() {
+
+        // update SharedPreferences every time fragment resumes
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences( this);
+//        mSharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        mToneGenerator.setPlaybackSeconds( Double.parseDouble( sharedPreferences.getString(
+                getString( R.string.prefs_playback_seconds_key),
+                getString( R.string.prefs_playback_seconds_default))));
+
+
+
+        mScalarTone.setFrequencyRange(
+                Double.parseDouble( sharedPreferences.getString(
+                        getString( R.string.prefs_generator_base_frequency_key),
+                        getString( R.string.prefs_generator_base_frequency_default)
+                )),
+                Double.parseDouble( sharedPreferences.getString(
+                        getString( R.string.prefs_generator_peak_frequency_key),
+                        getString( R.string.prefs_generator_peak_frequency_default)
+                )));
+        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getApplicationContext();
+        applicationSingleton.setScalarTone( mScalarTone);
+        applicationSingleton.setToneGenerator( mToneGenerator);
 
     }
 
@@ -87,8 +126,10 @@ public class MainActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO: remove tacky updateSharedPrefs() method
     @Override
     public boolean onNavigationItemSelected( @NonNull MenuItem item) {
+        updatedSharedPrefs();
         Fragment fragment = null;
         int id = item.getItemId();
 

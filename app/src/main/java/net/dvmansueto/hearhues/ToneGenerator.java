@@ -37,6 +37,7 @@ public class ToneGenerator {
     private byte[] mSoundBytes = new byte[ 2 * mPlaybackSamples];
     private AudioTrack mAudioTrack;
     private boolean mPlaying;
+    private boolean mPlayContinuously = false;
     private ToneGeneratorListener mListener;
 
     /**
@@ -75,7 +76,11 @@ public class ToneGenerator {
     }
 
     void setFrequency( double frequency) {
+        mTone = frequency;
+    }
 
+    void playContinuously( boolean state) {
+        mPlayContinuously = state;
     }
 
     void stopTone() {
@@ -174,6 +179,7 @@ public class ToneGenerator {
      * Source: http://stackoverflow.com/a/3731075
      */
     private void generateTone() {
+        mPlaying = true;
         // create anew each time to set buffer size
         // since setter & getter methods require API v24 & v23 respectively.
         mAudioTrack = new AudioTrack(
@@ -194,13 +200,12 @@ public class ToneGenerator {
             public void onMarkerReached(AudioTrack track) {
                 Log.d(TAG, "End of audioTrack");
                 mPlaying = false;
-                if (mListener != null)
-                    mListener.stoppedPlaying();
+                if ( mListener != null) mListener.stoppedPlaying();
+                if ( mPlayContinuously) startTone();
             }
         });
         mAudioTrack.play();
         mListener.startedPlaying();
-        mPlaying = true;
     }
 
 }
