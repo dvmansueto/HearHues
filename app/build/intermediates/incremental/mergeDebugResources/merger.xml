@@ -1797,7 +1797,7 @@
         <item>880</item>
         <item>1760</item>
         <item>3520</item>
-    </string-array><string name="prefs_playback_seconds_title">Playback Duration</string><string name="alert_positive">Okay</string><string name="alert_enable_gps_title">Location is disabled</string><string name="prefs_generator_base_frequency_default">440</string><string name="prefs_save_files_summary">Captured stills will be saved to disk</string><string name="prefs_generator_base_frequency_title">Base Tone</string><string name="prefs_playback_seconds_key">playback_seconds</string><string-array name="prefs_playback_seconds_values">
+    </string-array><string name="prefs_playback_seconds_title">Playback Duration</string><string name="alert_positive">Okay</string><string name="alert_enable_gps_title">Location is disabled</string><string name="prefs_generator_base_frequency_default">440</string><string name="prefs_save_files_summary">Captured stills will be saved to disk</string><string name="prefs_generator_base_frequency_title">Base Tone</string><string name="fragment_touch_tones_tab_tag">touchTones</string><string name="prefs_playback_seconds_key">playback_seconds</string><string-array name="prefs_playback_seconds_values">
         <item>0.8</item>
         <item>1.6</item>
         <item>2.4</item>
@@ -1831,7 +1831,7 @@
         <item>A₆</item>
         <item>A₇</item>
         <item>A₈</item>
-    </string-array><string name="HH_btn_capturePhoto">Capture Photograph</string><string name="prefs_palette_swatch_key">palette_swatch</string><string name="title_fragment_settings">Settings</string><string name="prefs_palette_number_title">Colour Precision</string><string name="prefs_generator_peak_frequency_default">7040</string><string name="fragment_touch_hues_title">Touch Hues</string><string name="prefs_generator_peak_frequency_title">Peak Tone</string><string name="request_permission">This feature requires camera permission.</string><string-array name="prefs_generator_base_frequency_entries">
+    </string-array><string name="fragment_touch_hues_tab_tag">touchHues</string><string name="HH_btn_capturePhoto">Capture Photograph</string><string name="prefs_palette_swatch_key">palette_swatch</string><string name="title_fragment_settings">Settings</string><string name="prefs_palette_number_title">Colour Precision</string><string name="prefs_generator_peak_frequency_default">7040</string><string name="fragment_touch_hues_title">Touch Hues</string><string name="prefs_generator_peak_frequency_title">Peak Tone</string><string name="request_permission">This feature requires camera permission.</string><string-array name="prefs_generator_base_frequency_entries">
         <item>A₀</item>
         <item>A₁</item>
         <item>A₂</item>
