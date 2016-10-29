@@ -66,21 +66,24 @@ public class MainActivity
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences( this);
 //        mSharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
-        mToneGenerator.setPlaybackSeconds( Double.parseDouble( sharedPreferences.getString(
-                getString( R.string.prefs_playback_seconds_key),
-                getString( R.string.prefs_playback_seconds_default))));
+        mToneGenerator.setLinToLogPower(
+                Integer.parseInt( sharedPreferences.getString(
+                        getString( R.string.prefs_generator_logarithm_power_key),
+                        getString( R.string.prefs_generator_logarithm_power_default))));
 
-
+        mToneGenerator.setPlaybackSeconds(
+                Double.parseDouble( sharedPreferences.getString(
+                        getString( R.string.prefs_playback_seconds_key),
+                        getString( R.string.prefs_playback_seconds_default))));
 
         mScalarTone.setFrequencyRange(
                 Double.parseDouble( sharedPreferences.getString(
                         getString( R.string.prefs_generator_base_frequency_key),
-                        getString( R.string.prefs_generator_base_frequency_default)
-                )),
+                        getString( R.string.prefs_generator_base_frequency_default))),
                 Double.parseDouble( sharedPreferences.getString(
                         getString( R.string.prefs_generator_peak_frequency_key),
-                        getString( R.string.prefs_generator_peak_frequency_default)
-                )));
+                        getString( R.string.prefs_generator_peak_frequency_default))));
+
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getApplicationContext();
         applicationSingleton.setScalarTone( mScalarTone);
         applicationSingleton.setToneGenerator( mToneGenerator);

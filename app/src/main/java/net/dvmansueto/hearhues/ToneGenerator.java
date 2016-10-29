@@ -17,107 +17,83 @@ import android.util.Log;
 
 public class ToneGenerator {
 
-    /**
-     * For {@link Log}
-     */
+    /** For {@link Log} */
     private static final String TAG = "ToneGenerator";
 
-    /**
-     * Number of samples per second.
-     * Somewhat arbitrary selection!
-     */
-    private static final int SAMPLE_RATE = 9600;
+    /** Number of samples per second. Somewhat arbitrary selection! */
+//    //TODO: Investigate using AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE
+    private static final int SAMPLE_RATE = 44100;
+//    private static final int SAMPLE_RATE = AudioManager.getProperty( AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
+//    private int mSampleRate;
 
-    /**
-     * Percent of the total tone over which to ramp up to and down from full amplitude.
-     */
+
+    /** Percent of the total tone over which to ramp up to and down from full amplitude. */
     private static final double RAMP_PERCENT = 0.1;
 
-    /**
-     * 2^15 = 32767, used for 16-bit WAV
-     */
+    /** Used in {@link #generateTone()} to convert {@link #mToneSamples} to 16-bit WAV
+     *  {@link #mToneBytes}. */
     private static final int TWO_TO_THE_POWER_OF_FIFTEEN = 32767; // 2^15 for 16-bit WAV
 
-    /**
-     * Whether the {@link ToneGenerator} should be muted (silent) or not.
-     */
+    /** Whether the {@link ToneGenerator} should be muted (silent) or not. */
     private boolean mMuted;
 
-    /**
-     * The current volume, muted or otherwise, of the audio track.
-     */
+    /** The current volume, muted or otherwise, of the audio track. */
     private double mVolume;
 
-    /**
-     * The frequency of the tone, in Hz.
-     */
+    /** Whether volume should be converted from linear to logarithmic scale */
+    private boolean mLinToLogEnabled;
+
+    /** The coefficient of the expression in {@link #linToLog(double)} */
+    private double mLogVarA;
+
+    /** The base of the power in {@link #linToLog(double)} */
+    private double mLogVarB;
+
+    /** The coefficient of the power in {@link #linToLog(double)} */
+    private double mLogVarC;
+
+
+    /** The frequency of the tone, in Hz. */
     private double mFrequency;
 
-    /**
-     * The amplitude of the tone, [0...1].
-     */
+    /** The amplitude of the tone, [0...1]. */
     private double mAmplitude;
 
-    /**
-     * How long a tone to generate.
-     */
+    /** How long a tone to generate. */
     private double mPlaybackSeconds;
 
-    /**
-     * Allows contextual shortening or lengthening of playback duration.
-     */
+    /** Allows contextual shortening or lengthening of playback duration. */
     private double mPlaybackFactor;
 
-    /**
-     * Playback mode of the AudioTrack, valid options are {@link AudioTrack#MODE_STATIC} and
-     * {@link AudioTrack#MODE_STREAM}.
-     */
+    /** Playback mode of the AudioTrack, valid options are {@link AudioTrack#MODE_STATIC} and
+     *  {@link AudioTrack#MODE_STREAM}. */
     private int mPlaybackMode;
 
-    /**
-     * The frequency and amplitude of the sound at a discrete sample of time.
-     */
+    /** The frequency and amplitude of the sound at a discrete sample of time. */
     private double[] mToneSamples;
 
-    /**
-     * A version of {@link #mToneSamples} modified to suit {@link AudioTrack}.
-     */
+    /** A version of {@link #mToneSamples} modified to suit {@link AudioTrack}. */
     private byte[] mToneBytes;
 
-    /**
-     * The {@link AudioTrack} used by this {@link ToneGenerator}
-     */
+    /** The {@link AudioTrack} used by this {@link ToneGenerator} */
     private AudioTrack mAudioTrack;
 
-    /**
-     * Is the AudioTrack currently playing?
-     */
-//    private boolean mPlaying;
-
-    /**
-     * Should the AudioTrack play continuously?
-     */
+    /** Should the AudioTrack play continuously? */
     private boolean mPlayContinuously;
 
-    /**
-     * Custom listener.
-     */
+    /** Custom listener. */
     private ToneGeneratorListener mListener;
 
-    /**
-     * Should the tone ramp up gently at the start?
-     */
+    /** Should the tone ramp up gently at the start? */
     private boolean mRampingUp;
 
-    /**
-     * Should the tone ramp down gently at the end?
-     */
+    /** Should the tone ramp down gently at the end? */
     private boolean mRampingDown;
 
-    /**
-     * For
-     */
+    /** Push tone playback into asynchronous task */
     private AsyncPlaybackTask mAsyncPlaybackTask = new AsyncPlaybackTask();
+
+    /** Push tone generation into asynchronous task */
     private AsyncGenerateTask mAsyncGenerateTask = new AsyncGenerateTask();
 
 
@@ -157,9 +133,12 @@ public class ToneGenerator {
         mRampingUp = true;
         mRampingDown = true;
         mPlaybackMode = AudioTrack.MODE_STATIC;
+//        Log.e( TAG, "AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE: " + AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
+//        mSampleRate = (int) Double.parseDouble( AudioManager.getProperty( AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE));
+//        AudioManager.getProperty( AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
         prepareForTone();
+        mLinToLogEnabled = false;
         mMuted = false;
-//        mPlaying = false;
         mPlayContinuously = false;
     }
 
@@ -172,9 +151,6 @@ public class ToneGenerator {
      * Starts tone generation.
      */
     void play() {
-//        if ( mAudioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) {
-//            stop();
-//        }
         mAudioTrack.write( mToneBytes, 0, mToneBytes.length);
         mAsyncPlaybackTask = new AsyncPlaybackTask();
         mAsyncPlaybackTask.execute();
@@ -240,9 +216,26 @@ public class ToneGenerator {
      */
     private void setVolume() {
         // via variable as AudioTrack doesn't return volume
-        mVolume = mMuted ? 0 : linToLog( mAmplitude);
+        // ...ternary inside of ternary works?! This has to be bad programming.
+        mVolume = mMuted ? 0 : mLinToLogEnabled ? linToLog( mAmplitude) : mAmplitude;
         mAudioTrack.setVolume( (float) mVolume);
-        Log.d( TAG, "Volume: " + Double.toString(mVolume));
+    }
+
+    /**
+     * Determines how 'aggressively' {@link #linToLog(double)} will scale.
+     * *** NO ERROR CHECK! *** If calling not by sharedPreferences, ensure power is [1...7]!
+     * @param power logarithmic power [1...7]; 1 disables conversion (remains linear)
+     */
+    void setLinToLogPower( int power) {
+        // allows disabling conversion by calling with power 1
+        mLinToLogEnabled = power == 1;
+        // A is the coefficient of the power
+        mLogVarC = power;
+        // B is the base of the power
+        mLogVarB = Math.pow( 10, power - 1);
+        // C is the coefficient of the expression
+        // Calculation only holds for powers > 1, not tested upper bounds
+        mLogVarA = Math.pow( 10, -1 * ( power * ( power - 2)));
     }
 
     /**
@@ -251,7 +244,7 @@ public class ToneGenerator {
      * @return a logarithmic value corresponding to the input value.
      */
     private double linToLog( double x) {
-        return 0.01 * Math.pow( 10.0, 2.0 * x);
+        return mLogVarA * Math.pow( mLogVarB, mLogVarC * x);
     }
 
     /**

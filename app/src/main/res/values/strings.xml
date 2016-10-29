@@ -179,7 +179,30 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
         <item>7040</item>
     </string-array>
 
-    <string name="prefs_detector_category">Tone Detector</string>
+    <string name="prefs_generator_logarithm_power_key">generator_logarithm_power</string>
+    <string name="prefs_generator_logarithm_power_title">Logarithmic Volume</string>
+    <string name="prefs_generator_logarithm_power_summary">Determines how aggressive logarithmic scaling will be</string>
+    <string name="prefs_generator_logarithm_power_default">4</string>
+    <!-- list must start one octave above base notes -->
+    <string-array name="prefs_generator_logarithm_power_entries">
+        <item>Disabled</item>
+        <item>Very Weak</item>
+        <item>Weak</item>
+        <item>Moderate</item>
+        <item>Strong</item>
+        <item>Very Strong</item>
+        <item>Silly</item>
+    </string-array>
+    <string-array name="prefs_generator_logarithm_power_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
 
     <!-- DIALOGS -->
     <string name="alert_positive">Okay</string>

@@ -54,5 +54,12 @@
             android:defaultValue="@string/prefs_generator_peak_frequency_default"
             android:entries="@array/prefs_generator_peak_frequency_entries"
             android:entryValues="@array/prefs_generator_peak_frequency_values" />
+        <ListPreference
+            android:key="@string/prefs_generator_logarithm_power_key"
+            android:title="@string/prefs_generator_logarithm_power_title"
+            android:summary="@string/prefs_generator_logarithm_power_summary"
+            android:defaultValue="@string/prefs_generator_logarithm_power_default"
+            android:entries="@array/prefs_generator_logarithm_power_entries"
+            android:entryValues="@array/prefs_generator_logarithm_power_values" />
     </PreferenceCategory>
 </PreferenceScreen>
