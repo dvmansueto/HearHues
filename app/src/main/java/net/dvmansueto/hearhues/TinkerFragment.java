@@ -41,7 +41,7 @@ public class TinkerFragment extends Fragment {
         mScalarTone = applicationSingleton.getScalarTone();
         mToneGenerator = applicationSingleton.getToneGenerator();
         mToneGenerator.playContinuously( false);
-        mToneGenerator.setPlaybackSeconds( 200/1000);
+        mToneGenerator.setPlaybackSeconds( 200.0/1000.0);
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
             @Override
             public void startedPlaying() {

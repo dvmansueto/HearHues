@@ -745,6 +745,7 @@ public class HearHueFragment extends Fragment
 
     @Override
     public void onStop() {
+        mToneGenerator.flushTone();
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
         applicationSingleton.setScalarTone( mScalarTone);
         applicationSingleton.setToneGenerator( mToneGenerator);
