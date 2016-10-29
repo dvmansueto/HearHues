@@ -77,6 +77,7 @@ public class TinkerFragment extends Fragment {
         });
 
         mLocView = (LocView) getActivity().findViewById( R.id.tinker_loc_view);
+        mLocView.setTouchAllowed( true);
         mLocView.setLocViewListener(new LocView.LocViewListener() {
             @Override
             public void newFrequency(double frequency) {
@@ -91,7 +92,6 @@ public class TinkerFragment extends Fragment {
 //                mToneGenerator.play();
             }
         });
-        mLocView.setTouchAllowed( true);
     }
 
 
