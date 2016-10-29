@@ -3,6 +3,7 @@ package net.dvmansueto.hearhues;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.os.AsyncTask;
 import android.util.Log;
 
 /**
@@ -42,6 +43,9 @@ public class ToneGenerator {
      */
     private boolean mMuted;
 
+    /**
+     * The current volume, muted or otherwise, of the audio track.
+     */
     private double mVolume;
 
     /**
@@ -88,7 +92,7 @@ public class ToneGenerator {
     /**
      * Is the AudioTrack currently playing?
      */
-    private boolean mPlaying;
+//    private boolean mPlaying;
 
     /**
      * Should the AudioTrack play continuously?
@@ -110,8 +114,16 @@ public class ToneGenerator {
      */
     private boolean mRampingDown;
 
+    /**
+     * For
+     */
+    private AsyncPlaybackTask mAsyncPlaybackTask = new AsyncPlaybackTask();
+    private AsyncGenerateTask mAsyncGenerateTask = new AsyncGenerateTask();
 
-    //// Listener
+
+    //--------------------------------
+    // Listener
+    //--------------------------------
 
     /**
      * Custom listener, reports {@link #startedPlaying()} and {@link #stoppedPlaying()}.
@@ -130,7 +142,9 @@ public class ToneGenerator {
     }
 
 
-    //// Constructor
+    //--------------------------------
+    // Constructor
+    //--------------------------------
 
     /**
      * Creates a new {@link ToneGenerator} using arbitrary default values.
@@ -146,26 +160,58 @@ public class ToneGenerator {
         mPlaybackMode = AudioTrack.MODE_STATIC;
         prepareForTone();
         mMuted = false;
-        mPlaying = false;
+//        mPlaying = false;
         mPlayContinuously = false;
     }
 
-    void logThis() {
-        Log.d( TAG, "Amplitude: " + Double.toString( mAmplitude));
-        Log.d( TAG, "Frequency: " + Double.toString( mFrequency));
-        Log.d( TAG, "ToneSamples: " + Integer.toString( mToneSamples.length) + ", " +
-                ( mToneSamples == null ? "null" : "not null"));
-        Log.d( TAG, "ToneBytes: " + Integer.toString( mToneBytes.length) + ", " +
-                ( mToneBytes == null ? "null" : "not null"));
-        Log.d( TAG, "Duration: " + Double.toString( mPlaybackSeconds * mPlaybackFactor));
-        Log.d( TAG, "Mode: " + ( mPlaybackMode == 0 ? "STATIC" : "STREAM"));
-        Log.d( TAG, "Volume: " + Double.toString( mVolume));
-        Log.d( TAG, "Muted: " + Boolean.toString( mMuted));
-        Log.d( TAG, "Playing: " + Boolean.toString( mPlaying));
-        Log.d( TAG, "Continuous: " + Boolean.toString( mPlayContinuously));
-        Log.d( TAG, "Ramp Up: " + Boolean.toString( mRampingUp));
-        Log.d( TAG, "Ramp Down: " + Boolean.toString( mRampingDown));
+
+    //--------------------------------
+    // Helpers
+    //--------------------------------
+
+    /**
+     * Starts tone generation.
+     */
+    void play() {
+//        if ( mAudioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) {
+//            stop();
+//        }
+        mAudioTrack.write( mToneBytes, 0, mToneBytes.length);
+        mAsyncPlaybackTask = new AsyncPlaybackTask();
+        mAsyncPlaybackTask.execute();
+        mListener.startedPlaying();
     }
+
+
+    /**
+     * Cleanly stops tone generation.
+     */
+    void stop() {
+        if ( mAudioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) {
+            mAsyncPlaybackTask.cancel( true);
+        }
+        if ( mListener != null) mListener.stoppedPlaying();
+    }
+
+    /**
+     * Flushes the tone out of the device's playback buffer.
+     */
+    void flush() {
+        mAudioTrack.flush();
+    }
+
+
+    //--------------------------------
+    // Accessors
+    //--------------------------------
+
+    /**
+     * @return whether the {@link ToneGenerator} is muted (silent) or not.
+     */
+    boolean getMuted() {
+        return mMuted;
+    }
+
 
     @Override
     public String toString() {
@@ -179,67 +225,23 @@ public class ToneGenerator {
                 " [Duration: " + Double.toString( mPlaybackSeconds * mPlaybackFactor) + ']' +
                 " [Volume: " + Double.toString( mVolume) + ']' +
                 " [Muted: " + Boolean.toString( mMuted) + ']' +
-                " [Playing: " + Boolean.toString( mPlaying) + ']' +
+                " [PlayState: " + Integer.toString( mAudioTrack.getPlayState()) + ']' +
                 " [Continuous: " + Boolean.toString( mPlayContinuously) + ']' +
                 " [Ramp Up: " + Boolean.toString( mRampingUp) + ']' +
                 " [Ramp Down: " + Boolean.toString( mRampingDown) + ']';
     }
 
-    //// Helpers
 
-    /**
-     * Starts tone generation.
-     */
-    void play() {
-
-        if ( mPlaying) {
-            stop();
-        }
-
-        playTone( mToneBytes);
-    }
-
-    /**
-     * Cleanly stops tone generation.
-     */
-    void stop() {
-        if ( mPlaying) {
-            mAudioTrack.stop();
-            mPlaying = false;
-            if ( mListener != null) mListener.stoppedPlaying();
-            if ( mPlayContinuously) play();
-        }
-    }
-
-    /**
-     * Flushes the tone out of the device's playback buffer.
-     */
-    void flush() {
-        mAudioTrack.flush();
-    }
-
-
-    //// Accessors
-
-    /**
-     * @return whether the {@link ToneGenerator} is muted (silent) or not.
-     */
-    boolean getMuted() {
-        return mMuted;
-    }
-
-
-    //// Mutators
+    //--------------------------------
+    // Mutators
+    //--------------------------------
 
     /**
      * Sets the volume of {@link #mAudioTrack} based on {@link #mMuted} and {@link #mAmplitude}.
      */
     private void setVolume() {
-        Log.d( TAG, "Muted: " + Boolean.toString( mMuted));
-        Log.d( TAG, "Amplitude: " + Double.toString( mAmplitude));
-        Log.d( TAG, "Volume: " + Double.toString( mVolume));
+        // via variable as AudioTrack doesn't return volume
         mVolume = mMuted ? 0 : mAmplitude;
-        Log.d( TAG, "Volume: " + Double.toString( mVolume));
         mAudioTrack.setVolume( (float) mVolume);
     }
 
@@ -263,14 +265,18 @@ public class ToneGenerator {
         setVolume();
     }
 
-
     /**
      * Sets the frequency of the generated tone.
      * @param frequency the new value (Hz)
      */
     void setFrequency( double frequency) {
+
         mFrequency = frequency;
-        generateTone();
+
+        // cancel any existing tone generation task and start a new one
+        mAsyncGenerateTask.cancel( true);
+        mAsyncGenerateTask = new AsyncGenerateTask();
+        mAsyncGenerateTask.execute();
     }
 
     /**
@@ -309,7 +315,6 @@ public class ToneGenerator {
      */
     void setPlayContinuously( boolean state) {
         mPlayContinuously = state;
-        if ( mPlayContinuously) play();
     }
 
     /**
@@ -327,7 +332,9 @@ public class ToneGenerator {
     }
 
 
-    //// Methods
+    //--------------------------------
+    // Utilities
+    //--------------------------------
 
     /**
      * Prepares sound arrays ({@link #mToneSamples} & {@link #mToneBytes}) and
@@ -355,13 +362,11 @@ public class ToneGenerator {
             public void onMarkerReached(AudioTrack track) {
                 Log.d(TAG, "Reached end of audioTrack");
                 stop();
+                if ( mPlayContinuously) play();
             }
         });
     }
 
-    /**
-     * Fills the sound arrays with {@link #mFrequency} Hz tone.
-     */
     private void generateTone() {
 
         // generate the sound samples
@@ -389,14 +394,41 @@ public class ToneGenerator {
     }
 
     /**
-     * Sets the audio track and starts playing.
-     * @param soundBytes the sound to play.
+     * Plays the tune in an asynchronous task when executed.
      */
-    private void playTone( byte[] soundBytes) {
-//        logThis();
-        mPlaying = true;
-        mAudioTrack.write( soundBytes, 0, soundBytes.length);
-        mAudioTrack.play();
-        mListener.startedPlaying();
+    private class AsyncPlaybackTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mAudioTrack.play();
+            return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAudioTrack.stop();
+            super.onCancelled();
+        }
+    }
+
+
+    /**
+     * Generates the tone samples in an asynchronous task when executed.
+     */
+    private class AsyncGenerateTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            generateTone();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            play();
+            super.onPostExecute(aVoid);
+        }
     }
 }

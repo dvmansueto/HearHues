@@ -82,13 +82,13 @@ public class TinkerFragment extends Fragment {
             public void newFrequency(double frequency) {
                 if ( mCurrentView != LOC_VIEW) setCurrentView( LOC_VIEW);
                 mToneGenerator.setFrequency( mScalarTone.scalarToTone( frequency));
-                mToneGenerator.play();
+//                mToneGenerator.play();
             }
             @Override
             public void newAmplitude(double amplitude) {
                 if ( mCurrentView != LOC_VIEW) setCurrentView( LOC_VIEW);
                 mToneGenerator.setAmplitude( amplitude);
-                mToneGenerator.play();
+//                mToneGenerator.play();
             }
         });
     }
@@ -122,7 +122,7 @@ public class TinkerFragment extends Fragment {
 
     private void optimiseForLocView() {
         mToneGenerator.setPlaybackMode ( AudioTrack.MODE_STREAM);
-        mToneGenerator.setPlaybackFactor( 1); // much shorter playback times
+        mToneGenerator.setPlaybackFactor( 0.0625); // much shorter playback times
         mToneGenerator.setPlayContinuously( true);
         mToneGenerator.setRampingUp( true);
         mToneGenerator.setRampingDown( true);
