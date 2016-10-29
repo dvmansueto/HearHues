@@ -507,10 +507,10 @@ public class HearHueFragment extends Fragment
         updateUi();
 
         // update the frequency of the tone generator
-        mToneGenerator.setTone( mHueTone.getTone());
+        mToneGenerator.setFrequency( mHueTone.getTone());
 
         // let rip!
-        mToneGenerator.startTone();
+        mToneGenerator.play();
     }
 
     /**
@@ -536,9 +536,9 @@ public class HearHueFragment extends Fragment
 
     private void playStop() {
         if ( !mPlaying) {
-            mToneGenerator.startTone();
+            mToneGenerator.play();
         } else {
-            mToneGenerator.stopTone();
+            mToneGenerator.stop();
         }
     }
 
@@ -745,7 +745,7 @@ public class HearHueFragment extends Fragment
 
     @Override
     public void onStop() {
-        mToneGenerator.flushTone();
+        mToneGenerator.flush();
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
         applicationSingleton.setScalarTone( mScalarTone);
         applicationSingleton.setToneGenerator( mToneGenerator);
