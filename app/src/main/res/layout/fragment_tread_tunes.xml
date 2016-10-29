@@ -1,8 +1,46 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.dvmansueto.hearhues.TreadTunesFragment">
+    tools:context="net.dvmansueto.hearhues.TreadTuneFragment">
 
+    <ImageView
+        android:id="@+id/tread_tune_iv_tread"
+        android:src="@drawable/ic_tread"
+        android:contentDescription="@string/tread_tune_iv_tread"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+    <TextView
+        android:id="@+id/tread_tune_title"
+        android:text="@string/tinker_hue_view_title"
+        android:textSize="@dimen/heading_textSize"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@id/tread_tune_iv_tread"
+        android:layout_alignTop="@id/tread_tune_iv_tread"
+        android:layout_alignBottom="@id/tread_tune_iv_tread"
+        android:gravity="center_vertical"/>
+    <ImageView
+        android:id="@+id/tread_tune_ivbtn_location"
+        android:src="@drawable/ic_location"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
 
-</FrameLayout>
+    <net.dvmansueto.hearhues.LocView
+        android:id="@+id/tread_tune_loc_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tread_tune_iv_tread"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

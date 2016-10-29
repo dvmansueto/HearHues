@@ -9,7 +9,7 @@
     <item
         android:id="@+id/nav_treadTunes"
         android:icon="@drawable/ic_tone"
-        android:title="@string/title_fragment_tread_tunes" />
+        android:title="@string/title_fragment_tread_tune" />
     <item
         android:id="@+id/nav_tinker"
         android:icon="@drawable/ic_tinker"

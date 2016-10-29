@@ -12,8 +12,8 @@ final class LocTone {
 
     private static final String TAG = "LocTone";
 
-    private static final double AMPLITUDE_DISTANCE = 10; // metres from datum to max amp
-    private static final double FREQUENCY_DISTANCE = 10; // metres from datum to max freq
+    private static final double AMPLITUDE_DISTANCE = 100; // metres from datum to max amp
+    private static final double FREQUENCY_DISTANCE = 100; // metres from datum to max freq
 
     private double mLatitudeRadius = 6378137.0; // WGS84 major (equatorial) radius
     private double mLongitudeRadius = 6356752.3142; // WGS84 semi-major (polar) radius

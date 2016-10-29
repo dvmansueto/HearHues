@@ -16,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import static java.lang.Boolean.parseBoolean;
-
 
 public class MainActivity
         extends AppCompatActivity
@@ -41,7 +39,7 @@ public class MainActivity
 
         if (null == savedInstanceState) {
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, TreadTunesFragment.newInstance())
+                    .replace(R.id.fragment_container, TreadTuneFragment.newInstance())
                     .commit();
         }
 
@@ -137,7 +135,7 @@ public class MainActivity
             fragment = new HearHueFragment();
             setMenuItemsVisible( true);
         } else if( id == R.id.nav_treadTunes) {
-            fragment = new TreadTunesFragment();
+            fragment = new TreadTuneFragment();
             setMenuItemsVisible( true);
         } else if( id == R.id.nav_tinker) {
             fragment = new TinkerFragment();

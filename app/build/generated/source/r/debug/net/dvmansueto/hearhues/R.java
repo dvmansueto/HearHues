@@ -2629,20 +2629,22 @@ containing a value of this type.
         public static final int ic_camera_front_48=0x7f02005d;
         public static final int ic_hue=0x7f02005e;
         public static final int ic_hue_48=0x7f02005f;
-        public static final int ic_pause_circle_outline=0x7f020060;
-        public static final int ic_pause_circle_outline_48=0x7f020061;
-        public static final int ic_play_circle_outline=0x7f020062;
-        public static final int ic_play_circle_outline_48=0x7f020063;
-        public static final int ic_settings=0x7f020064;
-        public static final int ic_shutter_48=0x7f020065;
-        public static final int ic_tinker=0x7f020066;
-        public static final int ic_tone=0x7f020067;
-        public static final int ic_tone_48=0x7f020068;
-        public static final int ic_volume_mute=0x7f020069;
-        public static final int ic_volume_off=0x7f02006a;
-        public static final int navigation_empty_icon=0x7f02006b;
-        public static final int neil_harbisson=0x7f02006c;
-        public static final int notification_template_icon_bg=0x7f02006d;
+        public static final int ic_location=0x7f020060;
+        public static final int ic_pause_circle_outline=0x7f020061;
+        public static final int ic_pause_circle_outline_48=0x7f020062;
+        public static final int ic_play_circle_outline=0x7f020063;
+        public static final int ic_play_circle_outline_48=0x7f020064;
+        public static final int ic_settings=0x7f020065;
+        public static final int ic_shutter_48=0x7f020066;
+        public static final int ic_tinker=0x7f020067;
+        public static final int ic_tone=0x7f020068;
+        public static final int ic_tone_48=0x7f020069;
+        public static final int ic_tread=0x7f02006a;
+        public static final int ic_volume_mute=0x7f02006b;
+        public static final int ic_volume_off=0x7f02006c;
+        public static final int navigation_empty_icon=0x7f02006d;
+        public static final int neil_harbisson=0x7f02006e;
+        public static final int notification_template_icon_bg=0x7f02006f;
     }
     public static final class id {
         public static final int HH_aftv_cameraPreview=0x7f0e0084;
@@ -2658,7 +2660,7 @@ containing a value of this type.
         public static final int about_neil_harbisson=0x7f0e007e;
         public static final int about_project_body=0x7f0e007d;
         public static final int about_project_heading=0x7f0e007c;
-        public static final int action0=0x7f0e008f;
+        public static final int action0=0x7f0e0093;
         public static final int action_bar=0x7f0e005e;
         public static final int action_bar_activity_content=0x7f0e0000;
         public static final int action_bar_container=0x7f0e005d;
@@ -2667,13 +2669,13 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0e003e;
         public static final int action_bar_title=0x7f0e003d;
         public static final int action_context_bar=0x7f0e005f;
-        public static final int action_divider=0x7f0e0093;
+        public static final int action_divider=0x7f0e0097;
         public static final int action_menu_divider=0x7f0e0002;
         public static final int action_menu_presenter=0x7f0e0003;
         public static final int action_mode_bar=0x7f0e005b;
         public static final int action_mode_bar_stub=0x7f0e005a;
         public static final int action_mode_close_button=0x7f0e003f;
-        public static final int action_mute=0x7f0e00a1;
+        public static final int action_mute=0x7f0e00a5;
         public static final int activity_chooser_view_content=0x7f0e0040;
         public static final int add=0x7f0e001a;
         public static final int alertTitle=0x7f0e004c;
@@ -2683,12 +2685,12 @@ containing a value of this type.
         public static final int beginning=0x7f0e0034;
         public static final int bottom=0x7f0e0022;
         public static final int buttonPanel=0x7f0e0047;
-        public static final int cancel_action=0x7f0e0090;
+        public static final int cancel_action=0x7f0e0094;
         public static final int center=0x7f0e0023;
         public static final int center_horizontal=0x7f0e0024;
         public static final int center_vertical=0x7f0e0025;
         public static final int checkbox=0x7f0e0055;
-        public static final int chronometer=0x7f0e0096;
+        public static final int chronometer=0x7f0e009a;
         public static final int clip_horizontal=0x7f0e002e;
         public static final int clip_vertical=0x7f0e002f;
         public static final int collapseActionView=0x7f0e0037;
@@ -2707,7 +2709,7 @@ containing a value of this type.
         public static final int drawer_layout=0x7f0e006d;
         public static final int edit_query=0x7f0e0060;
         public static final int end=0x7f0e0026;
-        public static final int end_padder=0x7f0e009b;
+        public static final int end_padder=0x7f0e009f;
         public static final int enterAlways=0x7f0e0015;
         public static final int enterAlwaysCollapsed=0x7f0e0016;
         public static final int exitUntilCollapsed=0x7f0e0017;
@@ -2724,22 +2726,22 @@ containing a value of this type.
         public static final int icon=0x7f0e0045;
         public static final int ifRoom=0x7f0e0038;
         public static final int image=0x7f0e0042;
-        public static final int info=0x7f0e009a;
+        public static final int info=0x7f0e009e;
         public static final int item_touch_helper_previous_elevation=0x7f0e0005;
         public static final int left=0x7f0e0028;
-        public static final int line1=0x7f0e0094;
-        public static final int line3=0x7f0e0098;
+        public static final int line1=0x7f0e0098;
+        public static final int line3=0x7f0e009c;
         public static final int listMode=0x7f0e000b;
         public static final int list_item=0x7f0e0044;
-        public static final int media_actions=0x7f0e0092;
+        public static final int media_actions=0x7f0e0096;
         public static final int middle=0x7f0e0035;
         public static final int mini=0x7f0e0033;
         public static final int multiply=0x7f0e001b;
-        public static final int nav_about=0x7f0e009f;
-        public static final int nav_hearHue=0x7f0e009c;
-        public static final int nav_settings=0x7f0e00a0;
-        public static final int nav_tinker=0x7f0e009e;
-        public static final int nav_treadTunes=0x7f0e009d;
+        public static final int nav_about=0x7f0e00a3;
+        public static final int nav_hearHue=0x7f0e00a0;
+        public static final int nav_settings=0x7f0e00a4;
+        public static final int nav_tinker=0x7f0e00a2;
+        public static final int nav_treadTunes=0x7f0e00a1;
         public static final int nav_view=0x7f0e0071;
         public static final int navigation_header_container=0x7f0e0076;
         public static final int never=0x7f0e0039;
@@ -2782,15 +2784,15 @@ containing a value of this type.
         public static final int src_in=0x7f0e001e;
         public static final int src_over=0x7f0e001f;
         public static final int start=0x7f0e002a;
-        public static final int status_bar_latest_event_content=0x7f0e0091;
+        public static final int status_bar_latest_event_content=0x7f0e0095;
         public static final int submenuarrow=0x7f0e0058;
         public static final int submit_area=0x7f0e0069;
         public static final int tabMode=0x7f0e000d;
-        public static final int text=0x7f0e0099;
-        public static final int text2=0x7f0e0097;
+        public static final int text=0x7f0e009d;
+        public static final int text2=0x7f0e009b;
         public static final int textSpacerNoButtons=0x7f0e0050;
         public static final int text_input_password_toggle=0x7f0e007b;
-        public static final int time=0x7f0e0095;
+        public static final int time=0x7f0e0099;
         public static final int tinker_fragment=0x7f0e008a;
         public static final int tinker_hue_view=0x7f0e008c;
         public static final int tinker_hue_view_title=0x7f0e008b;
@@ -2802,6 +2804,10 @@ containing a value of this type.
         public static final int top=0x7f0e002b;
         public static final int topPanel=0x7f0e004a;
         public static final int touch_outside=0x7f0e0072;
+        public static final int tread_tune_iv_tread=0x7f0e008f;
+        public static final int tread_tune_ivbtn_location=0x7f0e0091;
+        public static final int tread_tune_loc_view=0x7f0e0092;
+        public static final int tread_tune_title=0x7f0e0090;
         public static final int up=0x7f0e0009;
         public static final int useLogo=0x7f0e0014;
         public static final int view_offset_helper=0x7f0e000a;
@@ -2885,6 +2891,8 @@ containing a value of this type.
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
+        public static final int ic_my_location=0x7f030001;
+        public static final int ic_tread=0x7f030002;
     }
     public static final class string {
         public static final int HH_btn_capturePhoto=0x7f070015;
@@ -2893,8 +2901,8 @@ containing a value of this type.
         public static final int HH_description=0x7f070018;
         public static final int HH_hue=0x7f070019;
         public static final int HH_hueTitle=0x7f07001a;
-        public static final int HH_ic_hue=0x7f07001b;
-        public static final int HH_ic_tone=0x7f07001c;
+        public static final int HH_iv_hue=0x7f07001b;
+        public static final int HH_iv_tone=0x7f07001c;
         public static final int HH_title=0x7f07001d;
         public static final int HH_tone=0x7f07001e;
         public static final int HH_toneHeading=0x7f07001f;
@@ -2993,7 +3001,8 @@ containing a value of this type.
         public static final int title_fragment_about=0x7f070067;
         public static final int title_fragment_hear_hue=0x7f070068;
         public static final int title_fragment_settings=0x7f070069;
-        public static final int title_fragment_tread_tunes=0x7f07006a;
+        public static final int title_fragment_tread_tune=0x7f07006a;
+        public static final int tread_tune_iv_tread=0x7f07006b;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09008d;

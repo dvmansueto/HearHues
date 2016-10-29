@@ -22,13 +22,14 @@
     <string name="HH_btn_capturePhoto">Capture Photograph</string>
     <string name="HH_btn_toggleCamera">Toggle Camera</string>
     <string name="HH_btn_playPause">Play/Pause</string>
-    <string name="HH_ic_tone">Tone</string>
-    <string name="HH_ic_hue">Hue</string>
+    <string name="HH_iv_tone">Tone</string>
+    <string name="HH_iv_hue">Hue</string>
     <string name="request_permission">This feature requires camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
-    <!-- TreadTunesFragment -->
-    <string name="title_fragment_tread_tunes">Tread Tunes</string>
+    <!-- TreadTuneFragment -->
+    <string name="title_fragment_tread_tune">Tread Tune</string>
+    <string name="tread_tune_iv_tread">Tone</string>
 
     <!-- TinkerFragment -->
     <string name="fragment_tinker_title">Tinker</string>

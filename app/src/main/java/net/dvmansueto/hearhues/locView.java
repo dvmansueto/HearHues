@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -24,8 +23,13 @@ public class LocView extends View {
     private static final float AXIS_STROKE_WIDTH = 2f;
     private static final float TICK_STROKE_WIDTH = 1f;
 
-    private static final float NEW_COORD_RADIUS = 4f;
-    private static final float OLD_COORD_RADIUS = 2f;
+    private static final int OLD_COORD_COUNT = 5;
+    private static final int VIEW_DIMENSIONS = 2;
+    private static final int X = 0;
+    private static final int Y = 1;
+
+    private static final float NEW_COORD_RADIUS = 6f;
+    private static final float OLD_COORD_RADIUS = 3f;
 
     private boolean mIsPortrait;
 
@@ -33,9 +37,10 @@ public class LocView extends View {
     private Paint mTickPaint;
 
     private Paint mNewCoordPaint;
-    private Paint mOldCoordPaint;
+    private Paint[] mOldCoordPaints;
+
     private float mNewCoordRadius;
-    private float mOldCoordRadius;
+    private float[] mOldCoordRadii;
 
     private float[] mAxes;
     private float[] mTicks;
@@ -49,13 +54,12 @@ public class LocView extends View {
     private double mMaxAmp = 100;
     private double mMinAmp = 0;
 
-    private double mNewLat = 0;
-    private double mNewLong = 0;
-
-    private double mOldLat = 0;
-    private double mOldLong = 0;
+    private float[] mNewCoords;
+    private float[][] mOldCoords;
 
     private LocViewListener mLocViewListener;
+
+    private boolean mTouchAllowed = false;
 
     /**
      * Constructs a new LocView.
@@ -64,9 +68,12 @@ public class LocView extends View {
     public LocView(Context context, AttributeSet attributes) {
         super( context, attributes);
 
-        // is this necessary?
-        mLocViewListener = null;
+        // initialise variables
+        mLocViewListener = null; // for comparison later maybe?
+        mNewCoords = new float[ VIEW_DIMENSIONS];
+        mOldCoords = new float[ OLD_COORD_COUNT][ VIEW_DIMENSIONS];
 
+        // prepare drawing components
         mAxisPaint = new Paint();
         mAxisPaint.setAntiAlias( false); // ordinate lines!
         mAxisPaint.setColor( Color.BLACK);
@@ -84,10 +91,26 @@ public class LocView extends View {
         mNewCoordPaint.setColor( Color.RED);
         mNewCoordPaint.setStyle( Paint.Style.FILL);
 
-        mOldCoordPaint = new Paint();
-        mOldCoordPaint.setAntiAlias( true);
-        mOldCoordPaint.setColor( Color.GRAY);
-        mOldCoordPaint.setStyle( Paint.Style.FILL);
+        mOldCoordPaints = new Paint[ OLD_COORD_COUNT];
+        mOldCoordRadii = new float[ OLD_COORD_COUNT];
+        for ( int i = 0; i < OLD_COORD_COUNT; i++) {
+
+            mOldCoordPaints[ i] = new Paint();
+            mOldCoordPaints[ i].setAntiAlias( true);
+            mOldCoordPaints[ i].setColor( Color.GRAY);
+            mOldCoordPaints[ i].setStyle(Paint.Style.FILL);
+            mOldCoordPaints[ i].setAlpha( (int) ( 255.0 * i / OLD_COORD_COUNT));
+
+            mOldCoordRadii[ i] = OLD_COORD_RADIUS * (OLD_COORD_COUNT - i) / OLD_COORD_COUNT;
+        }
+    }
+
+    boolean getTouchAllowed() {
+        return mTouchAllowed;
+    }
+
+    void setTouchAllowed( boolean state) {
+        mTouchAllowed = state;
     }
 
     /**
@@ -101,8 +124,11 @@ public class LocView extends View {
         canvas.drawLines( mAxes, mAxisPaint);
         canvas.drawLines( mTicks, mTickPaint);
 
-        canvas.drawCircle( (float) mOldLong, (float) mOldLat, mOldCoordRadius, mOldCoordPaint);
-        canvas.drawCircle( (float) mNewLong, (float) mNewLat, mNewCoordRadius, mNewCoordPaint);
+        for ( int i = 0; i < OLD_COORD_COUNT; i++) {
+            canvas.drawCircle( mOldCoords[ i][ X], mOldCoords[ i][ Y]
+                    , mOldCoordRadii[ i], mOldCoordPaints[ i]);
+        }
+        canvas.drawCircle( mNewCoords[ X], mNewCoords[ Y], mNewCoordRadius, mNewCoordPaint);
     }
 
     /**
@@ -117,9 +143,6 @@ public class LocView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        // convert into density-independent pixels
-//        mWidth = getWidth() / (int) getResources().getDisplayMetrics().density;
-//        mHeight = getHeight() / (int) getResources().getDisplayMetrics().density;
         mWidth = getWidth();
         mHeight = getHeight();
 
@@ -127,15 +150,9 @@ public class LocView extends View {
 
         mDp = getResources().getDisplayMetrics().density;
 
-//        mBitmap = Bitmap.createBitmap( w, h, Bitmap.Config.ARGB_8888);
-
-//        // create a 'dp' equivalent
-//        float xdpi = getResources().getDisplayMetrics().xdpi;
-//        float ydpi = getResources().getDisplayMetrics().ydpi;
-//        mDpi = xdpi > ydpi ? xdpi : ydpi;
-
-
-        mOldCoordRadius = OLD_COORD_RADIUS * mDp;
+        for ( int i = 0; i < OLD_COORD_COUNT; i++) {
+            mOldCoordRadii[ i] *= mDp;
+        }
         mNewCoordRadius = NEW_COORD_RADIUS * mDp;
 
         updateAxes();
@@ -180,7 +197,7 @@ public class LocView extends View {
         float stop = start + tick;
         float[] xTicks = new float[ 5 * FREQ_TICKS];
         for (int i = 0; i <= FREQ_TICKS; i++ ) {
-            xTicks[ i * 4 + 0] = i * step + offset;
+            xTicks[ i * 4    ] = i * step + offset;
             xTicks[ i * 4 + 1] = start;
             xTicks[ i * 4 + 2] = i * step + offset;
             xTicks[ i * 4 + 3] = stop;
@@ -191,7 +208,7 @@ public class LocView extends View {
         stop = start + tick;
         float[] yTicks = new float[ 5 * AMP_TICKS];
         for (int i = 0; i <= AMP_TICKS; i++ ) {
-            yTicks[ i * 4 + 0] = start;
+            yTicks[ i * 4    ] = start;
             yTicks[ i * 4 + 1] = i * step + offset;
             yTicks[ i * 4 + 2] = stop;
             yTicks[ i * 4 + 3] = i * step + offset;
@@ -216,6 +233,28 @@ public class LocView extends View {
         return c;
     }
 
+    void newScalarCoord( float x, float y) {
+
+        if ( x < 0) x = 0;
+        if ( x > 1) x = 1;
+        if ( y < 0) y = 0;
+        if ( y > 1) y = 1;
+
+        setNewCoords( x * mWidth, ( y - 1) * mHeight);
+    }
+
+    private void setNewCoords( float x, float y) {
+        setNewCoords( new float[] { x, y});
+    }
+
+    private void setNewCoords( float[] coords) {
+        float[][] tempCoords = new float[ OLD_COORD_COUNT][ VIEW_DIMENSIONS];
+        System.arraycopy( mOldCoords, 1, tempCoords, 0, OLD_COORD_COUNT - 1);
+        mOldCoords = tempCoords;
+        mOldCoords[ OLD_COORD_COUNT] = mNewCoords;
+        mNewCoords = coords;
+    }
+
     /**
      * Interprets touch, updates old and new coordinates, and throws frequency and amplitude
      * percentages.
@@ -229,10 +268,7 @@ public class LocView extends View {
         if ( y < 0) y = 0;
         if ( y > mHeight) y = mHeight;
 
-        mOldLat = mNewLat;
-        mOldLong = mNewLong;
-        mNewLat = y;
-        mNewLong = x;
+        setNewCoords( x, y);
 
         mLocViewListener.newFrequency( x / mWidth);
         mLocViewListener.newAmplitude( ( mHeight - y) / mHeight); // since y starts from the top
@@ -247,6 +283,9 @@ public class LocView extends View {
      */
     @Override
     public boolean onTouchEvent( MotionEvent motionEvent) {
+
+        if ( !mTouchAllowed) return false;
+
         // shamelessly stolen from
         // https://examples.javacodegeeks.com/android/core/graphics/canvas-graphics/android-canvas-example/
         float x = motionEvent.getX();
