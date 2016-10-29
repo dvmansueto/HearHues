@@ -1,6 +1,7 @@
 package net.dvmansueto.hearhues;
 
 import android.location.Location;
+import android.util.Log;
 
 /**
  * LocTone: idea is to establish a datum, then use relative latitude and longitude to alter the
@@ -58,7 +59,7 @@ final class LocTone {
      */
     private double deltaToScalar( double delta, double limit) {
         // for positive or zero values, return between 0.5 and 1
-        if ( delta > 0) {
+        if ( delta >= 0) {
             return ( delta > limit) ? 1 : 0.5 + 0.5 * ( delta / limit);
         }
         // for negative values, return between 0 and 0.5

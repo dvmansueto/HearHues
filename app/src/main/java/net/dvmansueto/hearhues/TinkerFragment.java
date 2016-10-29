@@ -34,8 +34,6 @@ public class TinkerFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        Log.d( TAG, " onActivityCreated.");
     }
 
     @Override
@@ -96,11 +94,16 @@ public class TinkerFragment extends Fragment {
 
 
     @Override
-    public void onStop() {
+    public void onPause() {
+        super.onPause();
         if ( mCurrentView != HUE_VIEW) setCurrentView( HUE_VIEW); // restore normal activity.
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
         applicationSingleton.setScalarTone( mScalarTone);
         applicationSingleton.setToneGenerator( mToneGenerator);
+    }
+
+    @Override
+    public void onStop() {
         super.onStop();
     }
 

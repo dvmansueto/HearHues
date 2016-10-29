@@ -141,7 +141,6 @@ public class ToneGenerator {
         mListener = listener;
     }
 
-
     //--------------------------------
     // Constructor
     //--------------------------------
@@ -243,6 +242,7 @@ public class ToneGenerator {
         // via variable as AudioTrack doesn't return volume
         mVolume = mMuted ? 0 : linToLog( mAmplitude);
         mAudioTrack.setVolume( (float) mVolume);
+        Log.d( TAG, "Volume: " + Double.toString(mVolume));
     }
 
     /**
@@ -279,9 +279,7 @@ public class ToneGenerator {
      * @param frequency the new value (Hz)
      */
     void setFrequency( double frequency) {
-
         mFrequency = frequency;
-
         // cancel any existing tone generation task and start a new one
         mAsyncGenerateTask.cancel( true);
         mAsyncGenerateTask = new AsyncGenerateTask();

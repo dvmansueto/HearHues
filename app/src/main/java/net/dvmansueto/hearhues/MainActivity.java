@@ -33,6 +33,7 @@ public class MainActivity
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getApplicationContext();
         applicationSingleton.setScalarTone( mScalarTone);
         applicationSingleton.setToneGenerator( mToneGenerator);
+        updatedSharedPrefs();
 
         // provide content view
         setContentView(R.layout.activity_main);

@@ -12,7 +12,7 @@ import java.util.Locale;
 public class ScalarTone {
 
 
-    private static final String TAG = "HueTone";
+    private static final String TAG = "ScalarTone";
 
     // all for updating incorrectly selected preferences
     private final Context mContext;
@@ -90,9 +90,6 @@ public class ScalarTone {
 
         mBaseFrequency = baseFrequency;
         mHalfStepsPerRange = ( peakOctave - baseOctave) * HALF_STEPS_PER_OCTAVE;
-
-        Log.d( TAG, "Base frequency: " + Double.toString( baseFrequency));
-        Log.d( TAG, "Peak frequency: " + Double.toString( peakFrequency));
     }
 
     /**
@@ -112,16 +109,11 @@ public class ScalarTone {
             }
         }
 
-        Log.e( TAG, "minDistance: " + Double.toString( minDistance));
-        Log.e( TAG, "noteIdx: " + Integer.toString( noteIdx));
-        Log.e( TAG, "mTone: " + Double.toString( tone));
         // if note is a long way from a note, suggest it is 'between' notes
         if ( noteIdx == 0 || noteIdx == NOTE_FREQS.length) return NOTE_NAMES[ noteIdx];
         if ( minDistance > NOTE_THRESHOLD * ( NOTE_FREQS[ noteIdx] - NOTE_FREQS[ noteIdx - 1])) {
-            Log.e( TAG, "bit flat");
             return NOTE_NAMES[ noteIdx - 1] + " to " + NOTE_NAMES[ noteIdx];
         } else if ( minDistance > NOTE_THRESHOLD * ( NOTE_FREQS[ noteIdx + 1] - NOTE_FREQS[ noteIdx])) {
-            Log.e( TAG, "bit sharp");
             return NOTE_NAMES[ noteIdx] + " to " + NOTE_NAMES[ noteIdx + 1];
         }
         return NOTE_NAMES[ noteIdx];
@@ -140,11 +132,11 @@ public class ScalarTone {
     /**
      * Converts a scalar/percentage to a tone.
      *
-     * @param hue the hue [0...1] to convert
+     * @param scalar the hue [0...1] to convert
      * @return the corresponding frequency (Hertz)
      */
-    double scalarToTone( double hue) {
-        return mBaseFrequency * Math.pow( TWELFTH_ROOT_OF_2, mHalfStepsPerRange * hue);
+    double scalarToTone( double scalar) {
+        return mBaseFrequency * Math.pow( TWELFTH_ROOT_OF_2, mHalfStepsPerRange * scalar);
     }
 
 }

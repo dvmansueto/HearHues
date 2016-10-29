@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioTrack;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -85,16 +86,21 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
             public void onLocationChanged(Location location) {
                 if ( isBetterLocation( location, mLocation)) {
                     mLocation = location;
-
+                    Log.d( TAG, "Have new location: " + location.toString());
                     if (mSettingDatum) {
+                        Log.d( TAG, "new LocTone");
                         mLocTone = new LocTone( mLocation);
                         mSettingDatum = false;
                     }
                     else {
+                        Log.d(TAG, "updating LocTone");
                         mLocTone.updateLoc(mLocation);
+                    }
+                        Log.d( TAG, "updating LocView");
                         mLocView.newScalarCoord(
                                 (float) mLocTone.getFrequency(), (float) mLocTone.getAmplitude());
-                    }
+                        mToneGenerator.setFrequency( mScalarTone.scalarToTone( mLocTone.getFrequency()));
+                        mToneGenerator.setAmplitude( mLocTone.getAmplitude());
                 }
             }
 
@@ -129,6 +135,7 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
         mScalarTone = applicationSingleton.getScalarTone();
         mToneGenerator = applicationSingleton.getToneGenerator();
+//        mToneGenerator = new ToneGenerator();
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
             @Override
             public void startedPlaying() {
@@ -145,8 +152,24 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
 //                imageView.setImageResource( R.drawable.ic_play_circle_outline_48);
             }
         });
+        mToneGenerator.setPlaybackMode( AudioTrack.MODE_STREAM);
+        mToneGenerator.setPlaybackFactor( 0.0625);
+        mToneGenerator.setPlayContinuously( true);
 
         mLocView = (LocView) getActivity().findViewById( R.id.tread_tune_loc_view);
+        mLocView.setTouchAllowed( true);
+        mLocView.setLocViewListener(new LocView.LocViewListener() {
+            @Override
+            public void newFrequency(double frequency) {
+                mToneGenerator.setFrequency( mScalarTone.scalarToTone( frequency));
+//                mToneGenerator.play();
+            }
+            @Override
+            public void newAmplitude(double amplitude) {
+                mToneGenerator.setAmplitude( amplitude);
+//                mToneGenerator.play();
+            }
+        });
 
     }
 

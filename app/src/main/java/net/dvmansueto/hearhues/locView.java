@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -29,7 +30,7 @@ public class LocView extends View {
     private static final int Y = 1;
 
     private static final float NEW_COORD_RADIUS = 6f;
-    private static final float OLD_COORD_RADIUS = 3f;
+    private static final float OLD_COORD_RADIUS = 6f;
 
     private boolean mIsPortrait;
 
@@ -44,6 +45,9 @@ public class LocView extends View {
 
     private float[] mAxes;
     private float[] mTicks;
+
+    private float mX;
+    private float mY;
 
     private int mWidth;
     private int mHeight;
@@ -72,6 +76,7 @@ public class LocView extends View {
         mLocViewListener = null; // for comparison later maybe?
         mNewCoords = new float[ VIEW_DIMENSIONS];
         mOldCoords = new float[ OLD_COORD_COUNT][ VIEW_DIMENSIONS];
+        mX = mY = 0;
 
         // prepare drawing components
         mAxisPaint = new Paint();
@@ -101,7 +106,7 @@ public class LocView extends View {
             mOldCoordPaints[ i].setStyle(Paint.Style.FILL);
             mOldCoordPaints[ i].setAlpha( (int) ( 255.0 * i / OLD_COORD_COUNT));
 
-            mOldCoordRadii[ i] = OLD_COORD_RADIUS * (OLD_COORD_COUNT - i) / OLD_COORD_COUNT;
+            mOldCoordRadii[ i] = OLD_COORD_RADIUS * i / OLD_COORD_COUNT;
         }
     }
 
@@ -120,6 +125,8 @@ public class LocView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw( canvas);
+
+        Log.d( TAG, "onDraw");
 
         canvas.drawLines( mAxes, mAxisPaint);
         canvas.drawLines( mTicks, mTickPaint);
@@ -234,13 +241,11 @@ public class LocView extends View {
     }
 
     void newScalarCoord( float x, float y) {
-
         if ( x < 0) x = 0;
         if ( x > 1) x = 1;
         if ( y < 0) y = 0;
         if ( y > 1) y = 1;
-
-        setNewCoords( x * mWidth, ( y - 1) * mHeight);
+        setNewCoords( x * mWidth, ( 1 - y) * mHeight);
     }
 
     private void setNewCoords( float x, float y) {
@@ -251,8 +256,10 @@ public class LocView extends View {
         float[][] tempCoords = new float[ OLD_COORD_COUNT][ VIEW_DIMENSIONS];
         System.arraycopy( mOldCoords, 1, tempCoords, 0, OLD_COORD_COUNT - 1);
         mOldCoords = tempCoords;
-        mOldCoords[ OLD_COORD_COUNT] = mNewCoords;
+        mOldCoords[ OLD_COORD_COUNT - 1] = mNewCoords;
         mNewCoords = coords;
+        invalidate(); // prompts system to call onDraw()
+
     }
 
     /**
