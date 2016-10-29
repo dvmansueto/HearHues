@@ -13,15 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fad9373a-5da7-45d2-94e3-f7712aa72a07" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java" />
     </list>
     <ignored path="HearHues.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,61 +49,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ToneGenerator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
+      <file leaf-file-name="LocView.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="257" column="44" selection-start-line="257" selection-start-column="44" selection-end-line="257" selection-end-column="44" />
+            <state relative-caret-position="502">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4939#4940#0" expanded="true" />
-                <element signature="e#4974#4975#0" expanded="true" />
-                <element signature="e#5188#5189#0" expanded="true" />
-                <element signature="e#5217#5218#0" expanded="true" />
-                <element signature="e#6944#6945#0" expanded="true" />
-                <element signature="e#6998#6999#0" expanded="true" />
-                <element signature="e#8905#8906#0" expanded="true" />
-                <element signature="e#8946#8947#0" expanded="true" />
-                <element signature="e#9091#9092#0" expanded="true" />
-                <element signature="e#9125#9126#0" expanded="true" />
-                <element signature="e#9270#9271#0" expanded="true" />
-                <element signature="e#9306#9307#0" expanded="true" />
+                <element signature="e#2652#2653#0" expanded="true" />
+                <element signature="e#2688#2689#0" expanded="true" />
+                <element signature="e#2732#2733#0" expanded="true" />
+                <element signature="e#2769#2770#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AudioManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Android/SDK/sources/android-24/android/media/AudioManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4860">
-              <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AudioTrack.java" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Android/SDK/sources/android-24/android/media/AudioTrack.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
-              <folding>
-                <element signature="e#45298#45299#0" expanded="true" />
-                <element signature="e#45329#45330#0" expanded="true" />
-                <element signature="e#68909#68910#0" expanded="true" />
-                <element signature="e#68959#68960#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AudioFormat.java" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Android/SDK/sources/android-24/android/media/AudioFormat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="449" column="31" selection-start-line="449" selection-start-column="13" selection-end-line="449" selection-end-column="31" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -118,46 +68,21 @@
       <file leaf-file-name="TinkerFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="802">
-              <caret line="124" column="48" selection-start-line="124" selection-start-column="48" selection-end-line="124" selection-end-column="48" />
+            <state relative-caret-position="840">
+              <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1466#1496#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java">
+      <file leaf-file-name="LocTone.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="128" column="51" selection-start-line="128" selection-start-column="51" selection-end-line="128" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2764#2811#0" expanded="true" />
-                <element signature="e#2829#2880#0" expanded="true" />
-                <element signature="e#3016#3071#0" expanded="true" />
-                <element signature="e#3097#3156#0" expanded="true" />
-                <element signature="e#3266#3321#0" expanded="true" />
-                <element signature="e#3347#3406#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HueTone.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1100">
-              <caret line="244" column="61" selection-start-line="240" selection-start-column="15" selection-end-line="244" selection-end-column="61" />
-              <folding>
-                <element signature="e#9860#9861#0" expanded="true" />
-                <element signature="e#9915#9916#0" expanded="true" />
-                <marker date="1477631231722" expanded="false" signature="7017:7096" ph="&quot;generator_peak_frequency&quot;" />
-                <marker date="1477631231722" expanded="false" signature="7494:7573" ph="&quot;generator_base_frequency&quot;" />
-                <marker date="1477631231722" expanded="false" signature="7725:7804" ph="&quot;generator_peak_frequency&quot;" />
-              </folding>
+            <state relative-caret-position="560">
+              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1907,7 +1832,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/gpsLocs.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TreadTunesFragment.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TouchHuesFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/locView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_touch_tones.xml" />
@@ -1925,9 +1849,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HearHueFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TimingLogger.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java" />
       </list>
     </option>
   </component>
@@ -2557,7 +2482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1477738031389</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="#29. Fixed popping on ToneGenerator. Logarithmic volume on ToneGenerator.">
+      <created>1477740688334</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1477740688334</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2630,7 +2562,8 @@
     <MESSAGE value="#26. Slightly less bad ToneGenerator (still popping, holds up main thread)" />
     <MESSAGE value="#27. Even less bad ToneGenerator (no longer holds up main thread, still pops)" />
     <MESSAGE value="#28. Techno version of ToneGenerator" />
-    <option name="LAST_COMMIT_MESSAGE" value="#28. Techno version of ToneGenerator" />
+    <MESSAGE value="#29. Fixed popping on ToneGenerator. Logarithmic volume on ToneGenerator." />
+    <option name="LAST_COMMIT_MESSAGE" value="#29. Fixed popping on ToneGenerator. Logarithmic volume on ToneGenerator." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2933,14 +2866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-660">
-          <caret line="0" column="32" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Android/SDK/sources/android-24/android/app/Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -3021,28 +2946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="244" column="61" selection-start-line="240" selection-start-column="15" selection-end-line="244" selection-end-column="61" />
-          <folding>
-            <element signature="e#9860#9861#0" expanded="true" />
-            <element signature="e#9915#9916#0" expanded="true" />
-            <marker date="1477631231722" expanded="false" signature="7017:7096" ph="&quot;generator_peak_frequency&quot;" />
-            <marker date="1477631231722" expanded="false" signature="7494:7573" ph="&quot;generator_base_frequency&quot;" />
-            <marker date="1477631231722" expanded="false" signature="7725:7804" ph="&quot;generator_peak_frequency&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Android/SDK/sources/android-24/android/media/AudioManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4860">
-          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Android/SDK/sources/android-24/android/os/AsyncTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -3059,14 +2962,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
+    <entry file="file://C:/Android/SDK/sources/android-24/java/lang/Math.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
-          <caret line="124" column="48" selection-start-line="124" selection-start-column="48" selection-end-line="124" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1466#1496#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="300">
+          <caret line="590" column="32" selection-start-line="590" selection-start-column="32" selection-end-line="590" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Android/SDK/sources/android-24/android/media/AudioManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4860">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3091,19 +2999,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
-          <caret line="232" column="28" selection-start-line="232" selection-start-column="28" selection-end-line="232" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
+        <state relative-caret-position="2380">
           <caret line="128" column="51" selection-start-line="128" selection-start-column="51" selection-end-line="128" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3117,32 +3015,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Android/SDK/sources/android-24/java/lang/Math.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="590" column="32" selection-start-line="590" selection-start-column="32" selection-end-line="590" selection-end-column="32" />
+        <state relative-caret-position="-4620">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/HueTone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="244" column="61" selection-start-line="240" selection-start-column="15" selection-end-line="244" selection-end-column="61" />
+          <folding>
+            <element signature="e#9860#9861#0" expanded="true" />
+            <element signature="e#9915#9916#0" expanded="true" />
+            <marker date="1477631231722" expanded="false" signature="7017:7096" ph="&quot;generator_peak_frequency&quot;" />
+            <marker date="1477631231722" expanded="false" signature="7494:7573" ph="&quot;generator_base_frequency&quot;" />
+            <marker date="1477631231722" expanded="false" signature="7725:7804" ph="&quot;generator_peak_frequency&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocTone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/ToneGenerator.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/TinkerFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="257" column="44" selection-start-line="257" selection-start-column="44" selection-end-line="257" selection-end-column="44" />
+        <state relative-caret-position="840">
+          <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4939#4940#0" expanded="true" />
-            <element signature="e#4974#4975#0" expanded="true" />
-            <element signature="e#5188#5189#0" expanded="true" />
-            <element signature="e#5217#5218#0" expanded="true" />
-            <element signature="e#6944#6945#0" expanded="true" />
-            <element signature="e#6998#6999#0" expanded="true" />
-            <element signature="e#8905#8906#0" expanded="true" />
-            <element signature="e#8946#8947#0" expanded="true" />
-            <element signature="e#9091#9092#0" expanded="true" />
-            <element signature="e#9125#9126#0" expanded="true" />
-            <element signature="e#9270#9271#0" expanded="true" />
-            <element signature="e#9306#9307#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/dvmansueto/hearhues/LocView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2652#2653#0" expanded="true" />
+            <element signature="e#2688#2689#0" expanded="true" />
+            <element signature="e#2732#2733#0" expanded="true" />
+            <element signature="e#2769#2770#0" expanded="true" />
           </folding>
         </state>
       </provider>

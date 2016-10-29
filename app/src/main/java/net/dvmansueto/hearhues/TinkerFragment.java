@@ -91,6 +91,7 @@ public class TinkerFragment extends Fragment {
 //                mToneGenerator.play();
             }
         });
+        mLocView.setTouchAllowed( true);
     }
 
 
