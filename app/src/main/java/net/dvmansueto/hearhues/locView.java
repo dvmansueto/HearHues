@@ -264,8 +264,8 @@ public class LocView extends View {
     }
 
     public interface LocViewListener {
-        public void newFrequency( double frequency);
-        public void newAmplitude( double amplitude);
+        void newFrequency( double frequency);
+        void newAmplitude( double amplitude);
     }
 
     public void setLocViewListener( LocViewListener locViewListener) {

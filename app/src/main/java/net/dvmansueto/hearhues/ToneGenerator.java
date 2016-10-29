@@ -379,13 +379,15 @@ public class ToneGenerator {
 
             short sample;
             if ( i < mToneSamples.length * RAMP_PERCENT && mRampingUp) {
-                sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN);
+                sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN *
+                        i / ( mToneSamples.length * RAMP_PERCENT));
             }
             else if ( i > mToneSamples.length * ( 1 - RAMP_PERCENT) && mRampingDown) {
                 sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN);
             }
             else {
-                sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN);
+                sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN *
+                        ( mToneSamples.length - i) / ( mToneSamples.length * RAMP_PERCENT));
             }
 
             mToneBytes[ j++] = (byte) ( sample & 0x00FF);
