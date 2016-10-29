@@ -241,8 +241,17 @@ public class ToneGenerator {
      */
     private void setVolume() {
         // via variable as AudioTrack doesn't return volume
-        mVolume = mMuted ? 0 : mAmplitude;
+        mVolume = mMuted ? 0 : linToLog( mAmplitude);
         mAudioTrack.setVolume( (float) mVolume);
+    }
+
+    /**
+     * Converts a linear value [0...1] to a logarithmic value [0...1].
+     * @param x the linear value to convert
+     * @return a logarithmic value corresponding to the input value.
+     */
+    private double linToLog( double x) {
+        return 0.01 * Math.pow( 10.0, 2.0 * x);
     }
 
     /**
@@ -383,11 +392,11 @@ public class ToneGenerator {
                         i / ( mToneSamples.length * RAMP_PERCENT));
             }
             else if ( i > mToneSamples.length * ( 1 - RAMP_PERCENT) && mRampingDown) {
-                sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN);
-            }
-            else {
                 sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN *
                         ( mToneSamples.length - i) / ( mToneSamples.length * RAMP_PERCENT));
+            }
+            else {
+                sample = (short) ( mToneSamples[ i] * TWO_TO_THE_POWER_OF_FIFTEEN);
             }
 
             mToneBytes[ j++] = (byte) ( sample & 0x00FF);
