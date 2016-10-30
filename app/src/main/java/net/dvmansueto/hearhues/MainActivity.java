@@ -14,12 +14,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-
-import java.util.List;
 
 
 public class MainActivity
@@ -45,7 +41,7 @@ public class MainActivity
 
         if (null == savedInstanceState) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, TreadTuneFragment.newInstance())
+                    .replace(R.id.fragment_container, TreadToneFragment.newInstance())
                     .commit();
         }
 
@@ -169,7 +165,7 @@ public class MainActivity
             fragment = new HearHueFragment();
             setMenuItemsVisible( true);
         } else if( id == R.id.nav_treadTunes) {
-            fragment = new TreadTuneFragment();
+            fragment = new TreadToneFragment();
             setMenuItemsVisible( true);
         } else if( id == R.id.nav_tinker) {
             fragment = new TinkerFragment();

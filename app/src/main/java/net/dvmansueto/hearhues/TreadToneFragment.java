@@ -27,7 +27,7 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TreadTuneFragment extends Fragment implements View.OnClickListener {
+public class TreadToneFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "TreadTunes";
     private static final int LOCATION_REQUEST_CALLBACK_CODE = 42;
@@ -56,19 +56,19 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    public TreadTuneFragment() {
+    public TreadToneFragment() {
         // Required empty public constructor
     }
 
-    public static TreadTuneFragment newInstance() {
-        return new TreadTuneFragment();
+    public static TreadToneFragment newInstance() {
+        return new TreadToneFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tread_tunes, container, false);
+        return inflater.inflate(R.layout.fragment_tread_tone, container, false);
     }
 
     private Location mLocation;

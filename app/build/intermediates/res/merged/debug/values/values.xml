@@ -681,11 +681,8 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="about_iv_neil_harbisson">Image of Neil Harbisson</string>
-    <string name="about_project_body">
-Hear Hues was developed for a \"Sensor Implementation\" project in a
-<a href="http://www.flinders.edu.au">university</a> mobile application development topic.
-\n The idea for the app comes from <a href="https://en.wikipedia.org/wiki/Neil_Harbisson">Neil Harbisson</a>,
+    <string name="about_hear_hue_body">
+The idea for Hear Hue comes from <a href="https://en.wikipedia.org/wiki/Neil_Harbisson">Neil Harbisson</a>,
 the worlds first government-recognized cyborg.
 Neil was born into the grey world of <a href="https://en.wikipedia.org/wiki/Achromatopsia">achromatopsia</a>
 (total colour blindness) and has never seen colour. In 2004 Neil had an antenna surgically implanted
@@ -694,7 +691,19 @@ into his skull, allowing him to \'hear\' colour.
 luminance) and maps it to a range of tones. As no literature appears to have been published on the
 implant, the mapping used by Harbisson is unknown, leaving us free to play with it in the settings.
     </string>
-    <string name="about_project_heading">Hear Hues</string>
+    <string name="about_hear_hue_heading">Hear Hue</string>
+    <string name="about_iv_neil_harbisson">Image of Neil Harbisson</string>
+    <string name="about_project_body">
+Hear Hues was developed for a \"Sensor Implementation\" project in a
+<a href="http://www.flinders.edu.au">university</a> mobile application development topic.
+    </string>
+    <string name="about_project_heading">Project</string>
+    <string name="about_tread_tone_body">
+Tread Tone takes the device\'s location as input for a tone generator. Longitudinal movement
+(parallel to the equator) determines the frequency, while latitudinal movement determines the
+amplitude (volume).
+    </string>
+    <string name="about_tread_tone_heading">Tread Tone</string>
     <string name="action_mute">Toggle Mute</string>
     <string name="alert_camera_permission_refused_message">Sorry, the sole purpose of Hear Hue
         requires this permission to function.</string>

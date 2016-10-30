@@ -1,31 +1,92 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="net.dvmansueto.hearhues.AboutFragment"
-    android:orientation="vertical"
-    android:background="@color/windowBackground">
+    android:background="@color/windowBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/about_project_heading"
-        android:text="@string/about_project_heading"
-        android:textAppearance="@style/Headline"
-        android:paddingTop="16dp"
-        android:paddingBottom="19dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/about_project_body"
-        android:text="@string/about_project_body"
-        android:paddingBottom="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/about_neil_harbisson"
-        android:src="@drawable/neil_harbisson"
-        android:contentDescription="@string/about_iv_neil_harbisson"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <!-- App -->
+        <TextView
+            android:id="@+id/about_project_heading"
+            android:text="@string/about_project_heading"
+            android:textAppearance="@style/Headline"
+            android:paddingTop="16dp"
+            android:paddingBottom="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/about_project_body"
+            android:text="@string/about_project_body"
+            android:paddingBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:id="@+id/about_below_project_rule"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark" />
+
+        <!-- Hear Hue -->
+        <TextView
+            android:id="@+id/about_hear_hue_heading"
+            android:text="@string/about_hear_hue_heading"
+            android:textAppearance="@style/Headline"
+            android:paddingTop="16dp"
+            android:paddingBottom="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/about_hear_hue_body"
+            android:text="@string/about_hear_hue_body"
+            android:paddingBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/about_neil_harbisson"
+            android:src="@drawable/neil_harbisson"
+            android:contentDescription="@string/about_iv_neil_harbisson"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/about_below_hear_hue_rule"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark" />
+
+        <!-- Tread Tone -->
+        <TextView
+            android:id="@+id/about_tread_tone_heading"
+            android:text="@string/about_tread_tone_heading"
+            android:textAppearance="@style/Headline"
+            android:paddingTop="16dp"
+            android:paddingBottom="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/about_tread_tone_body"
+            android:text="@string/about_tread_tone_body"
+            android:paddingBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- space at end to ensure all is displayed-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp"/>
+    </LinearLayout>
+</ScrollView>
