@@ -115,7 +115,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     /**
      * Only ask for permission once.
      */
-    private boolean pestering;
+    private boolean askedForPermission;
 
     @Override
     public void onResume() {
@@ -123,8 +123,10 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle( R.string.title_fragment_tread_tune);
 
-        // check for permission; ask for it if needed; establish GPS listener; exit to drawer if refused.
-        checkLocationPermission();
+        if ( !askedForPermission) {
+            // check for permission; ask for it if needed; establish GPS listener; exit to drawer if refused.
+            checkLocationPermission();
+        }
 
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
         mScalarTone = applicationSingleton.getScalarTone();
@@ -221,8 +223,10 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
                         getString( R.string.toast_tread_tune_location_rationale),
                         Toast.LENGTH_LONG).show();
                 ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
+                askedForPermission = true;
             } else {
                 ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
+                askedForPermission = true;
             }
         }
         else {

@@ -15,7 +15,7 @@ import android.util.Log;
  *  plus https://gist.github.com/SuspendedPhan/7596139
  */
 
-public class ToneGenerator {
+final class ToneGenerator {
 
     /** For {@link Log} */
     private static final String TAG = "ToneGenerator";

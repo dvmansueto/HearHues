@@ -24,6 +24,7 @@
     <string name="HH_btn_playPause">Play/Pause</string>
     <string name="HH_iv_tone">Tone</string>
     <string name="HH_iv_hue">Hue</string>
+    <string name="hear_hue_alert_no_camera">No camera found!</string>
     <string name="request_permission">This feature requires camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
@@ -77,15 +78,7 @@ amplitude (volume).
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_main">Hear Hues</string>
 
-
-    <!-- Permissions -->
-
-
-
     <!-- Alerts -->
-    <string name="alert_positive">Okay</string>
-    <string name="alert_negative">Cancel</string>
-
     <string name="toast_tread_tune_location_rationale">The sole purpose of Tread Tune requires
         this permission to function.</string>
     <string name="alert_enable_location_setting_title">Location is disabled</string>
