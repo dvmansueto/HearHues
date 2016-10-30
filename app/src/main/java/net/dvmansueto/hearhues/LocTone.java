@@ -3,6 +3,8 @@ package net.dvmansueto.hearhues;
 import android.location.Location;
 import android.util.Log;
 
+import java.util.Locale;
+
 /**
  * LocTone: idea is to establish a datum, then use relative latitude and longitude to alter the
  * amplitude and frequency (or visa versa) of a generated tone.
@@ -16,23 +18,24 @@ final class LocTone {
     private static final double AMPLITUDE_DISTANCE = 100; // metres from datum to max amp
     private static final double FREQUENCY_DISTANCE = 100; // metres from datum to max freq
 
+    private ScalarTone mScalarTone;
+
     private double mLatitudeRadius = 6378137.0; // WGS84 major (equatorial) radius
     private double mLongitudeRadius = 6356752.3142; // WGS84 semi-major (polar) radius
 
     private double mRefLat;
     private double mRefLong;
 
-    private double mDeltaLat;
-    private double mDeltaLong;
+    private double mDeltaLat = 0;
+    private double mDeltaLong = 0;
 
-    private double mAmplitude;
-    private double mFrequency;
+    private double mAmplitude = 0;
+    private double mFrequency = -1;
 
     LocTone(Location datum) {
         mRefLat = datum.getLatitude();
         mRefLong = datum.getLongitude();
         mLatitudeRadius = computeLatitudeRadius();
-        updateLoc( datum);
     }
 
     void updateLoc( Location update) {
@@ -49,6 +52,24 @@ final class LocTone {
 
     double getFrequency() {
         return mFrequency;
+    }
+
+    /**
+     * Fetches the tone in frequency format.
+     * @return the tone as a "xxxxxx.xx Hz" format string.
+     */
+    String toToneString() {
+
+        // Locale.getDefault() for appropriate '.' or ',' decimal point
+        return String.format(Locale.getDefault(), "%7.2f", mFrequency) + " Hz";
+    }
+
+    /**
+     * Fetches the nearest half-note.
+     * @return the nearest half-note as a formatted string.
+     */
+    String toNoteString() {
+        return ( mFrequency < 0) ? "" : mScalarTone.toNoteString( mFrequency);
     }
 
     /**

@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -50,7 +51,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     public void onClick( View view) {
         Log.d(TAG, "onClick: " + view.getId());
         switch( view.getId()) {
-            case R.id.tread_tune_ivbtn_location:
+            case R.id.tread_tone_ivbtn_location:
                 setDatum();
                 break;
         }
@@ -93,11 +94,12 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
                         Log.d(TAG, "updating LocTone");
                         mLocTone.updateLoc(mLocation);
                     }
-                        Log.d( TAG, "updating LocView");
-                        mLocView.newScalarCoord(
-                                (float) mLocTone.getFrequency(), (float) mLocTone.getAmplitude());
-                        mToneGenerator.setFrequency( mScalarTone.scalarToTone( mLocTone.getFrequency()));
-                        mToneGenerator.setAmplitude( mLocTone.getAmplitude());
+                    Log.d( TAG, "updating LocView");
+                    mLocView.newScalarCoord(
+                            (float) mLocTone.getFrequency(), (float) mLocTone.getAmplitude());
+                    mToneGenerator.setFrequency( mScalarTone.scalarToTone( mLocTone.getFrequency()));
+                    mToneGenerator.setAmplitude( mLocTone.getAmplitude());
+//                    updateUi();
                 }
             }
 
@@ -105,6 +107,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
             }
 
             public void onProviderEnabled(String provider) {
+
             }
 
             public void onProviderDisabled(String provider) {
@@ -121,7 +124,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle( R.string.title_fragment_tread_tune);
+        activity.getSupportActionBar().setTitle( R.string.title_fragment_tread_tone);
 
         if ( !askedForPermission) {
             // check for permission; ask for it if needed; establish GPS listener; exit to drawer if refused.
@@ -152,7 +155,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
         mToneGenerator.setPlaybackFactor( 0.0625);
         mToneGenerator.setPlayContinuously( true);
 
-        mLocView = (LocView) getActivity().findViewById( R.id.tread_tune_loc_view);
+        mLocView = (LocView) getActivity().findViewById( R.id.tread_tone_loc_view);
 //        mLocView.setTouchAllowed( true);
 //        mLocView.setLocViewListener(new LocView.LocViewListener() {
 //            @Override
@@ -165,6 +168,20 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
 //            }
 //        });
 
+    }
+
+    /**
+     * Updates dynamic UI elements:
+     *  • Tone frequency string
+     *  • Hue icon colour
+     *  • Hue colour string
+     */
+    private void updateUi() {
+
+
+        // update tone text display
+        TextView textView = (TextView) getActivity().findViewById( R.id.tread_tone_tv_heading);
+        textView.setText( mLocTone.toToneString() + " (" + mLocTone.toNoteString() + ")");
     }
 
     @Override

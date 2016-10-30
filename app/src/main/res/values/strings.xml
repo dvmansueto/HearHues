@@ -28,9 +28,10 @@
     <string name="request_permission">This feature requires camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
-    <!-- TreadTuneFragment -->
-    <string name="title_fragment_tread_tune">Tread Tune</string>
-    <string name="tread_tune_iv_tread">Tone</string>
+    <!-- TreadToneFragment -->
+    <string name="title_fragment_tread_tone">Tread Tune</string>
+    <string name="tread_tone_iv_tread">Tone</string>
+    <string name="tread_tone_tv_heading">Waiting for location...</string>
 
     <!-- TinkerFragment -->
     <string name="fragment_tinker_title">Tinker</string>

@@ -32,7 +32,7 @@ final class HueTone {
      */
     private static final String TAG = "HueTone";
 
-    public ScalarTone mScalarTone;
+    private ScalarTone mScalarTone;
 
 //    // all for updating incorrectly selected preferences
 //    private final Context mContext;

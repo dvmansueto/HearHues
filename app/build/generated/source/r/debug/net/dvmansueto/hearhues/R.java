@@ -2812,10 +2812,10 @@ containing a value of this type.
         public static final int top=0x7f0e002b;
         public static final int topPanel=0x7f0e004a;
         public static final int touch_outside=0x7f0e0072;
-        public static final int tread_tune_iv_tread=0x7f0e0095;
-        public static final int tread_tune_ivbtn_location=0x7f0e0097;
-        public static final int tread_tune_loc_view=0x7f0e0098;
-        public static final int tread_tune_title=0x7f0e0096;
+        public static final int tread_tone_iv_tread=0x7f0e0095;
+        public static final int tread_tone_ivbtn_location=0x7f0e0097;
+        public static final int tread_tone_loc_view=0x7f0e0098;
+        public static final int tread_tone_tv_heading=0x7f0e0096;
         public static final int up=0x7f0e0009;
         public static final int useLogo=0x7f0e0014;
         public static final int view_offset_helper=0x7f0e000a;
@@ -3018,10 +3018,11 @@ containing a value of this type.
         public static final int title_fragment_about=0x7f070070;
         public static final int title_fragment_hear_hue=0x7f070071;
         public static final int title_fragment_settings=0x7f070072;
-        public static final int title_fragment_tread_tune=0x7f070073;
+        public static final int title_fragment_tread_tone=0x7f070073;
         public static final int toast_hear_hue_camera_rational=0x7f070074;
         public static final int toast_tread_tune_location_rationale=0x7f070075;
-        public static final int tread_tune_iv_tread=0x7f070076;
+        public static final int tread_tone_iv_tread=0x7f070076;
+        public static final int tread_tone_tv_heading=0x7f070077;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09008d;

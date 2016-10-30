@@ -1802,7 +1802,7 @@
         <item>1.6</item>
         <item>2.4</item>
     </string-array><string name="HH_toneHeading">Tone: </string><string name="alert_camera_permission_refused_message">Sorry, the sole purpose of Hear Hue
-        requires this permission to function.</string><string name="about_project_heading">Project</string><string name="HH_btn_toggleCamera">Toggle Camera</string><string name="camera_error">This device doesn\'t support Camera2 API.</string><string name="navigation_drawer_secondary_features">Ancillary Features</string><string name="HH_iv_hue">Hue</string><string name="title_fragment_tread_tune">Tread Tune</string><string name="tinker_loc_view_title">Touch Tones</string><string name="title_activity_main">Hear Hues</string><string name="alert_camera_permission_refused_title">This feature requires camera access</string><string-array name="prefs_palette_area_entries">
+        requires this permission to function.</string><string name="tread_tone_tv_heading">Waiting for location...</string><string name="about_project_heading">Project</string><string name="HH_btn_toggleCamera">Toggle Camera</string><string name="camera_error">This device doesn\'t support Camera2 API.</string><string name="navigation_drawer_secondary_features">Ancillary Features</string><string name="HH_iv_hue">Hue</string><string name="tinker_loc_view_title">Touch Tones</string><string name="title_activity_main">Hear Hues</string><string name="alert_camera_permission_refused_title">This feature requires camera access</string><string name="title_fragment_tread_tone">Tread Tune</string><string-array name="prefs_palette_area_entries">
         <item>Very Low</item>
         <item>Low</item>
         <item>Medium</item>
@@ -1853,7 +1853,7 @@ amplitude (volume).
         <item>Very Strong</item>
         <item>Silly</item>
     </string-array><string name="fragment_tinker_title">Tinker</string><string name="toast_tread_tune_location_rationale">The sole purpose of Tread Tune requires
-        this permission to function.</string><string name="HH_btn_capturePhoto">Capture Photograph</string><string name="prefs_palette_swatch_key">palette_swatch</string><string name="title_fragment_settings">Settings</string><string name="prefs_palette_number_title">Colour Precision</string><string name="prefs_generator_peak_frequency_default">7040</string><string name="prefs_generator_peak_frequency_title">Peak Tone</string><string name="request_permission">This feature requires camera permission.</string><string-array name="prefs_generator_base_frequency_entries">
+        this permission to function.</string><string name="HH_btn_capturePhoto">Capture Photograph</string><string name="prefs_palette_swatch_key">palette_swatch</string><string name="title_fragment_settings">Settings</string><string name="prefs_palette_number_title">Colour Precision</string><string name="prefs_generator_peak_frequency_default">7040</string><string name="prefs_generator_peak_frequency_title">Peak Tone</string><string name="request_permission">This feature requires camera permission.</string><string name="tread_tone_iv_tread">Tone</string><string-array name="prefs_generator_base_frequency_entries">
         <item>A₀</item>
         <item>A₁</item>
         <item>A₂</item>
@@ -1885,7 +1885,7 @@ Hear Hues was developed for a \"Sensor Implementation\" project in a
 
 
         
-    </string><string name="alert_camera_permission_refused_negative">Cancel</string><string name="prefs_palette_area_summary">Number of candidate cells (affects processing time)</string><string name="HH_hueTitle">Hue: </string><string name="tread_tune_iv_tread">Tone</string><string name="prefs_palette_area_key">palette_area</string><string-array name="prefs_playback_seconds_entries">
+    </string><string name="alert_camera_permission_refused_negative">Cancel</string><string name="prefs_palette_area_summary">Number of candidate cells (affects processing time)</string><string name="HH_hueTitle">Hue: </string><string name="prefs_palette_area_key">palette_area</string><string-array name="prefs_playback_seconds_entries">
         <item>Short</item>
         <item>Medium</item>
         <item>Long</item>
