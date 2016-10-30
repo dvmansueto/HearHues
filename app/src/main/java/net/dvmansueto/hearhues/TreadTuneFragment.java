@@ -151,17 +151,17 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
         mToneGenerator.setPlayContinuously( true);
 
         mLocView = (LocView) getActivity().findViewById( R.id.tread_tune_loc_view);
-        mLocView.setTouchAllowed( true);
-        mLocView.setLocViewListener(new LocView.LocViewListener() {
-            @Override
-            public void newFrequency(double frequency) {
-                mToneGenerator.setFrequency( mScalarTone.scalarToTone( frequency));
-            }
-            @Override
-            public void newAmplitude(double amplitude) {
-                mToneGenerator.setAmplitude( amplitude);
-            }
-        });
+//        mLocView.setTouchAllowed( true);
+//        mLocView.setLocViewListener(new LocView.LocViewListener() {
+//            @Override
+//            public void newFrequency(double frequency) {
+//                mToneGenerator.setFrequency( mScalarTone.scalarToTone( frequency));
+//            }
+//            @Override
+//            public void newAmplitude(double amplitude) {
+//                mToneGenerator.setAmplitude( amplitude);
+//            }
+//        });
 
     }
 
