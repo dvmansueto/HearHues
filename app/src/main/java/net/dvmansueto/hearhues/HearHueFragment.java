@@ -3,10 +3,7 @@ package net.dvmansueto.hearhues;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -37,6 +34,9 @@ import android.os.HandlerThread;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -86,7 +86,7 @@ public class HearHueFragment extends Fragment
      * Conversion from screen rotation to JPEG orientation.
      */
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-    private static final int REQUEST_CAMERA_PERMISSION = 1;
+    private static final int CAMERA_REQUEST_CALLBACK_CODE = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
 
     static {
@@ -620,6 +620,28 @@ public class HearHueFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         Log.d( TAG, " onActivityCreated.");
+    }
+
+    @Override
+    public View onCreateView( LayoutInflater inflater,
+                              ViewGroup container,
+                              Bundle savedInstanceState) {
+        return inflater.inflate( R.layout.fragment_hear_hue, container, false);
+    }
+
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        view.findViewById( R.id.HH_btn_playStop).setOnClickListener( this);
+        view.findViewById( R.id.HH_btn_toggleCamera).setOnClickListener( this);
+        view.findViewById( R.id.HH_btn_capturePhoto).setOnClickListener( this);
+        mTextureView = (AutoFitTextureView) view.findViewById(R.id.HH_aftv_cameraPreview);
+    }
+
+
+    //TODO: consider replacing fetching prefs with a listener, or something!
+    @Override
+    public void onResume() {
+        super.onResume();
 
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
         mScalarTone = applicationSingleton.getScalarTone();
@@ -647,29 +669,6 @@ public class HearHueFragment extends Fragment
         initFile();
         initCamera();
         updateUi();
-
-    }
-
-    @Override
-    public View onCreateView( LayoutInflater inflater,
-                              ViewGroup container,
-                              Bundle savedInstanceState) {
-        return inflater.inflate( R.layout.fragment_hear_hue, container, false);
-    }
-
-    @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
-        view.findViewById( R.id.HH_btn_playStop).setOnClickListener( this);
-        view.findViewById( R.id.HH_btn_toggleCamera).setOnClickListener( this);
-        view.findViewById( R.id.HH_btn_capturePhoto).setOnClickListener( this);
-        mTextureView = (AutoFitTextureView) view.findViewById(R.id.HH_aftv_cameraPreview);
-    }
-
-
-    //TODO: consider replacing fetching prefs with a listener, or something!
-    @Override
-    public void onResume() {
-        super.onResume();
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
 //        noinspection ConstantConditions
@@ -752,27 +751,27 @@ public class HearHueFragment extends Fragment
         super.onStop();
     }
 
-    private void requestCameraPermission() {
-        if (FragmentCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-            new ConfirmationDialog().show(getChildFragmentManager(), FRAGMENT_DIALOG);
-        } else {
-            FragmentCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
-                    REQUEST_CAMERA_PERMISSION);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                ErrorDialog.newInstance(getString(R.string.request_permission))
-                        .show(getChildFragmentManager(), FRAGMENT_DIALOG);
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
+//    private void requestCameraPermission() {
+//        if (FragmentCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+//            new ConfirmationDialog().show(getSupportFragmentManager(), FRAGMENT_DIALOG);
+//        } else {
+//            FragmentCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+//                    REQUEST_CAMERA_PERMISSION);
+//        }
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+//                                           @NonNull int[] grantResults) {
+//        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+//            if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+//                ErrorDialog.newInstance(getString(R.string.request_permission))
+//                        .show(getChildFragmentManager(), FRAGMENT_DIALOG);
+//            }
+//        } else {
+//            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
+//    }
 
     /**
      * Initialises the camera.
@@ -959,11 +958,7 @@ public class HearHueFragment extends Fragment
      */
     private void openCamera( int width, int height) {
 
-        if ( ContextCompat.checkSelfPermission( getActivity(), Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestCameraPermission();
-            return;
-        }
+        checkCameraPermission();
 
         setUpCameraOutputs( width, height);
         configureTransform( width, height);
@@ -1401,52 +1396,86 @@ public class HearHueFragment extends Fragment
             return dialog;
         }
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Activity activity = getActivity();
-            return new AlertDialog.Builder(activity)
+            return new android.support.v7.app.AlertDialog.Builder(activity)
                     .setMessage(getArguments().getString(ARG_MESSAGE))
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            activity.finish();
-                        }
-                    })
-                    .create();
-        }
-
-    }
-
-    /**
-     * Shows OK/Cancel confirmation dialog about camera permission.
-     */
-    public static class ConfirmationDialog extends DialogFragment {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final android.app.Fragment parent = getParentFragment();
-            return new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.request_permission)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            FragmentCompat.requestPermissions(parent,
-                                    new String[]{Manifest.permission.CAMERA},
-                                    REQUEST_CAMERA_PERMISSION);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel,
+                    .setNeutralButton(android.R.string.ok,
                             new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Activity activity = parent.getActivity();
-                                    if (activity != null) {
-                                        activity.finish();
-                                    }
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    // user cancelled the dialog
+                                    ((MainActivity) getActivity()).openNavigationDrawer();
+                                    onPause();
                                 }
-                            })
-                    .create();
+                            }
+                    ).create();
         }
     }
 
+    private void checkCameraPermission() {
+        String permission = Manifest.permission.CAMERA;
+        int callbackCode = CAMERA_REQUEST_CALLBACK_CODE;
+
+        if (ActivityCompat.checkSelfPermission(
+                getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
+            // check if Android thinks we should explain to the user why we need this permission
+            // ( ie it would seem out-of-context to user otherwise)
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+                Toast.makeText(getActivity(),
+                        getString(R.string.toast_tread_tune_location_rationale),
+                        Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, callbackCode);
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, callbackCode);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult( int returnedCode, @NonNull String[] permissions,
+                                            @NonNull int[] grantedResults) {
+        Log.d( TAG, "switching " + Integer.toString( returnedCode));
+
+        switch ( returnedCode) {
+            case CAMERA_REQUEST_CALLBACK_CODE: {
+
+                // If request was rejected, the result arrays will be empty.
+                if (grantedResults.length == 0
+                        || grantedResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+                    Log.d(TAG, "camera permission rejected");
+                    // permission refused, display a dialog and exit to nav drawer
+                    android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                    alertDialogBuilder.setTitle(R.string.alert_camera_permission_refused_title)
+                            .setMessage(R.string.alert_camera_permission_refused_message)
+                            .setNeutralButton(R.string.alert_camera_permission_refused_negative,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // user cancelled the dialog
+                                            exitToNavigationDrawer();
+                                        }
+                                    });
+                    alertDialogBuilder.create().show();
+                } else {
+                    // otherwise we have permission
+                    Log.d(TAG, "camera permission accepted");
+                    initCamera();
+                }
+            }
+            default:
+                super.onRequestPermissionsResult( returnedCode, permissions, grantedResults);
+        }
+    }
+
+
+    private void exitToNavigationDrawer() {
+        // cast to avoid 'static' complaint
+        ((MainActivity) getActivity()).openNavigationDrawer();
+        Log.d( TAG, "Exited to nav drawer");
+        onPause();
+    }
 }

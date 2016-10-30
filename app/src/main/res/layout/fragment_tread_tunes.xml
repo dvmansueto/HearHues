@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.dvmansueto.hearhues.TreadTuneFragment">
+    tools:context="net.dvmansueto.hearhues.TreadTuneFragment"
+    android:background="@color/windowBackground">
 
     <ImageView
         android:id="@+id/tread_tune_iv_tread"

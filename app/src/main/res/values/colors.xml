@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">@android:color/holo_blue_dark</color>
     <color name="colorAccent">@android:color/holo_orange_light</color>
     <color name="textColorPrimary">@android:color/white</color>
-    <color name="windowBackground">@android:color/darker_gray</color>
+    <color name="windowBackground">@android:color/white</color>
     <color name="navigationBarColor">@android:color/transparent</color>
 </resources>

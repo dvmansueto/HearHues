@@ -1,9 +1,9 @@
 package net.dvmansueto.hearhues;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 public class SettingsFragment extends Fragment {

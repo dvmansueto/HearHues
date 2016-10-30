@@ -66,6 +66,36 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_main">Hear Hues</string>
 
+
+    <!-- Permissions -->
+
+
+
+    <!-- Alerts -->
+    <string name="alert_positive">Okay</string>
+    <string name="alert_negative">Cancel</string>
+
+    <string name="toast_tread_tune_location_rationale">The sole purpose of Tread Tune requires
+        this permission to function.</string>
+    <string name="alert_enable_location_setting_title">Location is disabled</string>
+    <string name="alert_enable_location_setting_message">Please go to settings and enable location in order to
+        use this feature.</string>
+    <string name="alert_enable_location_setting_positive">Go to settings</string>
+    <string name="alert_enable_location_setting_negative">Cancel</string>
+
+    <string name="alert_location_permission_refused_title">This feature requires location access</string>
+    <string name="alert_location_permission_refused_message">Sorry, the sole purpose of Tread Tune
+        requires this permission to function.</string>
+    <string name="alert_location_permission_refused_negative">Cancel</string>
+
+    <string name="toast_hear_hue_camera_rational">The sole purpose of Hear Hue requires this
+        permission to function.</string>
+<string name="alert_camera_permission_refused_title">This feature requires camera access</string>
+    <string name="alert_camera_permission_refused_message">Sorry, the sole purpose of Hear Hue
+        requires this permission to function.</string>
+    <string name="alert_camera_permission_refused_negative">Cancel</string>
+
+
     <!-- Preferences -->
 
     <string name="prefs_palette_category">Hear Hue</string>
@@ -202,20 +232,5 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
         <item>6</item>
         <item>7</item>
     </string-array>
-
-
-    <!-- DIALOGS -->
-    <string name="alert_positive">Okay</string>
-    <string name="alert_negative">Cancel</string>
-
-    <string name="alert_enable_gps_title">Location is disabled</string>
-    <string name="alert_enable_gps_message">Please go to settings and enable location in order to
-        use this feature.</string>
-    <string name="alert_enable_gps_positive">Go to settings</string>
-    <string name="alert_enable_gps_negative">Cancel</string>
-
-    <string name="alert_location_refused_title">This feature requires location</string>
-    <string name="alert_location_refused_message">Sorry, this feature requires location access.</string>
-    <string name="alert_location_refused_neutral">Cancel</string>
 
 </resources>

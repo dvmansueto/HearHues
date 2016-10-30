@@ -1,13 +1,13 @@
 package net.dvmansueto.hearhues;
 
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
+import java.util.List;
 
 
 public class MainActivity
@@ -42,10 +44,18 @@ public class MainActivity
         setContentView(R.layout.activity_main);
 
         if (null == savedInstanceState) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, TreadTuneFragment.newInstance())
                     .commit();
         }
+
+//        // handle back
+//        getSupportFragmentManager().addOnBackStackChangedListener(
+//                new FragmentManager.OnBackStackChangedListener() {
+//                    public void onBackStackChanged() {
+//                        // Update your UI here.
+//                    }
+//                });
 
         // setup the action bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -98,7 +108,11 @@ public class MainActivity
         DrawerLayout drawerLayout = (DrawerLayout) findViewById( R.id.drawer_layout);
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+        }
+//        else if (getFragmentManager().getBackStackEntryCount() > 0 ){
+//            getFragmentManager().popBackStack();
+//        }
+        else {
             super.onBackPressed();
         }
     }
@@ -121,6 +135,7 @@ public class MainActivity
     }
 
     private static final String TAG = "MainActivity";
+
     private void toggleMute() {
         ActionMenuItemView muteButton = (ActionMenuItemView) findViewById( R.id.action_mute);
         if (mToneGenerator.getMuted()) {
@@ -168,8 +183,12 @@ public class MainActivity
         }
 
         if( fragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace( R.id.fragment_container, fragment).commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+//                    .replace( R.id.fragment_container, fragment)
+                    .replace( R.id.fragment_container, fragment, fragment.getTag())
+                    .addToBackStack( fragment.getTag())
+                    .commit();
         }
         closeNavigationDrawer();
         return true;

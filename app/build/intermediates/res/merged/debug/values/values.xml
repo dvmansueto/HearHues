@@ -170,7 +170,7 @@
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <color name="textColorPrimary">@android:color/white</color>
-    <color name="windowBackground">@android:color/darker_gray</color>
+    <color name="windowBackground">@android:color/white</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode">
             
             <enum name="normal" value="0"/>
@@ -696,14 +696,19 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
     </string>
     <string name="about_project_heading">Hear Hues</string>
     <string name="action_mute">Toggle Mute</string>
-    <string name="alert_enable_gps_message">Please go to settings and enable location in order to
+    <string name="alert_camera_permission_refused_message">Sorry, the sole purpose of Hear Hue
+        requires this permission to function.</string>
+    <string name="alert_camera_permission_refused_negative">Cancel</string>
+    <string name="alert_camera_permission_refused_title">This feature requires camera access</string>
+    <string name="alert_enable_location_setting_message">Please go to settings and enable location in order to
         use this feature.</string>
-    <string name="alert_enable_gps_negative">Cancel</string>
-    <string name="alert_enable_gps_positive">Go to settings</string>
-    <string name="alert_enable_gps_title">Location is disabled</string>
-    <string name="alert_location_refused_message">Sorry, this feature requires location access.</string>
-    <string name="alert_location_refused_neutral">Cancel</string>
-    <string name="alert_location_refused_title">This feature requires location</string>
+    <string name="alert_enable_location_setting_negative">Cancel</string>
+    <string name="alert_enable_location_setting_positive">Go to settings</string>
+    <string name="alert_enable_location_setting_title">Location is disabled</string>
+    <string name="alert_location_permission_refused_message">Sorry, the sole purpose of Tread Tune
+        requires this permission to function.</string>
+    <string name="alert_location_permission_refused_negative">Cancel</string>
+    <string name="alert_location_permission_refused_title">This feature requires location access</string>
     <string name="alert_negative">Cancel</string>
     <string name="alert_positive">Okay</string>
     <string name="app_name">Hear Hues</string>
@@ -770,6 +775,10 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
     <string name="title_fragment_hear_hue">Hear Hue</string>
     <string name="title_fragment_settings">Settings</string>
     <string name="title_fragment_tread_tune">Tread Tune</string>
+    <string name="toast_hear_hue_camera_rational">The sole purpose of Hear Hue requires this
+        permission to function.</string>
+    <string name="toast_tread_tune_location_rationale">The sole purpose of Tread Tune requires
+        this permission to function.</string>
     <string name="tread_tune_iv_tread">Tone</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/tinker_fragment"
-    tools:context="net.dvmansueto.hearhues.TinkerFragment">
+    tools:context="net.dvmansueto.hearhues.TinkerFragment"
+    android:background="@color/windowBackground">
 
     <TextView
         android:id="@+id/tinker_hue_view_title"

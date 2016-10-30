@@ -1,7 +1,6 @@
 package net.dvmansueto.hearhues;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,8 +11,8 @@ import android.media.AudioTrack;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -41,8 +40,6 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
 
     private LocTone mLocTone;
     private LocView mLocView;
-
-    private boolean mGettingGpsLocs = false;
 
     private boolean mSettingDatum = true; // so will take first fix as datum
 
@@ -126,11 +123,8 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle( R.string.title_fragment_tread_tune);
 
-        if ( !mGettingGpsLocs && !pestering) {
-            pestering = true;
-            // check for permission; ask for it if needed; establish GPS listener; exit to drawer if refused.
-            checkPermission( Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_REQUEST_CALLBACK_CODE);
-        } // locations returned to mLocationListener.
+        // check for permission; ask for it if needed; establish GPS listener; exit to drawer if refused.
+        checkLocationPermission();
 
         ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
         mScalarTone = applicationSingleton.getScalarTone();
@@ -162,12 +156,10 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
             @Override
             public void newFrequency(double frequency) {
                 mToneGenerator.setFrequency( mScalarTone.scalarToTone( frequency));
-//                mToneGenerator.play();
             }
             @Override
             public void newAmplitude(double amplitude) {
                 mToneGenerator.setAmplitude( amplitude);
-//                mToneGenerator.play();
             }
         });
 
@@ -177,10 +169,9 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
     public void onPause() {
         super.onPause();
 
-        if (mGettingGpsLocs) {
-            //noinspection MissingPermission: mGettingGpsLocs is set in onResume
+        if ( ActivityCompat.checkSelfPermission( getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mLocationManager.removeUpdates(mLocationListener);
-            mGettingGpsLocs = false;
         }
     }
 
@@ -193,9 +184,9 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
         if ( !mLocationManager.isProviderEnabled( LocationManager.GPS_PROVIDER)) {
             Log.d( TAG, "gps setting disabled");
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( getActivity());
-            alertDialogBuilder.setTitle( R.string.alert_enable_gps_title)
-                    .setMessage( R.string.alert_enable_gps_message)
-                    .setPositiveButton( R.string.alert_enable_gps_positive,
+            alertDialogBuilder.setTitle( R.string.alert_enable_location_setting_title)
+                    .setMessage( R.string.alert_enable_location_setting_message)
+                    .setPositiveButton( R.string.alert_enable_location_setting_positive,
                             new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick( DialogInterface dialog, int which) {
@@ -203,7 +194,7 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
                             startActivity( intent);
                         }
                     })
-                    .setNegativeButton( R.string.alert_enable_gps_negative,
+                    .setNegativeButton( R.string.alert_enable_location_setting_negative,
                             new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick( DialogInterface dialog, int which) {
@@ -215,31 +206,28 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
         }
         //noinspection MissingPermission: definitely have permission at this point...
         mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mLocationListener);
-        mGettingGpsLocs = true;
     }
 
-    private void permissionGranted(String permission) {
-        switch( permission) {
-            case ( Manifest.permission.ACCESS_FINE_LOCATION): {
-                initGpsLoc();
-            }
-        }
-    }
+    private void checkLocationPermission() {
+        String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+        int callbackCode = LOCATION_REQUEST_CALLBACK_CODE;
 
-    private void checkPermission( String permission, int callbackCode) {
-
-        if ( ActivityCompat.checkSelfPermission( getActivity(), permission) !=
-                    PackageManager.PERMISSION_GRANTED) {
+        if ( ActivityCompat.checkSelfPermission(
+                getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
             // check if Android thinks we should explain to the user why we need this permission
             // ( ie it would seem out-of-context to user otherwise)
             if ( ActivityCompat.shouldShowRequestPermissionRationale( getActivity(), permission)) {
-                Toast.makeText( getActivity(), "we need this", Toast.LENGTH_LONG).show();
-                FragmentCompat.requestPermissions( this, new String[] { permission}, callbackCode);
+                Toast.makeText( getActivity(),
+                        getString( R.string.toast_tread_tune_location_rationale),
+                        Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
             } else {
-                FragmentCompat.requestPermissions( this, new String[] { permission}, callbackCode);
+                ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
             }
-        } else {
-            permissionGranted( permission);
+        }
+        else {
+            // we have permission!
+            initGpsLoc();
         }
     }
 
@@ -258,9 +246,9 @@ public class TreadTuneFragment extends Fragment implements View.OnClickListener 
                     Log.d(TAG, "gps permission rejected");
                     // permission refused, display a dialog and exit to nav drawer
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                    alertDialogBuilder.setTitle(R.string.alert_location_refused_title)
-                            .setMessage(R.string.alert_location_refused_message)
-                            .setNeutralButton(R.string.alert_location_refused_neutral,
+                    alertDialogBuilder.setTitle(R.string.alert_location_permission_refused_title)
+                            .setMessage(R.string.alert_location_permission_refused_message)
+                            .setNeutralButton(R.string.alert_location_permission_refused_negative,
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {

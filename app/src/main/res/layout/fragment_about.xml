@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context="net.dvmansueto.hearhues.AboutFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/windowBackground">
 
     <TextView
         android:id="@+id/about_project_heading"
