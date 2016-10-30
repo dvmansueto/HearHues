@@ -12,9 +12,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 
 public class MainActivity
@@ -117,14 +120,26 @@ public class MainActivity
         }
     }
 
+    private static final String TAG = "MainActivity";
+    private void toggleMute() {
+        ActionMenuItemView muteButton = (ActionMenuItemView) findViewById( R.id.action_mute);
+        if (mToneGenerator.getMuted()) {
+            mToneGenerator.setMuted( false);
+            muteButton.setIcon( getResources().getDrawable( R.drawable.ic_volume_unmuted));
+        } else {
+            mToneGenerator.setMuted( true);
+            muteButton.setIcon( getResources().getDrawable( R.drawable.ic_volume_muted));
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_mute: {
-//
-//                return true;
-//            }
-//        }
+        switch (item.getItemId()) {
+            case R.id.action_mute: {
+                toggleMute();
+                return true;
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 

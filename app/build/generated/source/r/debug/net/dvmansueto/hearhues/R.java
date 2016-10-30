@@ -2642,8 +2642,8 @@ containing a value of this type.
         public static final int ic_tone=0x7f020068;
         public static final int ic_tone_48=0x7f020069;
         public static final int ic_tread=0x7f02006a;
-        public static final int ic_volume_mute=0x7f02006b;
-        public static final int ic_volume_off=0x7f02006c;
+        public static final int ic_volume_muted=0x7f02006b;
+        public static final int ic_volume_unmuted=0x7f02006c;
         public static final int navigation_empty_icon=0x7f02006d;
         public static final int neil_harbisson=0x7f02006e;
         public static final int notification_template_icon_bg=0x7f02006f;

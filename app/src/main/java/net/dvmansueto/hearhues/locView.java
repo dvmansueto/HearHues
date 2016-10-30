@@ -126,8 +126,6 @@ public class LocView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw( canvas);
 
-        Log.d( TAG, "onDraw");
-
         canvas.drawLines( mAxes, mAxisPaint);
         canvas.drawLines( mTicks, mTickPaint);
 
@@ -259,7 +257,6 @@ public class LocView extends View {
         mOldCoords[ OLD_COORD_COUNT - 1] = mNewCoords;
         mNewCoords = coords;
         invalidate(); // prompts system to call onDraw()
-
     }
 
     /**
@@ -279,7 +276,6 @@ public class LocView extends View {
 
         mLocViewListener.newFrequency( x / mWidth);
         mLocViewListener.newAmplitude( ( mHeight - y) / mHeight); // since y starts from the top
-
     }
 
     /**

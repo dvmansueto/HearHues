@@ -5,7 +5,7 @@
     <!-- "Mute Tones", should appear as action button if possible -->
     <item
         android:id="@+id/action_mute"
-        android:icon="@drawable/ic_volume_mute"
+        android:icon="@drawable/ic_volume_unmuted"
         android:title="@string/action_mute"
         app:showAsAction="ifRoom" />
 
