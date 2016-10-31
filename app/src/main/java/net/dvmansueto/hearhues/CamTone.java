@@ -51,14 +51,12 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Dave on 30/10/16.
+ * Google's Camera2Basic sample code wrapped up in an object.
  */
-
 final class CamTone {
 
+    /** To compensate for moving from an activity to an object */
     private Context mContext;
-
-    // extending Google's Camera2Basic sample code
 
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -414,10 +412,6 @@ final class CamTone {
         }
     }
 
-    int getRequestCode() {
-        return mCameraRequestCode;
-    }
-
     /**
      * Given {@code choices} of {@code Size}s supported by a camera, choose the smallest one that
      * is at least as large as the respective texture view size, and that is at most as large as the
@@ -488,8 +482,9 @@ final class CamTone {
      *  • {@link #mBackCameraId}
      *  • {@link #mFrontCameraId}
      *  • {@link #mCameraId} (defaults to back camera, else front)
+     *  @return true if a camera ID was found.
      */
-    private void findCameraIds() {
+    private boolean findCameraIds() {
         Activity activity = (Activity) mContext;
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -522,9 +517,7 @@ final class CamTone {
             } else if ( mFrontCameraId != null) {
                 mCameraId = mFrontCameraId;
             }
-            if ( mCameraId == null) {
-                mListener.errorDialog("No camera detected");
-            }
+            return ( mCameraId != null);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
@@ -532,6 +525,7 @@ final class CamTone {
             // device this code runs.
             mListener.errorDialog( mContext.getString( R.string.camera_error));
         }
+        return false;
     }
 
     //TODO: explore generic 'switch camera' icon, avoid 'current state'/'next state' confusion.
@@ -659,14 +653,15 @@ final class CamTone {
     /**
      * Opens the {@link #mCameraId} camera.
      */
-    protected void openCamera() {
+    void openCamera() {
         Log.d( TAG, "openCamera");
 
-        // ensure there is a camera
-        if ( mCameraId == null) findCameraIds();
+        if ( mCameraId == null) {
+            if ( !findCameraIds()) return;
+        }
         Log.d( TAG, "cameraId = "  + mCameraId);
 
-        // since that's what they are...
+        // since that's what they'll always be...
         int width = mPreviewTextureView.getWidth();
         int height = mPreviewTextureView.getHeight();
         setUpCameraOutputs( width, height);
