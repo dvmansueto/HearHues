@@ -24,11 +24,35 @@
             android:defaultValue="@string/prefs_palette_number_default"
             android:entries="@array/prefs_palette_number_entries"
             android:entryValues="@array/prefs_palette_number_entries" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefs_save_files_key"
             android:title="@string/prefs_save_files_title"
-            android:summary="@string/prefs_save_files_summary"
             android:defaultValue="@string/prefs_save_files_default" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/prefs_tread_tone_category">
+        <ListPreference
+            android:key="@string/prefs_tread_tone_window_height_key"
+            android:title="@string/prefs_tread_tone_window_height_title"
+            android:summary="@string/prefs_tread_tone_window_height_summary"
+            android:defaultValue="@string/prefs_tread_tone_window_height_default"
+            android:entries="@array/prefs_tread_tone_window_height_entries"
+            android:entryValues="@array/prefs_tread_tone_window_height_values" />
+        <ListPreference
+            android:key="@string/prefs_tread_tone_window_width_key"
+            android:title="@string/prefs_tread_tone_window_width_title"
+            android:summary="@string/prefs_tread_tone_window_width_summary"
+            android:defaultValue="@string/prefs_tread_tone_window_width_default"
+            android:entries="@array/prefs_tread_tone_window_width_entries"
+            android:entryValues="@array/prefs_tread_tone_window_width_values" />
+        <ListPreference
+            android:key="@string/prefs_tread_tone_location_timeout_key"
+            android:title="@string/prefs_tread_tone_location_timeout_title"
+            android:summary="@string/prefs_tread_tone_location_timeout_summary"
+            android:defaultValue="@string/prefs_tread_tone_location_timeout_default"
+            android:entries="@array/prefs_tread_tone_location_timeout_entries"
+            android:entryValues="@array/prefs_tread_tone_location_timeout_values" />
     </PreferenceCategory>
 
     <PreferenceCategory

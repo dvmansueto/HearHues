@@ -3,12 +3,14 @@ package net.dvmansueto.hearhues;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioTrack;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -22,45 +24,68 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 import static android.content.Context.LOCATION_SERVICE;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A fragment which shows location on a lat/long axis, and converts lat/long to freq/amp, which
+ * it displays and plays.
  */
 public class TreadToneFragment extends Fragment implements View.OnClickListener {
 
+    /** For {@link Log} */
     private static final String TAG = "TreadTunes";
+
+    /** Callback matchup code for permission request */
     private static final int LOCATION_REQUEST_CALLBACK_CODE = 42;
 
-    //TODO: pref candidate
-    private static final int LOCATION_USE_BY_TIME = 1000 * 30; // short because expect small travel distances
-
+    /** Provides scalar:tone functions */
     private ScalarTone mScalarTone;
+
+    /** Generates tones... */
     private ToneGenerator mToneGenerator;
 
+    /** Provides location methods */
     private LocTone mLocTone;
+
+    /** Creates the axis view */
     private LocView mLocView;
 
-    private boolean mSettingDatum = true; // so will take first fix as datum
+    /** User's preferred window height, in metres */
+    private double mPreferredWindowHeight;
 
+    /** User's preferred window width, in meters */
+    private double mPreferredWindowWidth;
+
+    /** User's preferred location reliability timeout, in seconds */
+    private int mPreferredLocationTimeout;
+
+    /** Whether to take the next location as the 'origin' point */
+    private boolean mSettingOrigin;
+
+    /** ...Manages Locations? */
     private LocationManager mLocationManager;
+
+    /** Listens for location changes */
     private LocationListener mLocationListener;
 
-    @Override
-    public void onClick( View view) {
-        Log.d(TAG, "onClick: " + view.getId());
-        switch( view.getId()) {
-            case R.id.tread_tone_ivbtn_location:
-                setDatum();
-                break;
-        }
-    }
+    /** Last good location... */
+    private Location mLastGoodLocation;
 
+    /**
+     * A fragment which shows location on a lat/long axis, and converts lat/long to freq/amp, which
+     * it displays and plays.
+     */
     public TreadToneFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Instantiates the fragment?
+     * @return this fragment.
+     */
     public static TreadToneFragment newInstance() {
         return new TreadToneFragment();
     }
@@ -68,50 +93,53 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tread_tone, container, false);
     }
 
-    private Location mLocation;
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        // prepare to capture button presses
+        view.findViewById( R.id.tread_tone_ivbtn_location).setOnClickListener( this);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         mLocationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-
         mLocationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                if ( isBetterLocation( location, mLocation)) {
-                    mLocation = location;
-                    Log.d( TAG, "Have new location: " + location.toString());
-                    if (mSettingDatum) {
-                        Log.d( TAG, "new LocTone");
-                        mLocTone = new LocTone( mLocation);
-                        mSettingDatum = false;
+                // check if this location is better, using Android example code
+                if ( isBetterLocation( location, mLastGoodLocation)) {
+                    mLastGoodLocation = location;
+
+                    // will be true after onResume and when user clicks the button
+                    if (mSettingOrigin) {
+                        mLocTone = new LocTone(
+                                mPreferredWindowHeight, mPreferredWindowWidth, location);
+                        mSettingOrigin = false;
                     }
-                    else {
-                        Log.d(TAG, "updating LocTone");
-                        mLocTone.updateLoc(mLocation);
-                    }
-                    Log.d( TAG, "updating LocView");
-                    mLocView.newScalarCoord(
-                            (float) mLocTone.getFrequency(), (float) mLocTone.getAmplitude());
-                    mToneGenerator.setFrequency( mScalarTone.scalarToTone( mLocTone.getFrequency()));
-                    mToneGenerator.setAmplitude( mLocTone.getAmplitude());
-//                    updateUi();
+
+                    double scalarLatitude = mLocTone.scalarLatitude( location.getLatitude());
+                    double scalarLongitude = mLocTone.scalarLongitude( location.getLongitude());
+
+                    // update axis view
+                    mLocView.newScalarCoords( (float) scalarLongitude, (float) scalarLatitude);
+
+                    // frequency passes through mScalarTone to apply sharedPreference ranges
+                    double frequency = mScalarTone.scalarToTone( scalarLongitude);
+                    //noinspection UnnecessaryLocalVariable for compilers, sure, but helps humans
+                    double amplitude = scalarLatitude;
+
+                    mToneGenerator.setFrequency( frequency); // plays noise!
+                    mToneGenerator.setAmplitude( amplitude);
+
+                    updateHeadingText( frequency, amplitude);
                 }
             }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            public void onProviderDisabled(String provider) {
-            }
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+            public void onProviderEnabled(String provider) {}
+            public void onProviderDisabled(String provider) {}
         };
     }
 
@@ -123,180 +151,95 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onResume() {
         super.onResume();
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle( R.string.title_fragment_tread_tone);
+
+        //noinspection ConstantConditions
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle( R.string.title_fragment_tread_tone);
+
+        // first location onResume is taken as initial datum/origin
+        mSettingOrigin = true;
 
         if ( !askedForPermission) {
             // check for permission; ask for it if needed; establish GPS listener; exit to drawer if refused.
             checkLocationPermission();
         }
 
-        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getActivity().getApplicationContext();
-        mScalarTone = applicationSingleton.getScalarTone();
-        mToneGenerator = applicationSingleton.getToneGenerator();
-//        mToneGenerator = new ToneGenerator();
-        mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
-            @Override
-            public void startedPlaying() {
-//                mPlaying = true;
-//                Activity activity = getActivity();
-//                ImageView imageView = (ImageView) activity.findViewById( R.id.HH_btn_playStop);
-//                imageView.setImageResource( R.drawable.ic_pause_circle_outline_48);
-            }
-            @Override
-            public void stoppedPlaying() {
-//                mPlaying = false;
-//                Activity activity = getActivity();
-//                ImageView imageView = (ImageView) activity.findViewById( R.id.HH_btn_playStop);
-//                imageView.setImageResource( R.drawable.ic_play_circle_outline_48);
-            }
-        });
+        // redefine variables from shared preferences every resume
+        // no point using a listener, as can't change preferences while this fragment is active
+        // and need to define them each resume anyway
+        initialiseFromSharedPreferences();
+
+        // mScalarTone and mToneGenerator are 'global' objects, retrieved from ApplicationContext
+        ApplicationContext applicationContext = (ApplicationContext) getActivity().getApplicationContext();
+        mScalarTone = applicationContext.getScalarTone();
+        mToneGenerator = applicationContext.getToneGenerator();
+
+        // configure for looped short bursts
+        mToneGenerator.setAmplitude( 1);
         mToneGenerator.setPlaybackMode( AudioTrack.MODE_STREAM);
         mToneGenerator.setPlaybackFactor( 0.0625);
         mToneGenerator.setPlayContinuously( true);
 
         mLocView = (LocView) getActivity().findViewById( R.id.tread_tone_loc_view);
-//        mLocView.setTouchAllowed( true);
-//        mLocView.setLocViewListener(new LocView.LocViewListener() {
-//            @Override
-//            public void newFrequency(double frequency) {
-//                mToneGenerator.setFrequency( mScalarTone.scalarToTone( frequency));
-//            }
-//            @Override
-//            public void newAmplitude(double amplitude) {
-//                mToneGenerator.setAmplitude( amplitude);
-//            }
-//        });
-
-    }
-
-    /**
-     * Updates dynamic UI elements:
-     *  • Tone frequency string
-     *  • Hue icon colour
-     *  • Hue colour string
-     */
-    private void updateUi() {
-
-
-        // update tone text display
-        TextView textView = (TextView) getActivity().findViewById( R.id.tread_tone_tv_heading);
-        textView.setText( mLocTone.toToneString() + " (" + mLocTone.toNoteString() + ")");
     }
 
     @Override
     public void onPause() {
         super.onPause();
 
+        // release location retrieval!
         if ( ActivityCompat.checkSelfPermission( getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mLocationManager.removeUpdates(mLocationListener);
         }
     }
 
-    private void setDatum() {
-        mSettingDatum = true;
-    }
-
-    private void initGpsLoc() {
-        // check setting is enabled
-        if ( !mLocationManager.isProviderEnabled( LocationManager.GPS_PROVIDER)) {
-            Log.d( TAG, "gps setting disabled");
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( getActivity());
-            alertDialogBuilder.setTitle( R.string.alert_enable_location_setting_title)
-                    .setMessage( R.string.alert_enable_location_setting_message)
-                    .setPositiveButton( R.string.alert_enable_location_setting_positive,
-                            new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick( DialogInterface dialog, int which) {
-                            Intent intent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity( intent);
-                        }
-                    })
-                    .setNegativeButton( R.string.alert_enable_location_setting_negative,
-                            new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick( DialogInterface dialog, int which) {
-                            // user cancelled the dialog
-                            exitToNavigationDrawer();
-                        }
-                    });
-            alertDialogBuilder.create().show();
-        }
-        //noinspection MissingPermission: definitely have permission at this point...
-        mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mLocationListener);
-    }
-
-    private void checkLocationPermission() {
-        String permission = Manifest.permission.ACCESS_FINE_LOCATION;
-        int callbackCode = LOCATION_REQUEST_CALLBACK_CODE;
-
-        if ( ActivityCompat.checkSelfPermission(
-                getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
-            // check if Android thinks we should explain to the user why we need this permission
-            // ( ie it would seem out-of-context to user otherwise)
-            if ( ActivityCompat.shouldShowRequestPermissionRationale( getActivity(), permission)) {
-                Toast.makeText( getActivity(),
-                        getString( R.string.toast_tread_tune_location_rationale),
-                        Toast.LENGTH_LONG).show();
-                ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
-                askedForPermission = true;
-            } else {
-                ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
-                askedForPermission = true;
-            }
-        }
-        else {
-            // we have permission!
-            initGpsLoc();
-        }
-    }
-
     @Override
-    public void onRequestPermissionsResult( int returnedCode, @NonNull String[] permissions,
-                                            @NonNull int[] grantedResults) {
-        Log.d( TAG, "switching " + Integer.toString( returnedCode));
-
-        switch ( returnedCode) {
-            case LOCATION_REQUEST_CALLBACK_CODE: {
-
-                // If request was rejected, the result arrays will be empty.
-                if (grantedResults.length == 0
-                        || grantedResults[0] != PackageManager.PERMISSION_GRANTED) {
-
-                    Log.d(TAG, "gps permission rejected");
-                    // permission refused, display a dialog and exit to nav drawer
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                    alertDialogBuilder.setTitle(R.string.alert_location_permission_refused_title)
-                            .setMessage(R.string.alert_location_permission_refused_message)
-                            .setNeutralButton(R.string.alert_location_permission_refused_negative,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            // user cancelled the dialog
-                                            exitToNavigationDrawer();
-                                        }
-                                    });
-                    alertDialogBuilder.create().show();
-                } else {
-                    // otherwise we have permission
-                    Log.d(TAG, "gps permission accepted");
-                    initGpsLoc();
-                }
-            }
-            default:
-                super.onRequestPermissionsResult( returnedCode, permissions, grantedResults);
+    public void onClick( View view) {
+        Log.d(TAG, "onClick: " + view.getId());
+        switch( view.getId()) {
+            case R.id.tread_tone_ivbtn_location:
+                mSettingOrigin = true;
+                break;
         }
+    }
+
+
+    //------------------------
+    // Utilities
+    //------------------------
+
+    private void initialiseFromSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mPreferredWindowHeight = Double.parseDouble( sharedPreferences.getString(
+                getString( R.string.prefs_tread_tone_window_height_key),
+                getString( R.string.prefs_tread_tone_window_height_default)));
+        mPreferredWindowWidth = Double.parseDouble( sharedPreferences.getString(
+                getString( R.string.prefs_tread_tone_window_width_key),
+                getString( R.string.prefs_tread_tone_window_width_default)));
+        mPreferredLocationTimeout = Integer.parseInt( sharedPreferences.getString(
+                getString( R.string.prefs_tread_tone_location_timeout_key),
+                getString( R.string.prefs_tread_tone_location_timeout_default)));
+    }
+
+    /**
+     * Updates heading text of the fragment...
+     */
+    private void updateHeadingText(double frequency, double amplitude) {
+        String ampString = String.format( Locale.getDefault(), "%3d", (int) ( amplitude * 100));
+        String toneString = String.format( Locale.getDefault(), "%7.2f", frequency) + " Hz";
+        String noteString = mScalarTone.toneToNoteString( frequency);
+        TextView textView = (TextView) getActivity().findViewById( R.id.tread_tone_tv_heading);
+        textView.setText( toneString + " (" + noteString + "), " + ampString + "% volume" );
     }
 
     private void exitToNavigationDrawer() {
         // cast to avoid 'static' complaint
         ((MainActivity) getActivity()).openNavigationDrawer();
-        Log.d( TAG, "Exited to nav drawer");
+        Log.d( TAG, "Exiting to nav drawer");
         onPause();
     }
 
-    //////// GPS METHODS
+    //// GPS Methods
 
     /** Determines whether one Location reading is better than the current Location fix
      * @param location  The new Location that you want to evaluate
@@ -310,8 +253,8 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
 
         // Check whether the new location fix is newer or older
         long timeDelta = location.getTime() - currentBestLocation.getTime();
-        boolean isSignificantlyNewer = timeDelta > LOCATION_USE_BY_TIME;
-        boolean isSignificantlyOlder = timeDelta < -LOCATION_USE_BY_TIME;
+        boolean isSignificantlyNewer = timeDelta > mPreferredLocationTimeout;
+        boolean isSignificantlyOlder = timeDelta < -mPreferredLocationTimeout;
         boolean isNewer = timeDelta > 0;
 
         // If it's been more than two minutes since the current location, use the new location
@@ -350,5 +293,97 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
             return provider2 == null;
         }
         return provider1.equals(provider2);
+    }
+
+    private void initGpsLoc() {
+        // check setting is enabled
+        if ( !mLocationManager.isProviderEnabled( LocationManager.GPS_PROVIDER)) {
+            Log.d( TAG, "gps setting disabled");
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( getActivity());
+            alertDialogBuilder.setTitle( R.string.alert_enable_location_setting_title)
+                    .setMessage( R.string.alert_enable_location_setting_message)
+                    .setPositiveButton( R.string.alert_enable_location_setting_positive,
+                            new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick( DialogInterface dialog, int which) {
+                            Intent intent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity( intent);
+                        }
+                    })
+                    .setNegativeButton( R.string.alert_enable_location_setting_negative,
+                            new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick( DialogInterface dialog, int which) {
+                            // user cancelled the dialog
+                            exitToNavigationDrawer();
+                        }
+                    });
+            alertDialogBuilder.create().show();
+        }
+        //noinspection MissingPermission: definitely have permission at this point...
+        mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mLocationListener);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult( int returnedCode, @NonNull String[] permissions,
+                                            @NonNull int[] grantedResults) {
+        Log.d( TAG, "switching " + Integer.toString( returnedCode));
+
+        switch ( returnedCode) {
+            case LOCATION_REQUEST_CALLBACK_CODE: {
+
+                // If request was rejected, the result arrays will be empty.
+                if (grantedResults.length == 0
+                        || grantedResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+                    Log.d(TAG, "gps permission rejected");
+                    // permission refused, display a dialog and exit to nav drawer
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                    alertDialogBuilder.setTitle(R.string.alert_location_permission_refused_title)
+                            .setMessage(R.string.alert_location_permission_refused_message)
+                            .setNeutralButton(R.string.alert_location_permission_refused_negative,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // user cancelled the dialog
+                                            exitToNavigationDrawer();
+                                        }
+                                    });
+                    alertDialogBuilder.create().show();
+                } else {
+                    // otherwise we have permission
+                    Log.d(TAG, "gps permission accepted");
+                    initGpsLoc();
+                }
+            }
+            default:
+                super.onRequestPermissionsResult( returnedCode, permissions, grantedResults);
+        }
+    }
+
+    private void checkLocationPermission() {
+        String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+        int callbackCode = LOCATION_REQUEST_CALLBACK_CODE;
+
+        if ( ActivityCompat.checkSelfPermission(
+                getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
+            // check if Android thinks we should explain to the user why we need this permission
+            // ( ie it would seem out-of-context to user otherwise)
+            if ( ActivityCompat.shouldShowRequestPermissionRationale( getActivity(), permission)) {
+                Toast.makeText( getActivity(),
+                        getString( R.string.toast_tread_tune_location_rationale),
+                        Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
+                askedForPermission = true;
+            } else {
+                ActivityCompat.requestPermissions( getActivity(), new String[] { permission}, callbackCode);
+                askedForPermission = true;
+            }
+        }
+        else {
+            // we have permission!
+            initGpsLoc();
+        }
     }
 }
