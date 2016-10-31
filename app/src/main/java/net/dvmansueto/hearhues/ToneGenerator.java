@@ -20,12 +20,9 @@ final class ToneGenerator {
     /** For {@link Log} */
     private static final String TAG = "ToneGenerator";
 
-    /** Number of samples per second. Somewhat arbitrary selection! */
-//    //TODO: Investigate using AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE
+    /** Number of samples per second. Somewhat arbitrary selection, but a more rigorous approach
+     * is overly convoluted and is unlikely to yield much. */
     private static final int SAMPLE_RATE = 44100;
-//    private static final int SAMPLE_RATE = AudioManager.getProperty( AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
-//    private int mSampleRate;
-
 
     /** Percent of the total tone over which to ramp up to and down from full amplitude. */
     private static final double RAMP_PERCENT = 0.1;
@@ -133,9 +130,6 @@ final class ToneGenerator {
         mRampingUp = true;
         mRampingDown = true;
         mPlaybackMode = AudioTrack.MODE_STATIC;
-//        Log.e( TAG, "AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE: " + AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
-//        mSampleRate = (int) Double.parseDouble( AudioManager.getProperty( AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE));
-//        AudioManager.getProperty( AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
         prepareForTone();
         mLinToLogEnabled = false;
         mMuted = false;
@@ -147,6 +141,11 @@ final class ToneGenerator {
     // Helpers
     //--------------------------------
 
+    void playStop() {
+        if ( mAudioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) stop();
+        else play();
+    }
+
     /**
      * Starts tone generation.
      */
@@ -154,13 +153,14 @@ final class ToneGenerator {
         mAudioTrack.write( mToneBytes, 0, mToneBytes.length);
         mAsyncPlaybackTask = new AsyncPlaybackTask();
         mAsyncPlaybackTask.execute();
-        mListener.startedPlaying();
+        if ( mListener != null) mListener.startedPlaying();
     }
 
 
     /**
      * Cleanly stops tone generation.
      */
+    @SuppressWarnings("WeakerAccess")
     void stop() {
         if ( mAudioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) {
             mAsyncPlaybackTask.cancel( true);
@@ -216,7 +216,7 @@ final class ToneGenerator {
      */
     private void setVolume() {
         // via variable as AudioTrack doesn't return volume
-        // ...ternary inside of ternary works?! This has to be bad programming.
+        // ...ternary inside of ternary works?! This has to be poor programming... >:D
         mVolume = mMuted ? 0 : mLinToLogEnabled ? linToLog( mAmplitude) : mAmplitude;
         mAudioTrack.setVolume( (float) mVolume);
     }
