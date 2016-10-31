@@ -14,13 +14,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class MainActivity
         extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     protected ScalarTone mScalarTone; // the _ONLY_ ScalarTone for the entire app.
     protected ToneGenerator mToneGenerator;  // the _ONLY_ ToneGenerator for the entire app.
@@ -29,12 +30,14 @@ public class MainActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // register pref listener
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+        // instantiate sole versions, update and then set in ApplicationContext
         mScalarTone = new ScalarTone( this);
         mToneGenerator = new ToneGenerator();
-        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getApplicationContext();
-        applicationSingleton.setScalarTone( mScalarTone);
-        applicationSingleton.setToneGenerator( mToneGenerator);
-        updatedSharedPrefs();
+        initialiseFromSharedPreferences();
 
         // provide content view
         setContentView(R.layout.activity_main);
@@ -45,15 +48,7 @@ public class MainActivity
                     .commit();
         }
 
-//        // handle back
-//        getSupportFragmentManager().addOnBackStackChangedListener(
-//                new FragmentManager.OnBackStackChangedListener() {
-//                    public void onBackStackChanged() {
-//                        // Update your UI here.
-//                    }
-//                });
-
-        // setup the action bar
+        // setup the action/app bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,14 +61,11 @@ public class MainActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
-    public void updatedSharedPrefs() {
+    private void initialiseFromSharedPreferences() {
 
-        // update SharedPreferences every time fragment resumes
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences( this);
-//        mSharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         mToneGenerator.setLinToLogPower(
                 Integer.parseInt( sharedPreferences.getString(
@@ -93,10 +85,9 @@ public class MainActivity
                         getString( R.string.prefs_generator_peak_frequency_key),
                         getString( R.string.prefs_generator_peak_frequency_default))));
 
-        ApplicationSingleton applicationSingleton = (ApplicationSingleton) getApplicationContext();
-        applicationSingleton.setScalarTone( mScalarTone);
-        applicationSingleton.setToneGenerator( mToneGenerator);
-
+        ApplicationContext applicationContext = (ApplicationContext) getApplicationContext();
+        applicationContext.setScalarTone( mScalarTone);
+        applicationContext.setToneGenerator( mToneGenerator);
     }
 
     @Override
@@ -136,10 +127,42 @@ public class MainActivity
         ActionMenuItemView muteButton = (ActionMenuItemView) findViewById( R.id.action_mute);
         if (mToneGenerator.getMuted()) {
             mToneGenerator.setMuted( false);
-            muteButton.setIcon( getResources().getDrawable( R.drawable.ic_volume_unmuted));
+            muteButton.setIcon( getResources().getDrawable( R.drawable.ic_volume_unmuted, null));
         } else {
             mToneGenerator.setMuted( true);
-            muteButton.setIcon( getResources().getDrawable( R.drawable.ic_volume_muted));
+            muteButton.setIcon( getResources().getDrawable( R.drawable.ic_volume_muted, null));
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key){
+
+        ApplicationContext applicationContext = (ApplicationContext) getApplicationContext();
+
+        if ( key.equals( getString( R.string.prefs_generator_logarithm_power_key))) {
+            mToneGenerator.setLinToLogPower(
+                    Integer.parseInt( sharedPreferences.getString(
+                            getString( R.string.prefs_generator_logarithm_power_key),
+                            getString( R.string.prefs_generator_logarithm_power_default))));
+            applicationContext.setToneGenerator( mToneGenerator);
+        }
+        else if ( key.equals( getString( R.string.prefs_playback_seconds_key))) {
+            mToneGenerator.setPlaybackSeconds(
+                    Double.parseDouble( sharedPreferences.getString(
+                            getString( R.string.prefs_playback_seconds_key),
+                            getString( R.string.prefs_playback_seconds_default))));
+            applicationContext.setToneGenerator( mToneGenerator);
+        }
+        else if ( key.equals( getString( R.string.prefs_generator_base_frequency_key)) ||
+                  key.equals( getString( R.string.prefs_generator_peak_frequency_key))) {
+            mScalarTone.setFrequencyRange(
+                    Double.parseDouble( sharedPreferences.getString(
+                            getString( R.string.prefs_generator_base_frequency_key),
+                            getString( R.string.prefs_generator_base_frequency_default))),
+                    Double.parseDouble( sharedPreferences.getString(
+                            getString( R.string.prefs_generator_peak_frequency_key),
+                            getString( R.string.prefs_generator_peak_frequency_default))));
+            applicationContext.setScalarTone( mScalarTone);
         }
     }
 
@@ -154,13 +177,12 @@ public class MainActivity
         return super.onOptionsItemSelected(item);
     }
 
-    //TODO: remove tacky updateSharedPrefs() method
     @Override
     public boolean onNavigationItemSelected( @NonNull MenuItem item) {
-        updatedSharedPrefs();
-        Fragment fragment = null;
-        int id = item.getItemId();
 
+        Fragment fragment = null;
+
+        int id = item.getItemId();
         if( id == R.id.nav_hearHue) {
             fragment = new HearHueFragment();
             setMenuItemsVisible( true);
@@ -181,7 +203,6 @@ public class MainActivity
         if( fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-//                    .replace( R.id.fragment_container, fragment)
                     .replace( R.id.fragment_container, fragment, fragment.getTag())
                     .addToBackStack( fragment.getTag())
                     .commit();
