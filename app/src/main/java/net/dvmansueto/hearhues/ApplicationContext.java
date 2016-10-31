@@ -6,7 +6,7 @@ import android.app.Application;
  * Created by Dave on 28/10/16.
  */
 
-public class ApplicationSingleton extends Application {
+public class ApplicationContext extends Application {
 
     private ScalarTone mScalarTone; // the _ONLY_ ScalarTone for the entire app.
     private ToneGenerator mToneGenerator;  // the _ONLY_ ToneGenerator for the entire app.
