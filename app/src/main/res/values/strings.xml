@@ -31,7 +31,8 @@
     <!-- TreadToneFragment -->
     <string name="title_fragment_tread_tone">Tread Tune</string>
     <string name="tread_tone_iv_tread">Tone</string>
-    <string name="tread_tone_tv_heading">Waiting for location...</string>
+    <string name="tread_tone_tv_heading">Waiting for location…</string>
+    <string name="tread_tone_ivbtn_origin">Update Origin</string>
 
     <!-- TinkerFragment -->
     <string name="fragment_tinker_title">Tinker</string>

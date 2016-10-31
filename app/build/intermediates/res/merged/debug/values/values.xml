@@ -88,6 +88,54 @@
         <item>1.6</item>
         <item>2.4</item>
     </string-array>
+    <string-array name="prefs_tread_tone_location_timeout_entries">
+        <item>Tiny</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Huge</item>
+        <item>Silly</item>
+    </string-array>
+    <string-array name="prefs_tread_tone_location_timeout_values">
+        <item>5</item>
+        <item>10</item>
+        <item>25</item>
+        <item>40</item>
+        <item>60</item>
+        <item>90</item>
+    </string-array>
+    <string-array name="prefs_tread_tone_window_height_entries">
+        <item>Tiny</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Huge</item>
+        <item>Silly</item>
+    </string-array>
+    <string-array name="prefs_tread_tone_window_height_values">
+        <item>10</item>
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+        <item>100</item>
+        <item>200</item>
+    </string-array>
+    <string-array name="prefs_tread_tone_window_width_entries">
+        <item>Tiny</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Huge</item>
+        <item>Silly</item>
+    </string-array>
+    <string-array name="prefs_tread_tone_window_width_values">
+        <item>10</item>
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+        <item>100</item>
+        <item>200</item>
+    </string-array>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
     <attr format="boolean" name="isLightTheme"/>
@@ -741,7 +789,7 @@ amplitude (volume).
     <string name="navigation_drawer_secondary_features">Ancillary Features</string>
     <string name="prefs_generator_base_frequency_default">440</string>
     <string name="prefs_generator_base_frequency_key">generator_base_frequency</string>
-    <string name="prefs_generator_base_frequency_summary">Lowest note to be generated (must be lower than peak note)</string>
+    <string name="prefs_generator_base_frequency_summary">Lowest note to be generated</string>
     <string name="prefs_generator_base_frequency_title">Base Tone</string>
     <string name="prefs_generator_category">Tone Generator</string>
     <string name="prefs_generator_logarithm_power_default">4</string>
@@ -750,7 +798,7 @@ amplitude (volume).
     <string name="prefs_generator_logarithm_power_title">Logarithmic Volume</string>
     <string name="prefs_generator_peak_frequency_default">7040</string>
     <string name="prefs_generator_peak_frequency_key">generator_peak_frequency</string>
-    <string name="prefs_generator_peak_frequency_summary">Highest note to be generated (must be higher than base note)</string>
+    <string name="prefs_generator_peak_frequency_summary">Highest note to be generated</string>
     <string name="prefs_generator_peak_frequency_title">Peak Tone</string>
     <string name="prefs_palette_area_default">Medium</string>
     <string name="prefs_palette_area_key">palette_area</string>
@@ -773,6 +821,19 @@ amplitude (volume).
     <string name="prefs_save_files_key">save_files</string>
     <string name="prefs_save_files_summary">Captured stills will be saved to disk</string>
     <string name="prefs_save_files_title">Save Photographs</string>
+    <string name="prefs_tread_tone_category">Tread Tone</string>
+    <string name="prefs_tread_tone_location_timeout_default">25</string>
+    <string name="prefs_tread_tone_location_timeout_key">tread_tone_location_timeout</string>
+    <string name="prefs_tread_tone_location_timeout_summary">Shorter timeouts force more frequent but less accurate updates</string>
+    <string name="prefs_tread_tone_location_timeout_title">Location Timout</string>
+    <string name="prefs_tread_tone_window_height_default">50</string>
+    <string name="prefs_tread_tone_window_height_key">tread_tone_window_height</string>
+    <string name="prefs_tread_tone_window_height_summary">Distance from minimum to maximum amplitude</string>
+    <string name="prefs_tread_tone_window_height_title">Window Height</string>
+    <string name="prefs_tread_tone_window_width_default">50</string>
+    <string name="prefs_tread_tone_window_width_key">tread_tone_window_width</string>
+    <string name="prefs_tread_tone_window_width_summary">Distance from minimum to maximum frequency</string>
+    <string name="prefs_tread_tone_window_width_title">Window Width</string>
     <string name="request_permission">This feature requires camera permission.</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>

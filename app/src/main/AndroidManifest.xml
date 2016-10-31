@@ -10,7 +10,7 @@
     <uses-feature android:name="android.hardware.camera2" />
 
     <application
-        android:name=".ApplicationSingleton"
+        android:name=".ApplicationContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

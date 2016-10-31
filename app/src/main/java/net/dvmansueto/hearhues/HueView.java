@@ -5,9 +5,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by Dave on 28/10/16.
+ * A touchable HSL view with hue callbacks.
  */
-
 public class HueView extends View {
 
     /**

@@ -27,8 +27,9 @@
         android:layout_alignBottom="@id/tread_tone_iv_tread"
         android:gravity="center_vertical"/>
     <ImageView
-        android:id="@+id/tread_tone_ivbtn_location"
+        android:id="@+id/tread_tone_ivbtn_origin"
         android:src="@drawable/ic_location"
+        android:contentDescription="@string/tread_tone_ivbtn_origin"
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

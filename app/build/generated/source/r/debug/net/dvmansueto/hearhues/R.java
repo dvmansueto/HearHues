@@ -39,6 +39,12 @@ public final class R {
         public static final int prefs_palette_swatch_entries=0x7f0c0008;
         public static final int prefs_playback_seconds_entries=0x7f0c0009;
         public static final int prefs_playback_seconds_values=0x7f0c000a;
+        public static final int prefs_tread_tone_location_timeout_entries=0x7f0c000b;
+        public static final int prefs_tread_tone_location_timeout_values=0x7f0c000c;
+        public static final int prefs_tread_tone_window_height_entries=0x7f0c000d;
+        public static final int prefs_tread_tone_window_height_values=0x7f0c000e;
+        public static final int prefs_tread_tone_window_width_entries=0x7f0c000f;
+        public static final int prefs_tread_tone_window_width_values=0x7f0c0010;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -3009,20 +3015,33 @@ containing a value of this type.
         public static final int prefs_save_files_key=0x7f070069;
         public static final int prefs_save_files_summary=0x7f07006a;
         public static final int prefs_save_files_title=0x7f07006b;
-        public static final int request_permission=0x7f07006c;
+        public static final int prefs_tread_tone_category=0x7f07006c;
+        public static final int prefs_tread_tone_location_timeout_default=0x7f07006d;
+        public static final int prefs_tread_tone_location_timeout_key=0x7f07006e;
+        public static final int prefs_tread_tone_location_timeout_summary=0x7f07006f;
+        public static final int prefs_tread_tone_location_timeout_title=0x7f070070;
+        public static final int prefs_tread_tone_window_height_default=0x7f070071;
+        public static final int prefs_tread_tone_window_height_key=0x7f070072;
+        public static final int prefs_tread_tone_window_height_summary=0x7f070073;
+        public static final int prefs_tread_tone_window_height_title=0x7f070074;
+        public static final int prefs_tread_tone_window_width_default=0x7f070075;
+        public static final int prefs_tread_tone_window_width_key=0x7f070076;
+        public static final int prefs_tread_tone_window_width_summary=0x7f070077;
+        public static final int prefs_tread_tone_window_width_title=0x7f070078;
+        public static final int request_permission=0x7f070079;
         public static final int search_menu_title=0x7f070013;
         public static final int status_bar_notification_info_overflow=0x7f070014;
-        public static final int tinker_hue_view_title=0x7f07006d;
-        public static final int tinker_loc_view_title=0x7f07006e;
-        public static final int title_activity_main=0x7f07006f;
-        public static final int title_fragment_about=0x7f070070;
-        public static final int title_fragment_hear_hue=0x7f070071;
-        public static final int title_fragment_settings=0x7f070072;
-        public static final int title_fragment_tread_tone=0x7f070073;
-        public static final int toast_hear_hue_camera_rational=0x7f070074;
-        public static final int toast_tread_tune_location_rationale=0x7f070075;
-        public static final int tread_tone_iv_tread=0x7f070076;
-        public static final int tread_tone_tv_heading=0x7f070077;
+        public static final int tinker_hue_view_title=0x7f07007a;
+        public static final int tinker_loc_view_title=0x7f07007b;
+        public static final int title_activity_main=0x7f07007c;
+        public static final int title_fragment_about=0x7f07007d;
+        public static final int title_fragment_hear_hue=0x7f07007e;
+        public static final int title_fragment_settings=0x7f07007f;
+        public static final int title_fragment_tread_tone=0x7f070080;
+        public static final int toast_hear_hue_camera_rational=0x7f070081;
+        public static final int toast_tread_tune_location_rationale=0x7f070082;
+        public static final int tread_tone_iv_tread=0x7f070083;
+        public static final int tread_tone_tv_heading=0x7f070084;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09008d;

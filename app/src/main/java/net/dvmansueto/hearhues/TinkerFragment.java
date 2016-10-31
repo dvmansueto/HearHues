@@ -47,12 +47,6 @@ public class TinkerFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
     @Override
     public View onCreateView( LayoutInflater inflater,
                               ViewGroup container,
@@ -110,11 +104,6 @@ public class TinkerFragment extends Fragment {
         ApplicationContext applicationContext = (ApplicationContext) getActivity().getApplicationContext();
         applicationContext.setScalarTone( mScalarTone);
         applicationContext.setToneGenerator( mToneGenerator);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     /**

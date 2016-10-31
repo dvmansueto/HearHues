@@ -99,7 +99,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         // prepare to capture button presses
-        view.findViewById( R.id.tread_tone_ivbtn_location).setOnClickListener( this);
+        view.findViewById( R.id.tread_tone_ivbtn_origin).setOnClickListener( this);
     }
 
     @Override
@@ -197,7 +197,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     public void onClick( View view) {
         Log.d(TAG, "onClick: " + view.getId());
         switch( view.getId()) {
-            case R.id.tread_tone_ivbtn_location:
+            case R.id.tread_tone_ivbtn_origin:
                 mSettingOrigin = true;
                 break;
         }
@@ -245,7 +245,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
      * @param location  The new Location that you want to evaluate
      * @param currentBestLocation  The current Location fix, to which you want to compare the new one
      */
-    protected boolean isBetterLocation(Location location, Location currentBestLocation) {
+    private boolean isBetterLocation(Location location, Location currentBestLocation) {
         if (currentBestLocation == null) {
             // A new location is always better than no location
             return true;

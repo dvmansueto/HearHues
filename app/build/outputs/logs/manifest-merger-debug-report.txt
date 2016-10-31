@@ -62,7 +62,7 @@ MERGED from [com.android.support:support-v13:24.2.1] C:\Dropbox\Uni\2016S2\COMP7
 	android:theme
 		ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:18:9-40
 	android:name
-		ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:13:9-45
+		ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:13:9-43
 activity#net.dvmansueto.hearhues.MainActivity
 ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:19:9-27:20
 	android:label

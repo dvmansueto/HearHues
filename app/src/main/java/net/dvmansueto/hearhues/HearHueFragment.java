@@ -299,7 +299,7 @@ public class HearHueFragment extends Fragment
      * Updates the {@link #mHueTone}, then updates the UI and tone generation accordingly.
      * @param color the new hue to use.
      */
-    public void updateHueTone( @ColorInt int color) {
+    private void updateHueTone( @ColorInt int color) {
 
         // update HueTone
         mHueTone.setHue( color);

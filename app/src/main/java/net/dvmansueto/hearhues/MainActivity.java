@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,8 +22,8 @@ public class MainActivity
         extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
-    protected ScalarTone mScalarTone; // the _ONLY_ ScalarTone for the entire app.
-    protected ToneGenerator mToneGenerator;  // the _ONLY_ ToneGenerator for the entire app.
+    private ScalarTone mScalarTone;
+    private ToneGenerator mToneGenerator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

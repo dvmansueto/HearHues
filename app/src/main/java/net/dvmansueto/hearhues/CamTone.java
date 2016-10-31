@@ -56,14 +56,14 @@ import java.util.concurrent.TimeUnit;
 final class CamTone {
 
     /** To compensate for moving from an activity to an object */
-    private Context mContext;
+    private final Context mContext;
 
     /**
      * Conversion from screen rotation to JPEG orientation.
      */
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
-    private int mCameraRequestCode;
+    private final int mCameraRequestCode;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);

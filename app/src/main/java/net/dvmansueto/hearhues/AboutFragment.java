@@ -32,11 +32,11 @@ public class AboutFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle(R.string.title_fragment_about);
+        //noinspection ConstantConditions
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_fragment_about);
 
         // activate autoLink
-        TextView textView = (TextView) activity.findViewById( R.id.about_project_body);
+        TextView textView = (TextView) getActivity().findViewById( R.id.about_project_body);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

@@ -3,9 +3,8 @@ package net.dvmansueto.hearhues;
 import android.app.Application;
 
 /**
- * Created by Dave on 28/10/16.
+ * Provides 'global object' functionality.
  */
-
 public class ApplicationContext extends Application {
 
     private ScalarTone mScalarTone; // the _ONLY_ ScalarTone for the entire app.
@@ -26,5 +25,4 @@ public class ApplicationContext extends Application {
     void setToneGenerator( ToneGenerator toneGenerator) {
         mToneGenerator = toneGenerator;
     }
-
 }

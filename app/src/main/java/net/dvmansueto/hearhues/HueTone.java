@@ -21,7 +21,7 @@ import static android.graphics.Color.parseColor;
 final class HueTone {
 
     /** Provides scalar:tone methods */
-    private ScalarTone mScalarTone;
+    private final ScalarTone mScalarTone;
 
     /** The {@link HueTone} in @ColorInt 0xAARRGGBB form */
     private int mRgb;

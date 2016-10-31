@@ -16,19 +16,19 @@ final class LocTone {
     private static final double POLAR_RADIUS = 6356752.3142;
 
     /** 'height' which bounds the 'view', in metres */
-    private double mLatitudeRange;
+    private final double mLatitudeRange;
 
     /** 'width' which bounds the 'view', in metres */
-    private double mLongitudeRange;
+    private final double mLongitudeRange;
 
     /** Latitude of origin */
-    private double mOriginLatitude;
+    private final double mOriginLatitude;
 
     /** Longitude at origin */
-    private double mOriginLongitude;
+    private final double mOriginLongitude;
 
     /** longitudinal radius of the earth at datum latitude, in metres */
-    private double mLatitudinalRadius;
+    private final double mLatitudinalRadius;
 
 
     //--------------------------------
