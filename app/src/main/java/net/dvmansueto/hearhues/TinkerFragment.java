@@ -3,6 +3,7 @@ package net.dvmansueto.hearhues;
 import android.media.AudioTrack;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,9 @@ public class TinkerFragment extends Fragment {
         super.onResume();
 
         //noinspection ConstantConditions
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_tinker_title);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setIcon( R.drawable.ic_tinker_24);
+        actionBar.setTitle( R.string.fragment_tinker_title);
 
         mHueView = (HueView) getActivity().findViewById( R.id.tinker_hue_view);
 

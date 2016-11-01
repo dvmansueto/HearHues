@@ -4,23 +4,23 @@
 
     <item
         android:id="@+id/nav_hearHue"
-        android:icon="@drawable/ic_hue"
+        android:icon="@drawable/ic_hue_48"
         android:title="@string/title_fragment_hear_hue" />
     <item
         android:id="@+id/nav_treadTunes"
-        android:icon="@drawable/ic_tone"
+        android:icon="@drawable/ic_tone_48"
         android:title="@string/title_fragment_tread_tone" />
     <item
         android:id="@+id/nav_tinker"
-        android:icon="@drawable/ic_tinker"
+        android:icon="@drawable/ic_tinker_48"
         android:title="@string/fragment_tinker_title" />
     <item
         android:id="@+id/nav_about"
-        android:icon="@drawable/ic_about"
+        android:icon="@drawable/ic_about_18"
         android:title="@string/title_fragment_about" />
     <item
         android:id="@+id/nav_settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_settings_18"
         android:title="@string/title_fragment_settings" />
 
     <!-- Old 'categorised' view -->

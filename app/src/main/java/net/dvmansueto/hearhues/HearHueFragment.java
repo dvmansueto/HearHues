@@ -16,6 +16,7 @@ import android.support.v13.app.FragmentCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
@@ -103,8 +104,10 @@ public class HearHueFragment extends Fragment
     public void onResume() {
         super.onResume();
 
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         //noinspection ConstantConditions
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_fragment_hear_hue);
+        actionBar.setIcon( R.drawable.ic_hue_24);
+        actionBar.setTitle( R.string.title_fragment_hear_hue);
 
         // redefine variables from shared preferences every resume
         // no point using a listener, as can't change preferences while this fragment is active

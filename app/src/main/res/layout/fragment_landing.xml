@@ -82,7 +82,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/tread_tone_iv_tread"
-            android:src="@drawable/ic_tread" />
+            android:src="@drawable/ic_tread_48" />
         <TextView
             android:id="@+id/summary2"
             android:layout_width="fill_parent"
@@ -126,7 +126,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/fragment_tinker_title"
-            android:src="@drawable/ic_tinker" />
+            android:src="@drawable/ic_tinker_48" />
         <TextView
             android:id="@+id/summary3"
             android:layout_width="fill_parent"
@@ -155,7 +155,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/horizontal_rule_height"
-        android:background="@android:color/darker_gray"/>
+        android:background="@color/colorPrimaryDark"/>
 
     <RelativeLayout
         android:id="@+id/landing_about"
@@ -170,7 +170,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/title_fragment_about"
-            android:src="@drawable/ic_about" />
+            android:src="@drawable/ic_about_18" />
         <TextView
             android:id="@+id/title4"
             android:layout_width="match_parent"
@@ -202,7 +202,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/title_fragment_settings"
-            android:src="@drawable/ic_settings" />
+            android:src="@drawable/ic_settings_18" />
         <TextView
             android:id="@+id/title5"
             android:layout_width="match_parent"

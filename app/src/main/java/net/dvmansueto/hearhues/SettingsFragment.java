@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 public class SettingsFragment extends Fragment {
@@ -16,7 +17,9 @@ public class SettingsFragment extends Fragment {
                 .replace( R.id.fragment_container, new PrefsFragment())
                 .commit();
         //noinspection ConstantConditions
-        activity.getSupportActionBar().setTitle( R.string.title_fragment_settings);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setIcon( R.drawable.ic_settings_18);
+        actionBar.setTitle( R.string.title_fragment_settings);
     }
 
     @SuppressLint("ValidFragment")

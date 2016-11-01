@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -145,7 +146,9 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
         super.onResume();
 
         //noinspection ConstantConditions
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle( R.string.title_fragment_tread_tone);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setIcon( R.drawable.ic_tread_24);
+        actionBar.setTitle( R.string.title_fragment_tread_tone);
 
         // first location onResume is taken as initial datum/origin
         mSettingOrigin = true;

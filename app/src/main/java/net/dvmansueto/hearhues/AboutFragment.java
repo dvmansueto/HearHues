@@ -3,6 +3,7 @@ package net.dvmansueto.hearhues;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -32,6 +33,12 @@ public class AboutFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        //noinspection ConstantConditions
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setIcon( R.drawable.ic_about_18);
+        actionBar.setTitle( R.string.title_fragment_about);
+
         //noinspection ConstantConditions
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_fragment_about);
 

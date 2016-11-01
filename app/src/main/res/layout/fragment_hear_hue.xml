@@ -111,7 +111,7 @@
     <!-- Toggles between front and back cameras -->
     <ImageView
         android:id="@+id/HH_btn_toggleCamera"
-        android:src="@drawable/ic_camera_back"
+        android:src="@drawable/ic_camera_back_48"
         android:tint="@android:color/white"
         android:contentDescription="@string/HH_btn_toggleCamera"
         android:padding="12dp"
