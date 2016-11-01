@@ -841,20 +841,15 @@ final class CamTone {
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    showToast("Saved: " + mFile);
-                    Log.d(TAG, mFile.toString());
-
                     mListener.newCapture( mFile);
-
                     if (mSavingPhotos) {
+                        showToast("Photograph saved: " + mFile);
                         incrementFile();
                     } else {
                         //noinspection ResultOfMethodCallIgnored
                         mFile.delete();
                     }
-
                     unlockFocus();
-
                 }
             };
 
@@ -1089,37 +1084,4 @@ final class CamTone {
             mListener.requestPermission( permission, callbackCode);
         }
     }
-//
-//    void onRequestPermissionsResult( int returnedCode, @NonNull String[] permissions,
-//                                     @NonNull int[] grantedResults) {
-//        Log.d( TAG, "switching " + Integer.toString( returnedCode));
-//
-//        switch ( returnedCode) {
-//            case mCameraRequestCode: {
-//
-//                // If request was rejected, the result arrays will be empty.
-//                if (grantedResults.length == 0
-//                        || grantedResults[0] != PackageManager.PERMISSION_GRANTED) {
-//
-//                    Log.d(TAG, "camera permission rejected");
-//                    // permission refused, display a dialog and exit to nav drawer
-//                    android.support.v7.app.AlertDialog.Builder alertDialogBuilder
-//                            = new android.support.v7.app.AlertDialog.Builder( mContext);
-//                    alertDialogBuilder.setTitle(R.string.alert_camera_permission_refused_title)
-//                            .setMessage(R.string.alert_camera_permission_refused_message)
-//                            .setNeutralButton(R.string.alert_camera_permission_refused_negative,
-//                                    new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            // user cancelled the dialog
-//                                            mListener.fatalError();
-//                                        }
-//                                    });
-//                    alertDialogBuilder.create().show();
-//                }
-//                // if we have permission, open the camera
-//                openCamera();
-//            }
-//        }
-//    }
 }
