@@ -32,8 +32,10 @@
     <!-- TinkerFragment -->
     <string name="fragment_tinker_title">Tinker</string>
     <string name="tinker_summary">Play around</string>
-    <string name="tinker_hue_view_title">@string/HH_description</string>
-    <string name="tinker_loc_view_title">@string/tread_tone_summary</string>
+    <string name="tinker_hue_view_title">Tap a colour to hear it\'s sound
+    \n Not actually implemented yet, sorry.</string>
+    <string name="tinker_loc_view_title">Convert coordinates to notes
+    \n Horizontal axis: frequency, vertical: amplitude.</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
@@ -51,7 +53,7 @@ This app was developed for a \"Sensor Implementation\" project in a
         <a href="https://en.wikipedia.org/wiki/Neil_Harbisson">Neil Harbisson</a>,
 the worlds first government-recognized cyborg.
 Neil was born into the grey world of <a href="https://en.wikipedia.org/wiki/Achromatopsia">achromatopsia</a>
-(total colour blindness) and has never seen colour. In 2004 Neil had an antenna surgically implanted
+(total colour blindness) and has never seen colour. In 2004 Harbisson had an antenna surgically implanted
 into his skull, allowing him to \'hear\' colour.
 \n This app converts colour extracted from the camera into it\'s raw \'hue\' (without saturation or
 luminance) and maps it to a range of tones. As no literature appears to have been published on the

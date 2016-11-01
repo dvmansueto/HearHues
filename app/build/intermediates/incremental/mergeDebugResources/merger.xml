@@ -1839,7 +1839,8 @@
         <item>100</item>
         <item>200</item>
     </string-array><string name="prefs_tread_tone_window_height_summary">Distance from minimum to maximum amplitude</string><string name="HH_toneHeading">Tone: </string><string name="alert_camera_permission_refused_message">Sorry, the sole purpose of Hear Hue
-        requires this permission to function.</string><string name="tread_tone_tv_heading">Waiting for location…</string><string name="about_project_heading">@string/app_name</string><string name="HH_btn_toggleCamera">Toggle Camera</string><string name="camera_error">This device doesn\'t support Camera2 API.</string><string name="tinker_loc_view_title">@string/tread_tone_summary</string><string name="alert_camera_permission_refused_title">This feature requires camera access</string><string-array name="prefs_palette_area_entries">
+        requires this permission to function.</string><string name="tread_tone_tv_heading">Waiting for location…</string><string name="about_project_heading">@string/app_name</string><string name="HH_btn_toggleCamera">Toggle Camera</string><string name="camera_error">This device doesn\'t support Camera2 API.</string><string name="tinker_loc_view_title">Convert coordinates to notes
+    \n Horizontal axis: frequency, vertical: amplitude.</string><string name="alert_camera_permission_refused_title">This feature requires camera access</string><string-array name="prefs_palette_area_entries">
         <item>Very Low</item>
         <item>Low</item>
         <item>Medium</item>
@@ -1898,7 +1899,8 @@ This app was developed for a \"Sensor Implementation\" project in a
         <item>880</item>
         <item>1760</item>
         <item>3520</item>
-    </string-array><string name="prefs_playback_seconds_title">Playback Duration</string><string name="prefs_generator_base_frequency_title">Base Tone</string><string name="prefs_tread_tone_window_height_key">tread_tone_window_height</string><string name="prefs_tread_tone_window_width_default">50</string><string name="landing_heading">Choose an activity…</string><string name="tinker_hue_view_title">@string/HH_description</string><string name="tread_tone_summary">Create sound by walking</string><string name="prefs_playback_seconds_key">playback_seconds</string><string-array name="prefs_playback_seconds_values">
+    </string-array><string name="prefs_playback_seconds_title">Playback Duration</string><string name="prefs_generator_base_frequency_title">Base Tone</string><string name="prefs_tread_tone_window_height_key">tread_tone_window_height</string><string name="prefs_tread_tone_window_width_default">50</string><string name="landing_heading">Choose an activity…</string><string name="tinker_hue_view_title">Tap a colour to hear it\'s sound
+    \n Not actually implemented yet, sorry.</string><string name="tread_tone_summary">Create sound by walking</string><string name="prefs_playback_seconds_key">playback_seconds</string><string-array name="prefs_playback_seconds_values">
         <item>0.8</item>
         <item>1.6</item>
         <item>2.4</item>
