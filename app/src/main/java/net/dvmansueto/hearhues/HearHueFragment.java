@@ -118,11 +118,12 @@ public class HearHueFragment extends Fragment
         ApplicationContext applicationContext = (ApplicationContext) getActivity().getApplicationContext();
         mScalarTone = applicationContext.getScalarTone();
         mToneGenerator = applicationContext.getToneGenerator();
-        // configure for long single bursts
-        mToneGenerator.setAmplitude( 1);
+        // configure for long single bursts at full volume when frequency updated, attach listener
         mToneGenerator.setPlaybackMode( AudioTrack.MODE_STATIC);
         mToneGenerator.setPlaybackFactor( 1);
         mToneGenerator.setPlayContinuously( false);
+        mToneGenerator.setAmplitude( 1);
+        mToneGenerator.setAutoPlayOnFrequencyUpdate( true);
         mToneGenerator.setToneGeneratorListener( new ToneGenerator.ToneGeneratorListener() {
             @Override
             public void startedPlaying() {
@@ -308,11 +309,8 @@ public class HearHueFragment extends Fragment
         mHueTone.setHue( color);
         updateUi();
 
-        // update the frequency of the tone generator
+        // update the frequency of the tone generator and autoplay
         mToneGenerator.setFrequency( mHueTone.getTone());
-
-        // let rip!
-        mToneGenerator.play();
     }
 
     /**

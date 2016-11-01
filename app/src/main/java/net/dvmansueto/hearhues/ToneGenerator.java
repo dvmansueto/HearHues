@@ -49,6 +49,8 @@ final class ToneGenerator {
     /** The coefficient of the power in {@link #linToLog(double)} */
     private double mLogVarC;
 
+    /** Whether to play when frequency is updated */
+    private boolean mAutoPlayOnFrequencyUpdate;
 
     /** The frequency of the tone, in Hz. */
     private double mFrequency;
@@ -134,6 +136,7 @@ final class ToneGenerator {
         mLinToLogEnabled = false;
         mMuted = false;
         mPlayContinuously = false;
+        mAutoPlayOnFrequencyUpdate = true;
     }
 
 
@@ -141,31 +144,12 @@ final class ToneGenerator {
     // Helpers
     //--------------------------------
 
+    /**
+     * Toggles play/stop.
+     */
     void playStop() {
         if ( mAudioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) stop();
         else play();
-    }
-
-    /**
-     * Starts tone generation.
-     */
-    void play() {
-        mAudioTrack.write( mToneBytes, 0, mToneBytes.length);
-        mAsyncPlaybackTask = new AsyncPlaybackTask();
-        mAsyncPlaybackTask.execute();
-        if ( mListener != null) mListener.startedPlaying();
-    }
-
-
-    /**
-     * Cleanly stops tone generation.
-     */
-    @SuppressWarnings("WeakerAccess")
-    void stop() {
-        if ( mAudioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) {
-            mAsyncPlaybackTask.cancel( true);
-        }
-        if ( mListener != null) mListener.stoppedPlaying();
     }
 
     /**
@@ -174,7 +158,6 @@ final class ToneGenerator {
     void flush() {
         mAudioTrack.flush();
     }
-
 
     //--------------------------------
     // Accessors
@@ -268,15 +251,14 @@ final class ToneGenerator {
     }
 
     /**
-     * Sets the frequency of the generated tone.
+     * Sets the frequency of the generated tone, starts playing if
+     * {@link #setAutoPlayOnFrequencyUpdate(boolean)} true.
      * @param frequency the new value (Hz)
      */
     void setFrequency( double frequency) {
         mFrequency = frequency;
-        // cancel any existing tone generation task and start a new one
-        mAsyncGenerateTask.cancel( true);
-        mAsyncGenerateTask = new AsyncGenerateTask();
-        mAsyncGenerateTask.execute();
+
+        if ( mAutoPlayOnFrequencyUpdate) generate();
     }
 
     /**
@@ -310,7 +292,15 @@ final class ToneGenerator {
     }
 
     /**
-     * Sets the ToneGenerator to play continuously.
+     * Sets the {@link ToneGenerator} to play automatically during {@link #setFrequency(double)}
+     * @param state whether to play automatically
+     */
+    void setAutoPlayOnFrequencyUpdate( boolean state) {
+        mAutoPlayOnFrequencyUpdate = state;
+    }
+
+    /**
+     * Sets the {@link ToneGenerator} to play continuously.
      * @param state whether or not to play continuously
      */
     void setPlayContinuously( boolean state) {
@@ -361,12 +351,19 @@ final class ToneGenerator {
             @Override
             public void onMarkerReached(AudioTrack track) {
                 Log.d(TAG, "Reached end of audioTrack");
-                stop();
                 if ( mPlayContinuously) play();
+                else {
+                    mAudioTrack.stop();
+                    stop();
+                }
             }
         });
     }
 
+    /**
+     * Computes {@link #mPlaybackSeconds} worth of {@link #mFrequency} Hertz and stores the
+     * results in {@link #mToneSamples} and {@link #mToneBytes}.
+     */
     private void generateTone() {
 
         // generate the sound samples
@@ -396,41 +393,73 @@ final class ToneGenerator {
     }
 
     /**
+     * Asynchronously generates the tone, then starts playing.
+     */
+    private void generate() {
+        // cancel any existing tone generation task and start a new one (single shot)
+        mAsyncGenerateTask.cancel( true);
+        mAsyncGenerateTask = new AsyncGenerateTask();
+        mAsyncGenerateTask.execute();
+    }
+
+    /**
+     * Starts tone generation.
+     */
+    private void play() {
+        // create a new task every time (single shot)
+        mAsyncPlaybackTask.cancel( true);
+        mAsyncPlaybackTask = new AsyncPlaybackTask();
+        mAsyncPlaybackTask.execute();
+        // announce start of playback
+        if ( mListener != null) mListener.startedPlaying();
+    }
+
+
+    /**
+     * Cleanly stops tone generation.
+     */
+    private void stop() {
+        mAsyncPlaybackTask.cancel( true); // possibly does nothing
+        mAudioTrack.stop();
+        if ( mListener != null) mListener.stoppedPlaying();
+    }
+
+    /**
      * Plays the tune in an asynchronous task when executed.
      */
     private class AsyncPlaybackTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
         @Override
         protected Void doInBackground(Void... params) {
             mAudioTrack.play();
             return null;
         }
-
-        @Override
-        protected void onCancelled() {
-            mAudioTrack.stop();
-            super.onCancelled();
-        }
     }
 
 
     /**
-     * Generates the tone samples in an asynchronous task when executed.
+     * Generates the tone samples in an asynchronous task onExecute, and writes the
+     * {@link AudioTrack} buffer and starts play onPostExecute.
      */
     private class AsyncGenerateTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
-
             generateTone();
-
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            play();
             super.onPostExecute(aVoid);
+            // update buffer
+            mAudioTrack.write( mToneBytes, 0, mToneBytes.length);
+            play();
         }
     }
 }
