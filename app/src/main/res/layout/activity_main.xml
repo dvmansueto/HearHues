@@ -18,16 +18,19 @@
         android:orientation="vertical">
 
         <!-- App Bar AKA Toolbar AKA Action Bar -->
-        <LinearLayout
-            android:id="@+id/container_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/app_bar_elevation"
-            android:orientation="vertical">
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar" />
-        </LinearLayout>
+        <include
+            android:id="@+id/activity_main_toolbar_container"
+            layout="@layout/toolbar" />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/container_toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:elevation="@dimen/app_bar_elevation"-->
+            <!--android:orientation="vertical">-->
+            <!--<include-->
+                <!--android:id="@+id/toolbar"-->
+                <!--layout="@layout/toolbar" />-->
+        <!--</LinearLayout>-->
 
         <!-- Page content via fragments -->
         <FrameLayout
