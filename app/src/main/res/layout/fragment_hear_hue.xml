@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="net.dvmansueto.hearhues.HearHueFragment"
-    android:background="@color/windowBackground">
+    android:background="@color/windowBackground"
+    android:clickable="true">
 
     <!-- TONES PANEL -->
     <!-- Tones icon: static -->

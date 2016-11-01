@@ -8,12 +8,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -33,7 +35,7 @@ public class MainActivity
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
-        // instantiate sole versions, update and then set in ApplicationContext
+        // instantiate global objects, update them and push to ApplicationContext
         mScalarTone = new ScalarTone( this);
         mToneGenerator = new ToneGenerator();
         initialiseFromSharedPreferences();
@@ -41,25 +43,21 @@ public class MainActivity
         // provide content view
         setContentView(R.layout.activity_main);
 
-        if (null == savedInstanceState) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, TreadToneFragment.newInstance())
-                    .commit();
-        }
+        // inflate the default fragment
+        setFragment( TreadToneFragment.newInstance());
 
         // setup the action/app bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // setup the navigation drawer
         DrawerLayout drawerLayout = (DrawerLayout) findViewById( R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener( toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void initialiseFromSharedPreferences() {
@@ -95,9 +93,9 @@ public class MainActivity
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
-//        else if (getFragmentManager().getBackStackEntryCount() > 0 ){
-//            getFragmentManager().popBackStack();
-//        }
+        else if (getFragmentManager().getBackStackEntryCount() > 0 ){
+            getFragmentManager().popBackStack();
+        }
         else {
             super.onBackPressed();
         }
@@ -112,15 +110,13 @@ public class MainActivity
         return true;
     }
 
-    private void setMenuItemsVisible(boolean visible) {
+    private void setToolbarActionsVisible(boolean visible) {
         if ( visible ^ mMenu.hasVisibleItems()) {
             for (int i = 0; i < mMenu.size(); i++) {
                 mMenu.getItem(i).setVisible(visible);
             }
         }
     }
-
-    private static final String TAG = "MainActivity";
 
     private void toggleMute() {
         ActionMenuItemView muteButton = (ActionMenuItemView) findViewById( R.id.action_mute);
@@ -184,30 +180,43 @@ public class MainActivity
         int id = item.getItemId();
         if( id == R.id.nav_hearHue) {
             fragment = new HearHueFragment();
-            setMenuItemsVisible( true);
+            setToolbarActionsVisible( true);
         } else if( id == R.id.nav_treadTunes) {
             fragment = new TreadToneFragment();
-            setMenuItemsVisible( true);
+            setToolbarActionsVisible( true);
         } else if( id == R.id.nav_tinker) {
             fragment = new TinkerFragment();
-            setMenuItemsVisible( true);
+            setToolbarActionsVisible( true);
         } else if( id == R.id.nav_settings) {
             fragment = new SettingsFragment();
-            setMenuItemsVisible( false);
+            setToolbarActionsVisible( false);
         } else if( id == R.id.nav_about) {
             fragment = new AboutFragment();
-            setMenuItemsVisible( false);
+            setToolbarActionsVisible( false);
         }
 
-        if( fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace( R.id.fragment_container, fragment, fragment.getTag())
-                    .addToBackStack( fragment.getTag())
-                    .commit();
-        }
+        if( fragment != null) setFragment( fragment);
         closeNavigationDrawer();
         return true;
+    }
+
+    /**
+     * Method for robust fragment management. Only adds new fragments to backstack.
+     * Old fragments remaining visible and clickable is fixed in XML layout of each fragment:
+     *    • android:background="@color/windowBackground"
+     *    • android:clickable="true"
+     * @param fragment the new fragment to apply.
+     */
+    private void setFragment( Fragment fragment) {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById( R.id.fragment_container);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace( R.id.fragment_container, fragment, fragment.getClass().getName());
+        // only add to backStack if first fragment or different fragment
+        if ( currentFragment == null || !currentFragment.getClass().equals( fragment.getClass())) {
+            transaction.addToBackStack( fragment.getClass().getName());
+        }
+        transaction.commit();
     }
 
     void closeNavigationDrawer() {

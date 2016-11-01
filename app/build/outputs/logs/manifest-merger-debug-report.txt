@@ -39,18 +39,19 @@ ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.
 		ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:10:19-58
 application
 ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:12:5-28:19
-MERGED from [com.android.support:design:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-compat:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-media-compat:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-utils:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-ui:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-fragment:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:palette-v7:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\palette-v7\24.2.1\AndroidManifest.xml:22:5-23:19
-MERGED from [com.android.support:support-v13:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v13\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:design:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\design\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-vector-drawable:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.0\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:transition:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:palette-v7:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\palette-v7\25.0.0\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:support-v13:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v13\25.0.0\AndroidManifest.xml:25:5-20
 	android:label
 		ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:16:9-41
 	android:supportsRtl
@@ -83,21 +84,22 @@ ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.
 		ADDED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml:25:27-74
 uses-sdk
 INJECTED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:design:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-compat:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-media-compat:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-utils:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-core-ui:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-fragment:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:palette-v7:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\palette-v7\24.2.1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v13:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v13\24.2.1\AndroidManifest.xml:21:5-23:55
+MERGED from [com.android.support:design:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\design\25.0.0\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:support-v4:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-compat:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-fragment:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:appcompat-v7:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-vector-drawable:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.0\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:animated-vector-drawable:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:palette-v7:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\palette-v7\25.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v13:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v13\25.0.0\AndroidManifest.xml:21:5-23:55
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:24.2.1] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:design:25.0.0] C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\build\intermediates\exploded-aar\com.android.support\design\25.0.0\AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
 		INJECTED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\AndroidManifest.xml

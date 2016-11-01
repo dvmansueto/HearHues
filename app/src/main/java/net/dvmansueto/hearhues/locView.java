@@ -5,17 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Created by Dave on 28/10/16.
+ * A view which shows current and past positions on a grid, with new location callbacks on touch input.
  */
-
 public class LocView extends View {
-
-    private static final String TAG = "LocView";
 
     private static final float TICK_WIDTH_PERCENT = 4;
     private static final int FREQ_TICKS = 12;
@@ -34,29 +30,27 @@ public class LocView extends View {
 
     private boolean mIsPortrait;
 
-    private Paint mAxisPaint;
-    private Paint mTickPaint;
+    private final Paint mAxisPaint;
+    private final Paint mTickPaint;
 
-    private Paint mNewCoordPaint;
-    private Paint[] mOldCoordPaints;
+    private final Paint mNewCoordPaint;
+    private final Paint[] mOldCoordPaints;
 
     private float mNewCoordRadius;
-    private float[] mOldCoordRadii;
+    private final float[] mOldCoordRadii;
 
     private float[] mAxes;
     private float[] mTicks;
-
-    private float mX;
-    private float mY;
 
     private int mWidth;
     private int mHeight;
     private float mDp;
 
-    private double mMaxFreq = 1760; // A6
-    private double mMinFreq = 880; // A5
-    private double mMaxAmp = 100;
-    private double mMinAmp = 0;
+    //TODO: annotate the plot!
+//    private double mMaxFreq = 1760; // A6
+//    private double mMinFreq = 880; // A5
+//    private double mMaxAmp = 100;
+//    private double mMinAmp = 0;
 
     private float[] mNewCoords;
     private float[][] mOldCoords;
@@ -76,7 +70,6 @@ public class LocView extends View {
         mLocViewListener = null; // for comparison later maybe?
         mNewCoords = new float[ VIEW_DIMENSIONS];
         mOldCoords = new float[ OLD_COORD_COUNT][ VIEW_DIMENSIONS];
-        mX = mY = 0;
 
         // prepare drawing components
         mAxisPaint = new Paint();
@@ -108,10 +101,6 @@ public class LocView extends View {
 
             mOldCoordRadii[ i] = OLD_COORD_RADIUS * i / OLD_COORD_COUNT;
         }
-    }
-
-    boolean getTouchAllowed() {
-        return mTouchAllowed;
     }
 
     void setTouchAllowed( boolean state) {
@@ -161,17 +150,6 @@ public class LocView extends View {
         mNewCoordRadius = NEW_COORD_RADIUS * mDp;
 
         updateAxes();
-
-//
-//        Log.d( TAG, "  width: " + Integer.toString( w) + "  height: " + Integer.toString(h));
-//        Log.d( TAG, " mWidth: " + Integer.toString( mWidth) + " mHeight: " + Integer.toString( mHeight));
-//        Log.d( TAG, "   mDpi: " + Float.toString( mDpi));
-//        Log.d( TAG, "density: " + Float.toString( getResources().getDisplayMetrics().density));
-//        Log.d( TAG, "   dDpi: " + Float.toString( getResources().getDisplayMetrics().densityDpi));
-//        Log.d( TAG, "scaledD: " + Float.toString( getResources().getDisplayMetrics().scaledDensity));
-//        Log.d( TAG, "density: " + Float.toString( getResources().getDisplayMetrics().));
-//        Log.d( TAG, "   xdpi: " + Float.toString( getResources().getDisplayMetrics().xdpi));
-//        Log.d( TAG, "   ydpi: " + Float.toString( getResources().getDisplayMetrics().ydpi));
     }
 
 
@@ -238,19 +216,19 @@ public class LocView extends View {
         return c;
     }
 
-    void newScalarCoord( float x, float y) {
+    void newScalarCoords(float x, float y) {
         if ( x < 0) x = 0;
         if ( x > 1) x = 1;
         if ( y < 0) y = 0;
         if ( y > 1) y = 1;
-        setNewCoords( x * mWidth, ( 1 - y) * mHeight);
+        newAbsoluteCoords( x * mWidth, ( 1 - y) * mHeight);
     }
 
-    private void setNewCoords( float x, float y) {
-        setNewCoords( new float[] { x, y});
+    private void newAbsoluteCoords(float x, float y) {
+        newAbsoluteCoords( new float[] { x, y});
     }
 
-    private void setNewCoords( float[] coords) {
+    private void newAbsoluteCoords(float[] coords) {
         float[][] tempCoords = new float[ OLD_COORD_COUNT][ VIEW_DIMENSIONS];
         System.arraycopy( mOldCoords, 1, tempCoords, 0, OLD_COORD_COUNT - 1);
         mOldCoords = tempCoords;
@@ -272,10 +250,10 @@ public class LocView extends View {
         if ( y < 0) y = 0;
         if ( y > mHeight) y = mHeight;
 
-        setNewCoords( x, y);
+        newAbsoluteCoords( x, y);
 
-        mLocViewListener.newFrequency( x / mWidth);
-        mLocViewListener.newAmplitude( ( mHeight - y) / mHeight); // since y starts from the top
+        // note view is top-down, coords are bottom-up
+        mLocViewListener.newScalarCoords( new double[] { x / mWidth, ( mHeight - y) / mHeight});
     }
 
     /**
@@ -306,8 +284,7 @@ public class LocView extends View {
     }
 
     public interface LocViewListener {
-        void newFrequency( double frequency);
-        void newAmplitude( double amplitude);
+        void newScalarCoords( double[] scalarCoords);
     }
 
     public void setLocViewListener( LocViewListener locViewListener) {

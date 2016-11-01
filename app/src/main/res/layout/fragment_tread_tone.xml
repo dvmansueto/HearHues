@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="net.dvmansueto.hearhues.TreadToneFragment"
-    android:background="@color/windowBackground">
+    android:background="@color/windowBackground"
+    android:clickable="true">
 
     <ImageView
         android:id="@+id/tread_tone_iv_tread"
