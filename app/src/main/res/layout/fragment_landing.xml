@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.dvmansueto.hearhues.AboutFragment"
+    android:background="@color/windowBackground"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/landing_heading"
+        android:text="@string/landing_heading"
+        android:textAppearance="@style/heading1"
+        android:paddingTop="16dp"
+        android:paddingBottom="19dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/horizontal_rule_height"
+        android:background="@color/colorPrimaryDark"/>
+
+
+    <RelativeLayout
+        android:id="@+id/landing_hear_hue"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="8dp" >
+        <ImageView
+            android:id="@+id/icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/HH_hue"
+            android:src="@drawable/ic_hue_48" />
+        <TextView
+            android:id="@+id/summary1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/icon1"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:text="@string/HH_description"
+            android:textAppearance="@style/heading2" />
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/summary1"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toEndOf="@id/icon1"
+            android:gravity="center_vertical"
+            android:text="@string/title_fragment_hear_hue"
+            android:textAppearance="@style/heading1" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/horizontal_rule_height"
+        android:background="@android:color/darker_gray"/>
+
+    <RelativeLayout
+        android:id="@+id/landing_tread_tone"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="8dp" >
+        <ImageView
+            android:id="@+id/icon2"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/tread_tone_iv_tread"
+            android:src="@drawable/ic_tread" />
+        <TextView
+            android:id="@+id/summary2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/icon2"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:text="@string/tread_tone_summary"
+            android:textAppearance="@style/heading2" />
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/summary2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toEndOf="@id/icon2"
+            android:gravity="center_vertical"
+            android:text="@string/title_fragment_tread_tone"
+            android:textAppearance="@style/heading1" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/horizontal_rule_height"
+        android:background="@android:color/darker_gray"/>
+
+    <RelativeLayout
+        android:id="@+id/landing_tinker"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="8dp" >
+        <ImageView
+            android:id="@+id/icon3"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/fragment_tinker_title"
+            android:src="@drawable/ic_tinker" />
+        <TextView
+            android:id="@+id/summary3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/icon3"
+            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:text="@string/tinker_summary"
+            android:textAppearance="@style/heading2" />
+        <TextView
+            android:id="@+id/title3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/summary3"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toEndOf="@id/icon3"
+            android:gravity="center_vertical"
+            android:text="@string/fragment_tinker_title"
+            android:textAppearance="@style/heading1" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/horizontal_rule_height"
+        android:background="@android:color/darker_gray"/>
+
+    <RelativeLayout
+        android:id="@+id/landing_about"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="8dp" >
+        <ImageView
+            android:id="@+id/icon4"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/title_fragment_about"
+            android:src="@drawable/ic_about" />
+        <TextView
+            android:id="@+id/title4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toEndOf="@id/icon4"
+            android:gravity="center_vertical"
+            android:text="@string/title_fragment_about"
+            android:textAppearance="@style/heading1" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/horizontal_rule_height"
+        android:background="@android:color/darker_gray"/>
+
+    <RelativeLayout
+        android:id="@+id/landing_settings"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="8dp" >
+        <ImageView
+            android:id="@+id/icon5"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/title_fragment_settings"
+            android:src="@drawable/ic_settings" />
+        <TextView
+            android:id="@+id/title5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toEndOf="@id/icon5"
+            android:gravity="center_vertical"
+            android:text="@string/title_fragment_settings"
+            android:textAppearance="@style/heading1" />
+    </RelativeLayout>
+</LinearLayout>

@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,14 +14,23 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MainActivity
         extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        LandingFragment.OnLandingViewSelectedListener{
+
+    /** For matching selected fragments */
+    private static final int HEAR_HUE = 1;
+    private static final int TREAD_TONE = 2;
+    private static final int TINKER = 3;
+    private static final int ABOUT = 4;
+    private static final int SETTINGS = 5;
 
     private ScalarTone mScalarTone;
     private ToneGenerator mToneGenerator;
@@ -43,8 +51,11 @@ public class MainActivity
         // provide content view
         setContentView(R.layout.activity_main);
 
-        // inflate the default fragment
-        setFragment( TreadToneFragment.newInstance());
+        // instantiate landing fragment, inflate and attach listener
+        LandingFragment landingFragment = new LandingFragment();
+        landingFragment.setLandingViewSelectedListener( this);
+        setFragment( landingFragment);
+
 
         // setup the action/app bar
         Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar);
@@ -175,30 +186,76 @@ public class MainActivity
     @Override
     public boolean onNavigationItemSelected( @NonNull MenuItem item) {
 
-        Fragment fragment = null;
-
-        int id = item.getItemId();
-        if( id == R.id.nav_hearHue) {
-            fragment = new HearHueFragment();
-            setToolbarActionsVisible( true);
-        } else if( id == R.id.nav_treadTunes) {
-            fragment = new TreadToneFragment();
-            setToolbarActionsVisible( true);
-        } else if( id == R.id.nav_tinker) {
-            fragment = new TinkerFragment();
-            setToolbarActionsVisible( true);
-        } else if( id == R.id.nav_settings) {
-            fragment = new SettingsFragment();
-            setToolbarActionsVisible( false);
-        } else if( id == R.id.nav_about) {
-            fragment = new AboutFragment();
-            setToolbarActionsVisible( false);
+        switch ( item.getItemId()) {
+            case R.id.nav_hearHue:
+                selectFragment( HEAR_HUE);
+                break;
+            case R.id.nav_treadTunes:
+                selectFragment( TREAD_TONE);
+                break;
+            case R.id.nav_tinker:
+                selectFragment( TINKER);
+                break;
+            case R.id.nav_about:
+                selectFragment( ABOUT);
+                break;
+            case R.id.nav_settings:
+                selectFragment( SETTINGS);
+                break;
         }
-
-        if( fragment != null) setFragment( fragment);
         closeNavigationDrawer();
         return true;
     }
+
+    @Override
+    public void OnLandingViewSelected( View view) {
+        switch ( view.getId()) {
+            case R.id.landing_hear_hue:
+                selectFragment( HEAR_HUE);
+                break;
+            case R.id.landing_tread_tone:
+                selectFragment( TREAD_TONE);
+                break;
+            case R.id.landing_tinker:
+                selectFragment( TINKER);
+                break;
+            case R.id.landing_about:
+                selectFragment( ABOUT);
+                break;
+            case R.id.landing_settings:
+                selectFragment( SETTINGS);
+                break;
+        }
+    }
+
+    private void selectFragment( int selection) {
+
+        Fragment fragment = null;
+        switch ( selection) {
+            case HEAR_HUE:
+                fragment = new HearHueFragment();
+                setToolbarActionsVisible( true);
+                break;
+            case TREAD_TONE:
+                fragment = new TreadToneFragment();
+                setToolbarActionsVisible( true);
+                break;
+            case TINKER:
+                fragment = new TinkerFragment();
+                setToolbarActionsVisible( true);
+                break;
+            case ABOUT:
+                fragment = new AboutFragment();
+                setToolbarActionsVisible( false);
+                break;
+            case SETTINGS:
+                fragment = new SettingsFragment();
+                setToolbarActionsVisible( false);
+                break;
+        }
+        if( fragment != null) setFragment( fragment);
+    }
+
 
     /**
      * Method for robust fragment management. Only adds new fragments to backstack.

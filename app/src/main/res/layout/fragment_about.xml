@@ -19,9 +19,9 @@
         <TextView
             android:id="@+id/about_project_heading"
             android:text="@string/about_project_heading"
-            android:textAppearance="@style/Headline"
+            android:textAppearance="@style/heading1"
             android:paddingTop="16dp"
-            android:paddingBottom="19dp"
+            android:paddingBottom="@dimen/heading1_bottom_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
@@ -35,14 +35,14 @@
             android:id="@+id/about_below_project_rule"
             android:layout_width="match_parent"
             android:layout_marginTop="12dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/horizontal_rule_height"
             android:background="@color/colorPrimaryDark" />
 
         <!-- Hear Hue -->
         <TextView
             android:id="@+id/about_hear_hue_heading"
             android:text="@string/about_hear_hue_heading"
-            android:textAppearance="@style/Headline"
+            android:textAppearance="@style/heading1"
             android:paddingTop="16dp"
             android:paddingBottom="19dp"
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
         <TextView
             android:id="@+id/about_tread_tone_heading"
             android:text="@string/about_tread_tone_heading"
-            android:textAppearance="@style/Headline"
+            android:textAppearance="@style/heading1"
             android:paddingTop="16dp"
             android:paddingBottom="19dp"
             android:layout_width="match_parent"

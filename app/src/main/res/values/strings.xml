@@ -1,15 +1,9 @@
 <resources>
     <string name="app_name">Hear Hues</string>
-    <string name="intro_message">
-        <![CDATA[
 
-
-            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
-            you can display camera preview and take pictures.
-
-
-        ]]>
-    </string>
+    <!-- LandingFragment -->
+    <string name="title_fragment_landing">Landing Page</string>
+    <string name="landing_heading">Choose an activity…</string>
 
     <!-- HearHueFragment -->
     <string name="title_fragment_hear_hue">Hear Hue</string>
@@ -29,30 +23,32 @@
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
     <!-- TreadToneFragment -->
-    <string name="title_fragment_tread_tone">Tread Tune</string>
+    <string name="title_fragment_tread_tone">Tread Tone</string>
+    <string name="tread_tone_summary">Create sound by walking</string>
     <string name="tread_tone_iv_tread">Tone</string>
     <string name="tread_tone_tv_heading">Waiting for location…</string>
     <string name="tread_tone_ivbtn_origin">Update Origin</string>
 
     <!-- TinkerFragment -->
     <string name="fragment_tinker_title">Tinker</string>
-    <string name="tinker_hue_view_title">Touch Hues</string>
-    <string name="tinker_loc_view_title">Touch Tones</string>
+    <string name="tinker_summary">Play around</string>
+    <string name="tinker_hue_view_title">@string/HH_description</string>
+    <string name="tinker_loc_view_title">@string/tread_tone_summary</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>
 
     <!-- AboutFragment -->
-    <string name="about_project_heading">Project</string>
+    <string name="about_project_heading">@string/app_name</string>
     <string name="about_project_body">
-Hear Hues was developed for a \"Sensor Implementation\" project in a
+This app was developed for a \"Sensor Implementation\" project in a
 <a href="http://www.flinders.edu.au">university</a> mobile application development topic.
     </string>
 
     <string name="title_fragment_about">About</string>
     <string name="about_hear_hue_heading">Hear Hue</string>
-    <string name="about_hear_hue_body">
-The idea for Hear Hue comes from <a href="https://en.wikipedia.org/wiki/Neil_Harbisson">Neil Harbisson</a>,
+    <string name="about_hear_hue_body">The idea for Hear Hue comes from
+        <a href="https://en.wikipedia.org/wiki/Neil_Harbisson">Neil Harbisson</a>,
 the worlds first government-recognized cyborg.
 Neil was born into the grey world of <a href="https://en.wikipedia.org/wiki/Achromatopsia">achromatopsia</a>
 (total colour blindness) and has never seen colour. In 2004 Neil had an antenna surgically implanted
@@ -64,8 +60,8 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
     <string name="about_iv_neil_harbisson">Image of Neil Harbisson</string>
 
     <string name="about_tread_tone_heading">Tread Tone</string>
-    <string name="about_tread_tone_body">
-Tread Tone takes the device\'s location as input for a tone generator. Longitudinal movement
+    <string name="about_tread_tone_body">Tread Tone takes the device\'s location as input for a
+        tone generator. Longitudinal movement
 (parallel to the equator) determines the frequency, while latitudinal movement determines the
 amplitude (volume).
     </string>

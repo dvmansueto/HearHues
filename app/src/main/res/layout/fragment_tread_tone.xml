@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/tread_tone_tv_heading"
         android:text="@string/tread_tone_tv_heading"
-        android:textSize="@dimen/heading_textSize"
+        android:textSize="@dimen/heading1_textSize"
         android:textColor="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

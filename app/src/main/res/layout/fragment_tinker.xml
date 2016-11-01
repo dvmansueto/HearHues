@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/tinker_hue_view_title"
         android:text="@string/tinker_hue_view_title"
-        android:textSize="@dimen/heading_textSize"
+        android:textSize="@dimen/heading1_textSize"
         android:textColor="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight" />
@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/tinker_loc_view_title"
         android:text="@string/tinker_hue_view_title"
-        android:textSize="@dimen/heading_textSize"
+        android:textSize="@dimen/heading1_textSize"
         android:textColor="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight" />

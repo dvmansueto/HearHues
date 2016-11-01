@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowBackground">@color/windowBackground</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,11 +18,14 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- https://material.google.com/style/typography.html -->
-    <style name="Headline" parent="@android:style/TextAppearance">
-        <item name="android:textSize">24sp</item>
+    <style name="heading1" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/heading1_textSize</item>
     </style>
-    <style name="Body1" parent="@android:style/TextAppearance">
-        <item name="android:textSize">13sp</item>
+    <style name="heading2" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/heading2_textSize</item>
+    </style>
+    <style name="body1" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/normal_textSize</item>
     </style>
 
 </resources>

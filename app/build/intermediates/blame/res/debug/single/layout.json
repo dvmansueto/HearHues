@@ -168,6 +168,10 @@
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_landing.xml",
+        "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\src\\main\\res\\layout\\fragment_landing.xml"
+    },
+    {
         "merged": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
         "source": "C:\\Dropbox\\Uni\\2016S2\\COMP7717\\HearHues\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },

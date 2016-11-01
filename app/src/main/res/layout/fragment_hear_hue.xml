@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/HH_tv_tone"
         android:text="@string/HH_tone"
-        android:textSize="@dimen/heading_textSize"
+        android:textSize="@dimen/heading1_textSize"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         android:id="@+id/HH_tv_hue"
         android:text="@string/HH_hue"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/heading_textSize"
+        android:textSize="@dimen/heading1_textSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"

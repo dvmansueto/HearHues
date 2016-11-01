@@ -82,14 +82,6 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
         // Required empty public constructor
     }
 
-    /**
-     * Instantiates the fragment?
-     * @return this fragment.
-     */
-    public static TreadToneFragment newInstance() {
-        return new TreadToneFragment();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
