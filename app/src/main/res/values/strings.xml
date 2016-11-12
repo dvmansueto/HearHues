@@ -25,7 +25,10 @@
     <!-- TreadToneFragment -->
     <string name="title_fragment_tread_tone">Tread Tone</string>
     <string name="tread_tone_summary">Create sound by walking</string>
-    <string name="tread_tone_iv_tread">Tone</string>
+    <string name="tread_tone_iv_tone">Tone</string>
+    <string name="tread_tone_tv_tone"> </string>
+    <string name="tread_tone_btn_playPause">Play/Pause</string>
+    <string name="tread_tone_iv_tread">Tread</string>
     <string name="tread_tone_tv_heading">Waiting for location…</string>
     <string name="tread_tone_ivbtn_origin">Update Origin</string>
 
@@ -150,43 +153,55 @@ amplitude (volume).
     <string name="prefs_tread_tone_window_width_key">tread_tone_window_width</string>
     <string name="prefs_tread_tone_window_width_title">Window Width</string>
     <string name="prefs_tread_tone_window_width_summary">Distance from minimum to maximum frequency</string>
-    <string name="prefs_tread_tone_window_width_default">50</string>
+    <string name="prefs_tread_tone_window_width_default">54</string>
     <string-array name="prefs_tread_tone_window_width_entries">
+        <item>Very Tiny</item>
         <item>Tiny</item>
+        <item>Very Small</item>
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
+        <item>Very Large</item>
         <item>Huge</item>
-        <item>Silly</item>
+        <item>Very Huge</item>
     </string-array>
     <string-array name="prefs_tread_tone_window_width_values">
-        <item>10</item>
+        <item>12</item>
+        <item>17</item>
         <item>25</item>
-        <item>50</item>
-        <item>75</item>
-        <item>100</item>
-        <item>200</item>
+        <item>37</item>
+        <item>54</item>
+        <item>78</item>
+        <item>113</item>
+        <item>165</item>
+        <item>240</item>
     </string-array>
 
     <string name="prefs_tread_tone_window_height_key">tread_tone_window_height</string>
     <string name="prefs_tread_tone_window_height_title">Window Height</string>
     <string name="prefs_tread_tone_window_height_summary">Distance from minimum to maximum amplitude</string>
-    <string name="prefs_tread_tone_window_height_default">50</string>
+    <string name="prefs_tread_tone_window_height_default">54</string>
     <string-array name="prefs_tread_tone_window_height_entries">
+        <item>Very Tiny</item>
         <item>Tiny</item>
+        <item>Very Small</item>
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
+        <item>Very Large</item>
         <item>Huge</item>
-        <item>Silly</item>
+        <item>Very Huge</item>
     </string-array>
     <string-array name="prefs_tread_tone_window_height_values">
-        <item>10</item>
+        <item>12</item>
+        <item>17</item>
         <item>25</item>
-        <item>50</item>
-        <item>75</item>
-        <item>100</item>
-        <item>200</item>
+        <item>37</item>
+        <item>54</item>
+        <item>78</item>
+        <item>113</item>
+        <item>165</item>
+        <item>240</item>
     </string-array>
 
     <string name="prefs_tread_tone_location_timeout_key">tread_tone_location_timeout</string>
@@ -208,6 +223,29 @@ amplitude (volume).
         <item>40</item>
         <item>60</item>
         <item>90</item>
+    </string-array>
+
+    <string name="prefs_tread_tone_location_accuracy_key">tread_tone_location_accuracy</string>
+    <string name="prefs_tread_tone_location_accuracy_title">Location Accuracy</string>
+    <string name="prefs_tread_tone_location_accuracy_summary">Stricter accuracy requirements increase reliability but decrease update frequency</string>
+    <string name="prefs_tread_tone_location_accuracy_default">44</string>
+    <string-array name="prefs_tread_tone_location_accuracy_entries">
+        <item>Very strict</item>
+        <item>Strict</item>
+        <item>Semi-strict</item>
+        <item>Medium</item>
+        <item>Semi-lax</item>
+        <item>Lax</item>
+        <item>Very lax</item>
+    </string-array>
+    <string-array name="prefs_tread_tone_location_accuracy_values">
+        <item>10</item>
+        <item>16</item>
+        <item>27</item>
+        <item>44</item>
+        <item>74</item>
+        <item>121</item>
+        <item>200</item>
     </string-array>
 
     <string name="prefs_generator_category">Tone Generator</string>

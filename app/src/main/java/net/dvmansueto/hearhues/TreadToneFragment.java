@@ -63,6 +63,9 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
     /** User's preferred location reliability timeout, in seconds */
     private int mPreferredLocationTimeout;
 
+    /** User's preferred location accuracy, in metres */
+    private int mPreferredLocationAccuracy;
+
     /** Whether to take the next location as the 'origin' point */
     private boolean mSettingOrigin;
 
@@ -111,10 +114,12 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
                         mLocTone = new LocTone(
                                 mPreferredWindowHeight, mPreferredWindowWidth, location);
                         mSettingOrigin = false;
+                    } else {
+                        mLocTone.setLocation( location);
                     }
 
-                    double scalarLatitude = mLocTone.scalarLatitude( location.getLatitude());
-                    double scalarLongitude = mLocTone.scalarLongitude( location.getLongitude());
+                    double scalarLatitude = mLocTone.getScalarLatitude();
+                    double scalarLongitude = mLocTone.getScalarLongitude();
 
                     // update axis view
                     mLocView.newScalarCoords( (float) scalarLongitude, (float) scalarLatitude);
@@ -127,7 +132,8 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
                     mToneGenerator.setFrequency( frequency); // plays noise!
                     mToneGenerator.setAmplitude( amplitude);
 
-                    updateHeadingText( frequency, amplitude);
+                    updateToneText( frequency, amplitude);
+                    updateLocText( mLocTone.toDegreeString(), mLocTone.toCoordString());
                 }
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -162,6 +168,10 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
         // no point using a listener, as can't change preferences while this fragment is active
         // and need to define them each resume anyway
         initialiseFromSharedPreferences();
+        Log.d( TAG, "should have prefs now");
+        Log.d( TAG, "mPreferredWindowHeight:" + Double.toString( mPreferredWindowHeight));
+        Log.d( TAG, "mPreferredWindowWidth:" + Double.toString( mPreferredWindowWidth));
+        Log.d( TAG, "mPreferredLocationTimeout:" + Double.toString( mPreferredLocationTimeout));
 
         // mScalarTone and mToneGenerator are 'global' objects, retrieved from ApplicationContext
         ApplicationContext applicationContext = (ApplicationContext) getActivity().getApplicationContext();
@@ -214,17 +224,28 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
         mPreferredLocationTimeout = Integer.parseInt( sharedPreferences.getString(
                 getString( R.string.prefs_tread_tone_location_timeout_key),
                 getString( R.string.prefs_tread_tone_location_timeout_default)));
+        mPreferredLocationAccuracy = Integer.parseInt( sharedPreferences.getString(
+                getString( R.string.prefs_tread_tone_location_accuracy_key),
+                getString( R.string.prefs_tread_tone_location_accuracy_default)));
     }
 
     /**
-     * Updates heading text of the fragment...
+     * Displays the tone as frequency & note and the volume on the Tone TextView.
      */
-    private void updateHeadingText(double frequency, double amplitude) {
+    private void updateToneText(double frequency, double amplitude) {
         String ampString = String.format( Locale.getDefault(), "%3d", (int) ( amplitude * 100));
         String toneString = String.format( Locale.getDefault(), "%7.2f", frequency) + " Hz";
         String noteString = mScalarTone.toneToNoteString( frequency);
-        TextView textView = (TextView) getActivity().findViewById( R.id.tread_tone_tv_heading);
-        textView.setText( toneString + " (" + noteString + "), " + ampString + "% volume" );
+        TextView textView = (TextView) getActivity().findViewById( R.id.tread_tone_tv_tone);
+        textView.setText( toneString + " (" + noteString + "), " + ampString + "%" );
+    }
+
+    /**
+     * Displays the tone as frequency and note and the volume on the Tone TextView.
+     */
+    private void updateLocText(String degrees, String coords) {
+        TextView textView = (TextView) getActivity().findViewById( R.id.tread_tone_tv_location);
+        textView.setText( degrees + " " + coords);
     }
 
     private void exitToNavigationDrawer() {
@@ -265,7 +286,7 @@ public class TreadToneFragment extends Fragment implements View.OnClickListener 
         int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
         boolean isLessAccurate = accuracyDelta > 0;
         boolean isMoreAccurate = accuracyDelta < 0;
-        boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+        boolean isSignificantlyLessAccurate = accuracyDelta > mPreferredLocationAccuracy;
 
         // Check if the old and new location are from the same provider
         boolean isFromSameProvider = isSameProvider(location.getProvider(),

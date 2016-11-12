@@ -2,6 +2,37 @@
 Created the app!
 The idea is to 'hear colour' a la Neil Harbisson, pulling colour from the camera, mapping it to a sound frequency, and playing it on the speaker.
 
+Two modes of operation:
+
+##1. Hear Hue
+Visual input (hue) -> auditory output (tone)
+
+  1.1 Visual input
+  Initially: live camera input - how to isolate a hue? Include full range of sensor hues --> IR & UV!
+  Extension: image upload
+
+  1.2 Auditory output
+  Generate tone - algorithm?
+
+##2. See Sound
+Auditory input (tone) -> visual output (hue)
+
+  2.1 Auditory input
+  Initially: live microphone input - how to isolate a tone?
+
+  2.2 Visual output
+  Generate hue - algorithm?
+
+##3. Generator mode
+One page: hue generator with readout linked to tone generator with readout - able to manipulate either affecting other.
+
+
+\begin{description}
+  \item[Hear Hue] Visual input (hue) \textrightarrow auditory output (tone)
+  \item [See Sound] Auditory input (tone) \textrightarrow visual output (hue)
+  \item [Generator]
+About
+Settings
 
 ------------------------
 
@@ -701,3 +732,154 @@ Alright, since we're instantiating LandingFragment anyway, made a listener for i
   >#59. Minor logic flow revision
 
   >#60. Fixed HearHueFragment not playing subsequent tones by forcing mAudioTrack.stop() when end of buffer marker reached.
+
+# 2016-11-12 Sat 12:48
+Got an extension, so better polish things up!
+Tread Tone activity only kind of works; locations are retrieved and sounds are made, but there is a lot of 'drift' on location, and there can be big jumps even when moving at steady pace. Experience playing Ingress leads me to believe this is simply how smartphone location awareness is.
+
+To combat drift, it makes sense to reduce the 'sensitivity', i.e. enlarging the window, so error (unchanged) is reduced compared to step (larger).
+
+Currently, based on thinking accuracy can't be as good as 1 m but is probably better than 10 m, our 'ready-reckoning' options are:
+
+```XML
+  <item>10</item>
+  <item>25</item>
+  <item>50</item>
+  <item>75</item>
+  <item>100</item>
+  <item>200</item>
+```
+
+Which, divided by 12 (window height & width in steps) give step sizes in metres:
+
+```Matlab
+>> [ 10 25 50 75 100 200] / 12
+ans =
+    0.8333    2.0833    4.1667    6.2500    8.3333   16.6667
+```
+
+But how accurate is the GPS, or, what size should the step size really be?
+
+Looking for articles on accuracy of smartphone GPS sensors.
+(Actually spent more time playing with referencing than searching...)
+
+[Zandbergen and Barbeau (2011)](#Zandbergen2011) found a mean error of 5.0 m using a Sanyo SCP-7050 GPS-equipped phone, while [Garnet and Stewart (2015)](#Garnet2015) calculate the mean static GPS location error for an iPhone 2 as 3.89 m in open areas and 11.2 m near buildings 2 to 8 storeys high: this is pretty much what I estimated.
+
+My own experience is that Google has put considerable effort into improving location accuracy, such as using cellular triangulation and WiFi MAC/SSID sniffing, so we can assume modern Android phones achieve at least as good accuracy as the iPhone 2.
+
+Lower accuracy is desirable, as playing fun tunes requires rapidly changing coordinate, which in turn is a function of real-world movement (walking speed) and the 'step size' of the Tread Tune window. At the same time, drift and jumps are annoying, especially where they simply push you against the window boundary.
+
+Since the literature basically supports our estimate, we can try increase the number of options and play around and see what happens.
+
+9 options ranging logarithmically from unrealistically small to aerobically large:
+
+```Matlab
+>> logspace( log10(1), log10(20), 9)
+ans =
+  Columns 1 through 6
+    1.0000    1.4542    2.1147    3.0753    4.4721    6.5034
+  Columns 7 through 9
+    9.4574   13.7531   20.0000
+>> ans * 12
+ans =
+  Columns 1 through 6
+   12.0000   17.4506   25.3769   36.9035   53.6656   78.0414
+  Columns 7 through 9
+  113.4890  165.0374  240.0000
+```
+
+```XML
+  <item>12</item>
+  <item>17</item>
+  <item>25</item>
+  <item>37</item>
+  <item>54</item>
+  <item>78</item>
+  <item>113</item>
+  <item>165</item>
+  <item>240</item>
+```
+
+# 2016-11-12 Sat 14:51
+Tested new GPS options and either I'm getting location errors as much as 120 m, or I'm not actually applying the window size preferences properly...
+
+Adding some debug logging...
+
+Wanted to see location on the screen, so re-jigging the layout so both location and tone strings are displayed.
+
+Okay, now I want to see both location and relative coordinates!
+Adding a `String getLocText()` method to `LocTone` to do all the heavy lifting.
+Or am I? Putting it inside requires LocTone to have memory; at the moment it's basically a utility class, but then it remembers a datum/origin point.
+I guess if it has any memory there's no problem adding more.
+But should I change the way it works and pass only a new `Location` then use accessors for everything? That would be consistent.
+
+
+# 2016-11-12 Sat 15:58
+## Commit:
+  >#61. Updated `LocTone`:
+  >  * Replaced origin lat/long doubles with a Location
+  >  * Added memory of current Location
+  >  * Added `setLocation()`
+  >  * Converted `double latitudeToScalar( double latitude)` to `double getScalarLatitude()`, similarly for longitude
+  >  * Added `toDegreeString()` and `toCoordString()`
+
+`TreadToneFragment.java` either sets a new datum or a new location on every new good location.
+
+# 2016-11-12 Sat 16:15
+Wow, does this thing whip around!
+
+The loc string is too long, and disappears under the 'set datum' icon.
+Really, the icon is in a silly place, could just move it away. Where to put it, though? Action bar? Kind of hidden. Floating? Obscures main view. Leave it where it is!
+
+Anyway, I wonder if there is a way we can improve accuracy.
+[Accuracy is the **radius** of 68% (2σ) confidence](https://developer.android.com/reference/android/location/Location.html)
+
+Can't simulate accuracy, and can't get real locations indoors...
+Add a preference and play around!
+Google sample code uses 200 as 'significantly less accurate', so we could choose static values:
+
+```Matlab
+>> logspace( log10( 10), log10( 200), 7)
+ans =
+  Columns 1 through 6
+   10.0000   16.4755   27.1442   44.7214   73.6806  121.3924
+  Column 7
+  200.0000
+```
+
+Or we could use proportional values, say percent of window width:
+
+```Matlab
+>> logspace( log10( 10), log10( 100), 7)
+ans =
+  Columns 1 through 6
+   10.0000   14.6780   21.5443   31.6228   46.4159   68.1292
+  Column 7
+  100.0000
+```
+
+Let's start with static values and see what happens. If things seems somewhat logical, move to proportional values.
+
+Doesn't do a thing.
+
+I wonder if the issue arises from how the difference between a new location and the origin is calculated:
+
+```Java
+// convert angular separation from degrees to radians
+double angle = (latitude - mOrigin.getLatitude()) * Math.PI / 180.0;
+
+// arc length = angle * ( 2 * PI * radius)
+return 2.0 * Math.PI * mLatitudinalRadius * angle;
+```
+
+Makes sense, seems to work, but haven't tested it properly.
+
+
+
+
+
+# References
+
+<a name="Zandbergen2011">Zandbergen, P.A. and Barbeau, S.J., 2011. Positional accuracy of assisted gps data from high-sensitivity gps-enabled mobile phones. Journal of Navigation, 64(03), pp.381-399. DOI:[10.1017/S0373463311000051](http://dx.doi.org/10.1017/S0373463311000051)</a>
+
+<a name="Garnet2015">Garnett, R. and Stewart, R., 2015. Comparison of GPS units and mobile Apple GPS capabilities in an urban landscape. Cartography and Geographic Information Science, 42(1), pp.1-8. DOI:[10.1080/15230406.2014.974074](http://dx.doi.org/10.1080/15230406.2014.974074)</a>

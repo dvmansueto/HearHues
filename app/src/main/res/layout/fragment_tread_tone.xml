@@ -6,6 +6,42 @@
     android:background="@color/windowBackground"
     android:clickable="true">
 
+    <!-- TONES PANEL -->
+    <!-- Tones icon: static -->
+    <ImageView
+        android:id="@+id/tread_tone_iv_tone"
+        android:src="@drawable/ic_tone_48"
+        android:contentDescription="@string/tread_tone_iv_tone"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+    <!-- Tones string: programatically changes after capture -->
+    <TextView
+        android:id="@+id/tread_tone_tv_tone"
+        android:text="@string/tread_tone_tv_tone"
+        android:textSize="@dimen/heading1_textSize"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/tread_tone_iv_tone"
+        android:layout_alignTop="@id/tread_tone_iv_tone"
+        android:layout_alignBottom="@id/tread_tone_iv_tone"
+        android:gravity="center_vertical" />
+    <!-- Plays or pauses tone generation -->
+    <ImageView
+        android:id="@+id/tread_tone_btn_playStop"
+        android:src="@drawable/ic_play_circle_outline_48"
+        android:contentDescription="@string/tread_tone_btn_playPause"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tread_tone_iv_tone"
+        android:layout_alignParentEnd="true" />
+
+
     <ImageView
         android:id="@+id/tread_tone_iv_tread"
         android:src="@drawable/ic_tread_48"
@@ -13,10 +49,10 @@
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/tread_tone_iv_tone"
         android:layout_alignParentStart="true"/>
     <TextView
-        android:id="@+id/tread_tone_tv_heading"
+        android:id="@+id/tread_tone_tv_location"
         android:text="@string/tread_tone_tv_heading"
         android:textSize="@dimen/heading1_textSize"
         android:textColor="@android:color/black"
@@ -34,7 +70,7 @@
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@id/tread_tone_iv_tread"
         android:layout_alignParentEnd="true"/>
 
     <net.dvmansueto.hearhues.LocView

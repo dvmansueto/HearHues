@@ -95,7 +95,7 @@ final class LocTone {
     }
 
     String toCoordString() {
-        return String.format(Locale.getDefault(), "%5.2f %5.2f",
+        return String.format(Locale.getDefault(), "(%5.2f, %5.2f)",
                 latitudeToDelta( mLocation.getLatitude()), longitudeToDelta( mLocation.getLongitude()));
     }
 
@@ -145,15 +145,15 @@ final class LocTone {
     }
 
     /**
-     * Computes Earth's longitudinal radius at mOriginLatitude.
+     * Computes Earth's longitudinal radius at {@link #mOrigin} latitude.
      *            _______________________
      *           / (a²cosφ)² + (b²sinφ)²
      *  R(φ) =  / ----------------------
      *         √  (a•cosφ)² + (b•sinφ)²
      *
-     *  a = equatorial radius, b = polar radius
+     *  a = equatorial radius (m), b = polar radius (m), φ = latitude (rad)
      *
-     * @return Earth's radius at mOriginLatitude
+     * @return Earth's longitudinal radius, in metres
      */
     private double computeLongitudinalRadius() {
         final double a = EQUATORIAL_RADIUS;

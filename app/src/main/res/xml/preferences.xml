@@ -53,6 +53,13 @@
             android:defaultValue="@string/prefs_tread_tone_location_timeout_default"
             android:entries="@array/prefs_tread_tone_location_timeout_entries"
             android:entryValues="@array/prefs_tread_tone_location_timeout_values" />
+        <ListPreference
+            android:key="@string/prefs_tread_tone_location_accuracy_key"
+            android:title="@string/prefs_tread_tone_location_accuracy_title"
+            android:summary="@string/prefs_tread_tone_location_accuracy_summary"
+            android:defaultValue="@string/prefs_tread_tone_location_accuracy_default"
+            android:entries="@array/prefs_tread_tone_location_accuracy_entries"
+            android:entryValues="@array/prefs_tread_tone_location_accuracy_values" />
     </PreferenceCategory>
 
     <PreferenceCategory
