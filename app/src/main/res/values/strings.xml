@@ -35,10 +35,8 @@
     <!-- TinkerFragment -->
     <string name="fragment_tinker_title">Tinker</string>
     <string name="tinker_summary">Play around</string>
-    <string name="tinker_hue_view_title">Tap a colour to hear it\'s sound
-    \n Not actually implemented yet, sorry.</string>
-    <string name="tinker_loc_view_title">Convert coordinates to notes
-    \n Horizontal axis: frequency, vertical: amplitude.</string>
+    <string name="tinker_hue_view_title">Tap a colour and hear it\'s sound!</string>
+    <string name="tinker_loc_view_title">Convert coordinates to tones!</string>
 
     <!-- SettingsFragment -->
     <string name="title_fragment_settings">Settings</string>

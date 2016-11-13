@@ -1030,15 +1030,28 @@ Maybe we can make a static final bitmap which is filled with a canvas (the curre
 Wow, that just worked.
 Had to define a [RectF](https://developer.android.com/reference/android/graphics/RectF.html): `mViewRect = new RectF( 0, 0, mWidth, mHeight);`
 For some reason doing it this way there are visible bands in the output:
-https://github.com/dvmansueto/HearHues/blob/master/
+
 Original array-indexed `onDraw` method
-![Array](HSL-array.png)
+![Array](https://raw.githubusercontent.com/dvmansueto/HearHues/6e205bd49408e599ce9d2d828287e88245feeab1/HSL-array.png)
 Creating an `RGB-565` Bitmap
-![RGB-565](HSL-bitmap-RGB_565.png)
+![RGB-565](https://raw.githubusercontent.com/dvmansueto/HearHues/6e205bd49408e599ce9d2d828287e88245feeab1/HSL-bitmap-RGB_565.png)
 Creating an `ARGB-8888` Bitmap
-![ARGB-8888](HSL-bitmap-ARGB_8888.png)
+![ARGB-8888](https://raw.githubusercontent.com/dvmansueto/HearHues/6e205bd49408e599ce9d2d828287e88245feeab1/HSL-bitmap-ARGB_8888.png)
 
+ARGB-8888 looks better than array and provides a (subjectively, *large*) speed advantage. Neat.
 
+## Commit:
+  >#68. `HueView`: replaced array-indexed rect drawing with bitmap drawing.
+
+Well, it's working, but it's pretty lame! Doesn't do anything LocView doesn't do. Would like to display the colour on a palette icon and indicate freq/note/vol.
+
+Oooh, could make the cursor in LocView really large, and colour it based on HSL!
+
+Anyway, enough procrastination, back to exam revision...
+
+# 2016-11-13 Sun 15:17
+## Commit:
+  >#69. Update Tinker strings.
 
 # References
 
