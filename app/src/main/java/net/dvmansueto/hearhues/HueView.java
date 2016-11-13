@@ -24,8 +24,8 @@ public class HueView extends View {
 
     private Paint[][] mHlPaint;
 
-    private int mWidth;
-    private int mHeight;
+    private float mHueToX;
+    private float mLumToY;
 
     /**
      * Constructs a new HueView.
@@ -63,37 +63,41 @@ public class HueView extends View {
             // for each lum in y (vertical, top to bottom)
             for ( int y = 0; y < 100; y++) {
                 // left, right, top, bottom, Paint
-                canvas.drawRect( x * mDp, y * mDp, x * mDp + mDp, y * mDp + mDp, mHlPaint[ x][ y]);
+                canvas.drawRect( x * mHueToX, y * mLumToY,
+                        x * mHueToX + mHueToX, y * mLumToY + mLumToY,
+                        mHlPaint[ x][ y]);
 //                canvas.drawRect( x * mDp, x * mDp + mDp, y * mDp, y * mDp + mDp, mHlPaint[ x][ y]);
             }
         }
 
     }
 
-//    /**
-//     * Recalculates {@link #mWidth}, {@link #mHeight},
-//     * @param w the new width
-//     * @param h the new height
-//     * @param oldw the old width, will be 0 if uninitialised, not used.
-//     * @param oldh the old height, will be 0 if uninitialised, not used.
-//     */
-//    @Override
-//    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-//        super.onSizeChanged(w, h, oldw, oldh);
+
+    /**
+     * Recalculates {@link #mHueToX}, {@link #mLumToY},
+     * @param w the new width
+     * @param h the new height
+     * @param oldw the old width, will be 0 if uninitialised, not used.
+     * @param oldh the old height, will be 0 if uninitialised, not used.
+     */
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        // hue * scale = width ==> scale = width / hue
+        mHueToX = ( (float) w) / HUE_MAX;
+        mLumToY = ( (float) h) / LUM_MAX;
+
+//        mIsPortrait = mHeight > mWidth;
+
+
+
+//        for ( int i = 0; i < OLD_COORD_COUNT; i++) {
+//            mOldCoordRadii[ i] *= mDp;
+//        }
+//        mNewCoordRadius = NEW_COORD_RADIUS * mDp;
 //
-//        mWidth = getWidth();
-//        mHeight = getHeight();
-//
-////        mIsPortrait = mHeight > mWidth;
-//
-//
-//
-////        for ( int i = 0; i < OLD_COORD_COUNT; i++) {
-////            mOldCoordRadii[ i] *= mDp;
-////        }
-////        mNewCoordRadius = NEW_COORD_RADIUS * mDp;
-////
-////        updateAxes();
-//    }
+//        updateAxes();
+    }
 
 }
