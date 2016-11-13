@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.v4.graphics.ColorUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -30,14 +32,8 @@ public class HueView extends View {
     /** Constant maximum saturation */
     private static final float SAT = 1;
 
-    /** Defines the colour using HSL at ( x, y) */
-    private Paint[][] mHlPaint;
-
-    /** Scales {@link #HUE_MAX} to view width 'x' */
-    private float mHueToX;
-
-    /** Scales {@link #LUM_MAX} to view height 'y' */
-    private float mLumToY;
+    /** HSL gradient bitmap */
+    private Bitmap mHlBitmap;
 
     /** The display-dependent width of the view, in pixels */
     private int mWidth;
@@ -64,16 +60,16 @@ public class HueView extends View {
     public HueView(Context context, AttributeSet attributes) {
         super(context, attributes);
 
-        mHlPaint = new Paint[ HUE_MAX][ LUM_MAX];
-        // for each hue in x (horizontal, left to right)
+        // generate HSL bitmap once only.
+        mHlBitmap = Bitmap.createBitmap( HUE_MAX, LUM_MAX, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas( mHlBitmap);
         for ( int x = 0; x < HUE_MAX; x++) {
-            // for each lum in y (vertical, top to bottom)
             for ( int y = 0; y < LUM_MAX; y++) {
-                mHlPaint[ x][ y] = new Paint();
-                // HSL: [0] = hue [0...360), [1] = sat [0...1], [2] = lum [0...1]
-                mHlPaint[ x][ y].setColor( ColorUtils.HSLToColor(
+                Paint paint = new Paint();
+                paint.setColor( ColorUtils.HSLToColor(
                         new float[] { (float) x, SAT, 1 - ((float) y) / LUM_MAX}));
-                mHlPaint[ x][ y].setStyle( Paint.Style.FILL);
+                paint.setStyle( Paint.Style.FILL);
+                canvas.drawPoint( x, y, paint);
             }
         }
     }
@@ -82,24 +78,14 @@ public class HueView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw( canvas);
 
-        // draw the hue/lum view
-        // for each hue in x (horizontal, left to right)
-        for ( int x = 0; x < 360; x++) {
-            // for each lum in y (vertical, top to bottom)
-            for ( int y = 0; y < 100; y++) {
-                // left, right, top, bottom, Paint
-                canvas.drawRect( x * mHueToX, y * mLumToY,
-                        x * mHueToX + mHueToX, y * mLumToY + mLumToY,
-                        mHlPaint[ x][ y]);
-//                canvas.drawRect( x * mDp, x * mDp + mDp, y * mDp, y * mDp + mDp, mHlPaint[ x][ y]);
-            }
-        }
+        // stretch the HSL bitmap over the canvas
+        canvas.drawBitmap( mHlBitmap, null, mViewRect, null);
 
     }
 
+    private RectF mViewRect;
 
     /**
-     * Recalculates {@link #mHueToX}, {@link #mLumToY},
      * @param w the new width
      * @param h the new height
      * @param oldw the old width, will be 0 if uninitialised, not used.
@@ -109,12 +95,10 @@ public class HueView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        // hue * scale = width ==> scale = width / hue
-        mHueToX = ((float) w) / HUE_MAX;
-        mLumToY = ((float) h) / LUM_MAX;
-
         mWidth = w;
         mHeight = h;
+
+        mViewRect = new RectF( 0, 0, mWidth, mHeight);
     }
 
     /**

@@ -860,7 +860,7 @@ ans =
 
 Let's start with static values and see what happens. If things seems somewhat logical, move to proportional values.
 
-Doesn't do a thing.
+Doesn't do a thing, even on 10. Means the drift is 'accurate'. Great.
 
 I wonder if the issue arises from how the difference between a new location and the origin is calculated:
 
@@ -873,8 +873,170 @@ return 2.0 * Math.PI * mLatitudinalRadius * angle;
 ```
 
 Makes sense, seems to work, but haven't tested it properly.
+That'll do for now, bigger fish to fry.
+
+# 2016-11-12 Sat 17:01
+## Commit:
+  >#62. Tweaked `TreadTone`
+  >  * Adapt for updated `LocTone`
+  >  * Add display of current location
+  >  * Add location accuracy preference
 
 
+# 2016-11-13 Sun 11:46
+HueView time!
+So, we want a little HSL window:
+
+  * Horizonal: Hue, 0° on the left to 360° on the right
+  * Vertical: Lum, 0 at the bottom, 1 on the top
+
+Let's go with 360 steps for hue: [ 0 ... 360) / 360 --> [ 0 ... 1)
+Lum, even more arbitrary, choose 100 steps: [ 0 ... 100) / 100.
+
+Need to do a little array work to initialise and draw all the different paints.
+Also need to get screen size to normalise it to our pseudo-pixels.
+
+Hue then maps to frequency, while lum maps to amplitude.
+
+Now, where to do what.
+The screen and colours aren't going to change, so we can prepare the canvas, say, at onViewCreated.
+Then we can draw it at onResume.
+
+Going to have to add some onClick goodness to get H/L, and feed that to both a HueTone and to a ToneGenerator.
+
+All the LocView stuff is being done in onResume, since that's where the ToneGenerator etc are defined. So, doing everything on every onResume for consistency. It's not a lot of work, if the debugger complains about skiping frames onResume, we can see if we can disaggregate the initialisation stuff to onViewCreated.
+
+Actually, we can just define the paint inside the draw loop, since both would be iterating over the same bounds.
+
+Compiler says that's naughty; preallocate.
+
+# 2016-11-13 Sun 12:39
+That's a lot of skipped frames.
+
+```Java
+public HueView(Context context, AttributeSet attributes) {
+    super(context, attributes);
+
+    mHlPaint = new Paint[ HUE_MAX][ LUM_MAX];
+    // for each hue in x (horizontal, left to right)
+    for ( int x = 0; x < HUE_MAX; x++) {
+        // for each lum in y (vertical, top to bottom)
+        for ( int y = 0; y < LUM_MAX; y++) {
+            mHlPaint[ x][ y] = new Paint();
+            mHlPaint[ x][ y].setColor( ColorUtils.HSLToColor(
+                    new float[] { (float) x, SAT, (float) ( 1 - y)}));
+            mHlPaint[ x][ y].setStyle( Paint.Style.FILL);
+        }
+    }
+}
+```
+```Java
+@Override
+protected void onDraw(Canvas canvas) {
+    super.onDraw( canvas);
+
+    // draw the hue/lum view
+    // for each hue in x (horizontal, left to right)
+    for ( int x = 0; x < 360; x++) {
+        // for each lum in y (vertical, top to bottom)
+        for ( int y = 0; y < 100; y++) {
+            canvas.drawRect( x * mDp, x * mDp + mDp, y * mDp, y * mDp + mDp, mHlPaint[ x][ y]);
+        }
+    }
+}
+```
+Maybe I should look at how a library gradient function works.
+Hmm, [`canvas.drawBitmap(Bitmap bitmap, Rect src, Rect dst, Paint paint)`](https://developer.android.com/reference/android/graphics/Canvas.html#drawBitmap(android.graphics.Bitmap,%20float,%20float,%20android.graphics.Paint)) could be an option, too. Define the bitmap onViewCreated, then just draw it with automatic scaling onResume/onDraw.
+
+|Parameter | Description | Implementation |
+|:---:|:----|:----|
+| `bitmap` |`Bitmap`: The bitmap to be drawn |Define this as HL gradient rectangle |
+| `src` | `Rect`: May be null. The subset of the bitmap to be drawn | `null` |
+| `dst` | `RectF`: The rectangle that the bitmap will be scaled/translated to fit into | This will be the whole view |
+| `paint` | `Paint`: May be null. The paint used to draw the bitmap | `null` |
+
+...But how do we create a bitmap?
+
+> [Bitmap](https://developer.android.com/reference/android/graphics/Bitmap.html): `createBitmap(int[] colors, int width, int height, Bitmap.Config config)`
+Returns a immutable bitmap with the specified width and height, with each pixel value set to the corresponding value in the colors array.
+
+But how do we set 2D colours with a 1D `colors` array?
+
+# 2016-11-13 Sun 13:32
+Had some lunch, came back and had a better look at where old array method wasn't working: was full black rectangle.
+
+  * HSL: [0] = hue [0...360), [1] = sat [0...1], [2] = lum [0...1], so need to divide lum by LUM_MAX
+  * ...need to cast y to float...
+  * It works! Moving to onViewCreated might be good enough to save skipped frames?
+
+Looks quite cool, not what I was expecting: maybe the 'HSL' colour pickers were used to only show the bottom half?
+Hmm. Kind of like the sinusoidal gradient that's visible this way of looking at it. Could clip half-way with a little maths while traversing the Paint creation array. Would also be faster: half as much work...
+
+Just thought of another way of mapping colour (and location) to tone: hue/longitude could be whole notes, with lum/latitude giving flat/sharpness...
+Something to play around with later, maybe.
+
+# 2016-11-13 Sun 13:44
+## Commit:
+  >#63. Basic implementation of `HueView`: just background (doesn't even fill view)
+
+Added some scalars to get gradient to fill view:
+
+```Java
+/**
+ * Recalculates {@link #mHueToX}, {@link #mLumToY},
+ * @param w the new width
+ * @param h the new height
+ * @param oldw the old width, will be 0 if uninitialised, not used.
+ * @param oldh the old height, will be 0 if uninitialised, not used.
+ */
+@Override
+protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    super.onSizeChanged(w, h, oldw, oldh);
+
+    // hue * scale = width ==> scale = width / hue
+    mHueToX = ((float) w) / HUE_MAX;
+    mLumToY = ((float) h) / LUM_MAX;
+}
+```
+
+## Commit:
+  >#64. Basic implementation of `HueView`: just background (fills view)
+
+Now to add some touch interpretation, time to copy `LocView` again!
+
+## Commit:
+  >#65. Basic implementation of `HueView`: added touch and listener, just missing tracking cursor.
+
+# 2016-11-13 Sun 14:11
+Updated `TinkerFragment` simulated, and it works, mostly...
+When first making the two-view TinkerFragment, I thought HueView would operate as a 'single tone' mode, while LocView would operate as 'continuous tone' mode. Now, they're basically the same thing, but with a different background.
+
+Could actually combine into one view?
+
+Certainly going to remove the 'single tone' stuff and just play continuously.
+
+In fact, it makes sense to push `optimiseForStreaming()` *into* `ToneGenerator`.
+
+# 2016-11-13 Sun 14:22
+## Commit:
+  >#66. `ToneGenerator`: added `setStreamMode()` and `setStaticMode()` methods.
+
+  >#67. `TinkerFragment`: adapt for updated `HueView`
+
+Simulating again, and HueView is really slow. Need to avoid redundantly drawing the whole array all the time.
+Maybe we can make a static final bitmap which is filled with a canvas (the current gradient!) and then just draw/scale that bitmap to the view canvas onDraw?
+
+# 2016-11-13 Sun 14:42
+Wow, that just worked.
+Had to define a [RectF](https://developer.android.com/reference/android/graphics/RectF.html): `mViewRect = new RectF( 0, 0, mWidth, mHeight);`
+For some reason doing it this way there are visible bands in the output:
+https://github.com/dvmansueto/HearHues/blob/master/
+Original array-indexed `onDraw` method
+![Array](HSL-array.png)
+Creating an `RGB-565` Bitmap
+![RGB-565](HSL-bitmap-RGB_565.png)
+Creating an `ARGB-8888` Bitmap
+![ARGB-8888](HSL-bitmap-ARGB_8888.png)
 
 
 

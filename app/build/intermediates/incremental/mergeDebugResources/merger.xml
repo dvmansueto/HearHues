@@ -1964,7 +1964,7 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
         <item>90</item>
     </string-array><string name="prefs_generator_logarithm_power_summary">Determines how aggressive logarithmic scaling will be</string><string name="title_fragment_about">About</string><string name="HH_btn_playPause">Play/Pause</string><string name="prefs_tread_tone_window_width_summary">Distance from minimum to maximum frequency</string><string name="prefs_generator_category">Tone Generator</string><string name="prefs_generator_base_frequency_summary">Lowest note to be generated</string><string name="alert_location_permission_refused_message">Sorry, the sole purpose of Tread Tune
         requires this permission to function.</string><string name="navigation_drawer_open">Open navigation drawer</string><string name="prefs_palette_number_default">Medium</string><string name="navigation_drawer_primary_features">Primary Features</string><string name="alert_enable_location_setting_message">Please go to settings and enable location in order to
-        use this feature.</string><string name="prefs_playback_seconds_summary">How long to play a tone for</string><string-array name="prefs_tread_tone_location_accuracy_values">
+        use this feature.</string><string-array name="prefs_tread_tone_location_accuracy_values">
         <item>10</item>
         <item>16</item>
         <item>27</item>
@@ -1972,7 +1972,7 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
         <item>74</item>
         <item>121</item>
         <item>200</item>
-    </string-array><string-array name="prefs_tread_tone_window_width_entries">
+    </string-array><string name="prefs_playback_seconds_summary">How long to play a tone for</string><string-array name="prefs_tread_tone_window_width_entries">
         <item>Very Tiny</item>
         <item>Tiny</item>
         <item>Very Small</item>
@@ -1990,11 +1990,11 @@ implant, the mapping used by Harbisson is unknown, leaving us free to play with 
         <item>Semi-lax</item>
         <item>Lax</item>
         <item>Very lax</item>
-    </string-array><string name="HH_hueTitle">Hue: </string><string name="prefs_palette_area_key">palette_area</string><string name="prefs_tread_tone_window_width_key">tread_tone_window_width</string><string-array name="prefs_playback_seconds_entries">
+    </string-array><string name="HH_hueTitle">Hue: </string><string name="prefs_palette_area_key">palette_area</string><string name="prefs_tread_tone_window_width_key">tread_tone_window_width</string><string name="prefs_tread_tone_location_accuracy_key">tread_tone_location_accuracy</string><string-array name="prefs_playback_seconds_entries">
         <item>Short</item>
         <item>Medium</item>
         <item>Long</item>
-    </string-array><string name="prefs_tread_tone_location_accuracy_key">tread_tone_location_accuracy</string><string name="prefs_palette_swatch_title">Colour Extraction</string><string name="prefs_save_files_default">false</string><string name="HH_title">Hear Hue</string><string name="prefs_generator_peak_frequency_summary">Highest note to be generated</string><string name="action_mute">Toggle Mute</string></file><file path="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\res\values\styles.xml" qualifiers=""><style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </string-array><string name="prefs_palette_swatch_title">Colour Extraction</string><string name="prefs_save_files_default">false</string><string name="HH_title">Hear Hue</string><string name="prefs_generator_peak_frequency_summary">Highest note to be generated</string><string name="action_mute">Toggle Mute</string></file><file path="C:\Dropbox\Uni\2016S2\COMP7717\HearHues\app\src\main\res\values\styles.xml" qualifiers=""><style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
