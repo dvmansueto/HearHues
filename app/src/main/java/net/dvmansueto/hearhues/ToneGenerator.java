@@ -195,6 +195,29 @@ final class ToneGenerator {
     //--------------------------------
 
     /**
+     * Optimises the Tone Generator for a stream of short tones.
+     */
+    void setStreamMode() {
+        setPlaybackMode(AudioTrack.MODE_STREAM);
+        setPlaybackFactor(0.0625); // much shorter playback times
+        setPlayContinuously(true);
+        setRampingUp(true);
+        setRampingDown(true);
+    }
+
+    /**
+     * Optimises the Tone Generator for a single static tone.
+     */
+    void setStaticMode() {
+        setPlaybackMode ( AudioTrack.MODE_STATIC);
+        setPlaybackFactor( 1); // much shorter playback times
+        setPlayContinuously( false);
+        setRampingUp( true);
+        setRampingDown( true);
+    }
+
+
+    /**
      * Sets the volume of {@link #mAudioTrack} based on {@link #mMuted} and {@link #mAmplitude}.
      */
     private void setVolume() {
